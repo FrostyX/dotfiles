@@ -6,8 +6,8 @@
 	git clone git@github.com:FrostyX/dotfiles.git ~/.dotfiles
 
 	# Make symlinks for configuration files
-	ln -s ~/.dotfiles/vim ~/.vim
-	ln -s ~/.dotfiles/vimrc ~/.vimrc
+	ln -s ~/.dotfiles/.vim ~/.vim
+	ln -s ~/.dotfiles/.vimrc ~/.vimrc
 
 	# Get git submodules
 	cd ~/.dotfiles
