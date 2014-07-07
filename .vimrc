@@ -153,6 +153,7 @@ map <C-n> :NERDTreeToggle<CR>
 " Taglist
 map <C-m> :TlistToggle<CR>
 let Tlist_Use_Right_Window = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
 
 " Jedi-vim
 " http://paste.debian.net/108459/
