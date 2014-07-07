@@ -146,6 +146,7 @@ cnoremap git Git
 map <leader>ga :Gwrite<CR>
 map <leader>gc :Gcommit<CR>
 map <leader>gp :Git push<CR>
+nnoremap <leader>fs :exec "file ". resolve(expand('%:p'))<CR>:e<CR>
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
