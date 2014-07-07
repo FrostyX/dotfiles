@@ -1,4 +1,5 @@
 # dotfiles
+## Installation
 
 	# Choose method which suits better for you
 	git clone https://github.com/FrostyX/dotfiles.git ~/.dotfiles
@@ -25,10 +26,13 @@ Requires:
 - CMake & Make
 - About 15 minutes
 
-	cd ~/.dotfiles/.vim/bundle/YouCompleteMe
 
+Installation:
+
+	cd ~/.dotfiles/.vim/bundle/YouCompleteMe
+	
 	# For semantic completion
 	./install.sh --clang-completer
-
+	
 	# Or without semantic completion
 	./install.sh
