@@ -145,6 +145,10 @@ map <leader>gp :Git push<CR>
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
+" Taglist
+map <C-m> :TlistToggle<CR>
+let Tlist_Use_Right_Window = 1
+
 " Jedi-vim
 " http://paste.debian.net/108459/
 "let load_jedi = 0
