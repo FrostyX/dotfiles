@@ -208,7 +208,6 @@ if has("gui_running")
 
 	colorscheme solarized
 	set background=dark
-	"set guifont=Terminus\ 9
 	set guioptions-=T  " No toolbar
 	set guioptions-=r  " No right scrollbar
 	set guioptions-=L  " No left scrollbar
@@ -227,6 +226,11 @@ if has("gui_running")
 
 	" Highlight current line
 	set cursorline
+
+	" Terminus is not installed everywhere
+	if isdirectory('/usr/share/fonts/terminus/')
+		set guifont=Terminus\ 9
+	end
 end
 
 
