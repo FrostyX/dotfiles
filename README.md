@@ -2,8 +2,8 @@
 ## Installation
 
 	# Choose method which suits better for you
-	git clone https://github.com/FrostyX/dotfiles.git ~/.dotfiles
 	git clone git@github.com:FrostyX/dotfiles.git ~/.dotfiles
+	git clone https://github.com/FrostyX/dotfiles.git ~/.dotfiles
 
 	# Make symlinks for configuration files
 	ln -s ~/.dotfiles/.vim ~/.vim
