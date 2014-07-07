@@ -6,8 +6,13 @@
 " cd ~/.vim/bundle/
 " git submodule add git://github.com/foo/bar.git
 
-" reference: [pathogen]
 let g:pathogen_disabled = ["supertab", "AutoComplPop"]
+
+if !executable('ctags')
+	call add(g:pathogen_disabled, 'taglist.vim')
+endif
+
+" reference: [pathogen]
 call pathogen#infect()
 call pathogen#helptags()
 
