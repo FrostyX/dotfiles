@@ -12,6 +12,10 @@
 	# Get git submodules
 	cd ~/.dotfiles
 	git submodule update --init --recursive
+	
+## Update submodules
+
+	git submodule update
 
 ## VIM
 
