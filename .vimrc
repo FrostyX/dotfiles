@@ -7,7 +7,7 @@
 " git submodule add git://github.com/foo/bar.git
 
 let g:pathogen_disabled = [
-	\ 'taglist',
+	\ 'taglist.vim',
 	\ 'supertab',
 	\ 'AutoComplPop',
 	\ 'YouCompleteMe',
