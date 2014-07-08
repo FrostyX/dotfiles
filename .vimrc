@@ -6,15 +6,25 @@
 " cd ~/.vim/bundle/
 " git submodule add git://github.com/foo/bar.git
 
-let g:pathogen_disabled = ["supertab", "AutoComplPop"]
-
-if !executable('ctags')
-	call add(g:pathogen_disabled, 'taglist.vim')
-endif
+let g:pathogen_disabled = [
+	\ 'taglist',
+	\ 'supertab',
+	\ 'AutoComplPop',
+	\ 'YouCompleteMe',
+\]
 
 " reference: [pathogen]
 call pathogen#infect()
 call pathogen#helptags()
+
+
+if executable('ctags')
+	call pathogen#interpose('bundle/taglist.vim')
+endif
+
+if filereadable($HOME.'/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so')
+	call pathogen#interpose('bundle/YouCompleteMe')
+endif
 
 
 
