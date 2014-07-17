@@ -32,8 +32,8 @@ endif
 " Global
 " ------------------------------------------
 
-"colorscheme solarized
-"set background=dark
+colorscheme solarized
+set background=dark
 set nocompatible
 set nowrap
 set autochdir
