@@ -207,6 +207,8 @@ let g:syntastic_quiet_messages = { "level": "warnings" }
 	let g:jedi#rename_command = "<leader>pr"
 " }
 
+" Markdown
+let g:vim_markdown_folding_disabled=1
 
 
 " ------------------------------------------
