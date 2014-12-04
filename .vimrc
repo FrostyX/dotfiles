@@ -1,30 +1,36 @@
 " ------------------------------------------
-" Pathogen
+" Vundle
 " ------------------------------------------
 
-" Adding new bundle
-" cd ~/.vim/bundle/
-" git submodule add git://github.com/foo/bar.git
+" Install plugins:
+" :PluginInstall
+" vim +PluginInstall +qall
 
-let g:pathogen_disabled = [
-	\ 'taglist.vim',
-	\ 'supertab',
-	\ 'AutoComplPop',
-	\ 'YouCompleteMe',
-\]
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" reference: [pathogen]
-call pathogen#infect()
-call pathogen#helptags()
-
-
+Bundle 'gmarik/vundle'
+Plugin 'scrooloose/nerdtree'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'kien/ctrlp.vim'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'scrooloose/syntastic'
+"
 if executable('ctags')
-	call pathogen#interpose('bundle/taglist.vim')
+	Plugin 'vim-scripts/taglist.vim'
 endif
 
 if filereadable($HOME.'/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so')
-	call pathogen#interpose('bundle/YouCompleteMe')
+	Plugin 'Valloric/YouCompleteMe'
 endif
+
+call vundle#end()
 
 
 
@@ -251,9 +257,6 @@ end
 " ------------------------------------------
 " References
 " ------------------------------------------
-
-" [pathogen]
-" http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/
 
 " [whitespace-on-save]
 " http://vim.wikia.com/wiki/Remove_unwanted_spaces#Automatically_removing_all_trailing_whitespace [0]
