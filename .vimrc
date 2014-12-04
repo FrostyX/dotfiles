@@ -21,14 +21,10 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'kien/ctrlp.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'scrooloose/syntastic'
-"
-if executable('ctags')
-	Plugin 'vim-scripts/taglist.vim'
-endif
 
-if filereadable($HOME.'/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so')
-	Plugin 'Valloric/YouCompleteMe'
-endif
+Plugin 'Valloric/YouCompleteMe'
+" Plugin 'vim-scripts/AutoComplPop'
+" Plugin 'ervandew/supertab'
 
 call vundle#end()
 
