@@ -12,12 +12,15 @@
 	# Get git submodules
 	cd ~/.dotfiles
 	git submodule update --init --recursive
-	
+
 ## Update submodules
 
 	git submodule update
 
 ## VIM
+
+	# Run every time when new Vundle module is added
+	vim +PluginInstall +qall
 
 ### YouCompleteMe
 YouCompleteMe is a fast, as-you-type, fuzzy-search code completion engine for Vim. It's the best choice for using Vim as IDE, but so bad for portability.
@@ -34,9 +37,9 @@ Requires:
 Installation:
 
 	cd ~/.dotfiles/.vim/bundle/YouCompleteMe
-	
+
 	# For semantic completion
 	./install.sh --clang-completer
-	
+
 	# Or without semantic completion
 	./install.sh
