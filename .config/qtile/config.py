@@ -40,7 +40,7 @@ keys = [
 	Key([mod], "l", lazy.screen.nextgroup()),
 
 	Key([sup], "f", lazy.window.toggle_fullscreen()),
-	
+
 	# Multimedia
 	Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q -D pulse sset Master 2%-")),
 	Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q -D pulse sset Master 2%+")),
@@ -130,7 +130,7 @@ screens = [
 			# Light
 			widget.TextBox(text="Light:"),
 			widget.Backlight(
-				brightness_file="/sys/class/backlight/intel_backlight/actual_brightness", 
+				brightness_file="/sys/class/backlight/intel_backlight/actual_brightness",
 				max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness"
 			),
 			widget.Sep(padding=15),
@@ -143,10 +143,10 @@ screens = [
 
 			# Volume
 			widget.TextBox(text="Volume:"),
-			widget.Volume(),
+			widget.Volume(get_volume_command="amixer -D pulse get Master".split()),
 			widget.Sep(padding=15),
 
-
+			widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:]),
 			widget.Spacer(),
 			widget.Clock(timezone="Europe/Prague", format="%H:%M  %d. %m. (%b) %Y"),
 		], 25),
@@ -159,7 +159,6 @@ screens = [
 			#widget.WindowName(),
 			#widget.WindowTabs(),
 			_WindowTabs(),
-			widget.Notify(),
 			widget.Systray(),
 		], 25),
 	),
@@ -180,7 +179,7 @@ dgroups_app_rules = []
 main = None
 cursor_warp = False
 auto_fullscreen = True
-wmname = "qtile"
+wmname = "LG3D"
 
 # Autostart
 @hook.subscribe.startup_once
