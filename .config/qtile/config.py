@@ -42,8 +42,8 @@ keys = [
 	Key([sup], "f", lazy.window.toggle_fullscreen()),
 
 	# Multimedia
-	Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q -D pulse sset Master 2%-")),
 	Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q -D pulse sset Master 2%+")),
+	Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q -D pulse sset Master 2%-")),
 	Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 10")),
 	Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 10")),
 ]
