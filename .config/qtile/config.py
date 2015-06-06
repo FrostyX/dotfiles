@@ -137,7 +137,7 @@ screens = [
 
 			# Battery
 			widget.TextBox(text="Battery:"),
-			widget.Battery(),
+			widget.Battery(battery_name="BAT1", low_foreground=colors["red"]),
 			#widget.BatteryIcon(),
 			widget.Sep(padding=15),
 
