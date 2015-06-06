@@ -131,7 +131,7 @@ screens = [
 		top=bar.Bar([
 			# Temp
 			widget.TextBox(text="Temp:"),
-			widget.ThermalSensor(tag_sensor="temp1", threshold=60, foreground_alert=colors["red"]),
+			widget.ThermalSensor(threshold=65, foreground_alert=colors["red"]),
 			widget.Sep(padding=15),
 
 			# Battery
