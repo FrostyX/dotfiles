@@ -127,51 +127,51 @@ class _WindowTabs(widget.WindowTabs):
 		self.text = self.separator.join(names)
 		self.bar.draw()
 
-screens = [
-	Screen(
-		top=bar.Bar([
-			# Temp
-			widget.TextBox(text="Temp:"),
-			widget.ThermalSensor(threshold=65, foreground_alert=colors["red"]),
-			widget.Sep(padding=15),
+screen = Screen(
+	top=bar.Bar([
+		# Temp
+		widget.TextBox(text="Temp:"),
+		widget.ThermalSensor(threshold=65, foreground_alert=colors["red"]),
+		widget.Sep(padding=15),
 
-			# Battery
-			widget.TextBox(text="Battery:"),
-			widget.Battery(battery_name="BAT1", low_foreground=colors["red"]),
-			#widget.BatteryIcon(),
-			widget.Sep(padding=15),
+		# Battery
+		widget.TextBox(text="Battery:"),
+		widget.Battery(battery_name="BAT1", low_foreground=colors["red"]),
+		#widget.BatteryIcon(),
+		widget.Sep(padding=15),
 
-			# Light
-			widget.TextBox(text="Light:"),
-			widget.Backlight(
-				brightness_file="/sys/class/backlight/intel_backlight/actual_brightness",
-				max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness"
-			),
-			widget.Sep(padding=15),
+		# Light
+		widget.TextBox(text="Light:"),
+		widget.Backlight(
+			brightness_file="/sys/class/backlight/intel_backlight/actual_brightness",
+			max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness"
+		),
+		widget.Sep(padding=15),
 
-			# Volume
-			widget.TextBox(text="Volume:"),
-			widget.Volume(get_volume_command="amixer -D pulse get Master".split()),
-			widget.Sep(padding=15),
+		# Volume
+		widget.TextBox(text="Volume:"),
+		widget.Volume(get_volume_command="amixer -D pulse get Master".split()),
+		widget.Sep(padding=15),
 
-			widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:]),
-			widget.Spacer(),
-			widget.Clock(timezone="Europe/Prague", format="%H:%M  %d. %m. (%b) %Y"),
-		], 25),
+		widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:]),
+		widget.Spacer(),
+		widget.Clock(timezone="Europe/Prague", format="%H:%M  %d. %m. (%b) %Y"),
+	], 25),
 
-		bottom=bar.Bar([
-			widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"]),
-			widget.Sep(padding=15),
-			widget.CurrentLayout(),
-			widget.Sep(padding=15),
-			widget.Prompt(),
-			#widget.WindowName(),
-			#widget.WindowTabs(),
-			_WindowTabs(),
-			widget.Systray(),
-		], 25),
-	),
-]
+	bottom=bar.Bar([
+		widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"]),
+		widget.Sep(padding=15),
+		widget.CurrentLayout(),
+		widget.Sep(padding=15),
+		widget.Prompt(),
+		#widget.WindowName(),
+		#widget.WindowTabs(),
+		_WindowTabs(),
+		widget.Systray(),
+	], 25),
+)
+
+screens = [screen] if True else 2 * [screen]
 
 # Drag floating layouts.
 mouse = [
