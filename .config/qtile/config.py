@@ -129,6 +129,11 @@ class _WindowTabs(widget.WindowTabs):
 screens = [
 	Screen(
 		top=bar.Bar([
+			# Temp
+			widget.TextBox(text="Temp:"),
+			widget.ThermalSensor(tag_sensor="temp1", threshold=60, foreground_alert=colors["red"]),
+			widget.Sep(padding=15),
+
 			# Light
 			widget.TextBox(text="Light:"),
 			widget.Backlight(
