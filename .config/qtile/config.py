@@ -134,18 +134,18 @@ screens = [
 			widget.ThermalSensor(tag_sensor="temp1", threshold=60, foreground_alert=colors["red"]),
 			widget.Sep(padding=15),
 
+			# Battery
+			widget.TextBox(text="Battery:"),
+			widget.Battery(),
+			#widget.BatteryIcon(),
+			widget.Sep(padding=15),
+
 			# Light
 			widget.TextBox(text="Light:"),
 			widget.Backlight(
 				brightness_file="/sys/class/backlight/intel_backlight/actual_brightness",
 				max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness"
 			),
-			widget.Sep(padding=15),
-
-			# Battery
-			widget.TextBox(text="Battery:"),
-			widget.Battery(),
-			#widget.BatteryIcon(),
 			widget.Sep(padding=15),
 
 			# Volume
