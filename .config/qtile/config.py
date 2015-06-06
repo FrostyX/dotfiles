@@ -41,6 +41,9 @@ keys = [
 
 	Key([sup], "f", lazy.window.toggle_fullscreen()),
 
+	# Process `gnome-screensaver` must run
+	Key([sup], "l", lazy.spawn("gnome-screensaver-command -l")),
+
 	# Multimedia
 	Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q -D pulse sset Master 2%+")),
 	Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q -D pulse sset Master 2%-")),
