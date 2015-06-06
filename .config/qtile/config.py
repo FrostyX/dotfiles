@@ -157,6 +157,7 @@ screens = [
 			widget.Spacer(),
 			widget.Clock(timezone="Europe/Prague", format="%H:%M  %d. %m. (%b) %Y"),
 		], 25),
+
 		bottom=bar.Bar([
 			widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"]),
 			widget.Sep(padding=15),
