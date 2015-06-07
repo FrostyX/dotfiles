@@ -228,6 +228,6 @@ def autostart():
 	subprocess.Popen([home + "/.config/qtile/autostart.sh"])
 
 
-# @hook.subscribe.screen_change
-# def restart_on_randr(qtile, ev):
-# 	qtile.cmd_restart()
+@hook.subscribe.screen_change
+def restart_on_randr(qtile, ev):
+	qtile.cmd_restart()
