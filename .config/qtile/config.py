@@ -228,6 +228,7 @@ def autostart():
 	subprocess.Popen([home + "/.config/qtile/autostart.sh"])
 
 
+# xrandr --output DP2 --auto --right-of eDP1
 @hook.subscribe.screen_change
 def restart_on_randr(qtile, ev):
 	qtile.cmd_restart()
