@@ -45,8 +45,8 @@ keys = [
 	Key([sup], "l", lazy.spawn("gnome-screensaver-command -l")),
 
 	# Multihead magic
-	Key([sup], "u", lazy.to_screen(0)),
-	Key([sup], "i", lazy.to_screen(1)),
+	Key([sup], "h", lazy.to_screen(0)),
+	Key([sup], "l", lazy.to_screen(1)),
 
 	# Multimedia
 	Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q -D pulse sset Master 2%+")),
