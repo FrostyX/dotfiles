@@ -44,6 +44,10 @@ keys = [
 	# Process `gnome-screensaver` must run
 	Key([sup], "l", lazy.spawn("gnome-screensaver-command -l")),
 
+	# Multihead magic
+	Key([sup], "u", lazy.to_screen(0)),
+	Key([sup], "i", lazy.to_screen(1)),
+
 	# Multimedia
 	Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q -D pulse sset Master 2%+")),
 	Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q -D pulse sset Master 2%-")),
@@ -130,51 +134,75 @@ class _WindowTabs(widget.WindowTabs):
 		self.text = self.separator.join(names)
 		self.bar.draw()
 
-screen = Screen(
-	top=bar.Bar([
-		# Temp
-		widget.TextBox(text="Temp:"),
-		widget.ThermalSensor(threshold=65, foreground_alert=colors["red"]),
-		widget.Sep(padding=15),
 
-		# Battery
-		widget.TextBox(text="Battery:"),
-		widget.Battery(battery_name="BAT1", low_foreground=colors["red"]),
-		#widget.BatteryIcon(),
-		widget.Sep(padding=15),
+def num_screens():
+	process = subprocess.Popen(["xrandr"], stdout=subprocess.PIPE)
+	out = process.communicate()[0].split("\n")
+	i = 0
+	for line in out:
+		if " connected " in line:
+			i += 1
+	return i
 
-		# Light
-		widget.TextBox(text="Light:"),
-		widget.Backlight(
-			brightness_file="/sys/class/backlight/intel_backlight/actual_brightness",
-			max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness"
-		),
-		widget.Sep(padding=15),
+screens = [
+	Screen(
+		top=bar.Bar([
+			# Temp
+			widget.TextBox(text="Temp:"),
+			widget.ThermalSensor(threshold=65, foreground_alert=colors["red"]),
+			widget.Sep(padding=15),
 
-		# Volume
-		widget.TextBox(text="Volume:"),
-		widget.Volume(get_volume_command="amixer -D pulse get Master".split()),
-		widget.Sep(padding=15),
+			# Battery
+			widget.TextBox(text="Battery:"),
+			widget.Battery(battery_name="BAT1", low_foreground=colors["red"]),
+			#widget.BatteryIcon(),
+			widget.Sep(padding=15),
 
-		widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:]),
-		widget.Spacer(),
-		widget.Clock(timezone="Europe/Prague", format="%H:%M  %d. %m. (%b) %Y"),
-	], 25),
+			# Light
+			widget.TextBox(text="Light:"),
+			widget.Backlight(
+				brightness_file="/sys/class/backlight/intel_backlight/actual_brightness",
+				max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness"
+			),
+			widget.Sep(padding=15),
 
-	bottom=bar.Bar([
-		widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"]),
-		widget.Sep(padding=15),
-		widget.CurrentLayout(),
-		widget.Sep(padding=15),
-		widget.Prompt(),
-		#widget.WindowName(),
-		#widget.WindowTabs(),
-		_WindowTabs(),
-		widget.Systray(),
-	], 25),
-)
+			# Volume
+			widget.TextBox(text="Volume:"),
+			widget.Volume(get_volume_command="amixer -D pulse get Master".split()),
+			widget.Sep(padding=15),
 
-screens = [screen] if True else 2 * [screen]
+			widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:]),
+			widget.Spacer(),
+			widget.Clock(timezone="Europe/Prague", format="%H:%M  %d. %m. (%b) %Y"),
+		], 25),
+
+		bottom=bar.Bar([
+			widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"]),
+			widget.Sep(padding=15),
+			widget.CurrentLayout(),
+			widget.Sep(padding=15),
+			widget.Prompt(),
+			#widget.WindowName(),
+			#widget.WindowTabs(),
+			_WindowTabs(),
+			widget.Systray(),
+		], 25),
+	)
+]
+
+if num_screens() == 2:
+	screens.append(
+		Screen(
+			bottom=bar.Bar([
+				widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"]),
+				widget.Sep(padding=15),
+				widget.CurrentLayout(),
+				widget.Sep(padding=15),
+				widget.Prompt(),
+				_WindowTabs(),
+				widget.Systray(),
+			], 25)))
+
 
 # Drag floating layouts.
 mouse = [
@@ -198,3 +226,8 @@ wmname = "LG3D"
 def autostart():
 	home = expanduser("~")
 	subprocess.Popen([home + "/.config/qtile/autostart.sh"])
+
+
+# @hook.subscribe.screen_change
+# def restart_on_randr(qtile, ev):
+# 	qtile.cmd_restart()
