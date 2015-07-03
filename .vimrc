@@ -34,8 +34,6 @@ call vundle#end()
 " Global
 " ------------------------------------------
 
-colorscheme solarized
-set background=dark
 set nocompatible
 set nowrap
 set autochdir
@@ -235,18 +233,32 @@ if has("gui_running")
 	" reference: [invisible-characters]
 	set list                            " Show invisible characters
 	set listchars=tab:▸\ ,eol:¬,trail:· " Specify what display instead of invisible space
+
+	" Highlight current line
+	set cursorline
+end
+
+
+" ------------------------------------------
+" Machine specific settings
+" ------------------------------------------
+let hostname = substitute(system('hostname'), '\n', '', '')
+
+if hostname == "thinkpad"
+	colorscheme solarized
+	set background=dark
+	set guifont=Terminus\ 9
 	highlight NonText guifg=#4a4a59     " EOL character color
 	highlight SpecialKey guifg=#4a4a59  " Tab and space character color
 	highlight SpecialKey guibg=#002B36
 
-	" Highlight current line
-	set cursorline
-
-	" Terminus is not installed everywhere
-	if isdirectory('/usr/share/fonts/terminus/')
-		set guifont=Terminus\ 9
-	end
+elseif hostname == "unused-4-222.brq.redhat.com"
+	set background=light
+	highlight NonText guifg=#d6d0bf     " EOL character color
+	highlight SpecialKey guifg=#d6d0bf  " Tab and space character color
+	highlight SpecialKey guibg=#fdf6e3
 end
+
 
 
 
