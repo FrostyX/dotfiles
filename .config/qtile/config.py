@@ -127,6 +127,7 @@ widget_defaults = dict(
 )
 
 class _WindowTabs(widget.WindowTabs):
+	separator = "    |    "
 	def update(self):
 		widget.WindowTabs.update(self)
 		# Very ugly hack
