@@ -42,7 +42,7 @@ keys = [
 	Key([sup], "f", lazy.window.toggle_fullscreen()),
 
 	# Process `gnome-screensaver` must run
-	Key([sup], "l", lazy.spawn("gnome-screensaver-command -l")),
+	Key([mod, sup], "l", lazy.spawn("gnome-screensaver-command -l")),
 
 	# Multihead magic
 	Key([sup], "h", lazy.to_screen(0)),
