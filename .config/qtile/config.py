@@ -40,6 +40,7 @@ keys = [
 	Key([mod], "l", lazy.screen.nextgroup()),
 
 	Key([sup], "f", lazy.window.toggle_fullscreen()),
+	Key([sup], "t", lazy.window.toggle_floating()),
 
 	# Process `gnome-screensaver` must run
 	Key([mod, sup], "l", lazy.spawn("gnome-screensaver-command -l")),
