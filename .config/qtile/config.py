@@ -12,7 +12,7 @@ run = "gmrun"
 
 hostname = uname()[1]
 if hostname == "unused-4-222.brq.redhat.com":
-	terminal = "konsole"
+	pass
 
 
 mod = "mod1" # Left alt
