@@ -85,7 +85,7 @@ for workspace in workspaces:
 # float dialog windows
 @hook.subscribe.client_new
 def dialogs(window):
-	floating = ["gmrun"]
+	floating = ["gmrun", "gcr-prompter"]
 	wm_type = window.window.get_wm_type()
 	wm_class = window.window.get_wm_class()[0]
 	transient_for = window.window.get_wm_transient_for()
