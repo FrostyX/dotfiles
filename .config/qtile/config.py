@@ -7,12 +7,20 @@ from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 
 
-terminal = "gnome-terminal"
-run = "gmrun"
+terminal     = "gnome-terminal"
+run          = "gmrun"
+vol_cur      = "amixer -D pulse get Master"
+vol_up       = "amixer -q -D pulse sset Master 2%+"
+vol_down     = "amixer -q -D pulse sset Master 2%-"
+mute         = "amixer -q -D pulse set Master toggle"
+bright_up    = "xbacklight -inc 10"
+bright_down  = "xbacklight -dec 10"
+scrot        = ""
+
 
 hostname = uname()[1]
 if hostname == "unused-4-222.brq.redhat.com":
-	pass
+	scrot = "/home/jkadlcik/.bin/screenshot.sh"
 
 
 mod = "mod1" # Left alt
@@ -50,11 +58,12 @@ keys = [
 	Key([sup], "l", lazy.to_screen(1)),
 
 	# Multimedia
-	Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q -D pulse sset Master 2%+")),
-	Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q -D pulse sset Master 2%-")),
-	Key([], "XF86AudioMute", lazy.spawn("amixer -q -D pulse set Master toggle")),
-	Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 10")),
-	Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 10")),
+	Key([], "XF86AudioRaiseVolume", lazy.spawn(vol_up)),
+	Key([], "XF86AudioLowerVolume", lazy.spawn(vol_down)),
+	Key([], "XF86AudioMute", lazy.spawn(mute)),
+	Key([], "XF86MonBrightnessUp", lazy.spawn(bright_up)),
+	Key([], "XF86MonBrightnessDown", lazy.spawn(bright_down)),
+	Key([], "Print", lazy.spawn(scrot)),
 ]
 
 
@@ -170,7 +179,7 @@ screens = [
 
 			# Volume
 			widget.TextBox(text="Volume:"),
-			widget.Volume(get_volume_command="amixer -D pulse get Master".split()),
+			widget.Volume(get_volume_command=vol_cur.split()),
 			widget.Sep(padding=15),
 
 			widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:]),
