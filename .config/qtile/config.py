@@ -82,10 +82,7 @@ workspaces = [
 
 groups = []
 for workspace in workspaces:
-	#icon = "/home/frostyx/.config/qtile/icons/invaders.png"
-	#icon = None
 	matches = workspace["matches"] if "matches" in workspace else None
-	#groups.append(Group(workspace["name"], icon=icon, matches=matches))
 	groups.append(Group(workspace["name"], matches=matches))
 	keys.append(Key([mod], workspace["key"], lazy.group[workspace["name"]].toscreen()))
 	keys.append(Key([mod, sup], workspace["key"], lazy.window.togroup(workspace["name"])))
@@ -100,13 +97,6 @@ def dialogs(window):
 	transient_for = window.window.get_wm_transient_for()
 	if wm_type == 'dialog' or transient_for or wm_class in floating:
 		window.floating = True
-
-# floating_layout = layout.Floating(auto_float_types=[
-# 	"notification",
-# 	"toolbar",
-# 	"splash",
-# 	"dialog",
-# ])
 
 colors = {
 	"grey": "#555555",
@@ -166,7 +156,6 @@ screens = [
 			# Battery
 			widget.TextBox(text="Battery:"),
 			widget.Battery(battery_name="BAT1", low_foreground=colors["red"]),
-			#widget.BatteryIcon(),
 			widget.Sep(padding=15),
 
 			# Light
@@ -193,8 +182,6 @@ screens = [
 			widget.CurrentLayout(),
 			widget.Sep(padding=15),
 			widget.Prompt(),
-			#widget.WindowName(),
-			#widget.WindowTabs(),
 			_WindowTabs(),
 			widget.Systray(),
 		], 25),
