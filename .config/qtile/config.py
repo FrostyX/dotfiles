@@ -15,6 +15,7 @@ vol_down     = "amixer -q -D pulse sset Master 2%-"
 mute         = "amixer -q -D pulse set Master toggle"
 bright_up    = "xbacklight -inc 10"
 bright_down  = "xbacklight -dec 10"
+lock         = "gnome-screensaver-command -l"
 scrot        = ""
 
 
@@ -51,7 +52,7 @@ keys = [
 	Key([sup], "t", lazy.window.toggle_floating()),
 
 	# Process `gnome-screensaver` must run
-	Key([mod, sup], "l", lazy.spawn("gnome-screensaver-command -l")),
+	Key([mod, sup], "l", lazy.spawn(lock)),
 
 	# Multihead magic
 	Key([sup], "h", lazy.to_screen(0)),
