@@ -45,8 +45,8 @@ keys = [
 	Key([mod], "w", lazy.screen.togglegroup()),
 
 	# cycle to previous and next group
-	Key([mod], "h", lazy.screen.prevgroup()),
-	Key([mod], "l", lazy.screen.nextgroup()),
+	Key([mod], "h", lazy.screen.prev_group(skip_managed=True)),
+	Key([mod], "l", lazy.screen.next_group(skip_managed=True)),
 
 	Key([sup], "f", lazy.window.toggle_fullscreen()),
 	Key([sup], "t", lazy.window.toggle_floating()),
