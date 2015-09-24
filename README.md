@@ -8,8 +8,11 @@
 	# Make symlinks for configuration files
 	ln -s ~/.dotfiles/.vim ~/.vim
 	ln -s ~/.dotfiles/.vimrc ~/.vimrc
-	
+
 	ln -s ~/.dotfiles/.config/qtile ~/.config/qtile
+
+	# VLC can't handle symlink
+	ln ~/.dotfiles/.config/vlc/vlcrc ~/.config/vlc/vlcrc
 
 	# Get git submodules
 	cd ~/.dotfiles
