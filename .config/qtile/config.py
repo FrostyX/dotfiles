@@ -55,10 +55,8 @@ keys = [
 	Key([mod, sup], "l", lazy.spawn(lock)),
 
 	# Multihead magic
-	# @FIXME Doesn't work when laptop screen is on the right side
-	# and the external screen is on the left
-	Key([sup], "h", lazy.to_screen(0)),
-	Key([sup], "l", lazy.to_screen(1)),
+	Key([sup], "h", lazy.prev_screen()),
+	Key([sup], "l", lazy.next_screen()),
 
 	# Multimedia
 	Key([], "XF86AudioRaiseVolume", lazy.spawn(vol_up)),
