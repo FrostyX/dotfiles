@@ -78,7 +78,7 @@ workspaces = [
 	{"name": "c", "key": "c"},
 	{"name": "v", "key": "v", "matches": [Match(wm_class=["VirtualBox"])]},
 	{"name": "g", "key": "g", "matches": [Match(wm_class=["Wine", "Python2.7", "Steam", "Progress"])]}, # Python2.7 is playonlinux; Progress is steam updater
-	{"name": "o", "key": "o", "matches": [Match(wm_class=["Vlc"])]},
+	{"name": "o", "key": "o", "matches": [Match(wm_class=["Vlc", "Totem"])]},
 ]
 
 groups = []
