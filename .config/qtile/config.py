@@ -174,7 +174,7 @@ screens = [
 
 			widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:]),
 			widget.Spacer(),
-			widget.Clock(timezone="Europe/Prague", format="%H:%M  %d. %m. (%b) %Y"),
+			widget.Clock(timezone="Europe/Prague", format="%H:%M  %d. %m. (%b) %Y   #%W"),
 		], 25),
 
 		bottom=bar.Bar([
