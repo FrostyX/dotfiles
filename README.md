@@ -8,6 +8,7 @@
 	# Make symlinks for configuration files
 	ln -s ~/.dotfiles/.vim ~/.vim
 	ln -s ~/.dotfiles/.vimrc ~/.vimrc
+	ln -s ~/.dotfiles/.local/share/applications/gvim.desktop ~/.local/share/applications/gvim.desktop
 
 	ln -s ~/.dotfiles/.config/qtile ~/.config/qtile
 
