@@ -71,10 +71,10 @@ keys = [
 
 
 workspaces = [
-	{"name": "i", "key": "i", "matches": [Match(wm_class=["Pidgin"])]},
+	{"name": "i", "key": "i", "matches": [Match(wm_class=["Pidgin", "Hexchat"])]},
 	{"name": "r", "key": "r", "matches": [Match(wm_class=["Chromium-browser", "Firefox", "Google-chrome"])]},
 	{"name": "f", "key": "f", "matches": [Match(wm_class=["Dolphin", "Thunar", "File-roller"])]},
-	{"name": "d", "key": "d", "matches": [Match(wm_class=["Lispworks", "jetbrains-pycharm", "Eclipse" ])]},
+	{"name": "d", "key": "d", "matches": [Match(wm_class=["Lispworks", "jetbrains-pycharm-ce", "Eclipse"])]},
 	{"name": "q", "key": "q", "matches": [Match(wm_class=["Acroread", "Zathura", "Evince"])]},
 	{"name": "n", "key": "n", "matches": [Match(wm_class=["Claws-mail"])]},
 	{"name": "c", "key": "c"},
