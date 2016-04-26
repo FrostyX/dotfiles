@@ -152,10 +152,10 @@ def num_screens():
 # dnf install fontawesome-fonts
 # https://fortawesome.github.io/Font-Awesome/cheatsheet/
 icons = {
-	"temp": "",
-	"battery": "",
-	"light": "",
-	"volume": "",
+	"temp": "",     # fa-fire-extinguisher
+	"battery": "",  # fa-battery-three-quarters
+	"light": "",    # fa-lightbulb-o
+	"volume": "",   # fa-volume-up
 }
 
 screens = [
