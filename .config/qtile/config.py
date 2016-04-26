@@ -129,15 +129,6 @@ widget_defaults = dict(
 	padding=3,
 )
 
-class _WindowTabs(widget.WindowTabs):
-	separator = "    |    "
-	def update(self):
-		widget.WindowTabs.update(self)
-		# Very ugly hack
-		names = self.text.split(self.separator)
-		self.text = self.separator.join(names)
-		self.bar.draw()
-
 
 def num_screens():
 	process = subprocess.Popen(["xrandr"], stdout=subprocess.PIPE)
@@ -195,7 +186,7 @@ screens = [
 			widget.CurrentLayout(),
 			widget.Sep(padding=15),
 			widget.Prompt(),
-			_WindowTabs(),
+			widget.WindowTabs(separator="    |    "),
 			widget.Systray(),
 		], 25),
 	)
@@ -210,7 +201,7 @@ if num_screens() == 2:
 				widget.CurrentLayout(),
 				widget.Sep(padding=15),
 				widget.Prompt(),
-				_WindowTabs(),
+				widget.WindowTabs(separator="    |    "),
 				widget.Systray(),
 			], 25)))
 
