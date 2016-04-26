@@ -175,6 +175,11 @@ screens = [
 			widget.Volume(get_volume_command=vol_cur.split()),
 			widget.Sep(padding=15),
 
+			# @TODO On Fedora 24
+			# widget.Memory(),
+			# widget.CheckUpdates(distro="Fedora"),
+			# widget.CurrentScreen(),
+
 			widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:]),
 			widget.Spacer(),
 			widget.Clock(timezone="Europe/Prague", format="%H:%M  %d. %m. (%b) %Y   #%W"),
