@@ -1,3 +1,5 @@
+#-*- coding: utf-8 -*-
+
 import re
 import subprocess
 from os import uname
@@ -146,21 +148,31 @@ def num_screens():
 			i += 1
 	return i
 
+
+# dnf install fontawesome-fonts
+# https://fortawesome.github.io/Font-Awesome/cheatsheet/
+icons = {
+	"temp": "",
+	"battery": "",
+	"light": "",
+	"volume": "",
+}
+
 screens = [
 	Screen(
 		top=bar.Bar([
 			# Temp
-			widget.TextBox(text="Temp:"),
+			widget.TextBox(text=icons["temp"]),
 			widget.ThermalSensor(threshold=65, foreground_alert=colors["red"]),
 			widget.Sep(padding=15),
 
 			# Battery
-			widget.TextBox(text="Battery:"),
+			widget.TextBox(text=icons["battery"]),
 			widget.Battery(battery_name="BAT1", low_foreground=colors["red"]),
 			widget.Sep(padding=15),
 
 			# Light
-			widget.TextBox(text="Light:"),
+			widget.TextBox(text=icons["light"]),
 			widget.Backlight(
 				brightness_file="/sys/class/backlight/intel_backlight/actual_brightness",
 				max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness"
@@ -168,7 +180,7 @@ screens = [
 			widget.Sep(padding=15),
 
 			# Volume
-			widget.TextBox(text="Volume:"),
+			widget.TextBox(text=icons["volume"]),
 			widget.Volume(get_volume_command=vol_cur.split()),
 			widget.Sep(padding=15),
 
