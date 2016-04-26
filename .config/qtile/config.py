@@ -19,11 +19,14 @@ bright_up    = "xbacklight -inc 10"
 bright_down  = "xbacklight -dec 10"
 lock         = "gnome-screensaver-command -l"
 scrot        = ""
+scrot_all    = ""
 
 
 hostname = uname()[1]
 if hostname == "unused-4-222.brq.redhat.com":
 	scrot = "/home/jkadlcik/.bin/screenshot.sh"
+	scrot_all = "/home/jkadlcik/git/qtile-screenshot/qtile-screenshot.py --one-empty -o /home/jkadlcik/images/scrot"
+	# https://github.com/FrostyX/qtile-screenshot
 
 
 mod = "mod1" # Left alt
@@ -67,6 +70,7 @@ keys = [
 	Key([], "XF86MonBrightnessUp", lazy.spawn(bright_up)),
 	Key([], "XF86MonBrightnessDown", lazy.spawn(bright_down)),
 	Key([], "Print", lazy.spawn(scrot)),
+	Key([sup], "Print", lazy.spawn(scrot_all)),
 ]
 
 
