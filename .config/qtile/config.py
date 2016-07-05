@@ -5,7 +5,7 @@ import subprocess
 from os import uname
 from os.path import expanduser
 from libqtile.config import Key, Screen, Group, Drag, Click, Match
-from libqtile.command import lazy
+from libqtile.command import lazy, Client
 from libqtile import layout, bar, widget, hook
 
 
@@ -25,8 +25,8 @@ scrot_all    = ""
 hostname = uname()[1]
 if hostname == "unused-4-222.brq.redhat.com":
 	scrot = "/home/jkadlcik/.bin/screenshot.sh"
-	scrot_all = "/home/jkadlcik/git/qtile-screenshot/qtile-screenshot.py --one-empty -o /home/jkadlcik/images/scrot"
-	# https://github.com/FrostyX/qtile-screenshot
+	scrot_all = "/home/jkadlcik/git/qtile-screenshot/qtile-screenshot.py -o /home/jkadlcik/images/scrot"
+	# https://github.com/FrostyX/qtile-screenshot/blob/master/qtile-screenshot.py
 
 
 mod = "mod1" # Left alt
@@ -75,10 +75,10 @@ keys = [
 
 
 workspaces = [
-	{"name": "i", "key": "i", "matches": [Match(wm_class=["Pidgin", "Hexchat"])]},
+	{"name": "i", "key": "i", "matches": [Match(wm_class=["Pidgin"])]},
 	{"name": "r", "key": "r", "matches": [Match(wm_class=["Chromium-browser", "Firefox", "Google-chrome"])]},
-	{"name": "f", "key": "f", "matches": [Match(wm_class=["Dolphin", "Thunar", "File-roller"])]},
-	{"name": "d", "key": "d", "matches": [Match(wm_class=["Lispworks", "jetbrains-pycharm-ce", "Eclipse"])]},
+	{"name": "f", "key": "f", "matches": [Match(wm_class=["dolphin", "Thunar", "File-roller"])]},
+	{"name": "d", "key": "d", "matches": [Match(wm_class=["Lispworks", "jetbrains-pycharm", "Eclipse" ])]},
 	{"name": "q", "key": "q", "matches": [Match(wm_class=["Acroread", "Zathura", "Evince"])]},
 	{"name": "n", "key": "n", "matches": [Match(wm_class=["Claws-mail"])]},
 	{"name": "c", "key": "c"},
@@ -143,6 +143,25 @@ def num_screens():
 			i += 1
 	return i
 
+# class ScreenBox(widget.base._TextBox):
+# 	def __init__(self, width=bar.CALCULATED, **config):
+# 		widget.base._TextBox.__init__(self, "", width, **config)
+#
+# 	def _configure(self, qtile, bar):
+# 		widget.base._TextBox._configure(self, qtile, bar)
+# 		self.text = "0"
+# 		self.setup_hooks()
+#
+# 	def screen(self):
+# 		return Client().screen.info()["index"]
+#
+# 	def setup_hooks(self):
+# 		def hook_response():
+# 			pass
+# 			#self.text = "{}".format(self.screen())
+# 			#self.bar.draw()
+# 		hook.subscribe.current_screen_change(hook_response)
+
 
 # dnf install fontawesome-fonts
 # https://fortawesome.github.io/Font-Awesome/cheatsheet/
@@ -179,10 +198,15 @@ screens = [
 			widget.Volume(get_volume_command=vol_cur.split()),
 			widget.Sep(padding=15),
 
-			# @TODO On Fedora 24
-			# widget.Memory(),
-			# widget.CheckUpdates(distro="Fedora"),
-			# widget.CurrentScreen(),
+			# Screen
+			# widget.TextBox(text="Screen:"),
+			# ScreenBox(),
+			# widget.Sep(padding=15),
+
+			# Updates
+			#widget.TextBox(text="Updates:"),
+			#CheckUpdates(distro="Fedora"),
+			#widget.Sep(padding=15),
 
 			widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:]),
 			widget.Spacer(),
