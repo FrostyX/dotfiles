@@ -23,6 +23,7 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'scrooloose/syntastic'
 
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'chriskempson/base16-vim'
 " Plugin 'vim-scripts/AutoComplPop'
 " Plugin 'ervandew/supertab'
 
@@ -222,7 +223,7 @@ if has("gui_running")
 	" Fix comments in solarized
 	let g:solarized_italic=0
 
-	colorscheme solarized
+	colorscheme base16-eighties
 	set background=dark
 	set guioptions-=T  " No toolbar
 	set guioptions-=r  " No right scrollbar
@@ -256,10 +257,11 @@ if hostname == "thinkpad"
 	highlight SpecialKey guibg=#002B36
 
 elseif hostname == "unused-4-222.brq.redhat.com"
-	set background=light
-	highlight NonText guifg=#d6d0bf     " EOL character color
-	highlight SpecialKey guifg=#d6d0bf  " Tab and space character color
-	highlight SpecialKey guibg=#fdf6e3
+	colorscheme base16-eighties
+	set background=dark
+	highlight NonText guifg=#4a4a59     " EOL character color
+	highlight SpecialKey guifg=#4a4a59  " Tab and space character color
+	highlight SpecialKey guibg=#2d2d2d
 end
 
 
