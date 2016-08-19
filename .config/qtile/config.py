@@ -169,7 +169,7 @@ icons = {
 	"temp": "",     # fa-fire-extinguisher
 	"battery": "",  # fa-battery-three-quarters
 	"light": "",    # fa-lightbulb-o
-	"volume": "",   # fa-volume-up
+	"volume": "",   # fa-bullhorn
 }
 
 screens = [
