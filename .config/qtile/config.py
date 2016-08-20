@@ -105,12 +105,16 @@ def dialogs(window):
 	if wm_type == 'dialog' or transient_for or wm_class in floating:
 		window.floating = True
 
+
+# Preivew: https://chriskempson.github.io/base16/#eighties
+# Codes: https://chriskempson.github.io/base16/css/base16-eighties.css
 colors = {
-	"grey": "#555555",
-	"red": "#DD1144",
-	"blue": "#445588",
-	"lgrey": "#b8b6b1",
-	"green": "#008080",
+	"greybg": "#2d2d2d",
+	"greyfg": "#d3d0c8",
+	"red": "#f2777a",
+	"blue": "#6699cc",
+	"lgrey": "#747369",
+	"green": "#99cc99",
 }
 
 # http://docs.qtile.org/en/latest/manual/ref/layouts.html
@@ -172,31 +176,40 @@ icons = {
 	"volume": "",   # fa-bullhorn
 }
 
+style = {
+	"foreground": colors["greyfg"],
+}
+
+sep = {
+	"foreground": colors["lgrey"]
+}
+
 screens = [
 	Screen(
 		top=bar.Bar([
 			# Temp
-			widget.TextBox(text=icons["temp"]),
-			widget.ThermalSensor(threshold=65, foreground_alert=colors["red"]),
-			widget.Sep(padding=15),
+			widget.TextBox(text=icons["temp"], **style),
+			widget.ThermalSensor(threshold=65, foreground_alert=colors["red"], **style),
+			widget.Sep(padding=15, **sep),
 
 			# Battery
-			widget.TextBox(text=icons["battery"]),
-			widget.Battery(battery_name="BAT1", low_foreground=colors["red"]),
-			widget.Sep(padding=15),
+			widget.TextBox(text=icons["battery"], **style),
+			widget.Battery(battery_name="BAT1", low_foreground=colors["red"], **style),
+			widget.Sep(padding=15, **sep),
 
 			# Light
-			widget.TextBox(text=icons["light"]),
+			widget.TextBox(text=icons["light"], **style),
 			widget.Backlight(
 				brightness_file="/sys/class/backlight/intel_backlight/actual_brightness",
-				max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness"
+				max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness",
+				**style
 			),
-			widget.Sep(padding=15),
+			widget.Sep(padding=15, **sep),
 
 			# Volume
-			widget.TextBox(text=icons["volume"]),
-			widget.Volume(get_volume_command=vol_cur.split()),
-			widget.Sep(padding=15),
+			widget.TextBox(text=icons["volume"], **style),
+			widget.Volume(get_volume_command=vol_cur.split(), **style),
+			widget.Sep(padding=15, **sep),
 
 			# Screen
 			# widget.TextBox(text="Screen:"),
@@ -208,20 +221,20 @@ screens = [
 			#CheckUpdates(distro="Fedora"),
 			#widget.Sep(padding=15),
 
-			widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:]),
+			widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:], **style),
 			widget.Spacer(),
-			widget.Clock(timezone="Europe/Prague", format="%H:%M  %d. %m. (%b) %Y   #%W"),
-		], 25),
+			widget.Clock(timezone="Europe/Prague", format="%H:%M  %d. %m. (%b) %Y   #%W", **style),
+		], 25, background=colors["greybg"]),
 
 		bottom=bar.Bar([
-			widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"]),
-			widget.Sep(padding=15),
-			widget.CurrentLayout(),
-			widget.Sep(padding=15),
+			widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"], active=colors["greyfg"], inactive=colors["lgrey"], **style),
+			widget.Sep(padding=15, **sep),
+			widget.CurrentLayout(**style),
+			widget.Sep(padding=15, **sep),
 			widget.Prompt(),
-			widget.WindowTabs(separator="    |    "),
+			widget.WindowTabs(separator="    |    ", **style),
 			widget.Systray(),
-		], 25),
+		], 25, background=colors["greybg"]),
 	)
 ]
 
@@ -229,14 +242,14 @@ if num_screens() == 2:
 	screens.append(
 		Screen(
 			bottom=bar.Bar([
-				widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"]),
-				widget.Sep(padding=15),
-				widget.CurrentLayout(),
-				widget.Sep(padding=15),
+			widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"], active=colors["greyfg"], inactive=colors["lgrey"], **style),
+				widget.Sep(padding=15, **sep),
+				widget.CurrentLayout(**style),
+				widget.Sep(padding=15, **sep),
 				widget.Prompt(),
-				widget.WindowTabs(separator="    |    "),
+				widget.WindowTabs(separator="    |    ", **style),
 				widget.Systray(),
-			], 25)))
+			], 25, background=colors["greybg"])))
 
 
 # Drag floating layouts.
