@@ -181,7 +181,8 @@ style = {
 }
 
 sep = {
-	"foreground": colors["lgrey"]
+	"foreground": colors["lgrey"],
+	"padding": 15,
 }
 
 screens = [
@@ -190,12 +191,12 @@ screens = [
 			# Temp
 			widget.TextBox(text=icons["temp"], **style),
 			widget.ThermalSensor(threshold=65, foreground_alert=colors["red"], **style),
-			widget.Sep(padding=15, **sep),
+			widget.Sep(**sep),
 
 			# Battery
 			widget.TextBox(text=icons["battery"], **style),
 			widget.Battery(battery_name="BAT1", low_foreground=colors["red"], **style),
-			widget.Sep(padding=15, **sep),
+			widget.Sep(**sep),
 
 			# Light
 			widget.TextBox(text=icons["light"], **style),
@@ -204,12 +205,12 @@ screens = [
 				max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness",
 				**style
 			),
-			widget.Sep(padding=15, **sep),
+			widget.Sep(**sep),
 
 			# Volume
 			widget.TextBox(text=icons["volume"], **style),
 			widget.Volume(get_volume_command=vol_cur.split(), **style),
-			widget.Sep(padding=15, **sep),
+			widget.Sep(**sep),
 
 			# Screen
 			# widget.TextBox(text="Screen:"),
@@ -228,9 +229,9 @@ screens = [
 
 		bottom=bar.Bar([
 			widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"], active=colors["greyfg"], inactive=colors["lgrey"], **style),
-			widget.Sep(padding=15, **sep),
+			widget.Sep(**sep),
 			widget.CurrentLayout(**style),
-			widget.Sep(padding=15, **sep),
+			widget.Sep(**sep),
 			widget.Prompt(),
 			widget.WindowTabs(separator="    |    ", **style),
 			widget.Systray(),
@@ -243,9 +244,9 @@ if num_screens() == 2:
 		Screen(
 			bottom=bar.Bar([
 			widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"], active=colors["greyfg"], inactive=colors["lgrey"], **style),
-				widget.Sep(padding=15, **sep),
+				widget.Sep(**sep),
 				widget.CurrentLayout(**style),
-				widget.Sep(padding=15, **sep),
+				widget.Sep(**sep),
 				widget.Prompt(),
 				widget.WindowTabs(separator="    |    ", **style),
 				widget.Systray(),
