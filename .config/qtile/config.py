@@ -41,7 +41,7 @@ keys = [
 	Key([mod], "F2", lazy.spawn(run)),
 
 	# Toggle between different layouts as defined below
-	Key([mod], "space", lazy.nextlayout()),
+	Key([mod], "space", lazy.next_layout()),
 	Key([mod], "F4", lazy.window.kill()),
 
 	Key([mod, "control"], "r", lazy.restart()),
@@ -140,7 +140,7 @@ widget_defaults = dict(
 
 def num_screens():
 	process = subprocess.Popen(["xrandr"], stdout=subprocess.PIPE)
-	out = process.communicate()[0].split("\n")
+	out = str(process.communicate()[0]).split("\n")
 	i = 0
 	for line in out:
 		if " connected " in line:
