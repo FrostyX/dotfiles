@@ -1,0 +1,9 @@
+[user]
+	name = Jakub Kadlcik
+	email = frostyx@email.cz
+
+[core]
+	editor = vim
+
+[alias]
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
