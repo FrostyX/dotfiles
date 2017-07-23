@@ -15,15 +15,17 @@ vol_cur      = "amixer -D pulse get Master"
 vol_up       = "amixer -q -D pulse sset Master 2%+"
 vol_down     = "amixer -q -D pulse sset Master 2%-"
 mute         = "amixer -q -D pulse set Master toggle"
-bright_up    = "xbacklight -inc 10"
-bright_down  = "xbacklight -dec 10"
+#bright_up    = "xbacklight -inc 10"
+#bright_down  = "xbacklight -dec 10"
+bright_up    = "light -A 5"
+bright_down  = "light -U 5"
 lock         = "gnome-screensaver-command -l"
 scrot        = ""
 scrot_all    = ""
 
 
 hostname = uname()[1]
-if hostname == "unused-4-222.brq.redhat.com":
+if hostname == "chromie":
 	scrot = "/home/jkadlcik/.bin/screenshot.sh"
 	scrot_all = "/home/jkadlcik/git/qtile-screenshot/qtile-screenshot.py -o /home/jkadlcik/images/scrot"
 	# https://github.com/FrostyX/qtile-screenshot/blob/master/qtile-screenshot.py
