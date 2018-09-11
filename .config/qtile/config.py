@@ -22,10 +22,12 @@ bright_down  = "light -U 5"
 lock         = "gnome-screensaver-command -l"
 scrot        = ""
 scrot_all    = ""
+battery      = "BAT0"
 
 
 hostname = uname()[1]
 if hostname == "chromie":
+	battery = "BAT1"
 	scrot = "/home/jkadlcik/.bin/screenshot.sh"
 	scrot_all = "/home/jkadlcik/git/qtile-screenshot/qtile-screenshot.py -o /home/jkadlcik/images/scrot"
 	# https://github.com/FrostyX/qtile-screenshot/blob/master/qtile-screenshot.py
@@ -197,7 +199,7 @@ screens = [
 
 			# Battery
 			widget.TextBox(text=icons["battery"], **style),
-			widget.Battery(battery_name="BAT1", low_foreground=colors["red"], **style),
+			widget.Battery(battery_name=battery, low_foreground=colors["red"], **style),
 			widget.Sep(**sep),
 
 			# Light
