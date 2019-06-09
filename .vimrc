@@ -22,6 +22,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'vimwiki/vimwiki'
+Plugin 'junegunn/goyo.vim'
 
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'chriskempson/base16-vim'
