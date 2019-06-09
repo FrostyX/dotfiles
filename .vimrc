@@ -21,6 +21,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'kien/ctrlp.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'vimwiki/vimwiki'
 
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'chriskempson/base16-vim'
@@ -213,6 +214,13 @@ let g:syntastic_quiet_messages = { "level": "warnings" }
 
 " Markdown
 let g:vim_markdown_folding_disabled=1
+
+" Vimwiki
+let g:vimwiki_dir_link = 'index'
+let g:vimwiki_hl_cb_checked = 2
+let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+
+au BufNewFile ~/vimwiki/diary/*.md :silent 0r !~/.vim/bin/fragment-vimwiki-diary '%'
 
 
 " ------------------------------------------
