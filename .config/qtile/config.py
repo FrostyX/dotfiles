@@ -24,6 +24,9 @@ scrot        = ""
 scrot_all    = ""
 battery      = "BAT0"
 
+player_prev = "playerctl previous --player=spotify"
+player_next = "playerctl next --player=spotify"
+player_play_pause = "playerctl play-pause --player=spotify"
 
 hostname = uname()[1]
 if hostname == "chromie":
@@ -67,7 +70,7 @@ keys = [
 	Key([sup], "h", lazy.prev_screen()),
 	Key([sup], "l", lazy.next_screen()),
 
-	# Multimedia
+	# Function keys
 	Key([], "XF86AudioRaiseVolume", lazy.spawn(vol_up)),
 	Key([], "XF86AudioLowerVolume", lazy.spawn(vol_down)),
 	Key([], "XF86AudioMute", lazy.spawn(mute)),
@@ -75,6 +78,11 @@ keys = [
 	Key([], "XF86MonBrightnessDown", lazy.spawn(bright_down)),
 	Key([], "Print", lazy.spawn(scrot)),
 	Key([sup], "Print", lazy.spawn(scrot_all)),
+
+	# Multimedia
+	Key([mod], "Left", lazy.spawn(player_prev)),
+	Key([mod], "Right", lazy.spawn(player_next)),
+	Key([mod], "Down", lazy.spawn(player_play_pause)),
 ]
 
 
