@@ -80,9 +80,9 @@ keys = [
 	Key([sup], "Print", lazy.spawn(scrot_all)),
 
 	# Multimedia
-	Key([mod], "Left", lazy.spawn(player_prev)),
-	Key([mod], "Right", lazy.spawn(player_next)),
-	Key([mod], "Down", lazy.spawn(player_play_pause)),
+	Key([sup], "Left", lazy.spawn(player_prev)),
+	Key([sup], "Right", lazy.spawn(player_next)),
+	Key([sup], "Down", lazy.spawn(player_play_pause)),
 ]
 
 
