@@ -1,5 +1,7 @@
 #-*- coding: utf-8 -*-
 
+import os
+import sqlite3
 from subprocess import Popen, PIPE
 from libqtile.widget import GenPollText
 
@@ -50,3 +52,25 @@ class VimwikiUnfinished(GenPollText):
         if process.returncode == 2:
             return "!"
         return stdout.strip().decode("utf-8")
+
+
+class Newsboat(GenPollText):
+
+    defaults = [
+        ("update_interval", 10, "The delay in seconds between updates"),
+        ("dbfile", "~/.newsboat/cache.db", "Path to newsboat sqlite database file"),
+    ]
+
+    def __init__(self, **config):
+        GenPollText.__init__(self, **config)
+        self.add_defaults(Newsboat.defaults)
+
+    def func(self):
+        dbfile = os.path.expanduser(self.dbfile)
+        try:
+            connection = sqlite3.connect(dbfile)
+            cursor = connection.cursor()
+            cursor.execute("select count(*) from rss_item where unread=1;")
+            return str(cursor.fetchone()[0])
+        except sqlite3.OperationalError:
+            return "!"
