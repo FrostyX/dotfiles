@@ -33,6 +33,9 @@ class VimwikiUnfinished(GenPollText):
         elif self.today:
             cmd.append("--today")
 
+        if self.section:
+            cmd.extend(["--section", self.section])
+
         try:
             process = Popen(cmd, stdout=PIPE, stderr=PIPE)
             stdout, _ = process.communicate()
