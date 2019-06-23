@@ -8,6 +8,8 @@ from libqtile.config import Key, Screen, Group, Drag, Click, Match
 from libqtile.command import lazy, Client
 from libqtile import layout, bar, widget, hook
 
+from contrib import VimwikiUnfinished, Newsboat
+
 
 terminal     = "gnome-terminal"
 run          = "gmrun"
@@ -181,11 +183,15 @@ def num_screens():
 
 # dnf install fontawesome-fonts
 # https://fortawesome.github.io/Font-Awesome/cheatsheet/
+# For v4.7 see https://fontawesome.com/v4.7.0/cheatsheet/
 icons = {
 	"temp": "",     # fa-fire-extinguisher
 	"battery": "",  # fa-battery-three-quarters
 	"light": "",    # fa-lightbulb-o
 	"volume": "",   # fa-bullhorn
+	"rss": "",      # fa-rss
+	"tasks": "",    # fa-calendar-check-o
+	"repeat": "",   # fa-repeat
 }
 
 style = {
@@ -233,6 +239,21 @@ screens = [
 			#widget.TextBox(text="Updates:"),
 			#CheckUpdates(distro="Fedora"),
 			#widget.Sep(padding=15),
+
+			# Unread news count
+			widget.TextBox(text=icons["rss"], **style),
+			Newsboat(dbfile="/home/jkadlcik/.newsboat/cache.db", **style),
+			widget.Sep(**sep),
+
+			# Unfinished vimwiki tasks - today
+			widget.TextBox(text=icons["tasks"], **style),
+			VimwikiUnfinished(today=True, filetype="md", section="## Todo", **style),
+			widget.Sep(**sep),
+
+			# Unfinished vimwiki tasks - daily checklist
+			widget.TextBox(text=icons["repeat"], **style),
+			VimwikiUnfinished(today=True, filetype="md", section="## Daily checklist", **style),
+			widget.Sep(**sep),
 
 			widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:], **style),
 			widget.Spacer(),
