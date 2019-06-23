@@ -161,25 +161,6 @@ def num_screens():
 			i += 1
 	return i
 
-# class ScreenBox(widget.base._TextBox):
-# 	def __init__(self, width=bar.CALCULATED, **config):
-# 		widget.base._TextBox.__init__(self, "", width, **config)
-#
-# 	def _configure(self, qtile, bar):
-# 		widget.base._TextBox._configure(self, qtile, bar)
-# 		self.text = "0"
-# 		self.setup_hooks()
-#
-# 	def screen(self):
-# 		return Client().screen.info()["index"]
-#
-# 	def setup_hooks(self):
-# 		def hook_response():
-# 			pass
-# 			#self.text = "{}".format(self.screen())
-# 			#self.bar.draw()
-# 		hook.subscribe.current_screen_change(hook_response)
-
 
 # dnf install fontawesome-fonts
 # https://fortawesome.github.io/Font-Awesome/cheatsheet/
@@ -229,16 +210,6 @@ screens = [
 			widget.TextBox(text=icons["volume"], **style),
 			widget.Volume(get_volume_command=vol_cur.split(), **style),
 			widget.Sep(**sep),
-
-			# Screen
-			# widget.TextBox(text="Screen:"),
-			# ScreenBox(),
-			# widget.Sep(padding=15),
-
-			# Updates
-			#widget.TextBox(text="Updates:"),
-			#CheckUpdates(distro="Fedora"),
-			#widget.Sep(padding=15),
 
 			# Unread news count
 			widget.TextBox(text=icons["rss"], **style),
