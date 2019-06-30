@@ -149,9 +149,6 @@ map <C-tab> :tabnext<CR>
 imap <C-S-tab> <ESC>:tabprevious<CR>i
 imap <C-tab> <ESC>:tabnext<CR>i
 imap <C-t> <ESC>:tabnew<CR>
-map <C-w> :q<CR>
-imap <C-w> <Esc>:q<CR>i
-
 
 
 " ------------------------------------------
@@ -274,7 +271,7 @@ elseif hostname == "unused-4-222.brq.redhat.com"
 	highlight SpecialKey guifg=#4a4a59  " Tab and space character color
 	highlight SpecialKey guibg=#2d2d2d
 
-elseif hostname == "chromie"
+elseif hostname == "chromie" || hostname == "localhost.localdomain"
 	if terminal == "rxvt-xpm"
 		colorscheme base16-chalk
 	end
