@@ -40,7 +40,6 @@ call vundle#end()
 
 set nocompatible
 set nowrap
-set autochdir
 set backspace=indent,eol,start
 
 " Check if file was changed from the outside
