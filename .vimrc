@@ -166,7 +166,7 @@ map <leader>gc :Gcommit<CR>
 map <leader>gp :Git push<CR>
 
 " NERDTree
-map <C-n> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeFind<CR>
 
 " Taglist
 map <C-m> :TlistToggle<CR>
