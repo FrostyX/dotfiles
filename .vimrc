@@ -114,23 +114,8 @@ let mapleader = ","
 imap <F1> <Esc>
 map <F1> <Esc>
 
-" Terminal
-map <leader>t :silent !urxvt -cd `pwd` &<CR>
-
-" Saving
-map <C-S> :w<CR>
-imap <C-S> <ESC>:w<CR>i
-
-" Select all
-map <C-a> ggVG<CR>
-imap <C-a> <ESC>ggVG<CR>i
-
 " Copy & Paste
-" reference: [copy-and-paste]
-nmap <C-V> l"+gP
-imap <C-V> <ESC><C-V>i
-map <C-C> "+y
-vmap <C-C> "+y
+set pastetoggle=<F2>
 
 " Splits
 nmap <silent> <c-k> :wincmd k<CR>
@@ -141,8 +126,6 @@ nmap <silent> <c-l> :wincmd l<CR>
 " Tabs
 nmap <C-S-tab> :tabprevious<CR>
 nmap <C-tab> :tabnext<CR>
-nmap <C-t> :tabnew<CR>
-map <C-t> :tabnew<CR>
 map <C-S-tab> :tabprevious<CR>
 map <C-tab> :tabnext<CR>
 imap <C-S-tab> <ESC>:tabprevious<CR>i
