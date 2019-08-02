@@ -37,6 +37,10 @@ if hostname == "chromie":
 	scrot_all = "/home/jkadlcik/git/qtile-screenshot/qtile-screenshot.py -o /home/jkadlcik/images/scrot"
 	# https://github.com/FrostyX/qtile-screenshot/blob/master/qtile-screenshot.py
 
+elif hostname == "localhost.localdomain":  # New work laptop is not named yet
+	terminal = "urxvt256c -e tmux"
+	lock = "i3lock -i /home/jkadlcik/.dotfiles/.config/qtile/img/bsod.png"
+
 
 mod = "mod1" # Left alt
 sup = "mod4" # Left win-key
