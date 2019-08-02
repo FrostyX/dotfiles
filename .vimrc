@@ -18,17 +18,17 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'kien/ctrlp.vim'
-Plugin 'davidhalter/jedi-vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'vimwiki/vimwiki'
 Plugin 'junegunn/goyo.vim'
 Plugin 'ElmCast/elm-vim'
-
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'chriskempson/base16-vim'
-" Plugin 'vim-scripts/AutoComplPop'
-" Plugin 'ervandew/supertab'
+
+" Requires to `dnf install python3-jedi`
+Plugin 'davidhalter/jedi-vim'
+
+" Requires to `dnf install fzf`
+Plugin 'junegunn/fzf.vim'
 
 call vundle#end()
 
@@ -151,6 +151,11 @@ imap <C-tab> <ESC>:tabnext<CR>i
 imap <C-t> <ESC>:tabnew<CR>
 
 
+" Because of czech keyboard layout
+nmap <Leader>def g<C-]>
+
+
+
 " ------------------------------------------
 " Plugins
 " ------------------------------------------
@@ -160,7 +165,6 @@ cnoremap git Git
 map <leader>ga :Gwrite<CR>
 map <leader>gc :Gcommit<CR>
 map <leader>gp :Git push<CR>
-nnoremap <leader>fs :exec "file ". resolve(expand('%:p'))<CR>:e<CR>
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
@@ -171,45 +175,16 @@ let Tlist_Use_Right_Window = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
 
 " Jedi-vim
-" http://paste.debian.net/108459/
-"let load_jedi = 0
-"let g:jedi#auto_initialization = 0
-"try
-	"python import jedi
-	"let load_jedi = 1
-	"catch
-"endtry
-
-" Supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" AutoComplPop
-let g:acp_behaviorKeywordLength = 3
-let g:acp_behaviorKeywordCommand = "\<C-n>"
+let g:jedi#popup_select_first = 1
+let g:jedi#show_call_signatures = 0
+let g:jedi#completions_command = "<C-n>"
+autocmd FileType python setlocal completeopt-=preview
 
 " tComment
 map <leader>c <C-_><C-_>
 
 " Syntastic
-" :help syntastic_quiet_messages
 let g:syntastic_quiet_messages = { "level": "warnings" }
-
-" YouCompleteMe
-" reference: [ycm-jedi-vim]
-" jedi-vim {
-	let g:jedi#auto_vim_configuration = 0
-	let g:jedi#popup_on_dot = 0
-	let g:jedi#popup_select_first = 0
-	let g:jedi#completions_enabled = 0
-	let g:jedi#completions_command = ""
-	let g:jedi#show_call_signatures = "1"
-
-	let g:jedi#goto_assignments_command = "<leader>pa"
-	let g:jedi#goto_definitions_command = "<leader>pd"
-	let g:jedi#documentation_command = "<leader>pk"
-	let g:jedi#usages_command = "<leader>pu"
-	let g:jedi#rename_command = "<leader>pr"
-" }
 
 " Markdown
 let g:vim_markdown_folding_disabled=1
@@ -220,6 +195,14 @@ let g:vimwiki_hl_cb_checked = 2
 let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
 
 au BufNewFile ~/vimwiki/diary/*.md :silent 0r !~/.vim/bin/fragment-vimwiki-diary '%'
+
+" FZF
+nmap ; :Buffers<CR>
+nmap <Leader>f :Files<CR>
+nmap <Leader>t :Tags<CR>
+
+" Don't suggest imports
+let g:fzf_tags_command = 'ctags -R --python-kinds=-i'
 
 
 " ------------------------------------------
