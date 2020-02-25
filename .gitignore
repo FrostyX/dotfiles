@@ -1,2 +1,5 @@
 .directory
 .vim/view/
+
+.emacs.d/*
+!.emacs.d/init.el

@@ -13,6 +13,7 @@
 	ln -s ~/.dotfiles/.Xresources ~/.Xresources
 	ln -s ~/.dotfiles/.vim ~/.vim
 	ln -s ~/.dotfiles/.vimrc ~/.vimrc
+	ln -s ~/.dotfiles/.emacs.d/ ~/.emacs.d
 	ln -s ~/.dotfiles/.local/share/applications/gvim.desktop ~/.local/share/applications/gvim.desktop
 	ln -s ~/.dotfiles/.config/cava/config ~/.config/cava/config
 
