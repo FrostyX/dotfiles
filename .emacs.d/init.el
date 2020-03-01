@@ -170,7 +170,8 @@
 (use-package dtrt-indent
   :ensure t
   :config
-  (dtrt-indent-mode))
+  (dtrt-indent-global-mode)
+  (dtrt-indent-adapt))
 
 
 (use-package neotree
