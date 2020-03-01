@@ -282,6 +282,13 @@
 (add-to-list 'dashboard-item-generators  '(custom . dashboard-insert-custom))
 
 
+(use-package password-store
+  :ensure t
+  :config
+  nil)
+
+
+
 
 ;; EWW notes here
 ;; Key bindings
@@ -316,8 +323,8 @@
 ;; See https://github.com/danielfm/spotify.el/#selecting-a-device-for-playback
 (add-to-list 'load-path "/home/jkadlcik/git/spotify.el")
 (require 'spotify)
-(setq spotify-oauth2-client-id "3e9b6956c46648dca8eee5890c471ccb")
-(setq spotify-oauth2-client-secret "94ad14142a3d49aab9320e350f49199c")
+(setq spotify-oauth2-client-id (password-store-get "spotify/client-id"))
+(setq spotify-oauth2-client-secret (password-store-get "spotify/client-secret"))
 (setq spotify-transport 'connect)
 (define-key spotify-mode-map (kbd "C-c .") 'spotify-command-map)
 
@@ -978,7 +985,7 @@
  '(helm-completion-style (quote emacs))
  '(package-selected-packages
    (quote
-    (w3m persp-projectile perspective eyebrowse centaur-tabs browse-at-remote magit jinja2-mode writeroom-mode markdown-mode docker-compose-mode dockerfile-mode powerline mu4e-conversation mu4e evil-collection notmuch rainbow-delimiters fic-mode neotree dtrt-indent evil-commentary use-package treemacs-icons-dired treemacs-evil transient swiper spotify helm-projectile helm-fuzzy-find git-commit fzf evil-leader evil-indent-textobject elpy elfeed dashboard company-jedi base16-theme)))
+    (password-store w3m persp-projectile perspective eyebrowse centaur-tabs browse-at-remote magit jinja2-mode writeroom-mode markdown-mode docker-compose-mode dockerfile-mode powerline mu4e-conversation mu4e evil-collection notmuch rainbow-delimiters fic-mode neotree dtrt-indent evil-commentary use-package treemacs-icons-dired treemacs-evil transient swiper spotify helm-projectile helm-fuzzy-find git-commit fzf evil-leader evil-indent-textobject elpy elfeed dashboard company-jedi base16-theme)))
  '(pixel-scroll-mode t)
  '(projectile-mode t nil (projectile)))
 (custom-set-faces
