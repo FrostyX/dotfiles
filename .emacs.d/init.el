@@ -329,6 +329,7 @@
 (define-key spotify-mode-map (kbd "C-c .") 'spotify-command-map)
 
 ;; https://github.com/danielfm/spotify.el#remote-minor-mode
+(evil-define-key 'normal spotify-mode-map (kbd "q") 'spotify-quit)  ;; @FIXME doesn't work, probably create an issue
 (evil-define-key 'normal spotify-mode-map (kbd "go") 'spotify-track-select)
 (evil-define-key 'normal spotify-mode-map (kbd "gp") 'spotify-toggle-play)
 (evil-define-key 'normal spotify-mode-map (kbd "g<") 'spotify-previous-track)
