@@ -609,6 +609,7 @@
 ;;             (set-window-fringes (selected-window) 0 0 nil)))
 
 
+(setq writeroom-fullscreen-effect (quote maximized))
 (add-hook 'writeroom-mode-hook
         (lambda ()
           (if writeroom-mode
