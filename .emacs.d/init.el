@@ -138,8 +138,8 @@
 
 
 ;; ;; https://emacs.stackexchange.com/questions/10350/how-can-i-add-a-new-colon-command-to-evil
-;; (eval-after-load 'evil-ex
-;;   '(evil-ex-define-cmd "b[utterfly]" 'butterfly))
+(eval-after-load 'evil-ex
+  '(evil-ex-define-cmd "Gbrowse" 'browse-at-remote))
 
 
 (use-package evil-collection
