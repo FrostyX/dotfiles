@@ -207,11 +207,14 @@
   (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
 
 
-(use-package browse-at-remote
-  ;; https://github.com/rmuslimov/browse-at-remote
-  :ensure t
-  :config
-  nil)
+;; (use-package browse-at-remote
+;;   ;; https://github.com/rmuslimov/browse-at-remote
+;;   :ensure t
+;;   :config
+;;   nil)
+
+(add-to-list 'load-path "/home/jkadlcik/git/browse-at-remote")
+(require 'browse-at-remote)
 
 
 ;; (use-package powerline
