@@ -61,6 +61,11 @@
   (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
   (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 
+  ;; @TODO bind this only in python mode
+  (define-key evil-insert-state-map (kbd ",i")
+    (lambda ()
+      (interactive)
+      (insert "import ipdb; ipdb.set_trace()")))
 
 
 
