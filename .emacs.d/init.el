@@ -215,7 +215,7 @@
 
 (add-to-list 'load-path "/home/jkadlcik/git/browse-at-remote")
 (require 'browse-at-remote)
-
+(setq browse-at-remote-add-line-number-if-no-region-selected nil)
 
 ;; (use-package powerline
 ;;   :ensure t
