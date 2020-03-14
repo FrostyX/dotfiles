@@ -222,15 +222,35 @@
 (require 'browse-at-remote)
 (setq browse-at-remote-add-line-number-if-no-region-selected nil)
 
+
+(use-package enwc
+  :ensure t
+  :config
+  (setq enwc-default-backend 'nm)
+  (setq enwc-wireless-device 'wlp2s0)
+  ;; (define-key enwc-mode-map (kbd "C") 'enwc-connect-to-network-essid)
+  nil)
+
+;; (evil-add-hjkl-bindings enwc-mode-map 'emacs
+;;   (kbd "/")       'evil-search-forward
+;;   (kbd "n")       'evil-search-next
+;;   (kbd "N")       'evil-search-previous
+;;   (kbd "C-d")     'evil-scroll-down
+;;   (kbd "C-u")     'evil-scroll-up
+;;   (kbd "C-w C-w") 'other-window)
+
 ;; (use-package powerline
 ;;   :ensure t
 ;;   :config
 ;;   (powerline-default-theme))
 
 
-;; @TODO use-package projectile
+(use-package projectile
+  :ensure t
+  :config
 ;; @TODO create key binding for `projectile-discover-projects-in-search-path'
-(setq projectile-project-search-path '("~/git/")) 
+  (setq projectile-project-search-path '("~/git/")))
+
 
 
 (use-package spaceline
