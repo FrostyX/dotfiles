@@ -522,6 +522,61 @@
 ;   (add-hook 'python-mode-hook 'config/enable-company-jedi))
 
 
+
+
+;; When messing with the configuration and going back to elpy, delete
+;; these packages with `M-x package-delete'
+;;
+;; (use-package company
+;;   :ensure t
+;;   :config
+;;   (global-company-mode))
+
+;; (use-package flycheck
+;;   :ensure t)
+
+;; (use-package lsp-mode
+;;   :ensure t
+;;   ;; Support for specific languages:
+;;   ;; Python: pip-3 install --user python-language-server[all]
+
+;;   :init
+;;   (setq lsp-keymap-prefix "s-l")
+
+;;   ;;@FIXME autocompletion inserts function arguments and it sux
+;;   ;;       using elpy until that
+;;   ;; :hook
+;;   ;; ((python-mode . lsp))
+
+;;   :config
+;;   (setq lsp-enable-symbol-highlighting nil)
+;;   (setq lsp-signature-auto-activate nil)
+;;   (setq lsp-enable-snippet nil)
+;;   (setq lsp-enable-completion-at-point nil)
+
+;;   :commands lsp)
+
+;; (use-package lsp-ui
+;;   :disabled
+;;   :ensure t
+;;   :commands lsp-ui-mode)
+
+;; (use-package company-lsp
+;;   :ensure t
+;;   :config
+;;   (setq company-lsp-enable-snippet nil)
+;;   :commands company-lsp)
+
+;; (use-package helm-lsp
+;;   :ensure t
+;;   :commands helm-lsp-workspace-symbol)
+
+;; (setq company-minimum-prefix-length 1
+;;       company-idle-delay 0) ;; default is 0.2
+
+;; (add-hook 'prog-mode-hook (lambda () (highlight-indentation-mode -1)))
+
+
 (use-package elpy
   ;; sudo dnf install python3-virtualenv
   :ensure t
