@@ -4,7 +4,7 @@ import re
 import subprocess
 from os import uname
 from os.path import expanduser
-from libqtile.config import Key, Screen, Group, Drag, Click, Match
+from libqtile.config import Key, Screen, Group, Drag, Click, Match, Rule
 from libqtile.command import lazy, Client
 from libqtile import layout, bar, widget, hook
 
@@ -277,7 +277,10 @@ bring_front_click = False
 
 
 dgroups_key_binder = None
-dgroups_app_rules = []
+dgroups_app_rules = [
+    # floating windows
+    Rule(Match(wm_class=['Synfigstudio', 'Wine', 'Xephyr', 'postal2-bin']), float=True),
+]
 main = None
 cursor_warp = False
 auto_fullscreen = True
