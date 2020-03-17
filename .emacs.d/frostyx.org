@@ -433,17 +433,18 @@
 (defhydra hydra-main (:color blue)
   "
     ^
-    ^Hydra^              ^Misc^
-    ^^^^────────────────────────────────
-    ^^                  _m_ major mode
-    _q_ quit            _a_ applications
+    ^Hydra^              ^Misc^                      ^Emacs^
+    ^^^^^^───────────────────────────────────────────────────────────────────
+    _q_ quit            _m_ major mode               _r_ reload configuration
+    ^^                  _a_ applications
     ^^                  _z_ zoom
   "
   ("SPC" nil)
   ("q" nil)
   ("m" hydra-major/body)
   ("a" hydra-applications/body)
-  ("z" hydra-zoom/body))
+  ("z" hydra-zoom/body)
+  ("r" (load-file user-init-file)))
 
 
 (defhydra hydra-zoom (:color blue)
