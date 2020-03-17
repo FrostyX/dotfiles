@@ -18,6 +18,17 @@
   (package-install 'use-package))
 (require 'use-package)
 
+;; automatically update emacs packages
+;; https://emacs.stackexchange.com/a/31904
+(use-package auto-package-update
+   :ensure t
+   :config
+   (setq auto-package-update-delete-old-versions t
+         auto-package-update-interval 1
+         auto-package-update-prompt-before-update t
+         auto-package-update-hide-results t)
+   (auto-package-update-at-time "03:00")
+   (auto-package-update-maybe))
 
 ;; load evil
 (use-package evil
