@@ -444,10 +444,12 @@
     ^
     ^Hydra^              ^Misc^
     ^^^^───────────────────────
-    _q_ quit            _z_ zoom
+    _q_ quit            _a_ applications
+    ^^                  _z_ zoom
   "
   ("SPC" nil)
   ("q" nil)
+  ("a" hydra-applications/body)
   ("z" hydra-zoom/body))
 
 
@@ -463,6 +465,26 @@
   ("q" nil)
   ("l" text-scale-decrease)
   ("g" text-scale-increase))
+
+
+(defhydra hydra-applications (:color blue)
+  "
+    ^
+    ^Applications^              ^Launch^
+    ^^^^────────────────────────────────
+    _q_ quit            _r_ RSS (elfeed)
+    ^^                  _w_ web (eww)
+    ^^                  _e_ email (mu4e)
+    ^^                  _p_ spotify - my playlists
+    ^^                  _s_ spotify - recently played
+  "
+  ("SPC" nil)
+  ("q" nil)
+  ("r" elfeed)
+  ("w" eww)
+  ("e" mu4e)
+  ("p" spotify-my-playlists)
+  ("s" spotify-recently-played))
 
 
 (use-package eyebrowse
