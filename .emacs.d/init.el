@@ -22,7 +22,7 @@
 (use-package org :ensure org-plus-contrib)
 
 ;; Tangle configuration
-(org-babel-load-file (expand-file-name "init.org" user-emacs-directory))
+(org-babel-load-file (expand-file-name "frostyx.org" user-emacs-directory))
 (garbage-collect)
 
 (custom-set-variables
