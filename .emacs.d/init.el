@@ -405,12 +405,15 @@
   "
     ^
     ^Hydra^              ^Misc^
-    ^^^^───────────────────────
+    ^^^^────────────────────────────────
+    ^^                  _m_ major mode
     _q_ quit            _a_ applications
     ^^                  _z_ zoom
+    ^
   "
   ("SPC" nil)
   ("q" nil)
+  ("m" hydra-major/body)
   ("a" hydra-applications/body)
   ("z" hydra-zoom/body))
 
@@ -419,7 +422,7 @@
   "
     ^
     ^Zoom^              ^Actions^
-    ^^^^─────────────────────────
+    ^^^^───────────────────────────
     _q_ quit            _l_ lesser
     ^^                  _g_ greater
   "
@@ -433,7 +436,7 @@
   "
     ^
     ^Applications^              ^Launch^
-    ^^^^────────────────────────────────
+    ^^^^─────────────────────────────────────────────
     _q_ quit            _r_ RSS (elfeed)
     ^^                  _w_ web (eww)
     ^^                  _e_ email (mu4e)
@@ -447,6 +450,19 @@
   ("e" mu4e)
   ("p" spotify-my-playlists)
   ("s" spotify-recently-played))
+
+
+;; We should actually call a different hydra based on the current major mode
+(defhydra hydra-major (:color blue)
+  "
+    ^
+    ^Python^              ^Actions^
+    ^^^^───────────────────────────
+    _q_ quit            _d_ doc
+  "
+  ("SPC" nil)
+  ("q" nil)
+  ("d" elpy-doc))
 
 
 (use-package eyebrowse
