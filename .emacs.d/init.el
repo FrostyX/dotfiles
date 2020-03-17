@@ -432,14 +432,37 @@
 (use-package hydra
   :ensure t
   :bind
-  ;; @TODO add SPC binding for evil normal mode
-  ("C-SPC" . hydra-zoom/body))
+  ("C-SPC" . hydra-main/body)
+  :config
+  (define-key evil-normal-state-map (kbd "SPC") 'hydra-main/body)
+  :custom
+  (hydra-default-hint nil))
 
 
-(defhydra hydra-zoom (:color red)
+(defhydra hydra-main (:color blue)
+  "
+    ^
+    ^Hydra^              ^Misc^
+    ^^^^───────────────────────
+    _q_ quit            _z_ zoom
+  "
+  ("SPC" nil)
   ("q" nil)
-  ("g" text-scale-increase "in")
-  ("l" text-scale-decrease "out"))
+  ("z" hydra-zoom/body))
+
+
+(defhydra hydra-zoom (:color blue)
+  "
+    ^
+    ^Zoom^              ^Actions^
+    ^^^^─────────────────────────
+    _q_ quit            _l_ lesser
+    ^^                  _g_ greater
+  "
+  ("SPC" nil)
+  ("q" nil)
+  ("l" text-scale-decrease)
+  ("g" text-scale-increase))
 
 
 (use-package eyebrowse
