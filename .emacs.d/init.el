@@ -72,12 +72,6 @@
   (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
   (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 
-  ;; @TODO bind this only in python mode
-  (define-key evil-insert-state-map (kbd ",i")
-    (lambda ()
-      (interactive)
-      (insert "import ipdb; ipdb.set_trace()")))
-
 
 
 
@@ -127,9 +121,16 @@
 
 
 
+  ;; @FIXME
   (use-package evil-leader
     :ensure t
     :config
+    (evil-leader/set-leader ",")
+    ;; (evil-leader/set-key
+      ;; this way they work in normal mode, not insert mode
+      ;; "e" 'find-file
+      ;; "b" 'switch-to-buffer
+      ;; "k" 'kill-buffer)
     (global-evil-leader-mode))
 
   ; (use-package evil-surround
@@ -178,7 +179,9 @@
 ;; e.g. opening a package info from `M-x list packages' uses a help mode
 ;; https://emacs.stackexchange.com/a/22502
 (add-to-list 'display-buffer-alist
-             '("*Help*" display-buffer-same-window))
+             '("*Help*" display-buffer-same-window)
+             ;; '("*Playlists: *" display-buffer-same-window))
+)
 
 ;; Close the package detail and go back to the package list by pressing `q'
 
@@ -383,6 +386,16 @@
 )
 
 
+;; (use-package hydra-posframe
+;;   :load-path "/home/jkadlcik/git/hydra-posframe"
+;;   :hook (after-init . hydra-posframe-enable)
+;;   :config
+;;   (setq hydra-posframe-border-width 1)
+;;   (setq hydra-posframe-parameters
+;;         '((left-fringe . 10)
+;;           (right-fringe . 10))))
+
+
 
 ;; Create my own spacemacs-like menu
 (use-package hydra
@@ -395,10 +408,19 @@
   (hydra-default-hint nil))
 
 
-(use-package hydra-posframe
-  :load-path "/home/jkadlcik/git/hydra-posframe"
-  :config
-  (hydra-posframe-mode))
+(use-package pretty-hydra
+  :ensure t)
+
+
+;; (pretty-hydra-define hydra-main
+;;   (:color amaranth :title "FOO")
+;;   ("Bar"
+;;     (("SPC" nil "quit")
+;;      ("q" nil "quit"))
+
+;;    "Misc"
+;;     (("a" hydra-applications/body "applications")
+;;      ("z" hydra-zoom/body "zoom"))))
 
 
 (defhydra hydra-main (:color blue)
@@ -480,7 +502,7 @@
 
        ;; unmap `gc' because it conflicts with `evil-commentary'
        ("g c" . nil)
-  
+
      :map evil-motion-state-map
        ("g c" . nil)
 
@@ -518,7 +540,7 @@
 ;;   (setq persp-state-default-file "/home/jkadlcik/.emacs.d/persp-save-default")
 ;;   (setq persp-disable-buffer-restriction-once t)
 
-;;   ;; (use-package persp-projectile 
+;;   ;; (use-package persp-projectile
 ;;   ;;   :ensure t
 ;;   ;;   :config
 ;;   ;;   nil)
@@ -639,6 +661,15 @@
   (elpy-enable))
 
 
+; (yas-define-snippets 'python-mode
+;   '(("ipdb" "ipmport ipdb; ipdb.set_trace()")))
+
+  ;; @TODO bind this only in python mode
+  ;; (define-key evil-insert-state-map (kbd ", i")
+  ;;   (lambda ()
+  ;;     (interactive)
+  ;;     (insert "import ipdb; ipdb.set_trace()")))
+
 
 ;; disable UI nonsense
 (menu-bar-mode -1)
@@ -668,6 +699,19 @@
 ;; Superword mode seems to apply only on searching, adding also this,
 ;; to get w, yiw, dw, etc working as expected
 (modify-syntax-entry ?_ "w")
+
+;; https://github.com/syl20bnr/spacemacs/blob/develop/doc/FAQ.org#include-underscores-in-word-motions
+;; (add-hook 'prog-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+;; (add-hook 'mhtml-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+
+;; https://emacs.stackexchange.com/questions/9583/how-to-treat-underscore-as-part-of-the-word/20717#20717
+;; (with-eval-after-load 'evil
+;;     (defalias #'forward-evil-word #'forward-evil-symbol)
+;;     ;; make evil-search-word look for symbol rather than word boundaries
+;;     (setq-default evil-symbol-word-search t))
+
+
+
 ;; (defadvice evil-inner-word (around underscore-as-word activate)
 ;;   (let ((table (copy-syntax-table (syntax-table))))
 ;;     (modify-syntax-entry ?_ "w" table)
@@ -676,6 +720,7 @@
 
 
 ;; https://www.emacswiki.org/emacs/AutoPairs
+;; TODO try https://github.com/Fuco1/smartparens instead
 (electric-pair-mode)
 
 
@@ -695,6 +740,10 @@
 (setq scroll-step 1)
 (setq scroll-margin 5)
 (setq scroll-conservatively 101)
+
+
+;; Don't throw "Invalid coding system" errors on me when writting a file
+(define-coding-system-alias 'UTF-8 'utf-8)
 
 
 ;; Don't mess CWD with #foo.py# and foo.py~ files
@@ -746,6 +795,7 @@
 ;;             (set-window-fringes (selected-window) 0 0 nil)))
 
 
+;; @TODO don't modify modeline
 (setq writeroom-fullscreen-effect (quote maximized))
 (add-hook 'writeroom-mode-hook
         (lambda ()
@@ -976,7 +1026,7 @@
 
 ;; (setq gnus-select-method
 ;;       '(nnimap "gmail"
-;;                (nnimap-address "imap.gmail.com")  ; it could also be imap.googlemail.com if that's your server.                                        
+;;                (nnimap-address "imap.gmail.com")  ; it could also be imap.googlemail.com if that's your server.
 ;;                (nnimap-server-port 993)
 ;;                (nnimap-stream ssl)))
 
@@ -1125,9 +1175,10 @@
  '(enwc-wired-device "wlp2s0")
  '(enwc-wireless-device "wlp2s0")
  '(helm-completion-style (quote emacs))
+ '(hydra-default-hint nil)
  '(package-selected-packages
    (quote
-    (auto-package-update nov elpy enwc password-store w3m persp-projectile perspective eyebrowse centaur-tabs browse-at-remote magit jinja2-mode writeroom-mode markdown-mode docker-compose-mode dockerfile-mode powerline mu4e-conversation mu4e evil-collection notmuch rainbow-delimiters fic-mode neotree dtrt-indent evil-commentary use-package treemacs-icons-dired treemacs-evil transient swiper spotify helm-projectile helm-fuzzy-find git-commit fzf evil-leader evil-indent-textobject elfeed dashboard company-jedi base16-theme)))
+    (pretty-hydra hydra-posframe auto-package-update nov elpy enwc password-store w3m persp-projectile perspective eyebrowse centaur-tabs browse-at-remote magit jinja2-mode writeroom-mode markdown-mode docker-compose-mode dockerfile-mode powerline mu4e-conversation mu4e evil-collection notmuch rainbow-delimiters fic-mode neotree dtrt-indent evil-commentary use-package treemacs-icons-dired treemacs-evil transient swiper spotify helm-projectile helm-fuzzy-find git-commit fzf evil-leader evil-indent-textobject elfeed company-jedi base16-theme)))
  '(pixel-scroll-mode t)
  '(projectile-mode t nil (projectile))
  '(yas-global-mode t))
