@@ -426,6 +426,22 @@
             (right-fringe . 10))))
 )
 
+
+
+;; Create my own spacemacs-like menu
+(use-package hydra
+  :ensure t
+  :bind
+  ;; @TODO add SPC binding for evil normal mode
+  ("C-SPC" . hydra-zoom/body))
+
+
+(defhydra hydra-zoom (:color red)
+  ("q" nil)
+  ("g" text-scale-increase "in")
+  ("l" text-scale-decrease "out"))
+
+
 (use-package eyebrowse
   ;; https://github.com/wasamasa/eyebrowse
   :ensure t
