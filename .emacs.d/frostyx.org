@@ -640,6 +640,14 @@
 ;; @TODO use jinja2-mode package
 #+END_SRC
 
+*** Org
+
+#+BEGIN_SRC emacs-lisp
+(use-package toc-org
+  :ensure t
+  :after org)
+#+END_SRC
+
 ** LSP
 
 #+BEGIN_SRC emacs-lisp
