@@ -1099,15 +1099,24 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(electric-pair-mode t)
+ '(enwc-wired-device "wlp2s0")
+ '(enwc-wireless-device "wlp2s0")
  '(helm-completion-style (quote emacs))
  '(package-selected-packages
    (quote
-    (password-store w3m persp-projectile perspective eyebrowse centaur-tabs browse-at-remote magit jinja2-mode writeroom-mode markdown-mode docker-compose-mode dockerfile-mode powerline mu4e-conversation mu4e evil-collection notmuch rainbow-delimiters fic-mode neotree dtrt-indent evil-commentary use-package treemacs-icons-dired treemacs-evil transient swiper spotify helm-projectile helm-fuzzy-find git-commit fzf evil-leader evil-indent-textobject elpy elfeed dashboard company-jedi base16-theme)))
+    (auto-package-update nov elpy enwc password-store w3m persp-projectile perspective eyebrowse centaur-tabs browse-at-remote magit jinja2-mode writeroom-mode markdown-mode docker-compose-mode dockerfile-mode powerline mu4e-conversation mu4e evil-collection notmuch rainbow-delimiters fic-mode neotree dtrt-indent evil-commentary use-package treemacs-icons-dired treemacs-evil transient swiper spotify helm-projectile helm-fuzzy-find git-commit fzf evil-leader evil-indent-textobject elfeed dashboard company-jedi base16-theme)))
  '(pixel-scroll-mode t)
- '(projectile-mode t nil (projectile)))
+ '(projectile-mode t nil (projectile))
+ '(yas-global-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+;; See configs from other people
+;; https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org
+;; https://jamiecollinson.com/blog/my-emacs-config/
+;; https://emacs.nasy.moe/
