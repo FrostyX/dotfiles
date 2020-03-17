@@ -286,42 +286,6 @@
                                         :foreground (plist-get base16-chalk-colors :base01))
 
 
-(use-package dashboard
-  :ensure t
-  ; :init
-  ; (add-hook 'after-init-hook 'dashboard-refresh-buffer)
-  ; (add-hook 'dashboard-mode-hook 'my/dashboard-banner)
-  :config
-  (setq dashboard-startup-banner 'logo)
-
-  (setq dashboard-items '((projects . 5)
-                          (recents  . 5)
-                          (custom . t)
-                          (agenda . 5)))
-
-  ;; We can't have startup hook for dashboard, because we
-  ;; have startup hook to restore previous buffers and frames
-  ;; @TODO dashboard would still be usefull, I just need keybinding for dashboard-setup-startup-hook
-  ;; (it))
-  )
-
-
-(defun dashboard-insert-custom (list-size)
-  (dashboard-insert-section
-   "Applications"
-   '("elfeed"
-     "spotify-my-playlists"
-     "spotify-recently-played"
-     "mu4e")
-     "eww"
-   list-size
-   "a"
-   `(lambda (&rest ignore) (command-execute (intern ,el)))
-   (format "%s" el)))
-
-(add-to-list 'dashboard-item-generators  '(custom . dashboard-insert-custom))
-
-
 (use-package password-store
   :ensure t
   :config
@@ -337,14 +301,6 @@
 ;; go - open in external browser
 
 
-
-; (add-to-list 'dashboard-item-generators  '(custom . dashboard-insert-custom))
-; (add-to-list 'dashboard-item-generators  '(custom . describe-package-widget))
-
-
-
-
-; (add-to-list 'dashboard-items '(custom) t)
 
 
 ; (use-package swiper
@@ -437,6 +393,12 @@
   (define-key evil-normal-state-map (kbd "SPC") 'hydra-main/body)
   :custom
   (hydra-default-hint nil))
+
+
+(use-package hydra-posframe
+  :load-path "/home/jkadlcik/git/hydra-posframe"
+  :config
+  (hydra-posframe-mode))
 
 
 (defhydra hydra-main (:color blue)
