@@ -592,9 +592,13 @@
   ;; sudo dnf install python3-virtualenv
   :ensure t
   :init
+  (setq elpy-modules
+        '(elpy-module-sane-defaults
+          elpy-module-company
+          elpy-module-eldoc
+          elpy-module-django))
   (elpy-enable))
 
-(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
 
 
 ;; disable UI nonsense
