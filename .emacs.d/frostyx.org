@@ -488,10 +488,14 @@
     ^Python^              ^Actions^
     ^^^^───────────────────────────
     _q_ quit            _d_ doc
+    ^^                  _e_ edit special
+    ^^                  _s_ save special edit
   "
   ("SPC" nil)
   ("q" nil)
-  ("d" elpy-doc))
+  ("d" elpy-doc)
+  ("e" org-edit-special)
+  ("s" org-edit-src-exit))
 #+END_SRC
 
 
@@ -646,6 +650,12 @@
 (use-package toc-org
   :ensure t
   :after org)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq org-src-window-setup 'current-window)
+(setq org-src-preserve-indentation nil)
+(setq org-edit-src-content-indentation 0)
 #+END_SRC
 
 ** LSP
