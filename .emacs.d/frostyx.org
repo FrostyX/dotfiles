@@ -79,10 +79,9 @@
    :config
    (setq auto-package-update-delete-old-versions t
          auto-package-update-interval 1
-         auto-package-update-prompt-before-update t
+         auto-package-update-prompt-before-update nil
          auto-package-update-hide-results t)
-   (auto-package-update-at-time "03:00")
-   (auto-package-update-maybe))
+   (auto-package-update-at-time "04:00"))
 #+END_SRC
 
 * Secrets
