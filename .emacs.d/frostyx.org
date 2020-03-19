@@ -185,6 +185,12 @@
   (define-key evil-normal-state-map (kbd ",gp") 'magit-push-current)
 
 
+  ;; @TODO maybe use yas snippets?
+  ;; @TODO make this binding for python only
+  (defun insert-ipdb ()
+    (interactive)
+    (insert "imporrt ipdb; ipdb.set_trace()"))
+  (define-key evil-insert-state-map (kbd ",i") 'insert-ipdb)
 
 
   ;; @FIXME
