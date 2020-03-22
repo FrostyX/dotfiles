@@ -184,27 +184,6 @@
   ;; @TODO still asks for something, use more specific function
   (define-key evil-normal-state-map (kbd ",gp") 'magit-push-current)
 
-
-  ;; @TODO maybe use yas snippets?
-  ;; @TODO make this binding for python only
-  (defun insert-ipdb ()
-    (interactive)
-    (insert "imporrt ipdb; ipdb.set_trace()"))
-  (define-key evil-insert-state-map (kbd ",i") 'insert-ipdb)
-
-
-  ;; @FIXME
-  (use-package evil-leader
-    :ensure t
-    :config
-    (evil-leader/set-leader ",")
-    ;; (evil-leader/set-key
-      ;; this way they work in normal mode, not insert mode
-      ;; "e" 'find-file
-      ;; "b" 'switch-to-buffer
-      ;; "k" 'kill-buffer)
-    (global-evil-leader-mode))
-
   ; (use-package evil-surround
   ;   :ensure t
   ;   :config
