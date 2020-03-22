@@ -1,8 +1,27 @@
 #+TITLE: FrostyX's Emacs configuration
 #+AUTHOR: Jakub Kadlčík
 
-#+BEGIN_SRC emacs-lisp
-#+END_SRC
+
+This Emacs configuration is a mess. I am a newbie trying to hack things together
+and experiment. Do not take anything from this configuration unles you know what
+you are doing. Because the odds are, that I am not.
+
+
+* TODO
+
+I would consider this configuration mature enough and not experimental anymore
+once these TODO items are done:
+
+- [ ] Documentation for each piece of emacs-lisp code
+- [ ] Correct indentation for standard filetypes
+  - [ ] When writting a checklist in org mode, newline inserts 4 spaces,
+        which is wrong
+- [ ] Correct indentation for non-standard filetypes, such as ~.elm~
+- [ ] Unified auto-completion across all programming languages
+- [ ] Code cleanup, unified way to do things
+  - [ ] All package imports using ~use-package~, even the local ones
+  - [ ] Key bindings - ~:bind~ vs ~:config~ vs whatever else
+
 
 * Defaults
 
