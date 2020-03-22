@@ -647,6 +647,22 @@
   (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
 #+END_SRC
 
+*** Elm
+
+Elm command line tools (such as `elm-format`) are not properly packaged in Fedora,
+so we need to install them using `npm`. Extend `$PATH` so Emacs can use them.
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'exec-path (expand-file-name "~/node_modules/.bin"))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package elm-mode
+  :ensure t
+  :config
+  (add-hook 'elm-mode-hook 'elm-format-on-save-mode))
+#+END_SRC
+
 *** Jinja2
 
 #+BEGIN_SRC emacs-lisp
