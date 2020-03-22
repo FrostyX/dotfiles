@@ -629,7 +629,15 @@
 *** Elm
 
 Elm command line tools (such as `elm-format`) are not properly packaged in Fedora,
-so we need to install them using `npm`. Extend `$PATH` so Emacs can use them.
+so we need to install them using `npm`.
+
+#+BEGIN_SRC emacs-lisp
+npm install elm
+npm install elm-format
+npm install elm-test
+#+END_SRC
+
+Extend `$PATH` so Emacs can use them.
 
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'exec-path (expand-file-name "~/node_modules/.bin"))
