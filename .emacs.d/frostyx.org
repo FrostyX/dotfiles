@@ -7,10 +7,10 @@ and experiment. Do not take anything from this configuration unles you know what
 you are doing. Because the odds are, that I am not.
 
 
-* TODO
+* Things to do
 
 I would consider this configuration mature enough and not experimental anymore
-once these TODO items are done:
+once these TODO items are done. Try ~C-c C-c~ to toggle them.
 
 - [ ] Documentation for each piece of emacs-lisp code
 - [ ] Correct indentation for standard filetypes
