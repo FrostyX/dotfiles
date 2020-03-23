@@ -26,6 +26,7 @@ once these TODO items are done. Try ~C-c C-c~ to toggle them.
   - [ ] All package imports using ~use-package~, even the local ones
   - [ ] Key bindings - ~:bind~ vs ~:config~ vs whatever else
   - [ ] Get rid of all ~:config nil~ lines
+  - [ ] Closing brackets where they should be
 
 
 These are less important, but we still want to keep track of them.
