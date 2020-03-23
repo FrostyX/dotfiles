@@ -37,6 +37,7 @@ These are less important, but we still want to keep track of them.
 - [ ] ~:set colorcolumn=120~ alternative (should be built in Emacs 27)
 - [ ] Figure out how to have multiple Emacs windows/instances in order to
       utilize window manager workspaces/groups and multiple monitors
+- [ ] Generate TOC list
 
 
 * Defaults
