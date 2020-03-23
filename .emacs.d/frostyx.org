@@ -481,10 +481,10 @@ See http://chriskempson.com/projects/base16/
 (defhydra hydra-main (:color blue)
   "
     ^
-    ^Hydra^              ^Misc^                      ^Workspaces^                   ^Emacs^
-    ^^^^^^───────────────────────────────────────────────────────────────────────────────────────────────────────
-    _q_ quit            _m_ major mode               _e_  switch workspace          _r_ reload configuration
-    ^^                  _a_ applications             _E_  eyebrowse
+    ^Hydra^              ^Misc^                      ^Workspaces^                    ^Projects^                       ^Emacs^
+    ^^^^^^─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+    _q_ quit            _m_ major mode               _e_  switch workspace           _p_ switch project               _r_ reload configuration
+    ^^                  _a_ applications             _E_  eyebrowse                  _P_ projectile
     ^^                  _o_ open
     ^^                  _z_ zoom
   "
@@ -496,6 +496,8 @@ See http://chriskempson.com/projects/base16/
   ("z" hydra-zoom/body)
   ("e" eyebrowse-switch-to-window-config)
   ("E" nil)  ;; @TODO
+  ("p" helm-projectile-switch-project)
+  ("P" hydra-project/body)
   ("r" (load-file user-init-file)))
 
 
@@ -511,6 +513,18 @@ See http://chriskempson.com/projects/base16/
   ("q" nil)
   ("l" text-scale-decrease)
   ("g" text-scale-increase))
+
+
+(defhydra hydra-project (:color blue)
+  "
+    ^
+    ^Project^            ^Actions^
+    ^^^^───────────────────────────
+    _q_ quit            _d_ discover
+  "
+  ("SPC" nil)
+  ("q" nil)
+  ("d" projectile-discover-projects-in-search-path))
 
 
 (defhydra hydra-applications (:color blue)
