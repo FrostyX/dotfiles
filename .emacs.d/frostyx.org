@@ -200,16 +200,6 @@ See:
   (define-key evil-normal-state-map (kbd "C-w o") 'toggle-fullscreen)
 
   (define-key evil-normal-state-map (kbd "C-n") 'neotree-find)
-  (evil-define-key 'normal neotree-mode-map (kbd "C-n") 'neotree-hide)
-  (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-  (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-  (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-  (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-  (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
-  (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
-  (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
-  (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
-  (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
 
   ; (use-package evil-surround
   ;   :ensure t
@@ -376,6 +366,19 @@ See http://chriskempson.com/projects/base16/
   :config
   (setq-default neo-show-hidden-files t)
   nil)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(evil-define-key 'normal neotree-mode-map (kbd "C-n") 'neotree-hide)
+(evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
+(evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
+(evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
+(evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
+(evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
