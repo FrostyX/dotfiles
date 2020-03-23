@@ -158,7 +158,6 @@ See:
 * Evil
 
 #+BEGIN_SRC emacs-lisp
-;; load evil
 (use-package evil
   :ensure t ;; install the evil package if not installed
   :init ;; tweak evil's configuration before loading it
@@ -169,7 +168,6 @@ See:
   (setq evil-shift-round nil)
   (setq evil-want-C-u-scroll t)
 
-
   ;; https://github.com/emacs-evil/evil-collection
   (setq evil-want-keybinding nil)
 
@@ -177,7 +175,6 @@ See:
 
   :config ;; tweak evil after loading it
   (evil-mode)
-
 
   ;; https://www.reddit.com/r/emacs/comments/7dsm0j/how_to_get_evilmode_hjkl_to_work_inside_mx/
   (evil-define-key 'normal package-menu-mode-map (kbd "m") #'package-menu-mark-install)
@@ -193,9 +190,6 @@ See:
   (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
   (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 
-
-
-
   (defun toggle-fullscreen ()
     ;; https://www.reddit.com/r/emacs/comments/86iq3w/evil_cw_o_toggle_windows/
     (interactive)
@@ -204,17 +198,6 @@ See:
       (winner-undo)))
 
   (define-key evil-normal-state-map (kbd "C-w o") 'toggle-fullscreen)
-
-  ;; (define-key global-map (kbd "C-w o") 'toggle-fullscreen)
-  ;; (evil-define-key 'normal evil-normal-state-map (kbd "C-w o") 'toggle-fullscreen)
-
-
-  ; (evil-define-key* 'motion elfeed-show-mode-map
-        ;                               "gb" #'elfeed-show-visit
-        ;                               "gj" #'elfeed-show-next
-        ;                               "gk" #'elfeed-show-prev)
-
-
 
   (define-key evil-normal-state-map (kbd "C-n") 'neotree-find)
   (evil-define-key 'normal neotree-mode-map (kbd "C-n") 'neotree-hide)
@@ -228,7 +211,6 @@ See:
   (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
   (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
 
-
   ; (use-package evil-surround
   ;   :ensure t
   ;   :config
@@ -241,13 +223,7 @@ See:
   (use-package evil-commentary
     :ensure t
     :config
-    (evil-commentary-mode)
-    ;; (evil-define-key 'normal evil-commentary-mode-map ", c" 'evil-commentary-line)
-
-    ;; This bind doesn't work for some reason, use `gc` instead
-    ;(evil-define-key 'visual evil-commentary-mode-map ", c" 'evil-commentary-line)
-
-    ))
+    (evil-commentary-mode)))
 #+END_SRC
 
 
