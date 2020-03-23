@@ -641,15 +641,34 @@ My workflow for opening a new project is.
 3. Switch to the desired project ~<leader>p~
 4. Rename the workspace ~<leader>$~
 
+
 * Sessions
 
-#+BEGIN_SRC emacs-lisp
-;; Saving sessions
-;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Emacs-Sessions.html
-(desktop-save-mode 1)
-;; (add-to-list 'window-persistent-parameters '(window-side . writable))
-;; (add-to-list 'window-persistent-parameters '(window-slot . writable))
+With Emacs, the idea is to launch it, use it and then never ever close it. Basically
+just become one with it and let it consume you. The problem is that sometimes we
+just don't have another option than to close it (laptop battery can run out, power
+outages, system reboots). All of these sucks by themselves but they can be particularly
+painful when hundreds days long Emacs session gets killed and you are forced to start
+from scratch.
 
+For this reason, we want to save a current session when closing Emacs and restore it
+when launching it. Additionally we want to periodically save the current session to
+prevent its lose in more violent situations than ~SIGTERM~.
+
+See https://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Emacs-Sessions.html
+
+#+BEGIN_SRC emacs-lisp
+(desktop-save-mode 1)
+#+END_SRC
+
+The periodical save is achieved by ~auto-save-*~ settings as a "side effect".
+
+To preserve even splits layout when restoring Emacs from a previous session,
+we need to explicitly load saved frameset from ~desktop-saved-frameset~
+
+See https://emacs.stackexchange.com/a/45829
+
+#+BEGIN_SRC emacs-lisp
 (setq desktop-restore-forces-onscreen nil)
 (add-hook 'desktop-after-read-hook
  (lambda ()
@@ -660,6 +679,7 @@ My workflow for opening a new project is.
     :force-display desktop-restore-in-current-display
     :force-onscreen desktop-restore-forces-onscreen)))
 #+END_SRC
+
 
 * Development
 
