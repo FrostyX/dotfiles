@@ -235,7 +235,19 @@ TODO evil-indent-textobject
 ;;   :ensure t)
 #+END_SRC
 
-TODO evil-commentary
+
+When programming, it is usefull to comment-out pieces of a code to temporarily disable them.
+This is valuable when refactoring something and deciding what implementation to use, when
+temporarily adding and then enabling/disabling breakpoints, etc. I do it thousand times a day.
+Instead of removing the lines and then undoing back, or maybe weirdly commenting the code
+line by line, use ~evil-commentary~.
+
+See https://github.com/linktohack/evil-commentary
+
+The usage is straightforward. In ~NORMAL~ mode press ~gcc~ to comment the current line of code.
+If it is already commented, it will uncomment it. This behavior is same for all the following
+commands. To comment e.g. next 3 lines, use ~3gcc~. To comment a ~VISUAL~ selection, press
+~gc~. Another useful option is to do ~gy~ which comments the selection but yanks it first.
 
 #+BEGIN_SRC emacs-lisp
 (use-package evil-commentary
