@@ -680,6 +680,8 @@ See https://emacs.stackexchange.com/a/45829
     :force-onscreen desktop-restore-forces-onscreen)))
 #+END_SRC
 
+This approach is able to correctly save and restore even ~eyebrowse~ workspaces.
+
 
 * Development
 
