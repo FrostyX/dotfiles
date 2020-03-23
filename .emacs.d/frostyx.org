@@ -17,6 +17,7 @@ once these TODO items are done. Try ~C-c C-c~ to toggle them.
   - [ ] When writting a checklist in org mode, newline inserts 4 spaces,
         which is wrong
   - [ ] Unify Evil's ~O~, ~RET~ for newlines plus ~TAB~ and ~>>~
+  - [ ] Inteligent behavior of backspace
 - [ ] Correct indentation for non-standard filetypes, such as ~.elm~
 - [ ] Unified auto-completion across all programming languages
 - [ ] Code cleanup, unified way to do things
