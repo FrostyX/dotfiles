@@ -179,21 +179,7 @@ See:
   (define-key evil-normal-state-map (kbd ";") 'helm-projectile-switch-to-buffer)
   (define-key evil-normal-state-map (kbd ",;") 'helm-buffers-list)
 
-  (define-key evil-normal-state-map (kbd "C-n") 'neotree-find)
-
-  ; (use-package evil-surround
-  ;   :ensure t
-  ;   :config
-  ;   (global-evil-surround-mode))
-
-  ;; ;; @FIXME missing config
-  ;; (use-package evil-indent-textobject
-  ;;   :ensure t)
-
-  (use-package evil-commentary
-    :ensure t
-    :config
-    (evil-commentary-mode)))
+  (define-key evil-normal-state-map (kbd "C-n") 'neotree-find))
 #+END_SRC
 
 
@@ -232,6 +218,35 @@ Random garbage
 (evil-leader/set-key
   "w" 'evil-window-vsplit
   "def" 'evil-jump-to-tag)
+#+END_SRC
+
+
+** Evil packages
+
+TODO evil-indent-surround
+
+#+BEGIN_SRC emacs-lisp
+;; (use-package evil-surround
+;;   :ensure t
+;;   :config
+;;   (global-evil-surround-mode))
+#+END_SRC
+
+TODO evil-indent-textobject
+
+#+BEGIN_SRC emacs-lisp
+;; ;; @FIXME missing config
+;; (use-package evil-indent-textobject
+;;   :ensure t)
+#+END_SRC
+
+TODO evil-commentary
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil-commentary
+  :ensure t
+  :config
+  (evil-commentary-mode))
 #+END_SRC
 
 
