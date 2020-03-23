@@ -176,28 +176,8 @@ See:
   :config ;; tweak evil after loading it
   (evil-mode)
 
-  ;; https://www.reddit.com/r/emacs/comments/7dsm0j/how_to_get_evilmode_hjkl_to_work_inside_mx/
-  (evil-define-key 'normal package-menu-mode-map (kbd "m") #'package-menu-mark-install)
-  (evil-define-key 'normal package-menu-mode-map (kbd "u") #'package-menu-mark-unmark)
-  (evil-define-key 'normal package-menu-mode-map (kbd "x") #'package-menu-execute)
-
   (define-key evil-normal-state-map (kbd ";") 'helm-projectile-switch-to-buffer)
   (define-key evil-normal-state-map (kbd ",;") 'helm-buffers-list)
-
-  ;; ctrl+w hjkl is too slow
-  (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-  (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-  (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-  (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-
-  (defun toggle-fullscreen ()
-    ;; https://www.reddit.com/r/emacs/comments/86iq3w/evil_cw_o_toggle_windows/
-    (interactive)
-    (if (window-parent)
-        (delete-other-windows)
-      (winner-undo)))
-
-  (define-key evil-normal-state-map (kbd "C-w o") 'toggle-fullscreen)
 
   (define-key evil-normal-state-map (kbd "C-n") 'neotree-find)
 
@@ -284,6 +264,25 @@ Random garbage
 (setq evil-default-state 'normal) ;; changes default state to emacs
 #+END_SRC
 
+TODO ctrl+w hjkl is too slow
+
+#+BEGIN_SRC emacs-lisp
+(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+#+END_SRC
+
+TODO package manager key bindings, these needs to go somewhere else
+
+See https://www.reddit.com/r/emacs/comments/7dsm0j/how_to_get_evilmode_hjkl_to_work_inside_mx/
+
+#+BEGIN_SRC emacs-lisp
+(evil-define-key 'normal package-menu-mode-map (kbd "m") #'package-menu-mark-install)
+(evil-define-key 'normal package-menu-mode-map (kbd "u") #'package-menu-mark-unmark)
+(evil-define-key 'normal package-menu-mode-map (kbd "x") #'package-menu-execute)
+#+END_SRC
+
 
 ** More Vim compatibility
 
@@ -311,6 +310,20 @@ Random garbage
 ;;     ;; make evil-search-word look for symbol rather than word boundaries
 ;;     (setq-default evil-symbol-word-search t))
 #+END_SRC
+
+
+See https://www.reddit.com/r/emacs/comments/86iq3w/evil_cw_o_toggle_windows/
+
+#+BEGIN_SRC emacs-lisp
+(defun toggle-fullscreen ()
+  (interactive)
+  (if (window-parent)
+      (delete-other-windows)
+    (winner-undo)))
+
+(define-key evil-normal-state-map (kbd "C-w o") 'toggle-fullscreen)
+#+END_SRC
+
 
 * Interface
 
