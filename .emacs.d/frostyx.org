@@ -174,12 +174,7 @@ See:
   (setq evil-ex-set-initial-state 'normal)
 
   :config ;; tweak evil after loading it
-  (evil-mode)
-
-  (define-key evil-normal-state-map (kbd ";") 'helm-projectile-switch-to-buffer)
-  (define-key evil-normal-state-map (kbd ",;") 'helm-buffers-list)
-
-  (define-key evil-normal-state-map (kbd "C-n") 'neotree-find))
+  (evil-mode))
 #+END_SRC
 
 
@@ -397,6 +392,10 @@ See http://chriskempson.com/projects/base16/
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
+(define-key evil-normal-state-map (kbd "C-n") 'neotree-find)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
 (evil-define-key 'normal neotree-mode-map (kbd "C-n") 'neotree-hide)
 (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
@@ -475,6 +474,12 @@ See http://chriskempson.com/projects/base16/
             (right-fringe . 10))))
 )
 #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(define-key evil-normal-state-map (kbd ";") 'helm-projectile-switch-to-buffer)
+(define-key evil-normal-state-map (kbd ",;") 'helm-buffers-list)
+#+END_SRC
+
 
 *** Hydra
 
