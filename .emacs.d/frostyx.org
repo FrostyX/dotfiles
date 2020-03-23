@@ -292,6 +292,16 @@ See:
 (setq evil-default-state 'normal) ;; changes default state to emacs
 #+END_SRC
 
+See https://github.com/cofi/evil-leader
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil-leader
+  :ensure t
+  :config
+  (evil-leader/set-leader ",")
+  (global-evil-leader-mode))
+#+END_SRC
+
 ** More Vim compatibility
 
 #+BEGIN_SRC emacs-lisp
@@ -609,14 +619,14 @@ See https://github.com/wasamasa/eyebrowse
   (eyebrowse-mode t)
   (eyebrowse-setup-opinionated-keys)
 
+  (evil-leader/set-key
+    "e" 'eyebrowse-switch-to-window-config
+    "c" 'eyebrowse-create-window-config
+    "$" 'eyebrowse-rename-window-config)
+
+  ;; unmap `gc' because it conflicts with `evil-commentary'
   :bind
   (:map evil-normal-state-map
-     (", e" . 'eyebrowse-switch-to-window-config)
-     (", c" . 'eyebrowse-create-window-config)
-     (", $" . 'eyebrowse-rename-window-config)
-
-   ;; unmap `gc' because it conflicts with `evil-commentary'
-   :map evil-normal-state-map
      ("g c" . nil)
 
    :map evil-motion-state-map
@@ -625,11 +635,11 @@ See https://github.com/wasamasa/eyebrowse
 
 My workflow for opening a new project is.
 
-1. Create a new workspace ~,c~
+1. Create a new workspace ~<leader>c~
 2. This preserves splits from previous workspace, which is a little bit
    inconvenient. Leave just one with ~C-w O~
-3. Switch to the desired project ~,p~
-4. Rename the workspace ~,$~
+3. Switch to the desired project ~<leader>p~
+4. Rename the workspace ~<leader>$~
 
 * Sessions
 
