@@ -25,6 +25,13 @@ once these TODO items are done. Try ~C-c C-c~ to toggle them.
 - [ ] Code cleanup, unified way to do things
   - [ ] All package imports using ~use-package~, even the local ones
   - [ ] Key bindings - ~:bind~ vs ~:config~ vs whatever else
+  - [ ] Get rid of all ~:config nil~ lines
+
+
+These are less important, but we still want to keep track of them.
+
+- [ ] Spell checker
+- [ ] ~:set colorcolumn=120~ alternative (should be built in Emacs 27)
 
 
 * Defaults
@@ -93,10 +100,18 @@ once these TODO items are done. Try ~C-c C-c~ to toggle them.
 )
 #+END_SRC
 
+
 * Package management
+
+We want to automatically update Emacs packages in order to avoid annoying warnings
+during startup, that some package is recommended to be updated.
+
+Update automatically every night, don't ask for confirmation and don't bother us
+with update at Emacs startup.
+
+See https://emacs.stackexchange.com/a/31904
+
 #+BEGIN_SRC emacs-lisp
-;; automatically update emacs packages
-;; https://emacs.stackexchange.com/a/31904
 (use-package auto-package-update
    :ensure t
    :config
@@ -107,13 +122,26 @@ once these TODO items are done. Try ~C-c C-c~ to toggle them.
    (auto-package-update-at-time "04:00"))
 #+END_SRC
 
+
 * Secrets
+
+Please do not hardcode your passwords or secret information into source code.
+Store them into some keyring application (e.g. ~pass~) and query them instead.
+This solution provides many advantages:
+
+1. You can safely share your configs publicly without exposing sensitive data,
+   /*duh*/
+2. No messing with partially commiting files just to leave the sensitive parts
+3. In comparison to including a git ignored file with password definitions,
+   keyrings have strong encryption
+
+See:
+- https://www.passwordstore.org/
+- https://medium.com/@chasinglogic/the-definitive-guide-to-password-store-c337a8f023a1
 
 #+BEGIN_SRC emacs-lisp
 (use-package password-store
-  :ensure t
-  :config
-  nil)
+  :ensure t)
 #+END_SRC
 
 * Evil
@@ -956,7 +984,9 @@ go - open in external browser
 
 * Resources
 
+
 ** Other people configs
-https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org
-https://jamiecollinson.com/blog/my-emacs-config/
-https://emacs.nasy.moe/
+
+- https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org
+- https://jamiecollinson.com/blog/my-emacs-config/
+- https://emacs.nasy.moe/
