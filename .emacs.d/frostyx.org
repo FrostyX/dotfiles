@@ -780,6 +780,13 @@ Extend ~$PATH~ so Emacs can use them.
 (setq org-edit-src-content-indentation 0)
 #+END_SRC
 
+See https://stackoverflow.com/a/24173780/3285282
+
+#+BEGIN_SRC emacs-lisp
+(setcar (nthcdr 2 org-emphasis-regexp-components) " \t\r\n\"'")
+(org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+#+END_SRC
+
 ** LSP
 
 #+BEGIN_SRC emacs-lisp
