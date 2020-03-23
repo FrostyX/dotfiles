@@ -30,6 +30,7 @@ once these TODO items are done. Try ~C-c C-c~ to toggle them.
 
 These are less important, but we still want to keep track of them.
 
+- [ ] These checklists doesn't render proprely at GitHub
 - [ ] Spell checker
 - [ ] ~:set colorcolumn=120~ alternative (should be built in Emacs 27)
 
@@ -98,6 +99,11 @@ These are less important, but we still want to keep track of them.
              '("*Help*" display-buffer-same-window)
              ;; '("*Playlists: *" display-buffer-same-window))
 )
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(save-place-mode 1)
 #+END_SRC
 
 
@@ -313,16 +319,22 @@ See:
 
 ** GUI
 
+Disable all the GUI nonsense. Even though we are running graphical version of Emacs,
+we want to be #mouseless and have the UI to look as close to terminal as possible.
+
+Get rid of menu, scrollbars, toolbars and everything that can be clicked on.
+
 #+BEGIN_SRC emacs-lisp
-;; disable UI nonsense
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
-(save-place-mode 1)
 #+END_SRC
 
 ** Themes
+
+At this point, my whole desktop environment uses ~base16-chalk~
+
+See http://chriskempson.com/projects/base16/
 
 #+BEGIN_SRC emacs-lisp
 (use-package base16-theme
@@ -330,6 +342,7 @@ See:
   :config
   (load-theme 'base16-chalk t))
 #+END_SRC
+
 
 ** Fonts
 
@@ -983,7 +996,6 @@ go - open in external browser
 #+END_SRC
 
 * Resources
-
 
 ** Other people configs
 
