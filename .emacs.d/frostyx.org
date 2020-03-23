@@ -27,6 +27,7 @@ once these TODO items are done. Try ~C-c C-c~ to toggle them.
   - [ ] Key bindings - ~:bind~ vs ~:config~ vs whatever else
   - [ ] Get rid of all ~:config nil~ lines
   - [ ] Closing brackets where they should be
+- [ ] Evil ~C-o~ jumps to a file regardles of a project
 
 
 These are less important, but we still want to keep track of them.
