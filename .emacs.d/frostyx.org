@@ -178,8 +178,6 @@ See:
   :config ;; tweak evil after loading it
   (evil-mode)
 
-  ;; example how to map a command in normal mode (called 'normal state' in evil)
-  (define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit)
 
   ;; https://www.reddit.com/r/emacs/comments/7dsm0j/how_to_get_evilmode_hjkl_to_work_inside_mx/
   (evil-define-key 'normal package-menu-mode-map (kbd "m") #'package-menu-mark-install)
@@ -188,11 +186,6 @@ See:
 
   (define-key evil-normal-state-map (kbd ";") 'helm-projectile-switch-to-buffer)
   (define-key evil-normal-state-map (kbd ",;") 'helm-buffers-list)
-
-
-  ; (define-key evil-normal-state-map (kbd ", f") 'helm-projectile-find-file)
-  (define-key evil-normal-state-map (kbd ", f") 'helm-projectile)
-  (define-key evil-normal-state-map (kbd ", p") 'helm-projectile-switch-project)
 
   ;; ctrl+w hjkl is too slow
   (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
@@ -222,7 +215,6 @@ See:
         ;                               "gk" #'elfeed-show-prev)
 
 
-  (define-key evil-normal-state-map (kbd ", def") 'evil-jump-to-tag)
 
   (define-key evil-normal-state-map (kbd "C-n") 'neotree-find)
   (evil-define-key 'normal neotree-mode-map (kbd "C-n") 'neotree-hide)
@@ -236,15 +228,6 @@ See:
   (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
   (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
 
-
-  ;; Magit
-  (define-key evil-normal-state-map (kbd ",ga") 'magit-stage-file)
-
-  ;; Maybe magit-commit-create
-  (define-key evil-normal-state-map (kbd ",gc") 'magit-commit)
-
-  ;; @TODO still asks for something, use more specific function
-  (define-key evil-normal-state-map (kbd ",gp") 'magit-push-current)
 
   ; (use-package evil-surround
   ;   :ensure t
@@ -265,8 +248,50 @@ See:
     ;(evil-define-key 'visual evil-commentary-mode-map ", c" 'evil-commentary-line)
 
     ))
+#+END_SRC
 
 
+** Evil leader
+
+See https://github.com/cofi/evil-leader
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil-leader
+  :ensure t
+  :config
+  (evil-leader/set-leader ",")
+  (global-evil-leader-mode))
+#+END_SRC
+
+TODO projectile
+
+#+BEGIN_SRC emacs-lisp
+(evil-leader/set-key
+  "f" 'helm-projectile
+  "p" 'helm-projectile-switch-project)
+#+END_SRC
+
+TODO magit
+
+#+BEGIN_SRC emacs-lisp
+(evil-leader/set-key
+  "ga" 'magit-stage-file
+  "gc" 'magit-commit  ;; Maybe magit-commit-create
+  "gp" 'magit-push-current) ;; @TODO still asks for something, use more specific function
+#+END_SRC
+
+Random garbage
+
+#+BEGIN_SRC emacs-lisp
+(evil-leader/set-key
+  "w" 'evil-window-vsplit
+  "def" 'evil-jump-to-tag)
+#+END_SRC
+
+
+** Vim keybindings everywhere
+
+#+BEGIN_SRC emacs-lisp
 ;; ;; https://emacs.stackexchange.com/questions/10350/how-can-i-add-a-new-colon-command-to-evil
 (eval-after-load 'evil-ex
   '(evil-ex-define-cmd "Gbrowse" 'browse-at-remote))
@@ -293,15 +318,6 @@ See:
 (setq evil-default-state 'normal) ;; changes default state to emacs
 #+END_SRC
 
-See https://github.com/cofi/evil-leader
-
-#+BEGIN_SRC emacs-lisp
-(use-package evil-leader
-  :ensure t
-  :config
-  (evil-leader/set-leader ",")
-  (global-evil-leader-mode))
-#+END_SRC
 
 ** More Vim compatibility
 
