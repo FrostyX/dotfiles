@@ -622,6 +622,14 @@ See https://github.com/wasamasa/eyebrowse
      ("g c" . nil)))
 #+END_SRC
 
+My workflow for opening a new project is.
+
+1. Create a new workspace ~,c~
+2. This preserves splits from previous workspace, which is a little bit
+   inconvenient. Leave just one with ~C-w O~
+3. Switch to the desired project ~,p~
+4. Rename the workspace ~,$~
+
 * Sessions
 
 #+BEGIN_SRC emacs-lisp
