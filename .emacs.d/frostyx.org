@@ -569,35 +569,56 @@ See http://chriskempson.com/projects/base16/
 
 * Project management
 
+When working on multiple projects at the same time, it is useful keep some level
+of separation between them. This is where ~projectile~ comes handy. It allows you
+to easily filter buffers, search files, work with tags and do many more action
+within a current project.
+
+As a project is considered every git (or other SCM) repository, or a directory
+containing a ~.projectile~ file in it.
+
+See https://github.com/bbatsov/projectile
+
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
   :ensure t
   :config
-;; @TODO create key binding for `projectile-discover-projects-in-search-path'
   (setq projectile-project-search-path '("~/git/")))
 #+END_SRC
 
+The only thing that ~projectile~ doesn't allow you to do (at least by default) is
+having multiple workspaces/tabs/perspectives or whatever you want to call it and
+switching between them. The purpose of such hypothetical workspaces would be to
+have one project per workspace that would allow to preserve splits layout when
+switching projects. This is essential for me since I work on 5-10 projects
+simultaneously.
+
+Such behavior can be achieved using ~eyebrowse~ even though it feels a little
+like a workaround. Eyebrowse is not project-oriented by design, it gives you
+free hand on what to use workspaces for. For this reason, it lacks certain
+project management shortcuts, that I would appreciate.
+
+See https://github.com/wasamasa/eyebrowse
+
 #+BEGIN_SRC emacs-lisp
 (use-package eyebrowse
-  ;; https://github.com/wasamasa/eyebrowse
   :ensure t
   :config
   (eyebrowse-mode t)
   (eyebrowse-setup-opinionated-keys)
 
   :bind
-    (:map evil-normal-state-map
-       (", e" . 'eyebrowse-switch-to-window-config)
-       (", c" . 'eyebrowse-create-window-config)
-       (", $" . 'eyebrowse-rename-window-config)
+  (:map evil-normal-state-map
+     (", e" . 'eyebrowse-switch-to-window-config)
+     (", c" . 'eyebrowse-create-window-config)
+     (", $" . 'eyebrowse-rename-window-config)
 
-       ;; unmap `gc' because it conflicts with `evil-commentary'
-       ("g c" . nil)
+   ;; unmap `gc' because it conflicts with `evil-commentary'
+   :map evil-normal-state-map
+     ("g c" . nil)
 
-     :map evil-motion-state-map
-       ("g c" . nil)
-
-))
+   :map evil-motion-state-map
+     ("g c" . nil)))
 #+END_SRC
 
 * Sessions
