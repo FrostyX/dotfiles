@@ -156,7 +156,40 @@ See:
   :ensure t)
 #+END_SRC
 
-* Evil
+* Living in Evil
+
+
+** Evil leader
+A common way to define custom key bindings for Vim ~NORMAL~ mode is by utilizing
+so called ~<leader>~ key. By default it is mapped to ~\~ but can be remaped to
+something else (in my case to comma). Custom mappings are then defined a sequence
+of ~<leader>~ key followed by one or more letters. An example can be ~\ga~ for
+~git add~ and ~\gc~ for ~git commit~.
+
+For Emacs, this functionality is implemented in ~evil-leader~ package.
+
+See https://github.com/cofi/evil-leader
+
+According to documentation we need to enable ~evil-leader-mode~ before ~evil-mode~.
+
+#+BEGIN_QUOTE
+Note: You should enable global-evil-leader-mode before you enable evil-mode,
+otherwise evil-leader won’t be enabled in initial buffers (*scratch*, *Messages*, …).
+#+END_QUOTE
+
+I don't know about these, but more importantly ~evil-leader~ needs to go first,
+otherwise it doesn't work in ~org-mode~.
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil-leader
+  :ensure t
+  :config
+  (evil-leader/set-leader ",")
+  (global-evil-leader-mode))
+#+END_SRC
+
+
+** Evil Mode
 
 #+BEGIN_SRC emacs-lisp
 (use-package evil
@@ -176,19 +209,6 @@ See:
 
   :config ;; tweak evil after loading it
   (evil-mode))
-#+END_SRC
-
-
-** Evil leader
-
-See https://github.com/cofi/evil-leader
-
-#+BEGIN_SRC emacs-lisp
-(use-package evil-leader
-  :ensure t
-  :config
-  (evil-leader/set-leader ",")
-  (global-evil-leader-mode))
 #+END_SRC
 
 TODO projectile
