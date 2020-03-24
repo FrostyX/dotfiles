@@ -211,31 +211,6 @@ otherwise it doesn't work in ~org-mode~.
   (evil-mode))
 #+END_SRC
 
-TODO projectile
-
-#+BEGIN_SRC emacs-lisp
-(evil-leader/set-key
-  "f" 'helm-projectile
-  "p" 'helm-projectile-switch-project)
-#+END_SRC
-
-TODO magit
-
-#+BEGIN_SRC emacs-lisp
-(evil-leader/set-key
-  "ga" 'magit-stage-file
-  "gc" 'magit-commit  ;; Maybe magit-commit-create
-  "gp" 'magit-push-current) ;; @TODO still asks for something, use more specific function
-#+END_SRC
-
-Random garbage
-
-#+BEGIN_SRC emacs-lisp
-(evil-leader/set-key
-  "w" 'evil-window-vsplit
-  "def" 'evil-jump-to-tag)
-#+END_SRC
-
 
 ** Evil packages
 
@@ -281,11 +256,6 @@ commands. To comment e.g. next 3 lines, use ~3gcc~. To comment a ~VISUAL~ select
 ** Vim keybindings everywhere
 
 #+BEGIN_SRC emacs-lisp
-;; ;; https://emacs.stackexchange.com/questions/10350/how-can-i-add-a-new-colon-command-to-evil
-(eval-after-load 'evil-ex
-  '(evil-ex-define-cmd "Gbrowse" 'browse-at-remote))
-
-
 (use-package evil-collection
   :after evil
   :ensure t
@@ -365,6 +335,57 @@ See https://www.reddit.com/r/emacs/comments/86iq3w/evil_cw_o_toggle_windows/
     (winner-undo)))
 
 (define-key evil-normal-state-map (kbd "C-w o") 'toggle-fullscreen)
+#+END_SRC
+
+
+** Custom Evil keybindings
+
+Emacs provides so many ways to create custom keybindings and to run commands in
+general (e.g. emacs key-chords, helm, hydra, evil-leader, etc). You will probably
+find multiple shortcuts in this document for executing a same command. One of them
+will them will be compatible with my Vim cofiguration which has been wired to my
+brain from a decade of using it. The other shortcuts will be more Emacsy.
+
+TODO The question is - should we define them here or within their use-package definitions?
+
+TODO projectile
+
+#+BEGIN_SRC emacs-lisp
+(evil-leader/set-key
+  "f" 'helm-projectile
+  "p" 'helm-projectile-switch-project)
+#+END_SRC
+
+TODO magit
+
+#+BEGIN_SRC emacs-lisp
+(evil-leader/set-key
+  "ga" 'magit-stage-file
+  "gc" 'magit-commit  ;; Maybe magit-commit-create
+  "gp" 'magit-push-current) ;; @TODO still asks for something, use more specific function
+#+END_SRC
+
+Random garbage
+
+#+BEGIN_SRC emacs-lisp
+(evil-leader/set-key
+  "w" 'evil-window-vsplit
+  "def" 'evil-jump-to-tag)
+#+END_SRC
+
+
+** Custom Evil commands
+
+Evil even allows you to create your own colon commands. I don't need it, most folks
+probably don't need it, but you got to admit it's pretty spectacular.
+
+See https://emacs.stackexchange.com/questions/10350/how-can-i-add-a-new-colon-command-to-evil
+
+This command is mainly an example how to do it. I have probably never used it.
+
+#+BEGIN_SRC emacs-lisp
+(eval-after-load 'evil-ex
+  '(evil-ex-define-cmd "Gbrowse" 'browse-at-remote))
 #+END_SRC
 
 
