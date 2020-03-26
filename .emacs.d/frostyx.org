@@ -28,6 +28,7 @@ once these TODO items are done. Try ~C-c C-c~ to toggle them.
   - [ ] Get rid of all ~:config nil~ lines
   - [ ] Closing brackets where they should be
 - [ ] Evil ~C-o~ jumps to a file regardles of a project
+- [ ] File backups should go to ~/.emacs/swp, not to mess git repos
 
 
 These are less important, but we still want to keep track of them.
@@ -157,6 +158,12 @@ See:
 #+END_SRC
 
 * Living in Evil
+
+@TODO link the great blog post explaining emacs key bindings
+
+TODO rant about Emacs key bindings
+
+TODO xkcd image mocking Emacs keybindings
 
 
 ** Evil leader
