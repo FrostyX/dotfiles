@@ -191,6 +191,10 @@ otherwise it doesn't work in ~org-mode~.
 
 ** Evil Mode
 
+See:
+- https://github.com/emacs-evil/evil
+- https://www.reddit.com/r/emacs/comments/726p7i/evil_mode_and_use_package/dnh3338?utm_source=share&utm_medium=web2x
+
 #+BEGIN_SRC emacs-lisp
 (use-package evil
   :ensure t ;; install the evil package if not installed
@@ -445,6 +449,9 @@ See http://chriskempson.com/projects/base16/
   nil)
 #+END_SRC
 
+
+*** Modeline
+
 #+BEGIN_SRC emacs-lisp
 (define-key evil-normal-state-map (kbd "C-n") 'neotree-find)
 #+END_SRC
@@ -465,19 +472,46 @@ See http://chriskempson.com/projects/base16/
 #+BEGIN_SRC emacs-lisp
 (use-package spaceline
   :ensure t
-  :config
-
-  ;; http://chriskempson.com/projects/base16/
-  (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-  (set-face-attribute 'spaceline-evil-normal nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base09))
-  (set-face-attribute 'spaceline-evil-emacs nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base0D))
-  (set-face-attribute 'spaceline-evil-insert nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base0B))
-  (set-face-attribute 'spaceline-evil-replace nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base0D))
-  (set-face-attribute 'spaceline-evil-motion nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base0D))
-  (set-face-attribute 'spaceline-evil-visual nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base0E))
-
-  (spaceline-spacemacs-theme))
+  :config)
 #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package spaceline-config
+  :ensure spaceline
+  :config
+  (spaceline-helm-mode 1)
+  (spaceline-spacemacs-theme)
+  (spaceline-toggle-org-clock-on)
+  (spaceline-toggle-minor-modes-off)
+  (spaceline-toggle-version-control-on)
+  (spaceline-toggle-buffer-size-off)
+  (spaceline-toggle-buffer-encoding-abbrev-off)
+  (spaceline-toggle-buffer-position-off))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+;; http://chriskempson.com/projects/base16/
+(setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+(set-face-attribute 'spaceline-evil-normal nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base09))
+(set-face-attribute 'spaceline-evil-emacs nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base0D))
+(set-face-attribute 'spaceline-evil-insert nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base0B))
+(set-face-attribute 'spaceline-evil-replace nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base0D))
+(set-face-attribute 'spaceline-evil-motion nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base0D))
+(set-face-attribute 'spaceline-evil-visual nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base0E))
+#+END_SRC
+
+
+See:
+- https://dev.to/gonsie/beautifying-the-mode-line-3k10
+- https://github.com/TheBB/spaceline/issues/20#issuecomment-150488572
+
+#+BEGIN_SRC emacs-lisp
+(spaceline-define-segment version-control
+  (let ((gitlogo (replace-regexp-in-string "^ Git." "  " vc-mode)))
+    (powerline-raw (s-trim gitlogo)))
+  :when vc-mode)
+#+END_SRC
+
 
 *** Helm
 
