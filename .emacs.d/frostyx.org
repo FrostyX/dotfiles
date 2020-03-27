@@ -696,12 +696,14 @@ See:
     _q_ quit            _d_ doc
     ^^                  _e_ edit special
     ^^                  _s_ save special edit
+    ^^                  _p_ preview
   "
   ("SPC" nil)
   ("q" nil)
   ("d" elpy-doc)
   ("e" org-edit-special)
-  ("s" org-edit-src-exit))
+  ("s" org-edit-src-exit)
+  ("p" markdown-preview))
 #+END_SRC
 
 
@@ -946,6 +948,21 @@ See https://stackoverflow.com/a/24173780/3285282
 (setcar (nthcdr 2 org-emphasis-regexp-components) " \t\r\n\"'")
 (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
 #+END_SRC
+
+*** Markdown
+
+See https://stackoverflow.com/a/34672923/3285282
+
+#+BEGIN_SRC emacs-lisp
+(defadvice markdown-preview (around markdown-preview-in-chromium activate compile)
+   (let ((browse-url-browser-function #'browse-url-chromium))
+     ad-do-it))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq browse-url-chromium-program "google-chrome")
+#+END_SRC
+
 
 ** LSP
 
