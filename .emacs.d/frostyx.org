@@ -165,6 +165,8 @@ TODO rant about Emacs key bindings
 
 TODO xkcd image mocking Emacs keybindings
 
+See https://github.com/noctuid/evil-guide
+
 
 ** Evil leader
 A common way to define custom key bindings for Vim ~NORMAL~ mode is by utilizing
