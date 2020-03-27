@@ -1225,6 +1225,51 @@ go - open in external browser
 ;;   (powerline-default-theme))
 #+END_SRC
 
+
+** Bluetooth
+See https://github.com/emacsmirror/bluetooth
+
+#+BEGIN_SRC bash
+dnf install bluez-hid2hci
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package bluetooth
+  :ensure t)
+#+END_SRC
+
+See https://emacs.stackexchange.com/questions/31244/how-can-i-disable-evil-in-help-mode?rq=1
+
+#+BEGIN_SRC emacs-lisp
+(evil-set-initial-state 'bluetooth-mode 'emacs)
+(evil-add-hjkl-bindings bluetooth-mode-map 'emacs)
+#+END_SRC
+
+
+** Pulseaudio
+
+TODO write my own plugin for switching output devices
+
+Here is a bash workflow
+
+See https://askubuntu.com/a/72076
+
+#+BEGIN_SRC bash
+# See available output devices (e.g. 1. speakers, 2. bluetooth headphones)
+pacmd list-sinks
+
+# Change default output device for new applications
+pacmd set-default-sink 2
+
+# See all currently running applications having output
+# e.g. chromium with id 1712
+pacmd list-sink-inputs
+
+# Then go through all those applications and switch their outpud device
+pacmd move-sink-input 1712 1
+#+END_SRC
+
+
 * Resources
 
 ** Other people configs
