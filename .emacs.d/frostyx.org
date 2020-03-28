@@ -1048,6 +1048,11 @@ See https://stackoverflow.com/a/34672923/3285282
 
 * Applications
 
+If I shoot myself into my leg and accidentally break a buffer by running an
+application in it and panicking how to get back, just kill the buffer with
+~M-x kill-buffer~.
+
+
 ** Web
 
 *** EWW
