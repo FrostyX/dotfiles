@@ -1205,6 +1205,15 @@ go - open in external browser
 (evil-define-key 'normal spotify-mode-map (kbd "gd") 'spotify-select-device)
 #+END_SRC
 
+*** Vuivet
+
+TODO see Vuivet, it should have some spotify features
+
+See:
+- http://mihaiolteanu.me/vuiet/
+- https://github.com/mihaiolteanu/vuiet
+
+
 ** NetworkManager
 
 #+BEGIN_SRC emacs-lisp
