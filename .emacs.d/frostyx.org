@@ -594,109 +594,96 @@ See:
   (define-key evil-normal-state-map (kbd "SPC") 'hydra-main/body)
   :custom
   (hydra-default-hint nil))
+#+END_SRC
 
+The default way to define hydras is too clumsy and involves a lot of tedious
+string formatting by hand. As a consequence it is really painful to add new
+items or delete the existing ones. Let's install ~pretty-hydra~ instead,
+if allows us to define hydras as lists of columns.
 
+#+BEGIN_SRC emacs-lisp
 (use-package pretty-hydra
   :ensure t)
+#+END_SRC
 
+Hydra main entry-point allowing us acces to other hydras.
 
-;; (pretty-hydra-define hydra-main
-;;   (:color amaranth :title "FOO")
-;;   ("Bar"
-;;     (("SPC" nil "quit")
-;;      ("q" nil "quit"))
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-main
+  (:color blue :quit-key "q" :title "Hydra")
+  ("Misc"
+   (("m" hydra-major/body "major mode")
+    ("a" hydra-applications/body "applications")
+    ("o" browse-url "open URL")
+    ("z" hydra-presentations/body "presentations"))
 
-;;    "Misc"
-;;     (("a" hydra-applications/body "applications")
-;;      ("z" hydra-zoom/body "zoom"))))
+   "Workspaces"
+   (("e" eyebrowse-switch-to-window-config "switch workspace")
+    ("E" nil "eyebrowse"))
 
+   "Projects"
+   (("p" helm-projectile-switch-project "switch project")
+    ("P" hydra-project/body "projectile"))
 
-(defhydra hydra-main (:color blue)
-  "
-    ^
-    ^Hydra^              ^Misc^                      ^Workspaces^                    ^Projects^                       ^Emacs^
-    ^^^^^^─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-    _q_ quit            _m_ major mode               _e_  switch workspace           _p_ switch project               _r_ reload configuration
-    ^^                  _a_ applications             _E_  eyebrowse                  _P_ projectile
-    ^^                  _o_ open
-    ^^                  _z_ zoom
-  "
-  ("SPC" nil)
-  ("q" nil)
-  ("m" hydra-major/body)
-  ("a" hydra-applications/body)
-  ("o" browse-url)
-  ("z" hydra-zoom/body)
-  ("e" eyebrowse-switch-to-window-config)
-  ("E" nil)  ;; @TODO
-  ("p" helm-projectile-switch-project)
-  ("P" hydra-project/body)
-  ("r" (load-file user-init-file)))
+   "Emacs"
+   (("r" (load-file user-init-file) "reload configuration"))))
+#+END_SRC
 
+Hydra definitions useful for presentations.
 
-(defhydra hydra-zoom (:color blue)
-  "
-    ^
-    ^Zoom^              ^Actions^
-    ^^^^───────────────────────────
-    _q_ quit            _l_ lesser
-    ^^                  _g_ greater
-  "
-  ("SPC" nil)
-  ("q" nil)
-  ("l" text-scale-decrease)
-  ("g" text-scale-increase))
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-presentations
+  (:color blue :quit-key "q" :title "Presentations")
+  ("Actions"
+   (("l" text-scale-decrease "lesser")
+    ("g" text-scale-increase "greated"))))
+#+END_SRC
 
+Hydra definitions for ~projectile~ package.
 
-(defhydra hydra-project (:color blue)
-  "
-    ^
-    ^Project^            ^Actions^
-    ^^^^───────────────────────────
-    _q_ quit            _d_ discover
-  "
-  ("SPC" nil)
-  ("q" nil)
-  ("d" projectile-discover-projects-in-search-path))
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-project
+  (:color blue :quit-key "q" :title "Project Management")
+  ("Actions"
+   (("d" projectile-discover-projects-in-search-path "discover new projects"))))
+#+END_SRC
 
+Hydra definition for ~dired~ package.
 
-(defhydra hydra-applications (:color blue)
-  "
-    ^
-    ^Applications^              ^Launch^
-    ^^^^─────────────────────────────────────────────
-    _q_ quit            _r_ RSS (elfeed)
-    ^^                  _w_ web (eww)
-    ^^                  _e_ email (mu4e)
-    ^^                  _p_ spotify - my playlists
-    ^^                  _s_ spotify - recently played
-  "
-  ("SPC" nil)
-  ("q" nil)
-  ("r" elfeed)
-  ("w" eww)
-  ("e" mu4e)
-  ("p" spotify-my-playlists)
-  ("s" spotify-recently-played))
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-dired
+  (:color blue :quit-key "q" :title "Dired")
+  ("Open in"
+   (("." dired-jump "current directory")
+    ("~" (lambda () (interactive) (dired "~/")) "home directory")
+    ("/" (lambda () (interactive) (dired "/")) "root directory"))))
+#+END_SRC
 
+Hydra launcher for applications
 
-;; We should actually call a different hydra based on the current major mode
-(defhydra hydra-major (:color blue)
-  "
-    ^
-    ^Python^              ^Actions^
-    ^^^^───────────────────────────
-    _q_ quit            _d_ doc
-    ^^                  _e_ edit special
-    ^^                  _s_ save special edit
-    ^^                  _p_ preview
-  "
-  ("SPC" nil)
-  ("q" nil)
-  ("d" elpy-doc)
-  ("e" org-edit-special)
-  ("s" org-edit-src-exit)
-  ("p" markdown-preview))
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-applications
+  (:color blue :quit-key "q" :title "Applications")
+  ("Launch"
+   (("r" elfeed "RSS (elfeed)")
+    ("w" eww "web (eww)")
+    ("e" mu4e "email (mu4e)")
+    ("p" spotify-my-playlists "spotify - my playlists")
+    ("s" sporify-recently-played "spotify - recently played"))))
+#+END_SRC
+
+Hydra definitions for major mode
+
+TODO use https://github.com/jerrypnz/major-mode-hydra.el
+
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-major
+  (:color blue :quit-key "q" :title "Major mode")
+  ("Actions"
+   (("d" elpy-doc "elpy-doc")
+    ("e" org-edit-special "edit special")
+    ("s" org-edit-src-exit "save special edit")
+    ("p" markdown-preview "preview"))))
 #+END_SRC
 
 
