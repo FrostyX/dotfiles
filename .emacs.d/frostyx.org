@@ -44,7 +44,7 @@ These are less important, but we still want to keep track of them.
 
 But ... is it even worth it? ... Nope. It is fun though!
 
-#+CAPTION: This is the caption for the next figure link (or table)
+#+CAPTION: Is It Worth The Time - xkcd.com/1205
 [[./img/is_it_worth_the_time.png]]
 
 Hint: Use ~M-x org-toggle-inline-images~ to see images in Emacs
