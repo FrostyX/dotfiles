@@ -1364,10 +1364,19 @@ pacmd move-sink-input 1712 1
 #+END_SRC
 
 
+
 * Resources
+
 
 ** Other people configs
 
 - https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org
+- https://wolfecub.github.io/dotfiles/
 - https://jamiecollinson.com/blog/my-emacs-config/
 - https://emacs.nasy.moe/
+
+
+** Videos
+
+- DistroTube - https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg
+- Protesilaos Stavrou - https://www.youtube.com/channel/UC0uTPqBCFIpZxlz_Lv1tk_g
