@@ -469,33 +469,7 @@ See http://chriskempson.com/projects/base16/
 
 ** UX
 
-#+BEGIN_SRC emacs-lisp
-(use-package neotree
-  :ensure t
-  :config
-  (setq-default neo-show-hidden-files t)
-  nil)
-#+END_SRC
-
-
 *** Modeline
-
-#+BEGIN_SRC emacs-lisp
-(define-key evil-normal-state-map (kbd "C-n") 'neotree-find)
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(evil-define-key 'normal neotree-mode-map (kbd "C-n") 'neotree-hide)
-(evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-(evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
-(evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
-(evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
-(evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
-(evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
-#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
 (use-package spaceline
@@ -1070,6 +1044,31 @@ See https://stackoverflow.com/a/34672923/3285282
 If I shoot myself into my leg and accidentally break a buffer by running an
 application in it and panicking how to get back, just kill the buffer with
 ~M-x kill-buffer~.
+
+
+** File manager
+
+There is already an awesome file manager built in Emacs, called ~dired~.
+
+In Vim, I was used to open and close NerdTree with ~C-n~. Side-tree
+file managers sux but let's keep the shortcut.
+
+#+BEGIN_SRC emacs-lisp
+(define-key evil-normal-state-map (kbd "C-n") 'dired-jump)
+#+END_SRC
+
+You will probably find these Evil keybindings useful.
+
+| Key binding | Explanation                  |
+|-------------+------------------------------|
+| RET         | Open a file or directory     |
+| +           | Create a directory           |
+| d           | Mark a file to be deleted    |
+| x           | Delete marked files          |
+| -           | Jump to the parent directory |
+
+
+TODO Prevent ^ from jumping to the parent directory
 
 
 ** Web
