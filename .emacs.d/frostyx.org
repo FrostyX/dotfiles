@@ -648,7 +648,7 @@ Hydra main entry-point allowing us acces to other hydras.
 (pretty-hydra-define hydra-main
   (:color blue :quit-key "q" :title "Hydra")
   ("Misc"
-   (("m" hydra-major/body "major mode")
+   (("m" major-mode-hydra "major mode")
     ("a" hydra-applications/body "applications")
     ("o" browse-url "open URL")
     ("z" hydra-presentations/body "presentations"))
@@ -720,18 +720,45 @@ Hydra launcher for applications
 
 **** Major mode
 
-Hydra definitions for major mode
+Thanks to ~major~mode~hydra~ it is possible to easily define
+major-mode-specific hydra menus.
 
-TODO use https://github.com/jerrypnz/major-mode-hydra.el
+See https://github.com/jerrypnz/major-mode-hydra.el
 
 #+BEGIN_SRC emacs-lisp
-(pretty-hydra-define hydra-major
-  (:color blue :quit-key "q" :title "Major mode")
+(use-package major-mode-hydra
+  :ensure t)
+#+END_SRC
+
+
+***** Org
+
+#+BEGIN_SRC emacs-lisp
+(major-mode-hydra-define org-mode
+  (:color blue :quit-key "q" :title "Org mode")
   ("Actions"
-   (("d" elpy-doc "elpy-doc")
-    ("e" org-edit-special "edit special")
-    ("s" org-edit-src-exit "save special edit")
-    ("p" markdown-preview "preview"))))
+   (("e" org-edit-special "Edit special")
+    ("s" org-edit-src-exit "Save special edit"))))
+#+END_SRC
+
+
+***** Python
+
+#+BEGIN_SRC emacs-lisp
+(major-mode-hydra-define python-mode
+  (:color blue :quit-key "q" :title "Python mode")
+  ("Actions"
+   (("d" elpy-doc "Show documentation"))))
+#+END_SRC
+
+
+***** Markdown
+
+#+BEGIN_SRC emacs-lisp
+(major-mode-hydra-define markdown-mode
+  (:color blue :quit-key "q" :title "Markdown mode")
+  ("Actions"
+   (("p" markdown-preview "Preview markdown in external web browser"))))
 #+END_SRC
 
 
