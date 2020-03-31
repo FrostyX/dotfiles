@@ -176,6 +176,19 @@ TODO xkcd image mocking Emacs keybindings
 See https://github.com/noctuid/evil-guide
 
 
+These two needs to be set before we even try to load Evil (or ~evil-collection~ or
+~evil-leader~).
+
+See
+- https://github.com/emacs-evil/evil-collection#installation
+- https://github.com/emacs-evil/evil-collection/issues/215
+
+#+BEGIN_SRC emacs-lisp
+(setq evil-want-keybinding nil)
+(setq evil-want-integration t)
+#+END_SRC
+
+
 ** Evil leader
 A common way to define custom key bindings for Vim ~NORMAL~ mode is by utilizing
 so called ~<leader>~ key. By default it is mapped to ~\~ but can be remaped to
@@ -200,10 +213,6 @@ otherwise it doesn't work in ~org-mode~.
 #+BEGIN_SRC emacs-lisp
 (use-package evil-leader
   :ensure t
-  :init
-  ;; https://github.com/emacs-evil/evil-collection/issues/215
-  (setq evil-want-keybinding nil)
-
   :config
   (evil-leader/set-leader ",")
   (global-evil-leader-mode))
