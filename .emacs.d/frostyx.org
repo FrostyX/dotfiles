@@ -42,6 +42,14 @@ These are less important, but we still want to keep track of them.
 - [ ] Generate TOC list
 
 
+But ... is it even worth it? ... Nope. It is fun though!
+
+#+CAPTION: This is the caption for the next figure link (or table)
+[[./img/is_it_worth_the_time.png]]
+
+Hint: Use ~M-x org-toggle-inline-images~ to see images in Emacs
+
+
 * Defaults
 
 #+BEGIN_SRC emacs-lisp
