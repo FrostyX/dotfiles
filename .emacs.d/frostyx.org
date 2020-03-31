@@ -573,19 +573,36 @@ See:
 
 *** Hydra
 
+Hydra, a mythical Greek creature ultimatelly killed by Heracles. The beast
+posseses many heads and for every head that is chopped off, Hydra will seal
+the wound and grow a two additional heads from it.
+
+What a beautiful /real-life/ example of binary trees. Hydras in Emacs lives
+in the same spirit. They are a pop-up menus that you may know from Spacemacs
+or Doom Emacs. The menu defines single-letter key bindings that can either
+execute a function or spawn another menu.
+
+This has many neat use-cases. You can create menus to simply launch applications,
+create a settings menu to easily toggle features (or minor modes), create
+shortcuts for commonly used commands, etc.
+
+You can also completly replace all Emacs key bindings because they are allegedly
+dangerous for your hands. Let's say that we use space for spawning the hydra
+menu. You can implement it in a way, that you can avoid pressing unnecessary
+~M-~ and ~C-~ chords (which is actually called ~god-mode~). You might want to
+an simpler version of that, e.g.
+
+| Default Chord   | Possible Hydra Alternative |
+|-----------------+----------------------------|
+| C-a             | <SPC> a                    |
+| C-x C-s         | <SPC> xs                   |
+| C-a C-k C-n C-y | <SPC> akny                 |
+
+See more about ~god-mode~ https://chrisdone.com/posts/god-mode/
+
+Let's install just the ~hydra~ package and keep it simple.
+
 #+BEGIN_SRC emacs-lisp
-;; (use-package hydra-posframe
-;;   :load-path "/home/jkadlcik/git/hydra-posframe"
-;;   :hook (after-init . hydra-posframe-enable)
-;;   :config
-;;   (setq hydra-posframe-border-width 1)
-;;   (setq hydra-posframe-parameters
-;;         '((left-fringe . 10)
-;;           (right-fringe . 10))))
-
-
-
-;; Create my own spacemacs-like menu
 (use-package hydra
   :ensure t
   :bind
@@ -594,6 +611,22 @@ See:
   (define-key evil-normal-state-map (kbd "SPC") 'hydra-main/body)
   :custom
   (hydra-default-hint nil))
+#+END_SRC
+
+
+**** Additional Hydra packages
+
+I would really love to use hydra in posframe, but it doesn't work properly
+
+See
+- https://github.com/Ladicle/hydra-posframe
+- https://github.com/jerrypnz/major-mode-hydra.el/issues/30
+
+#+BEGIN_SRC emacs-lisp
+;; (use-package hydra-posframe
+;;   :load-path "/home/jkadlcik/git/hydra-posframe"
+;;   :hook
+;;   (after-init . hydra-posframe-enable))
 #+END_SRC
 
 The default way to define hydras is too clumsy and involves a lot of tedious
@@ -605,6 +638,9 @@ if allows us to define hydras as lists of columns.
 (use-package pretty-hydra
   :ensure t)
 #+END_SRC
+
+
+**** Main Hydra Menu
 
 Hydra main entry-point allowing us acces to other hydras.
 
@@ -629,6 +665,9 @@ Hydra main entry-point allowing us acces to other hydras.
    (("r" (load-file user-init-file) "reload configuration"))))
 #+END_SRC
 
+
+**** Presentations
+
 Hydra definitions useful for presentations.
 
 #+BEGIN_SRC emacs-lisp
@@ -648,6 +687,9 @@ Hydra definitions for ~projectile~ package.
    (("d" projectile-discover-projects-in-search-path "discover new projects"))))
 #+END_SRC
 
+
+**** Dired
+
 Hydra definition for ~dired~ package.
 
 #+BEGIN_SRC emacs-lisp
@@ -658,6 +700,9 @@ Hydra definition for ~dired~ package.
     ("~" (lambda () (interactive) (dired "~/")) "home directory")
     ("/" (lambda () (interactive) (dired "/")) "root directory"))))
 #+END_SRC
+
+
+**** Applications
 
 Hydra launcher for applications
 
@@ -671,6 +716,9 @@ Hydra launcher for applications
     ("p" spotify-my-playlists "spotify - my playlists")
     ("s" sporify-recently-played "spotify - recently played"))))
 #+END_SRC
+
+
+**** Major mode
 
 Hydra definitions for major mode
 
