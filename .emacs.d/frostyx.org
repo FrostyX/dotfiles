@@ -192,6 +192,10 @@ otherwise it doesn't work in ~org-mode~.
 #+BEGIN_SRC emacs-lisp
 (use-package evil-leader
   :ensure t
+  :init
+  ;; https://github.com/emacs-evil/evil-collection/issues/215
+  (setq evil-want-keybinding nil)
+
   :config
   (evil-leader/set-leader ",")
   (global-evil-leader-mode))
@@ -215,8 +219,6 @@ See:
   (setq evil-shift-round nil)
   (setq evil-want-C-u-scroll t)
 
-  ;; https://github.com/emacs-evil/evil-collection
-  (setq evil-want-keybinding nil)
 
   (setq evil-ex-set-initial-state 'normal)
 
