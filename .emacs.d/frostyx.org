@@ -646,7 +646,7 @@ Hydra main entry-point allowing us acces to other hydras.
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-main
-  (:color blue :quit-key "q" :title "Hydra")
+  (:color blue :quit-key ("q" "SPC") :title "Hydra")
   ("Misc"
    (("m" major-mode-hydra "major mode")
     ("a" hydra-applications/body "applications")
@@ -672,7 +672,7 @@ Hydra definitions useful for presentations.
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-presentations
-  (:color blue :quit-key "q" :title "Presentations")
+  (:color blue :quit-key ("q" "SPC") :title "Presentations")
   ("Actions"
    (("l" text-scale-decrease "lesser")
     ("g" text-scale-increase "greated"))))
@@ -682,7 +682,7 @@ Hydra definitions for ~projectile~ package.
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-project
-  (:color blue :quit-key "q" :title "Project Management")
+  (:color blue :quit-key ("q" "SPC") :title "Project Management")
   ("Actions"
    (("d" projectile-discover-projects-in-search-path "discover new projects"))))
 #+END_SRC
@@ -694,7 +694,7 @@ Hydra definition for ~dired~ package.
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-dired
-  (:color blue :quit-key "q" :title "Dired")
+  (:color blue :quit-key ("q" "SPC") :title "Dired")
   ("Open in"
    (("." dired-jump "current directory")
     ("~" (lambda () (interactive) (dired "~/")) "home directory")
@@ -708,7 +708,7 @@ Hydra launcher for applications
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-applications
-  (:color blue :quit-key "q" :title "Applications")
+  (:color blue :quit-key ("q" "SPC") :title "Applications")
   ("Launch"
    (("r" elfeed "RSS (elfeed)")
     ("w" eww "web (eww)")
@@ -735,7 +735,7 @@ See https://github.com/jerrypnz/major-mode-hydra.el
 
 #+BEGIN_SRC emacs-lisp
 (major-mode-hydra-define org-mode
-  (:color blue :quit-key "q" :title "Org mode")
+  (:color blue :quit-key ("q" "SPC") :title "Org mode")
   ("Actions"
    (("e" org-edit-special "Edit special")
     ("s" org-edit-src-exit "Save special edit"))))
@@ -746,7 +746,7 @@ See https://github.com/jerrypnz/major-mode-hydra.el
 
 #+BEGIN_SRC emacs-lisp
 (major-mode-hydra-define python-mode
-  (:color blue :quit-key "q" :title "Python mode")
+  (:color blue :quit-key ("q" "SPC") :title "Python mode")
   ("Actions"
    (("d" elpy-doc "Show documentation"))))
 #+END_SRC
@@ -756,7 +756,7 @@ See https://github.com/jerrypnz/major-mode-hydra.el
 
 #+BEGIN_SRC emacs-lisp
 (major-mode-hydra-define markdown-mode
-  (:color blue :quit-key "q" :title "Markdown mode")
+  (:color blue :quit-key ("q" "SPC") :title "Markdown mode")
   ("Actions"
    (("p" markdown-preview "Preview markdown in external web browser"))))
 #+END_SRC
