@@ -3,4 +3,5 @@
 
 .emacs.d/*
 !.emacs.d/init.el
-!.emacs.d/init.org
+!.emacs.d/frostyx.org
+!.emacs.d/img
