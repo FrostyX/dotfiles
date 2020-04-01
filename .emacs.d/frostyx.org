@@ -67,6 +67,7 @@ once these TODO items are done. Try ~C-c C-c~ to toggle them.
   - [ ] Closing brackets where they should be
 - [ ] Evil ~C-o~ jumps to a file regardles of a project
 - [ ] File backups should go to ~/.emacs/swp, not to mess git repos
+- [ ] Searching with ~/~ is somehow broken and doesn't support arrow keys
 
 
 These are less important, but we still want to keep track of them.
