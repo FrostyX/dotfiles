@@ -77,7 +77,7 @@ These are less important, but we still want to keep track of them.
 - [ ] ~:set colorcolumn=120~ alternative (should be built in Emacs 27)
 - [ ] Figure out how to have multiple Emacs windows/instances in order to
       utilize window manager workspaces/groups and multiple monitors
-- [ ] Generate TOC list
+- [X] Generate TOC list
 
 
 But ... is it even worth it? ... Nope. It is fun though!
