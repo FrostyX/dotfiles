@@ -6,6 +6,44 @@ This Emacs configuration is a mess. I am a newbie trying to hack things together
 and experiment. Do not take anything from this configuration unles you know what
 you are doing. Because the odds are, that I am not.
 
+* Table of Contents :TOC:
+- [[#things-to-do][Things to do]]
+- [[#defaults][Defaults]]
+- [[#package-management][Package management]]
+- [[#secrets][Secrets]]
+- [[#living-in-evil][Living in Evil]]
+  - [[#evil-leader][Evil leader]]
+  - [[#evil-mode][Evil Mode]]
+  - [[#evil-packages][Evil packages]]
+  - [[#vim-keybindings-everywhere][Vim keybindings everywhere]]
+  - [[#more-vim-compatibility][More Vim compatibility]]
+  - [[#custom-evil-keybindings][Custom Evil keybindings]]
+  - [[#custom-evil-commands][Custom Evil commands]]
+- [[#interface][Interface]]
+  - [[#gui][GUI]]
+  - [[#themes][Themes]]
+  - [[#fonts][Fonts]]
+  - [[#ux][UX]]
+- [[#project-management][Project management]]
+- [[#sessions][Sessions]]
+- [[#development][Development]]
+  - [[#completion][Completion]]
+  - [[#whitespace][Whitespace]]
+  - [[#languages][Languages]]
+  - [[#lsp][LSP]]
+- [[#writing][Writing]]
+- [[#applications][Applications]]
+  - [[#file-manager][File manager]]
+  - [[#web][Web]]
+  - [[#email][Email]]
+  - [[#rss][RSS]]
+  - [[#spotify][Spotify]]
+  - [[#networkmanager][NetworkManager]]
+  - [[#bluetooth][Bluetooth]]
+  - [[#pulseaudio][Pulseaudio]]
+- [[#resources][Resources]]
+  - [[#other-people-configs][Other people configs]]
+  - [[#videos][Videos]]
 
 * Things to do
 
@@ -984,11 +1022,21 @@ Extend ~$PATH~ so Emacs can use them.
 
 *** Org
 
+Every larger document that is trying to look professionally should have
+a table of contents. Don't try to maintain it manually, it is the first
+step towards insanity. Use ~toc-org~ package instead.
+
 #+BEGIN_SRC emacs-lisp
 (use-package toc-org
   :ensure t
   :after org)
 #+END_SRC
+
+Now you can put ~:TOC:~ tag to a heading, run ~M-x toc-org-insert-toc~
+to generate the initial version based on your document structure and
+after this, every time you change the structure and save the document,
+TOC will be regenerated.
+
 
 #+BEGIN_SRC emacs-lisp
 (setq org-src-window-setup 'current-window)
