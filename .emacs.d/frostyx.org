@@ -1023,6 +1023,9 @@ Extend ~$PATH~ so Emacs can use them.
 
 *** Org
 
+Hint: see Org-Mode Reference Card
+https://www.gnu.org/software/emacs/refcards/pdf/orgcard.pdf
+
 Every larger document that is trying to look professionally should have
 a table of contents. Don't try to maintain it manually, it is the first
 step towards insanity. Use ~toc-org~ package instead.
