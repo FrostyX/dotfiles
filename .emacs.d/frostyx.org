@@ -1267,6 +1267,11 @@ go - open in external browser
   ;; @TODO notifications
   ;; https://github.com/iqbalansari/mu4e-alert
 
+  ;; Havent tested it yet, but it looks like a great feature
+  ;; https://www.reddit.com/r/emacs/comments/fu8ln7/in_mu4e_1310_how_do_i_open_an_email_in_browser/fmbbfz2?utm_source=share&utm_medium=web2x
+  (add-to-list 'mu4e-view-actions
+    '("View in Browser" . mu4e-action-view-in-browser) t)
+
   nil)
 #+END_SRC
 
