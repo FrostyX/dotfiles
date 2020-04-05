@@ -700,6 +700,10 @@ Hydra main entry-point allowing us acces to other hydras.
    (("p" helm-projectile-switch-project "switch project")
     ("P" hydra-project/body "projectile"))
 
+   "File Management"
+   (("d" dired-jump "open dired in the current directory")
+    ("D" hydra-dired/body "dired"))
+
    "Emacs"
    (("r" (load-file user-init-file) "reload configuration"))))
 #+END_SRC
