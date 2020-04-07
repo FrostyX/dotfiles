@@ -59,7 +59,7 @@ once these TODO items are done. Try ~C-c C-c~ to toggle them.
 - [ ] Correct indentation for non-standard filetypes, such as ~.elm~
 - [ ] Unified auto-completion across all programming languages
 - [ ] Not messing up whitespace by either removing or showing it
-- [ ] Working snippets for e.g. ~ipdb~
+- [X] Working snippets for e.g. ~ipdb~
 - [ ] Code cleanup, unified way to do things
   - [ ] All package imports using ~use-package~, even the local ones
   - [ ] Key bindings - ~:bind~ vs ~:config~ vs whatever else
