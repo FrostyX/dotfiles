@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Insert bash code block
+# key: bash
+# --
+
+#+BEGIN_SRC bash
+$0
+#+END_SRC

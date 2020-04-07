@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Insert code block with use-package
+# key: package
+# --
+
+#+BEGIN_SRC emacs-lisp
+(use-package $0
+  :ensure t)
+#+END_SRC

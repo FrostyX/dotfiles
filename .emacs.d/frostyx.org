@@ -969,6 +969,38 @@ This approach is able to correctly save and restore even ~eyebrowse~ workspaces.
 ;;     ))
 #+END_SRC
 
+** Snippets
+
+It is so boring to type the same things again and again and again,
+every day, hundred times a day. I've written the line
+~import ipdb; ipdb.set_trace()~ literaly a ten thousand times in my life.
+Let's install ~yasnippet~ so we can do just ~ipdb<TAB>~.
+
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+  :ensure t
+  :init
+  (yas-global-mode 1))
+#+END_SRC
+
+By default the snippet manager doesn't come with any snippets. Which is
+good idea but we don't really want to write all snippets on our own,
+it is a big maintanance overhead. Let's install some snippets collection
+and then write/override whatever is needed.
+
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet-snippets
+  :ensure t)
+#+END_SRC
+
+You can find my custom snippets in ~./snippets/~ directory. When creating
+a new snippet, just run ~M-x yas-new-snippet~ and then save it simply as
+~:w keyname~. It will store it to an appropriate directory for the current
+major mode.
+
+See ~M-x yas-describe-tables~ for all available snippets.
+
+
 ** Languages
 *** Python
 

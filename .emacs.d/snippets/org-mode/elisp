@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Insert code block with elisp
+# key: elisp
+# --
+
+#+BEGIN_SRC emacs-lisp
+$0
+#+END_SRC
