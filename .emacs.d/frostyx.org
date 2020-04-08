@@ -1009,11 +1009,11 @@ See ~M-x yas-describe-tables~ for all available snippets.
   ;; sudo dnf install python3-virtualenv
   :ensure t
   :init
-  ;; @TODO have some module for snippets
   (setq elpy-modules
         '(elpy-module-sane-defaults
           elpy-module-company
           elpy-module-eldoc
+          elpy-module-yasnippet
           elpy-module-django))
   (elpy-enable))
 #+END_SRC
