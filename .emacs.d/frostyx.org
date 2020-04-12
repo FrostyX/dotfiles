@@ -89,6 +89,18 @@ But ... is it even worth it? ... Nope. It is fun though!
 Hint: Use ~M-x org-toggle-inline-images~ to see images in Emacs
 
 
+* Oh-shit buttons
+
+In case you do something and have no idea how to save yourself.
+
+Reset variable to its default value, press ~M-:~ and run:
+
+#+BEGIN_SRC
+(custom-reevaluate-setting 'emms-player-next-function)
+#+END_SRC
+
+
+
 * Defaults
 
 #+BEGIN_SRC emacs-lisp
