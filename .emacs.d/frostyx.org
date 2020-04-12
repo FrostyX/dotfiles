@@ -1265,8 +1265,6 @@ go - open in external browser
 (use-package mu4e
   :ensure nil
   :config
-  (setq mu4e-maildir (expand-file-name "~/Mail/seznam"))
-
   ;; https://etienne.depar.is/emacs.d/mu4e.html
   (setq mu4e-split-view 'vertical)
   (setq mu4e-headers-visible-columns 67)
@@ -1324,8 +1322,51 @@ go - open in external browser
   (add-to-list 'mu4e-view-actions
     '("View in Browser" . mu4e-action-view-in-browser) t)
 
+
+  ;; https://emacs.stackexchange.com/questions/20790/mu4e-folders-for-multiple-accounts-contexts
+  (setq mu4e-maildir (expand-file-name "~/Mail"))
+  (setq mu4e-contexts
+ `( ,(make-mu4e-context
+     :name "gmail"
+     :match-func (lambda (msg) (when msg
+       (string-prefix-p "/gmail" (mu4e-message-field msg :maildir))))
+     :vars '(
+       ;; (mu4e-trash-folder . "/gmail/[Gmail].Trash")
+       ;; (mu4e-refile-folder . "/gmail/[Gmail].Archive")
+       (mu4e-bookmarks . ,(my4e-bookmarks "gmail"))
+       ))
+   ,(make-mu4e-context
+     :name "seznam"
+     :match-func (lambda (msg) (when msg
+       (string-prefix-p "/seznam" (mu4e-message-field msg :maildir)))))
+   ))
+
   nil)
 #+END_SRC
+
+TODO just redefine the existing bookmarks to somehow use maildir from context
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'mu4e-bookmarks
+  (make-mu4e-bookmark
+    :name  "GMail - Last 7 days"
+    :query "maildir:/gmail/INBOX AND date:7d..now"
+    :key ?g)
+
+  ;; (make-mu4e-bookmark
+  ;;   :name  "Seznam - Last 7 days"
+  ;;   :query "maildir:/seznam/I/BOX AND date:7d..now"
+  ;;   :key ?S))
+)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+;; (("flag:unread AND NOT flag:trashed" "Unread messages" 117)
+;;  ("date:today..now" "Today's messages" 116)
+;;  ("date:7d..now" "Last 7 days" 119)
+;;  ("mime:image/*" "Messages with images" 112))
+#+END_SRC
+
 
 ** RSS
 
