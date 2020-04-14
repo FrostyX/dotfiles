@@ -1230,6 +1230,16 @@ application in it and panicking how to get back, just kill the buffer with
 
 There is already an awesome file manager built in Emacs, called ~dired~.
 
+By default it doesn't automatically refresh opened directories, so any
+changes from the outside (e.g. file operations done in the command-line)
+doesn't apppear and user needs to manually refresh buffers using ~g~.
+One of the problems is, that this key binding doesn't work with evil.
+
+#+BEGIN_SRC emacs-lisp
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
+#+END_SRC
+
 In Vim, I was used to open and close NerdTree with ~C-n~. Side-tree
 file managers sux but let's keep the shortcut.
 
