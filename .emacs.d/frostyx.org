@@ -1259,6 +1259,7 @@ You will probably find these Evil keybindings useful.
 
 
 TODO Prevent ^ from jumping to the parent directory
+TODO Bind backspace for accessing the parent directory
 
 
 ** Web
