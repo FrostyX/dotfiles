@@ -923,13 +923,6 @@ This approach is able to correctly save and restore even ~eyebrowse~ workspaces.
 
 * Development
 
-#+BEGIN_SRC emacs-lisp
-(use-package dtrt-indent
-  :ensure t
-  :config
-  (dtrt-indent-global-mode)
-  (dtrt-indent-adapt))
-#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
 (use-package fic-mode
@@ -957,6 +950,30 @@ This approach is able to correctly save and restore even ~eyebrowse~ workspaces.
 (require 'browse-at-remote)
 (setq browse-at-remote-add-line-number-if-no-region-selected nil)
 #+END_SRC
+
+
+** Indentation
+
+Disable ~electric-indent-mode~ because it is trying to be smart and do weird
+aggressive indents that are in fact just stupid and only makes me manually remove
+and adjust them. Also make sure, that any major mode won't turn it on again.
+
+#+BEGIN_SRC emacs-lisp
+(electric-indent-mode -1)
+(add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
+#+END_SRC
+
+Set tab width and other indentation settings based on the analysis of the
+current project.
+
+#+BEGIN_SRC emacs-lisp
+(use-package dtrt-indent
+  :ensure t
+  :config
+  (dtrt-indent-global-mode)
+  (dtrt-indent-adapt))
+#+END_SRC
+
 
 ** Completion
 
