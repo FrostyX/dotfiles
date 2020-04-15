@@ -717,7 +717,8 @@ Hydra main entry-point allowing us acces to other hydras.
     ("D" hydra-dired/body "dired"))
 
    "Emacs"
-   (("r" (load-file user-init-file) "reload configuration"))))
+   (("r" (load-file user-init-file) "reload configuration")
+    ("c" hydra-configuration/body "reload configuration"))))
 #+END_SRC
 
 
@@ -772,6 +773,19 @@ Hydra launcher for applications
     ("s" sporify-recently-played "spotify - recently played"))))
 #+END_SRC
 
+**** Configuration
+
+Hydra for configuration/settings/toggle options
+
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-configuration
+  (:color blue :quit-key ("q" "SPC") :title "Configuration")
+  ("Vertical Line"
+   (("v" turn-off-fci-mode "No vertical line")
+    ("8" (my/colorcolumn 80) "80 characters")
+    ("1" (my/colorcolumn 100) "100 characters")
+    ("2" (my/colorcolumn 120) "120 characters"))))
+#+END_SRC
 
 **** Major mode
 
@@ -938,6 +952,28 @@ This approach is able to correctly save and restore even ~eyebrowse~ workspaces.
   :config
   nil)
 #+END_SRC
+
+In many programming languages there is a standard line width and code should not
+continue over it. Also when writting a text (e.g. documentation) it is better to
+hard-wrap the lines somewhere. It makes a review easier, it is much clearer in
+diffs, ets. Typically we wrap at 80, 100 or 120 characters.
+
+#+BEGIN_SRC emacs-lisp
+(use-package fill-column-indicator
+  :ensure t
+  :config
+  (setq fci-rule-width 1)
+  (setq fci-rule-color (plist-get base16-chalk-colors :base01)))
+#+END_SRC
+
+Let's define a function which will color a given column
+
+#+BEGIN_SRC emacs-lisp
+(defun my/colorcolumn (column)
+  (turn-on-fci-mode)
+  (set-fill-column column))
+#+END_SRC
+
 
 #+BEGIN_SRC emacs-lisp
 ;; (use-package browse-at-remote
