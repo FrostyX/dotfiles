@@ -758,6 +758,25 @@ Hydra definition for ~dired~ package.
 #+END_SRC
 
 
+**** Flycheck
+
+Hydra definition for flycheck or other linter
+
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-linter
+  (:color blue :quit-key ("q" "SPC") :title "Linter")
+  ("Flycheck"
+   (("v" flycheck-verify-setup "verify setup")
+    ("t" flycheck-mode "toggle on/off"))
+
+   "Error"
+   (("<" flycheck-previous-error "previous")
+    (">" flycheck-next-error "next")
+    ("l" flycheck-list-errors "list")
+    ("o" nil "open in browser")
+    ("i" nil "ignore"))))
+#+END_SRC
+
 **** Applications
 
 Hydra launcher for applications
@@ -817,7 +836,8 @@ See https://github.com/jerrypnz/major-mode-hydra.el
 (major-mode-hydra-define python-mode
   (:color blue :quit-key ("q" "SPC") :title "Python mode")
   ("Actions"
-   (("d" elpy-doc "Show documentation"))))
+   (("d" elpy-doc "Show documentation")
+    ("l" hydra-linter/body "Linter"))))
 #+END_SRC
 
 
@@ -1034,6 +1054,41 @@ current project.
 ;;     ))
 #+END_SRC
 
+
+** Flycheck
+
+It is handy to have some on-fly syntax and style checker in order to not
+produce ugly code.
+
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :ensure t)
+#+END_SRC
+
+Such tools are typically slow on large files, so to make it (allegedly 10x)
+faster, do not highlight words, but rather lines.
+
+#+BEGIN_SRC emacs-lisp
+(setq flycheck-highlighting-mode 'lines)
+#+END_SRC
+
+Argh, by default flycheck and other tools are so aggressive and distracting
+with all the text underlines and other annoying things.
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'flycheck-info nil :underline nil)
+(set-face-attribute 'flycheck-warning nil :underline nil)
+(set-face-attribute 'flycheck-error nil :underline nil)
+#+END_SRC
+
+It is not 1970s and we don't use computer terminals with 80x24 characters
+resolution anymore. Line length of 120 characters is reasonable enough.
+
+#+BEGIN_SRC emacs-lisp
+(setq-default flycheck-flake8-maximum-line-length 120)
+#+END_SRC
+
+
 ** Snippets
 
 It is so boring to type the same things again and again and again,
@@ -1083,6 +1138,15 @@ See ~M-x yas-describe-tables~ for all available snippets.
           elpy-module-django))
   (elpy-enable))
 #+END_SRC
+
+Use flycheck instead of flymake
+
+See https://elpy.readthedocs.io/en/latest/customization_tips.html#use-flycheck-instead-of-flymake
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'elpy-mode-hook 'flycheck-mode)
+#+END_SRC
+
 
 *** Lisp
 
