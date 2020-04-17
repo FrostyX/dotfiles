@@ -1142,6 +1142,8 @@ Get pylint error ID for the current line
 Glue everything together in one function to disable pylint warning
 for the current line.
 
+See https://www.reddit.com/r/emacs/comments/g31gtn/generate_comment_to_disable_falsepositive_pylint/
+
 #+BEGIN_SRC emacs-lisp
 (defun pylint-disable-current-warning ()
   (interactive)
