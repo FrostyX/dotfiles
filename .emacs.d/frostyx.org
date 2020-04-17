@@ -774,7 +774,7 @@ Hydra definition for flycheck or other linter
     (">" flycheck-next-error "next")
     ("l" flycheck-list-errors "list")
     ("o" nil "open in browser")
-    ("i" nil "ignore"))))
+    ("i" pylint-disable-current-warning "ignore"))))
 #+END_SRC
 
 **** Applications
@@ -1086,6 +1086,69 @@ resolution anymore. Line length of 120 characters is reasonable enough.
 
 #+BEGIN_SRC emacs-lisp
 (setq-default flycheck-flake8-maximum-line-length 120)
+#+END_SRC
+
+TODO from below this point, the flycheck configuration is python-specific
+
+Flycheck allows to run only one checker at the time. However, it allows to
+chain then and run them sequentially. In this case, after running flake8,
+run also a pylint.
+
+#+BEGIN_SRC emacs-lisp
+(flycheck-add-next-checker 'python-flake8 'python-pylint)
+#+END_SRC
+
+We would like to see symbolic, human readable IDs like ~no-name-in-module~
+instead of numeric values like ~E0611~. However, columns width in
+~M-x flycheck-list-errors~ are fixed and hardcoded, so just use numbers.
+
+#+BEGIN_SRC emacs-lisp
+(setq-default flycheck-pylint-use-symbolic-id nil)
+#+END_SRC
+
+Define a function to convert numeric error ID to symbolic.
+
+#+BEGIN_SRC emacs-lisp
+(defun pylint-id-to-symbolic (msg-id)
+  (let* ((cmd (format "pylint --help-msg %s" msg-id))
+         (msg (shell-command-to-string cmd))
+         (start (+ (string-match ":" msg) 1))
+         (end (string-match ":" msg start))
+         (name (substring msg start end)))
+    (car (split-string name " "))))
+#+END_SRC
+
+We can now disable false positive errors with a symbolic ID
+
+#+BEGIN_SRC emacs-lisp
+(defun pylint-disable-warning (msg-id)
+  (end-of-line)
+  (insert "  ")
+  (insert (format "# pylint: disable=%s" msg-id)))
+#+END_SRC
+
+Get pylint error ID for the current line
+
+#+BEGIN_SRC emacs-lisp
+(defun pylint-current-error ()
+  (first
+    (seq-filter
+      (lambda (x)
+        (eq (flycheck-error-line x)
+        (line-number-at-pos)))
+      flycheck-current-errors)))
+#+END_SRC
+
+Glue everything together in one function to disable pylint warning
+for the current line.
+
+#+BEGIN_SRC emacs-lisp
+(defun pylint-disable-current-warning ()
+  (interactive)
+  (pylint-disable-warning
+    (pylint-id-to-symbolic
+      (flycheck-error-id
+        (pylint-current-error)))))
 #+END_SRC
 
 
