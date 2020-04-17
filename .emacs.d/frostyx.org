@@ -1129,6 +1129,9 @@ We can now disable false positive errors with a symbolic ID
 
 Get pylint error ID for the current line
 
+TODO it would be better to have universal ~pylint-error-on-line~ so it easier
+to test and then specify line number in ~pylint-disable-current-warning~.
+
 #+BEGIN_SRC emacs-lisp
 (defun pylint-current-error ()
   (first
