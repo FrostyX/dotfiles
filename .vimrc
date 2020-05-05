@@ -159,10 +159,6 @@ map <leader>gp :Git push<CR>
 " NERDTree
 map <C-n> :NERDTreeFind<CR>
 
-" Taglist
-map <C-m> :TlistToggle<CR>
-let Tlist_Use_Right_Window = 1
-let Tlist_GainFocus_On_ToggleOpen = 1
 
 " Jedi-vim
 let g:jedi#popup_select_first = 1
