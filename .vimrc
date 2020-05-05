@@ -3,8 +3,11 @@
 " ------------------------------------------
 
 " Install plugins:
-" :PluginInstall
-" vim +PluginInstall +qall
+"   :PluginInstall
+"   vim +PluginInstall +qall
+"
+" Uninstall plugins:
+"   :PluginClean
 
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
