@@ -17,6 +17,7 @@ Bundle 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'  " Enable :Gbrowse in fugitive
 Plugin 'tomtom/tcomment_vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'Glench/Vim-Jinja2-Syntax'
@@ -32,6 +33,10 @@ Plugin 'davidhalter/jedi-vim'
 
 " Requires to `dnf install fzf`
 Plugin 'junegunn/fzf.vim'
+
+" My own plugins
+" Plugin 'file:///home/jkadlcik/git/vim-fugitive-pagure'
+Plugin 'FrostyX/vim-fugitive-pagure'  " Enable :Gbrowse for pagure.io
 
 call vundle#end()
 
