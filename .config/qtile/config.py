@@ -38,6 +38,7 @@ if hostname == "chromie":
     # https://github.com/FrostyX/qtile-screenshot/blob/master/qtile-screenshot.py
 
 elif hostname == "localhost.localdomain":  # New work laptop is not named yet
+    scrot = "/home/jkadlcik/.bin/screenshot.sh"
     terminal = "urxvt256c -e tmux"
     lock = "i3lock -i /home/jkadlcik/.dotfiles/.config/qtile/img/bsod.png"
 
