@@ -30,6 +30,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-term-color-vector
+   [unspecified "#151515" "#fb9fb1" "#acc267" "#ddb26f" "#6fc2ef" "#e1a3ee" "#6fc2ef" "#d0d0d0"] t)
+ '(electric-indent-mode nil)
  '(electric-pair-mode t)
  '(enwc-wired-device "wlp2s0")
  '(enwc-wireless-device "wlp2s0")
@@ -37,9 +40,10 @@
  '(hydra-default-hint nil)
  '(package-selected-packages
    (quote
-    (pretty-hydra hydra-posframe auto-package-update nov elpy enwc password-store w3m persp-projectile perspective eyebrowse centaur-tabs browse-at-remote magit jinja2-mode writeroom-mode markdown-mode docker-compose-mode dockerfile-mode powerline mu4e-conversation mu4e evil-collection notmuch rainbow-delimiters fic-mode neotree dtrt-indent evil-commentary use-package treemacs-icons-dired treemacs-evil transient swiper spotify helm-projectile helm-fuzzy-find git-commit fzf evil-leader evil-indent-textobject elfeed company-jedi base16-theme)))
+    (elfeed-org diff-hl adoc-mode flycheck fill-column-indicator yasnippet-snippets major-mode-hydra pulseaudio-control bluetooth elm-mode aggressive-indent toc-org pretty-hydra hydra-posframe auto-package-update nov elpy enwc password-store w3m persp-projectile perspective eyebrowse centaur-tabs browse-at-remote magit jinja2-mode writeroom-mode markdown-mode docker-compose-mode dockerfile-mode powerline mu4e-conversation mu4e evil-collection notmuch rainbow-delimiters fic-mode neotree dtrt-indent evil-commentary use-package treemacs-icons-dired treemacs-evil transient swiper spotify helm-projectile helm-fuzzy-find git-commit fzf evil-leader evil-indent-textobject elfeed company-jedi base16-theme)))
  '(pixel-scroll-mode t)
  '(projectile-mode t nil (projectile))
+ '(safe-local-variable-values (quote ((encoding . utf-8))))
  '(yas-global-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
