@@ -1,0 +1,127 @@
+* Blogs                                                              :elfeed:
+
+Here follows a list of RSS feeds that I am subscribed to.
+
+** Work
+
+Mainly Red Hatters, former colleagues and work related feeds.
+
+*** https://blog.samalik.com/feed.xml
+*** http://miroslav.suchy.cz/blog/rss.xml
+*** https://pavel.raiskup.cz/feed.xml
+*** https://clime.github.io/feed.xml
+*** https://contyk.org/feed/
+*** https://developers.redhat.com/blog/author/langdonwhite/feed/
+*** http://threebean.org/blog/feed/atom/index.xml
+*** https://sgallagh.wordpress.com/feed/
+
+** Fedora
+
+Fedora is my daily driver, develpment platform and news in Fedora are strongly
+tied to my day to day work-related tasks.
+
+*** https://eischmann.wordpress.com/feed/
+*** https://blog.linuxgrrl.com/feed/
+*** https://tatica.org/feed/
+*** https://fedoramagazine.org/feed/
+
+** Nerds
+
+I found them somewhere on the internet. I have no idea who they are. But they
+are smart, experienced and write about interesting topics. Most of them wrote
+"that one" article about something that saved my life when installing or
+configuring something.
+
+*** https://pbrisbin.com/feed/index.xml
+*** https://www.marksanborn.net/atom.xml
+*** https://www.rosipov.com/atom.xml
+*** https://www.badykov.com/feed.xml
+*** https://codingquark.com/feed.xml
+*** https://dmerej.info/blog/index.xml
+*** https://thevaluable.dev/index.xml
+*** https://doc.heronovo.cz/feed.xml
+*** https://ctoomey.com/atom.xml
+*** https://dmerej.info/blog/index.xml
+*** https://medium.com/feed/@alexeysamoshkin
+*** https://blog.aaronbieber.com/posts/index.xml
+*** https://jeffkreeftmeijer.com/feed.xml
+*** https://dubstepdish.com/index.php/feed/
+*** https://medium.com/feed/@araltasher
+*** https://blog.katriel.co.uk/feed
+*** https://www.artificialworlds.net/blog/feed/
+*** https://feeds.feedburner.com/GiantRobotsSmashingIntoOtherGiantRobots
+*** https://medium.com/feed/@romainhe.brisse
+*** https://chriskiehl.com/rss.xml
+*** https://brbsix.github.io/rss.xml
+*** http://www.patricksoftwareblog.com/feed/
+*** https://blog.miguelgrinberg.com/feed
+*** https://tuomassalmi.com/rss.xml
+*** https://ruleoftech.com/feed
+*** https://addy-dclxvi.github.io/post/index.xml
+*** https://statico.github.io/feed.xml
+*** https://codemadness.org/atom_content.xml
+*** https://www.mikeshultz.com/feeds/all.atom.xml
+
+** Gentoo
+
+My love for Gentoo will probably never fade away. Let's at least see whats up.
+
+*** https://blogs.gentoo.org/leio/feed/
+
+** Emacs
+
+There is always something new in the Emacs world.
+
+*** https://sachachua.com/blog/feed/
+*** http://blog.binchen.org/rss.xml
+
+** Vim
+
+There is more interesting Vim development happening than ever before.
+
+*** https://www.vimfromscratch.com/articles.rss
+
+** Python
+
+Python pays my bills, I should be excellent at it.
+
+*** http://charlesleifer.com/blog/rss/
+
+** Programming
+
+Workflows, testing, design patterns, CI, functional paradigm ... you know,
+all the good stuff.
+
+*** https://www.zdrojak.cz/clanky/feed/
+*** https://becoming-functional.com/feed
+
+** Fun
+
+Comics and other geeky stuff.
+
+*** https://xkcd.com/rss.xml
+
+** Game
+
+Lifestyle design, meditation, psychology, seduction and every other topic
+involving human interaction.
+
+** Personal
+
+Just some non-IT people that write about interesting real-life topics
+
+*** https://sexperimentatorka.cz/feed/
+*** https://elladawson.com/feed/
+
+** Sport
+
+Software engineer interested in sports. What could go wrong.
+
+*** https://jirkaorsag.cz/feed/
+
+** Sites without RSS
+
+Following websites unfortunatelly don't provide a RSS feed. Ideally, we want to
+contact them or file a RFE for implementing one.
+
+- https://whydoesitsuck.com/

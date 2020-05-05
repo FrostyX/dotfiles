@@ -4,5 +4,6 @@
 .emacs.d/*
 !.emacs.d/init.el
 !.emacs.d/frostyx.org
+!.emacs.d/elfeed.org
 !.emacs.d/img
 !.emacs.d/snippets

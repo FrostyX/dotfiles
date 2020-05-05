@@ -1566,27 +1566,58 @@ TODO just redefine the existing bookmarks to somehow use maildir from context
 
 ** RSS
 
+Probably the best available RSS client for Emacs is elfeed. It allows
+asynchronious sync, automatical refresh by using internal timers, and more.
+It provides a user-interface decoupled from the backend logic so we have an
+opportunity to implement our own views.
+
 #+BEGIN_SRC emacs-lisp
 (use-package elfeed
   :ensure t
   :commands (elfeed)
-
-
-  :commands elfeed
-        ; :bind (:map elfeed-search-mode-map
-        ;          ("<SPC>" . next-line)
-        ;          ("U" . elfeed-unjam)
-        ;          :map elfeed-show-mode-map
-        ;          ("S-<SPC>" . scroll-down-command))
-
   :config
-  (setq-default elfeed-search-filter "")
-  (setq elfeed-feeds
-  '("http://nullprogram.com/feed/"
-    "http://planet.emacsen.org/atom.xml")))
+  (setq-default elfeed-search-filter ""))
+#+END_SRC
 
+Managing our RSS feeds in org file is much more cool than having them in
+a list of lists.
 
+#+BEGIN_SRC emacs-lisp
+(use-package elfeed-org
+  :ensure t
+  :config
+  (elfeed-org))
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org"))
+#+END_SRC
+
+TODO automacal update
+
+See https://www.reddit.com/r/emacs/comments/bvbp92/is_there_a_simple_way_to_get_elfeed_to_update/
+
+Very likely we will need to execute operation accross every displayed article
+
+See https://emacs.stackexchange.com/a/2441
+
+#+BEGIN_SRC emacs-lisp
+(defun elfeed-apply-for-all (f)
+  (interactive)
+  (mark-whole-buffer)
+  (f))
+#+END_SRC
+
+Such as marking everything as read
+
+#+BEGIN_SRC emacs-lisp
+(defun elfeed-mark-all-as-read ()
+  (elfeed-apply-for-all elfeed-search-untag-all-unread))
+#+END_SRC
+
+TODO use Evil and have better key bindings
+
+#+BEGIN_SRC emacs-lisp
 (with-eval-after-load "elfeed-search"
   (evil-define-key* 'motion elfeed-search-mode-map
                                         "RET" #'elfeed-search-show-entry
@@ -1599,9 +1630,11 @@ TODO just redefine the existing bookmarks to somehow use maildir from context
 (evil-define-key* 'motion elfeed-show-mode-map
                   "gb" #'elfeed-show-visit
                   "gj" #'elfeed-show-next
-                  "gk" #'elfeed-show-prev)
-)
+                  "gk" #'elfeed-show-prev))
+
+(define-key elfeed-search-mode-map (kbd "R") 'elfeed-mark-all-as-read)
 #+END_SRC
+
 
 ** Spotify
 
