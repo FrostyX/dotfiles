@@ -174,6 +174,7 @@ map <leader>c <C-_><C-_>
 
 " Syntastic
 let g:syntastic_quiet_messages = { "level": "warnings" }
+let g:syntastic_error_symbol = "\u2717"
 
 " Markdown
 let g:vim_markdown_folding_disabled=1
