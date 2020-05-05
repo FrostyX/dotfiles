@@ -24,6 +24,7 @@ tied to my day to day work-related tasks.
 *** https://blog.linuxgrrl.com/feed/
 *** https://tatica.org/feed/
 *** https://fedoramagazine.org/feed/
+*** https://mojefedora.cz/feed/
 
 ** Nerds
 
