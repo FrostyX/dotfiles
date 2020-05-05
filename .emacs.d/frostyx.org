@@ -701,7 +701,7 @@ Hydra main entry-point allowing us acces to other hydras.
   ("Misc"
    (("m" major-mode-hydra "major mode")
     ("a" hydra-applications/body "applications")
-    ("o" browse-url "open URL")
+    ("o" browse-url-at-point "open URL")
     ("z" hydra-presentations/body "presentations"))
 
    "Workspaces"
