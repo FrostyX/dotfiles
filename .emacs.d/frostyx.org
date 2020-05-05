@@ -1313,6 +1313,15 @@ See https://stackoverflow.com/a/34672923/3285282
 (setq browse-url-chromium-program "google-chrome")
 #+END_SRC
 
+*** Ascii doc
+
+Just some syntax highlighting for asciidoc manual pages.
+
+#+BEGIN_SRC emacs-lisp
+(use-package adoc-mode
+  :ensure t)
+#+END_SRC
+
 
 ** LSP
 
