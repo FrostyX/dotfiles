@@ -1054,6 +1054,15 @@ current project.
 ;;     ))
 #+END_SRC
 
+Just remove all trailing whitespace on save. This can be annoying when somebody else already
+messed it up and commited to git repo with trailing spaces but overall its the most comfortable
+option.
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'before-save-hook 'unix-newline)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+END_SRC
+
 
 ** Flycheck
 
