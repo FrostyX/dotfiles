@@ -1031,6 +1031,18 @@ current project.
   (dtrt-indent-adapt))
 #+END_SRC
 
+Map ~ENTER~ key to execute ~newline-and-indent~ in order to eliminate different
+indentation from ~ENTER~ and pressing Evil ~o~ command. Hopefully they are the
+same, we need some longer observation.
+
+TODO map this for all modes?
+
+#+BEGIN_SRC emacs-lisp
+(defun set-newline-and-indent ()
+  (local-set-key (kbd "RET") 'newline-and-indent))
+(add-hook 'python-mode-hook 'set-newline-and-indent)
+#+END_SRC
+
 
 ** Completion
 
