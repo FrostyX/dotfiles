@@ -754,7 +754,8 @@ Hydra definition for ~dired~ package.
   ("Open in"
    (("." dired-jump "current directory")
     ("~" (lambda () (interactive) (dired "~/")) "home directory")
-    ("/" (lambda () (interactive) (dired "/")) "root directory"))))
+    ("/" (lambda () (interactive) (dired "/")) "root directory")
+    ("p" (lambda () (interactive) (dired (projectile-project-root)))))))
 #+END_SRC
 
 
