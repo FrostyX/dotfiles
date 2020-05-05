@@ -178,6 +178,7 @@ let g:syntastic_error_symbol = "\u2717"
 
 " Markdown
 let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_frontmatter=1
 
 " Vimwiki
 let g:vimwiki_dir_link = 'index'
