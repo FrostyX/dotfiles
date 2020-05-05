@@ -27,6 +27,9 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'junegunn/goyo.vim'
 Plugin 'ElmCast/elm-vim'
 Plugin 'chriskempson/base16-vim'
+Plugin 'tpope/vim-sleuth'
+Plugin 'ap/vim-css-color'
+Plugin 'tmhedberg/matchit'
 
 " Requires to `dnf install python3-jedi`
 Plugin 'davidhalter/jedi-vim'
