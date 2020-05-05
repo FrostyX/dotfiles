@@ -1077,6 +1077,19 @@ option.
 #+END_SRC
 
 
+** Version control
+
+Sometimes it might be useful to visualize git changes within a file
+(new and changed lines).
+
+Use ~M-x diff-hl-mode~
+
+#+BEGIN_SRC emacs-lisp
+(use-package diff-hl
+  :ensure t)
+#+END_SRC
+
+
 ** Flycheck
 
 It is handy to have some on-fly syntax and style checker in order to not
