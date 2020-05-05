@@ -101,7 +101,6 @@ URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 
 !! Double click selection
 ! URxvt.selection.pattern-0: ^(/[^:]+):\
-! URxvt*cutchars: "\\`\"'&()*,;<=>?@[]^{|}.#%+!/:-"'
 
 
 !! Copy Paste & Other Extensions
