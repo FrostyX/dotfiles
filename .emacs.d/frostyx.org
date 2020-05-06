@@ -968,6 +968,33 @@ See https://emacs.stackexchange.com/a/45829
 This approach is able to correctly save and restore even ~eyebrowse~ workspaces.
 
 
+* Upkeep
+
+Since we are running Emacs for months and months without closing, and even if we
+do, we restore the whole previous session, it is a good idea to make sure, that
+it doesn't waste resources by remembering things that are not necessary.
+
+Midnight mode runs a configured set of actions every /midnight/. By default it
+closes every buffer that hasn't been visited in last 3 days.
+
+See https://www.emacswiki.org/emacs/MidnightMode
+
+#+BEGIN_SRC emacs-lisp
+(use-package midnight
+  :ensure t
+  :config
+  (midnight-mode))
+#+END_SRC
+
+My midnight is definitelly not at midnight because I am definitely up and
+working at that time. It is safer to run automaticall tasks early in the
+morning.
+
+#+BEGIN_SRC emacs-lisp
+(midnight-delay-set 'midnight-delay "4:30am")
+#+END_SRC
+
+
 * Development
 
 
