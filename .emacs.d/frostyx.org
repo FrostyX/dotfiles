@@ -1659,24 +1659,38 @@ Such as marking everything as read
   (elfeed-apply-for-all elfeed-search-untag-all-unread))
 #+END_SRC
 
-TODO use Evil and have better key bindings
+You will probably find these keybindings useful.
+
+| Key binding | Explanation                   |
+|-------------+-------------------------------|
+| RET         | Open article in elfeed        |
+| o           | Open article in a web browser |
+| r           | Fetch new articles            |
+| u           | Mark article as read          |
+| U           | Mark article as unread        |
+| +           | Add tag                       |
+| -           | Remove tag                    |
+
+Define custom key bindings for the list of articles
 
 #+BEGIN_SRC emacs-lisp
 (with-eval-after-load "elfeed-search"
-  (evil-define-key* 'motion elfeed-search-mode-map
-                                        "RET" #'elfeed-search-show-entry
-                                        "go" #'elfeed-search-show-entry
-                                        "gb" #'elfeed-search-browse-url
-                                        "gr" #'elfeed-search-update--force
-                                        "gR" #'elfeed-search-fetch))
+  (evil-define-key*
+    'normal elfeed-search-mode-map
+    "RET" #'elfeed-search-show-entry
+    "o" #'elfeed-search-browse-url
+    "r" #'elfeed-search-fetch))
+#+END_SRC
 
+Define custom key bindings for when reading an article
+
+#+BEGIN_SRC emacs-lisp
 (with-eval-after-load "elfeed-show"
-(evil-define-key* 'motion elfeed-show-mode-map
-                  "gb" #'elfeed-show-visit
-                  "gj" #'elfeed-show-next
-                  "gk" #'elfeed-show-prev))
-
-(define-key elfeed-search-mode-map (kbd "R") 'elfeed-mark-all-as-read)
+  (evil-define-key*
+    'motion elfeed-show-mode-map
+    "gb" #'elfeed-show-visit
+    "gj" #'elfeed-show-next
+    "gk" #'elfeed-show-prev))
 #+END_SRC
 
 
