@@ -851,6 +851,18 @@ See https://github.com/jerrypnz/major-mode-hydra.el
    (("p" markdown-preview "Preview markdown in external web browser"))))
 #+END_SRC
 
+***** Elisp
+
+Lisp interaction mode, aka ~*scratch*~ buffer.
+
+#+BEGIN_SRC emacs-lisp
+(major-mode-hydra-define lisp-interaction-mode
+  (:color blue :quit-key ("q" "SPC") :title "Lisp interaction mode")
+  ("Actions"
+   (("e" eval-defun "Evaluate this function")
+    ("p" eval-print-last-sexp "Evaluate and print to the buffer"))))
+#+END_SRC
+
 
 * Project management
 
