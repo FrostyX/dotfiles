@@ -1676,9 +1676,20 @@ a list of lists.
 (setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org"))
 #+END_SRC
 
-TODO automacal update
+Automatically fetch updates from RSS feeds. Let's do it every hour, but I am
+afraid, that it will lag the whole Emacs, so we will probably need to adjust it
+and run less frequently.
 
-See https://www.reddit.com/r/emacs/comments/bvbp92/is_there_a_simple_way_to_get_elfeed_to_update/
+See:
+- https://github.com/skeeto/elfeed/issues/304
+- https://www.reddit.com/r/emacs/comments/bvbp92/is_there_a_simple_way_to_get_elfeed_to_update/
+
+#+BEGIN_SRC emacs-lisp
+(setq my/elfeed-update-timer
+  (run-at-time nil (* 1 60 60) #'elfeed-update))
+#+END_SRC
+
+Use ~M-x helm-timers~ to see (and cancel) executed timers.
 
 Very likely we will need to execute operation accross every displayed article
 
