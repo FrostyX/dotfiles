@@ -1704,6 +1704,58 @@ Define custom key bindings for when reading an article
     "gk" #'elfeed-show-prev))
 #+END_SRC
 
+** IRC
+
+There are several Emacs IRC clients available (such as ERC, rcirc and others)
+but Circe is the one trying to be modern and be pretty out of the box.
+
+See https://github.com/jorgenschaefer/circe
+
+#+BEGIN_SRC emacs-lisp
+(use-package circe
+  :ensure t)
+#+END_SRC
+
+These are not my /production/ settings because I still main ~weechat~ over
+Circe, which I am still trying to figure out.
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-network-options
+      '(("Freenode"
+         :tls t
+         :nick "frostyx_"
+         :channels ("#frostyx"))))
+#+END_SRC
+
+By default, circe doesn't support notifications. Luckily it is a matter of
+installing one additional package.
+
+#+BEGIN_SRC emacs-lisp
+(use-package circe-notifications
+  :ensure t
+  :config
+  (enable-circe-notifications))
+#+END_SRC
+
+By default, typical ~libnotify~ notifications are sent. You can emulate them by
+~/usr/bin/notify-send~ command. This is not what I like.
+My notification style of choice is setting window urgency. Window managers
+typically know that there is an urgent window on some workspace/group and
+highlight them in the panel.
+
+See https://github.com/jwiegley/alert#builtin-alert-styles
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-notifications-alert-style 'x11)
+#+END_SRC
+
+TODO notifications for not visible windows
+TODO https://github.com/jorgenschaefer/circe/wiki/Tracking for channels list
+TODO make sure logging is alright
+TODO change message format (date should go before nick)
+TODO we probably need to have IRC in different frame
+TODO modify ; key binding to work in ~circe-channel-mode~
+
 ** Spotify
 
 
