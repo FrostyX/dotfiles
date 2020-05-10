@@ -88,7 +88,6 @@ But ... is it even worth it? ... Nope. It is fun though!
 
 Hint: Use ~M-x org-toggle-inline-images~ to see images in Emacs
 
-
 * Oh-shit buttons
 
 In case you do something and have no idea how to save yourself.
@@ -98,8 +97,6 @@ Reset variable to its default value, press ~M-:~ and run:
 #+BEGIN_SRC
 (custom-reevaluate-setting 'emms-player-next-function)
 #+END_SRC
-
-
 
 * Defaults
 
@@ -172,7 +169,6 @@ Reset variable to its default value, press ~M-:~ and run:
 (save-place-mode 1)
 #+END_SRC
 
-
 * Package management
 
 We want to automatically update Emacs packages in order to avoid annoying warnings
@@ -193,7 +189,6 @@ See https://emacs.stackexchange.com/a/31904
          auto-package-update-hide-results t)
    (auto-package-update-at-time "04:00"))
 #+END_SRC
-
 
 * Secrets
 
@@ -239,7 +234,6 @@ See
 (setq evil-want-integration t)
 #+END_SRC
 
-
 ** Evil leader
 A common way to define custom key bindings for Vim ~NORMAL~ mode is by utilizing
 so called ~<leader>~ key. By default it is mapped to ~\~ but can be remaped to
@@ -269,7 +263,6 @@ otherwise it doesn't work in ~org-mode~.
   (global-evil-leader-mode))
 #+END_SRC
 
-
 ** Evil Mode
 
 See:
@@ -293,7 +286,6 @@ See:
   :config ;; tweak evil after loading it
   (evil-mode))
 #+END_SRC
-
 
 ** Evil packages
 
@@ -334,7 +326,6 @@ commands. To comment e.g. next 3 lines, use ~3gcc~. To comment a ~VISUAL~ select
   :config
   (evil-commentary-mode))
 #+END_SRC
-
 
 ** Vim keybindings everywhere
 
@@ -379,7 +370,6 @@ See https://www.reddit.com/r/emacs/comments/7dsm0j/how_to_get_evilmode_hjkl_to_w
 (evil-define-key 'normal package-menu-mode-map (kbd "x") #'package-menu-execute)
 #+END_SRC
 
-
 ** More Vim compatibility
 
 #+BEGIN_SRC emacs-lisp
@@ -420,7 +410,6 @@ See https://www.reddit.com/r/emacs/comments/86iq3w/evil_cw_o_toggle_windows/
 (define-key evil-normal-state-map (kbd "C-w o") 'toggle-fullscreen)
 #+END_SRC
 
-
 ** Custom Evil keybindings
 
 Emacs provides so many ways to create custom keybindings and to run commands in
@@ -456,7 +445,6 @@ Random garbage
   "def" 'evil-jump-to-tag)
 #+END_SRC
 
-
 ** Custom Evil commands
 
 Evil even allows you to create your own colon commands. I don't need it, most folks
@@ -470,7 +458,6 @@ This command is mainly an example how to do it. I have probably never used it.
 (eval-after-load 'evil-ex
   '(evil-ex-define-cmd "Gbrowse" 'browse-at-remote))
 #+END_SRC
-
 
 * Interface
 
@@ -499,7 +486,6 @@ See http://chriskempson.com/projects/base16/
   :config
   (load-theme 'base16-chalk t))
 #+END_SRC
-
 
 ** Fonts
 
@@ -565,7 +551,6 @@ See:
   :when vc-mode)
 #+END_SRC
 
-
 *** Helm
 
 #+BEGIN_SRC emacs-lisp
@@ -621,7 +606,6 @@ See:
 (define-key evil-normal-state-map (kbd ",;") 'helm-buffers-list)
 #+END_SRC
 
-
 *** Hydra
 
 Hydra, a mythical Greek creature ultimatelly killed by Heracles. The beast
@@ -664,7 +648,6 @@ Let's install just the ~hydra~ package and keep it simple.
   (hydra-default-hint nil))
 #+END_SRC
 
-
 **** Additional Hydra packages
 
 I would really love to use hydra in posframe, but it doesn't work properly
@@ -689,7 +672,6 @@ if allows us to define hydras as lists of columns.
 (use-package pretty-hydra
   :ensure t)
 #+END_SRC
-
 
 **** Main Hydra Menu
 
@@ -721,7 +703,6 @@ Hydra main entry-point allowing us acces to other hydras.
     ("c" hydra-configuration/body "reload configuration"))))
 #+END_SRC
 
-
 **** Presentations
 
 Hydra definitions useful for presentations.
@@ -743,7 +724,6 @@ Hydra definitions for ~projectile~ package.
    (("d" projectile-discover-projects-in-search-path "discover new projects"))))
 #+END_SRC
 
-
 **** Dired
 
 Hydra definition for ~dired~ package.
@@ -757,7 +737,6 @@ Hydra definition for ~dired~ package.
     ("/" (lambda () (interactive) (dired "/")) "root directory")
     ("p" (lambda () (interactive) (dired (projectile-project-root)))))))
 #+END_SRC
-
 
 **** Flycheck
 
@@ -819,7 +798,6 @@ See https://github.com/jerrypnz/major-mode-hydra.el
   :ensure t)
 #+END_SRC
 
-
 ***** Org
 
 #+BEGIN_SRC emacs-lisp
@@ -830,7 +808,6 @@ See https://github.com/jerrypnz/major-mode-hydra.el
     ("s" org-edit-src-exit "Save special edit"))))
 #+END_SRC
 
-
 ***** Python
 
 #+BEGIN_SRC emacs-lisp
@@ -840,7 +817,6 @@ See https://github.com/jerrypnz/major-mode-hydra.el
    (("d" elpy-doc "Show documentation")
     ("l" hydra-linter/body "Linter"))))
 #+END_SRC
-
 
 ***** Markdown
 
@@ -862,7 +838,6 @@ Lisp interaction mode, aka ~*scratch*~ buffer.
    (("e" eval-defun "Evaluate this function")
     ("p" eval-print-last-sexp "Evaluate and print to the buffer"))))
 #+END_SRC
-
 
 * Project management
 
@@ -926,7 +901,6 @@ My workflow for opening a new project is.
 3. Switch to the desired project ~<leader>p~
 4. Rename the workspace ~<leader>$~
 
-
 * Sessions
 
 With Emacs, the idea is to launch it, use it and then never ever close it. Basically
@@ -967,7 +941,6 @@ See https://emacs.stackexchange.com/a/45829
 
 This approach is able to correctly save and restore even ~eyebrowse~ workspaces.
 
-
 * Upkeep
 
 Since we are running Emacs for months and months without closing, and even if we
@@ -993,7 +966,6 @@ morning.
 #+BEGIN_SRC emacs-lisp
 (midnight-delay-set 'midnight-delay "4:30am")
 #+END_SRC
-
 
 * Development
 
@@ -1047,7 +1019,6 @@ Let's define a function which will color a given column
 (setq browse-at-remote-add-line-number-if-no-region-selected nil)
 #+END_SRC
 
-
 ** Indentation
 
 Disable ~electric-indent-mode~ because it is trying to be smart and do weird
@@ -1082,7 +1053,6 @@ TODO map this for all modes?
 (add-hook 'python-mode-hook 'set-newline-and-indent)
 #+END_SRC
 
-
 ** Completion
 
 #+BEGIN_SRC emacs-lisp
@@ -1115,7 +1085,6 @@ option.
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+END_SRC
 
-
 ** Version control
 
 Sometimes it might be useful to visualize git changes within a file
@@ -1127,7 +1096,6 @@ Use ~M-x diff-hl-mode~
 (use-package diff-hl
   :ensure t)
 #+END_SRC
-
 
 ** Flycheck
 
@@ -1230,7 +1198,6 @@ See https://www.reddit.com/r/emacs/comments/g31gtn/generate_comment_to_disable_f
         (pylint-current-error)))))
 #+END_SRC
 
-
 ** Snippets
 
 It is so boring to type the same things again and again and again,
@@ -1262,7 +1229,6 @@ major mode.
 
 See ~M-x yas-describe-tables~ for all available snippets.
 
-
 ** Languages
 *** Python
 
@@ -1288,7 +1254,6 @@ See https://elpy.readthedocs.io/en/latest/customization_tips.html#use-flycheck-i
 #+BEGIN_SRC emacs-lisp
 (add-hook 'elpy-mode-hook 'flycheck-mode)
 #+END_SRC
-
 
 *** Lisp
 
@@ -1387,7 +1352,6 @@ Just some syntax highlighting for asciidoc manual pages.
   :ensure t)
 #+END_SRC
 
-
 ** LSP
 
 #+BEGIN_SRC emacs-lisp
@@ -1476,7 +1440,6 @@ If I shoot myself into my leg and accidentally break a buffer by running an
 application in it and panicking how to get back, just kill the buffer with
 ~M-x kill-buffer~.
 
-
 ** File manager
 
 There is already an awesome file manager built in Emacs, called ~dired~.
@@ -1511,7 +1474,6 @@ You will probably find these Evil keybindings useful.
 
 TODO Prevent ^ from jumping to the parent directory
 TODO Bind backspace for accessing the parent directory
-
 
 ** Web
 
@@ -1646,7 +1608,6 @@ TODO just redefine the existing bookmarks to somehow use maildir from context
 ;;  ("mime:image/*" "Messages with images" 112))
 #+END_SRC
 
-
 ** RSS
 
 Probably the best available RSS client for Emacs is elfeed. It allows
@@ -1743,7 +1704,6 @@ Define custom key bindings for when reading an article
     "gk" #'elfeed-show-prev))
 #+END_SRC
 
-
 ** Spotify
 
 
@@ -1777,7 +1737,6 @@ See:
 - http://mihaiolteanu.me/vuiet/
 - https://github.com/mihaiolteanu/vuiet
 
-
 ** NetworkManager
 
 #+BEGIN_SRC emacs-lisp
@@ -1803,7 +1762,6 @@ See:
 ;;   (powerline-default-theme))
 #+END_SRC
 
-
 ** Bluetooth
 See https://github.com/emacsmirror/bluetooth
 
@@ -1822,7 +1780,6 @@ See https://emacs.stackexchange.com/questions/31244/how-can-i-disable-evil-in-he
 (evil-set-initial-state 'bluetooth-mode 'emacs)
 (evil-add-hjkl-bindings bluetooth-mode-map 'emacs)
 #+END_SRC
-
 
 ** Pulseaudio
 
@@ -1847,10 +1804,7 @@ pacmd list-sink-inputs
 pacmd move-sink-input 1712 1
 #+END_SRC
 
-
-
 * Resources
-
 
 ** Other people configs
 
@@ -1858,7 +1812,6 @@ pacmd move-sink-input 1712 1
 - https://wolfecub.github.io/dotfiles/
 - https://jamiecollinson.com/blog/my-emacs-config/
 - https://emacs.nasy.moe/
-
 
 ** Videos
 
