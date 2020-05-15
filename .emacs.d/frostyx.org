@@ -525,7 +525,7 @@ See http://chriskempson.com/projects/base16/
   (spaceline-toggle-version-control-on)
   (spaceline-toggle-buffer-size-off)
   (spaceline-toggle-buffer-encoding-abbrev-off)
-  (spaceline-toggle-buffer-position-off))
+  (spaceline-toggle-buffer-position-on))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
