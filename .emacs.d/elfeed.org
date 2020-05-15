@@ -65,6 +65,7 @@ configuring something.
 *** https://archive.casouri.cat/note/rss.xml
 *** https://andreyorst.gitlab.io/feed.xml
 
+*** https://smythp.com/feed.xml
 ** Gentoo
 
 My love for Gentoo will probably never fade away. Let's at least see whats up.
