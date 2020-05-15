@@ -546,9 +546,16 @@ See:
 
 #+BEGIN_SRC emacs-lisp
 (spaceline-define-segment version-control
-  (let ((gitlogo (replace-regexp-in-string "^ Git." "  " vc-mode)))
-    (powerline-raw (s-trim gitlogo)))
-  :when vc-mode)
+  (when vc-mode
+    (let ((gitlogo (replace-regexp-in-string "^ Git." "  " vc-mode)))
+      (powerline-raw (s-trim gitlogo)))))
+#+END_SRC
+
+After making changes in spaceline segments, it needs to be recompiled, otherwise
+they don't take an effect.
+
+#+BEGIN_SRC emacs-lisp
+(spaceline-compile)
 #+END_SRC
 
 *** Helm
