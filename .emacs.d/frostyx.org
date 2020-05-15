@@ -1737,6 +1737,8 @@ Circe, which I am still trying to figure out.
 By default, circe doesn't support notifications. Luckily it is a matter of
 installing one additional package.
 
+See https://github.com/eqyiel/circe-notifications
+
 #+BEGIN_SRC emacs-lisp
 (use-package circe-notifications
   :ensure t
@@ -1756,11 +1758,76 @@ See https://github.com/jwiegley/alert#builtin-alert-styles
 (setq circe-notifications-alert-style 'x11)
 #+END_SRC
 
-TODO notifications for not visible windows
-TODO https://github.com/jorgenschaefer/circe/wiki/Tracking for channels list
-TODO make sure logging is alright
+It doesn't matter when I was notified from some user the last time. Notify me
+again. It's not spam.
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-notifications-wait-for 0)
+#+END_SRC
+
+Chat history is important. Enable logging.
+
+#+BEGIN_SRC emacs-lisp
+(setq lui-logging-directory "~/.emacs.d/circe")
+(load "lui-logging" nil t)
+(enable-lui-logging-globally)
+#+END_SRC
+
+Make sure that we see lags and automatically reconnects if we got disconnected.
+
+#+BEGIN_SRC emacs-lisp
+(circe-lagmon-mode)
+#+END_SRC
+
+Let us know that it is a new day so we can go to bed already.
+
+#+BEGIN_SRC emacs-lisp
+(enable-circe-new-day-notifier)
+#+END_SRC
+
+Living without TAB completion for nicknames is out of the question.
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-use-cycle-completion t)
+#+END_SRC
+
+But we definitelly don't want to use helm for it.
+
+See https://github.com/jorgenschaefer/circe/wiki/Configuration#tab-completion
+
+#+BEGIN_SRC emacs-lisp
+(setq my/circe-major-modes
+      '(circe-channel-mode
+        circe-query-mode
+        circe-server-mode))
+(setq helm-mode-no-completion-in-region-in-modes my/circe-major-modes)
+#+END_SRC
+
+See the newest buffer activity fist. But also, prioritize notifications over
+just normal messages in a channel.
+
+#+BEGIN_SRC emacs-lisp
+(setq tracking-most-recent-first t)
+(setq tracking-sort-faces-first t)
+#+END_SRC
+
+Define a custom spaceline segment for showing a list of channels with activity.
+See https://github.com/TheBB/spaceline/issues/39#issuecomment-218469366
+
+TODO we want better colors here, highlight needs to be red
+
+#+BEGIN_SRC emacs-lisp
+(spaceline-define-segment circe-track
+  (when (and tracking-buffers
+             (member major-mode my/circe-major-modes))
+      (s-join " " (tracking-shorten tracking-buffers))))
+
+(spaceline-toggle-circe-track-on)
+(spaceline-spacemacs-theme 'circe-track)
+(spaceline-compile)
+#+END_SRC
+
 TODO change message format (date should go before nick)
-TODO we probably need to have IRC in different frame
 TODO modify ; key binding to work in ~circe-channel-mode~
 
 ** Spotify
