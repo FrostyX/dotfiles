@@ -1846,7 +1846,22 @@ TODO we want better colors here, highlight needs to be red
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(setq circe-format-say "{nick}  {body}")
+(setq circe-format-say "<{nick}>  {body}")
+#+END_SRC
+
+See https://github.com/jorgenschaefer/circe/wiki/Configuration#inline-nick-reply
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-format-self-say "<{nick}>  {body}")
+#+END_SRC
+
+See https://github.com/jorgenschaefer/circe/wiki/Configuration#channel-name-in-the-prompt
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'circe-chat-mode-hook 'my-circe-prompt)
+(defun my-circe-prompt ()
+  (lui-set-prompt
+   (concat "[" (propertize (buffer-name) 'face 'circe-prompt-face) "]  ")))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
