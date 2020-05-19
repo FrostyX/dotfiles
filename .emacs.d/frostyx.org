@@ -1827,8 +1827,70 @@ TODO we want better colors here, highlight needs to be red
 (spaceline-compile)
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(setq circe-format-say "{nick}  {body}")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(enable-circe-color-nicks)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun my/circe-autoscroll ()
+  (setq scroll-down-aggressively 0.5))
+(add-hook 'lui-mode-hook 'my/circe-autoscroll)
+#+END_SRC
+
+Hard wrap at 120 characters. Ideally we would like to indent the message to the
+exact column that it started but it is not that easy. So until then, indent new
+lines of a message with a typical 4 spaces.
+
+#+BEGIN_SRC emacs-lisp
+(setq lui-fill-column 120)
+(setq lui-fill-type "    ")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq lui-time-stamp-position 'left)
+(setq lui-time-stamp-format "[%H:%M]  ")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq lui-time-stamp-only-when-changed-p nil)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-reduce-lurker-spam t)
+#+END_SRC
+
+See https://emacs.stackexchange.com/a/37515
+
+#+BEGIN_SRC emacs-lisp
+(defvar my/circe-buffers-source
+  (helm-make-source "Shell Buffers" 'helm-source-buffers
+    :buffer-list
+    (lambda ()
+      (mapcar #'buffer-name
+              (cl-remove-if-not
+               (lambda (buf)
+                 (with-current-buffer buf
+                   (member major-mode my/circe-major-modes)))
+               (buffer-list))))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun my/circe-switch-to-buffer ()
+  (let ((helm-source-buffers-list my/circe-buffers-source))
+    (helm-buffers-list)))
+#+END_SRC
+
+
+TODO my messages format
+TODO highlight color
+TODO time stamp gray color and remove brackts
+TODO Day changed message like in weechat
+TODO logging file format like weechat has, see ~lui-logging-file-format~
 TODO change message format (date should go before nick)
-TODO modify ; key binding to work in ~circe-channel-mode~
 
 ** Spotify
 
