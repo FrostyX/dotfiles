@@ -1838,7 +1838,7 @@ TODO we want better colors here, highlight needs to be red
 (spaceline-define-segment circe-track
   (when (and tracking-buffers
              (member major-mode my/circe-major-modes))
-      (s-join " " tracking-buffers)))
+      (tracking-status)))
 
 (spaceline-toggle-circe-track-on)
 (spaceline-spacemacs-theme 'circe-track)
