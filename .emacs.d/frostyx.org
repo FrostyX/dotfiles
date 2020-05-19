@@ -731,6 +731,9 @@ Hydra main entry-point allowing us acces to other hydras.
     ("c" hydra-configuration/body "reload configuration"))))
 #+END_SRC
 
+TODO define a hydra menu for creating frames (having also specific purpose
+     frames such as for IRC, Mail and RSS
+
 **** Presentations
 
 Hydra definitions useful for presentations.
