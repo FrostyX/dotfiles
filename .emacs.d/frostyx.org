@@ -608,8 +608,29 @@ they don't take an effect.
 )
 #+END_SRC
 
+Buffer management is a bread and butter of every text editor. This is true even
+more for Emacs because we tend to live in it. Everything is a buffer.
+I don't want to navigate through a mess of all things that I've opened this week
+every time I want to switch a buffer.
+
+Most times, there is a high probability to guess, what we are currently
+interested in. Are we working in a project? Are we in the dired mode? Are we
+chatting on IRC?
+
 #+BEGIN_SRC emacs-lisp
-(define-key evil-normal-state-map (kbd ";") 'helm-projectile-switch-to-buffer)
+(defun my/smart-buffers-list ()
+  (interactive)
+  (cond ((derived-mode-p 'lui-mode) (my/circe-switch-to-buffer))
+        ((projectile-project-root) (helm-projectile-switch-to-buffer))
+        (t (helm-buffers-list))))
+#+END_SRC
+
+We have a key binding for our smarty-pants buffer-switching command which should
+be suitable for 99% of cases and for the rest, there is a fallback showing all
+open buffers without any filter.
+
+#+BEGIN_SRC emacs-lisp
+(define-key evil-normal-state-map (kbd ";") 'my/smart-buffers-list)
 (define-key evil-normal-state-map (kbd ",;") 'helm-buffers-list)
 #+END_SRC
 
