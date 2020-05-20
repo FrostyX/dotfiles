@@ -2080,6 +2080,7 @@ pacmd move-sink-input 1712 1
 - https://jamiecollinson.com/blog/my-emacs-config/
 - https://emacs.nasy.moe/
 - https://se30.xyz/conf.html
+- https://depp.brause.cc/dotemacs/#org22ed5c7 (wasamasa)
 
 ** Videos
 
