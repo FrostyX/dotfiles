@@ -1946,7 +1946,7 @@ See https://emacs.stackexchange.com/a/37515
               (cl-remove-if-not
                (lambda (buf)
                  (with-current-buffer buf
-                   (member major-mode my/circe-major-modes)))
+                   (derived-mode-p 'lui-mode)))
                (buffer-list))))))
 #+END_SRC
 
