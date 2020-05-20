@@ -1829,6 +1829,10 @@ just normal messages in a channel.
 (setq tracking-sort-faces-first t)
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(setq tracking-shorten-buffer-names-p nil)
+#+END_SRC
+
 Define a custom spaceline segment for showing a list of channels with activity.
 See https://github.com/TheBB/spaceline/issues/39#issuecomment-218469366
 
