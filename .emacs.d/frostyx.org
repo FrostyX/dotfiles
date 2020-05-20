@@ -1747,11 +1747,36 @@ Circe, which I am still trying to figure out.
 
 #+BEGIN_SRC emacs-lisp
 (setq circe-network-options
-      '(("Freenode"
+      `(("Freenode"
          :tls t
-         :nick "frostyx_"
-         :channels ("#frostyx"))))
+         :nick "FrostyX"
+         :nickserv-password ,(password-store-get "irc/freenode-password")
+         :channels ("#fedora-admin"
+                    "#fedora-buildsys"
+                    "#tito"
+                    "#emacs-circe"))
+        ("OFTC"
+         :tls t
+         :nick "FrostyX"
+         :channels ("#qtile"))
+        ("RedHat"
+         :host ,(password-store-get "irc/redhat-host")
+         :port 6667
+         :tls nil
+         :nick "jkadlcik"
+         :channels ("#brno" "#copr"))))
 #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun my/circe ()
+  (interactive)
+  (circe "Freenode")
+  (circe "OFTC")
+  (circe "RedHat"))
+#+END_SRC
+
+TODO If you want to quit IRC ... insert funny joke from wiki use
+     ~M-x kill-buffer~ and select the freenode server buffer.
 
 By default, circe doesn't support notifications. Luckily it is a matter of
 installing one additional package.
