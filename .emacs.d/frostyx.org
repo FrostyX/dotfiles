@@ -190,6 +190,15 @@ See https://emacs.stackexchange.com/a/31904
    (auto-package-update-at-time "04:00"))
 #+END_SRC
 
+When the update is failing, it starts to ask whether to kill the buffers
+or what. Don't do that.
+
+See https://emacs.stackexchange.com/q/14509
+
+#+BEGIN_SRC emacs-lisp
+(setq kill-buffer-query-functions nil)
+#+END_SRC
+
 * Secrets
 
 Please do not hardcode your passwords or secret information into source code.
