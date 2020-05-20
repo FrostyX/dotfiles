@@ -1952,6 +1952,7 @@ See https://emacs.stackexchange.com/a/37515
 
 #+BEGIN_SRC emacs-lisp
 (defun my/circe-switch-to-buffer ()
+  (interactive)
   (let ((helm-source-buffers-list my/circe-buffers-source))
     (helm-buffers-list)))
 #+END_SRC
