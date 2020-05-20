@@ -470,8 +470,9 @@ Get rid of menu, scrollbars, toolbars and everything that can be clicked on.
 
 #+BEGIN_SRC emacs-lisp
 (menu-bar-mode -1)
-(toggle-scroll-bar -1)
 (tool-bar-mode -1)
+(customize-set-variable 'scroll-bar-mode nil)
+(customize-set-variable 'horizontal-scroll-bar-mode nil)
 #+END_SRC
 
 ** Themes
