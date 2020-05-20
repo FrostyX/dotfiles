@@ -1751,15 +1751,21 @@ See https://github.com/jorgenschaefer/circe
   :ensure t)
 #+END_SRC
 
-These are not my /production/ settings because I still main ~weechat~ over
-Circe, which I am still trying to figure out.
+Do not forget to kill circe and run it again after modifying
+~circe-network-options~ variable.
 
 #+BEGIN_SRC emacs-lisp
 (setq circe-network-options
       `(("Freenode"
          :tls t
          :nick "FrostyX"
+
+         :sasl-username "FrostyX"
+         :sasl-password ,(password-store-get "irc/freenode-password")
+
+         :nickserv-nick "FrostyX"
          :nickserv-password ,(password-store-get "irc/freenode-password")
+
          :channels ("#fedora-admin"
                     "#fedora-buildsys"
                     "#tito"
