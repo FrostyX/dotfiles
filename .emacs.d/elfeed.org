@@ -64,6 +64,7 @@ configuring something.
 *** https://www.mikeshultz.com/feeds/all.atom.xml
 *** https://archive.casouri.cat/note/rss.xml
 *** https://andreyorst.gitlab.io/feed.xml
+*** https://nullprogram.com/feed/
 
 *** https://smythp.com/feed.xml
 ** Gentoo
