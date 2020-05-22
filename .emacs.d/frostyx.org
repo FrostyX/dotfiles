@@ -1884,9 +1884,24 @@ TODO we want better colors here, highlight needs to be red
   (when (and tracking-buffers
              (member major-mode my/circe-major-modes))
       (tracking-status)))
+#+END_SRC
 
+Define a custom spaceline segment for showing the current IRC network lag.
+
+TODO When lag <= 0.1, show "online" in green color
+
+#+BEGIN_SRC emacs-lisp
+(spaceline-define-segment circe-lagmon
+  (when (and circe-lagmon-mode
+             (member major-mode my/circe-major-modes))
+      (circe-lagmon-format-mode-line-entry))
+  :face other-face)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
 (spaceline-toggle-circe-track-on)
-(spaceline-spacemacs-theme 'circe-track)
+(spaceline-toggle-circe-lagmon-on)
+(spaceline-spacemacs-theme 'circe-lagmon 'circe-track)
 (spaceline-compile)
 #+END_SRC
 
