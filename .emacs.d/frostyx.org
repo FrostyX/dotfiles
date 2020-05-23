@@ -1718,6 +1718,7 @@ You will probably find these keybindings useful.
 | U           | Mark article as unread        |
 | +           | Add tag                       |
 | -           | Remove tag                    |
+| S           | Stop all fetching processes   |
 
 Define custom key bindings for the list of articles
 
@@ -1727,7 +1728,8 @@ Define custom key bindings for the list of articles
     'normal elfeed-search-mode-map
     "RET" #'elfeed-search-show-entry
     "o" #'elfeed-search-browse-url
-    "r" #'elfeed-search-fetch))
+    "r" #'elfeed-search-fetch
+    "S" #'elfeed-unjam))
 #+END_SRC
 
 Define custom key bindings for when reading an article
