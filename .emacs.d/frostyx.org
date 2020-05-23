@@ -187,7 +187,9 @@ See https://emacs.stackexchange.com/a/31904
          auto-package-update-interval 1
          auto-package-update-prompt-before-update nil
          auto-package-update-hide-results t)
-   (auto-package-update-at-time "04:00"))
+   ;; FIXME I want updates but it disconnects circe
+   ;; (auto-package-update-at-time "04:00")
+   (auto-package-update-at-time nil))
 #+END_SRC
 
 When the update is failing, it starts to ask whether to kill the buffers
@@ -1840,8 +1842,10 @@ Make sure that we see lags and automatically reconnects if we got disconnected.
 
 Let us know that it is a new day so we can go to bed already.
 
+FIXME I needed to disable it oterwise it messes with tracking
+
 #+BEGIN_SRC emacs-lisp
-(enable-circe-new-day-notifier)
+;; (enable-circe-new-day-notifier)
 #+END_SRC
 
 Living without TAB completion for nicknames is out of the question.
