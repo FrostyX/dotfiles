@@ -184,13 +184,17 @@ See https://emacs.stackexchange.com/a/31904
    :ensure t
    :config
    (setq auto-package-update-delete-old-versions t
-         auto-package-update-interval 1
+         auto-package-update-interval 365
          auto-package-update-prompt-before-update nil
          auto-package-update-hide-results t)
-   ;; FIXME I want updates but it disconnects circe
-   ;; (auto-package-update-at-time "04:00")
-   (auto-package-update-at-time nil))
+   (auto-package-update-at-time "04:00"))
 #+END_SRC
+
+Unfortunatelly updating takes around two minutes which is long enough to get
+disconnected from IRC, which is super annoying. As a temporary workaround let's
+update only once a year. We are waiting for async updates.
+
+See https://github.com/rranelli/auto-package-update.el/issues/39
 
 When the update is failing, it starts to ask whether to kill the buffers
 or what. Don't do that.
