@@ -1038,6 +1038,18 @@ morning.
 (midnight-delay-set 'midnight-delay "4:30am")
 #+END_SRC
 
+Don't kill circe buffers. I don't know if this magic helps, I hope so. It is
+taken from https://se30.xyz/conf.html
+
+This really sux though, I want to pass my own function for ~clean-buffer-list~
+to test buffer for my specific conditions such as major mode, eyebrowse
+visibility, etc.
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'clean-buffer-list-kill-never-regexps "@[^:]+:[1-9][0-9]*$")
+(add-to-list 'clean-buffer-list-kill-never-regexps "^[#&]")
+#+END_SRC
+
 * Development
 
 
