@@ -517,7 +517,11 @@ for customizing third-party packages.
 See http://chriskempson.com/projects/base16/#styling-guidelines
 
 #+BEGIN_SRC emacs-lisp
-(setq my/red (plist-get base16-chalk-colors :base08)
+(setq my/black (plist-get base16-chalk-colors :base00)
+      my/gray (plist-get base16-chalk-colors :base01)
+      ;; ... grayish colors from base02 to base06
+      my/white (plist-get base16-chalk-colors :base07)
+      my/red (plist-get base16-chalk-colors :base08)
       my/orange (plist-get base16-chalk-colors :base09)
       my/yellow (plist-get base16-chalk-colors :base0A)
       my/green (plist-get base16-chalk-colors :base0B)
@@ -539,9 +543,8 @@ See http://chriskempson.com/projects/base16/#styling-guidelines
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-;; http://chriskempson.com/projects/base16/
-(set-face-attribute 'lazy-highlight nil :background (plist-get base16-chalk-colors :base09)
-                                        :foreground (plist-get base16-chalk-colors :base01))
+(set-face-attribute 'lazy-highlight nil :background my/orange
+                                        :foreground my/gray)
 #+END_SRC
 
 ** UX
@@ -569,14 +572,13 @@ See http://chriskempson.com/projects/base16/#styling-guidelines
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-;; http://chriskempson.com/projects/base16/
 (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-(set-face-attribute 'spaceline-evil-normal nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base09))
-(set-face-attribute 'spaceline-evil-emacs nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base0D))
-(set-face-attribute 'spaceline-evil-insert nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base0B))
-(set-face-attribute 'spaceline-evil-replace nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base0D))
-(set-face-attribute 'spaceline-evil-motion nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base0D))
-(set-face-attribute 'spaceline-evil-visual nil :background (plist-get base16-chalk-colors :base01) :foreground (plist-get base16-chalk-colors :base0E))
+(set-face-attribute 'spaceline-evil-normal nil :background my/gray :foreground my/orange)
+(set-face-attribute 'spaceline-evil-emacs nil :background my/gray :foreground my/blue)
+(set-face-attribute 'spaceline-evil-insert nil :background my/gray :foreground my/green)
+(set-face-attribute 'spaceline-evil-replace nil :background my/gray :foreground my/blue)
+(set-face-attribute 'spaceline-evil-motion nil :background my/gray :foreground my/blue)
+(set-face-attribute 'spaceline-evil-visual nil :background my/gray :foreground my/purple)
 #+END_SRC
 
 
@@ -1078,7 +1080,7 @@ diffs, ets. Typically we wrap at 80, 100 or 120 characters.
   :ensure t
   :config
   (setq fci-rule-width 1)
-  (setq fci-rule-color (plist-get base16-chalk-colors :base01)))
+  (setq fci-rule-color my/gray))
 #+END_SRC
 
 Let's define a function which will color a given column
