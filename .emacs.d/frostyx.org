@@ -509,6 +509,24 @@ See http://chriskempson.com/projects/base16/
   (load-theme 'base16-chalk t))
 #+END_SRC
 
+** Colors
+
+Let's define our set of colors based on current theme, so we can easily use them
+for customizing third-party packages.
+
+See http://chriskempson.com/projects/base16/#styling-guidelines
+
+#+BEGIN_SRC emacs-lisp
+(setq my/red (plist-get base16-chalk-colors :base08)
+      my/orange (plist-get base16-chalk-colors :base09)
+      my/yellow (plist-get base16-chalk-colors :base0A)
+      my/green (plist-get base16-chalk-colors :base0B)
+      my/lblue (plist-get base16-chalk-colors :base0C)
+      my/blue (plist-get base16-chalk-colors :base0D)
+      my/purple (plist-get base16-chalk-colors :base0E)
+      my/brown (plist-get base16-chalk-colors :base0F))
+#+END_SRC
+
 ** Fonts
 
 #+BEGIN_SRC emacs-lisp
