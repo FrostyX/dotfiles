@@ -1040,16 +1040,24 @@ morning.
 (midnight-delay-set 'midnight-delay "4:30am")
 #+END_SRC
 
-Don't kill circe buffers. I don't know if this magic helps, I hope so. It is
-taken from https://se30.xyz/conf.html
-
-This really sux though, I want to pass my own function for ~clean-buffer-list~
-to test buffer for my specific conditions such as major mode, eyebrowse
-visibility, etc.
+Never kill circe buffers.
 
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'clean-buffer-list-kill-never-regexps "@[^:]+:[1-9][0-9]*$")
-(add-to-list 'clean-buffer-list-kill-never-regexps "^[#&]")
+(defun my/buffer-is-circe-p (buffer-name)
+  (with-current-buffer buffer-name
+    (derived-mode-p 'lui-mode)))
+#+END_SRC
+
+TODO never kill eyebrowse-visible files
+
+The name ~clean-buffer-list-kill-never-regexps~ is quite confusing because
+besides regexps it accepts also funcitons. See documentation for more info but
+basically the function takes a buffer name as an argument and returns non-nil
+when the buffer should never be killed.
+
+#+BEGIN_SRC emacs-lisp
+(setq clean-buffer-list-kill-never-regexps
+      (list 'my/buffer-is-circe-p))
 #+END_SRC
 
 * Development
