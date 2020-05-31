@@ -1048,7 +1048,30 @@ Never kill circe buffers.
     (derived-mode-p 'lui-mode)))
 #+END_SRC
 
-TODO never kill eyebrowse-visible files
+Never kill buffers that are currently /visible/ in any of eyebrowse window
+layouts. For that we first need to figure out what buffers are visible
+eyebrowse-wide.
+
+#+BEGIN_SRC emacs-lisp
+(defun my/eyebrowse-all-buffer-names ()
+  (let ((buffer-names (list)))
+    (dolist (window-config (eyebrowse--get 'window-configs))
+      (eyebrowse--walk-window-config
+       window-config
+       (lambda (item)
+         (when (eq (car item) 'buffer)
+           (let ((buffer-name (cadr item)))
+             (add-to-list 'buffer-names buffer-name))))))
+    buffer-names))
+#+END_SRC
+
+And now we can make a predicate to see if some buffer is visible within any
+eyebrowse layout.
+
+#+BEGIN_SRC emacs-lisp
+(defun my/buffer-is-eyebrowse-visible-p (buffer-name)
+  (seq-contains (my/eyebrowse-all-buffer-names) buffer-name))
+#+END_SRC
 
 The name ~clean-buffer-list-kill-never-regexps~ is quite confusing because
 besides regexps it accepts also funcitons. See documentation for more info but
@@ -1057,7 +1080,8 @@ when the buffer should never be killed.
 
 #+BEGIN_SRC emacs-lisp
 (setq clean-buffer-list-kill-never-regexps
-      (list 'my/buffer-is-circe-p))
+      (list 'my/buffer-is-circe-p
+            'my/buffer-is-eyebrowse-visible-p))
 #+END_SRC
 
 * Development
