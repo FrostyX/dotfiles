@@ -905,7 +905,7 @@ See https://github.com/jerrypnz/major-mode-hydra.el
 Lisp interaction mode, aka ~*scratch*~ buffer.
 
 #+BEGIN_SRC emacs-lisp
-(major-mode-hydra-define lisp-interaction-mode
+(major-mode-hydra-define (emacs-lisp-mode lisp-interaction-mode)
   (:color blue :quit-key ("q" "SPC") :title "Lisp interaction mode")
   ("Actions"
    (("e" eval-defun "Evaluate this function")
