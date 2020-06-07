@@ -80,6 +80,7 @@ There is always something new in the Emacs world.
 
 *** https://sachachua.com/blog/feed/
 *** http://blog.binchen.org/rss.xml
+*** http://doyouevenlisp.com/feed/
 
 ** Vim
 
