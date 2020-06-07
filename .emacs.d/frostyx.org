@@ -1620,6 +1620,7 @@ You will probably find these Evil keybindings useful.
 | d           | Mark a file to be deleted    |
 | x           | Delete marked files          |
 | -           | Jump to the parent directory |
+| C           | Copy a file or directory     |
 
 
 TODO Prevent ^ from jumping to the parent directory
