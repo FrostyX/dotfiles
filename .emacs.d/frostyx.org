@@ -155,16 +155,6 @@ Reset variable to its default value, press ~M-:~ and run:
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-;; Always open help buffers in the current window
-;; e.g. opening a package info from `M-x list packages' uses a help mode
-;; https://emacs.stackexchange.com/a/22502
-(add-to-list 'display-buffer-alist
-             '("*Help*" display-buffer-same-window)
-             ;; '("*Playlists: *" display-buffer-same-window))
-)
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (save-place-mode 1)
 #+END_SRC
@@ -476,9 +466,36 @@ This command is mainly an example how to do it. I have probably never used it.
 
 * Window management
 
-TODO move all buffer-alist things here
-TODO circe in the same window
-See https://www.simplify.ba/articles/2016/01/25/display-buffer-alist/
+Emacs default window management makes me want to kill myself. After six months,
+I still have absolutely no idea how it works. New windows literaly appear on the
+least expected positions, they randomly change, some of them even break the
+current split configuration. It seems like the internal window manager is trying
+so hard to be smart but for me, it has the exactly opposite effect.
+
+Meanwhile, this magic is not necessary (let alone useful) at all. Maybe it is
+for vanilla Emacs but in Evil world, the splits and window management is
+just amazing.
+
+Let's just open everything in the current window, shall we? I can split manually
+if I want to.
+
+We need to configure special buffers separately because it is going to be done
+based on ther names. They are special and their names do not change.
+
+For explanation of how ~display-buffer-alist~ works, see
+https://www.simplify.ba/articles/2016/01/25/display-buffer-alist/
+
+For other pratical code samples see
+https://reflexivereflection.com/posts/2018-04-06-disabling-emacs-window-management.html
+
+#+BEGIN_SRC emacs-lisp
+(setq display-buffer-alist
+      '(("shell.*" (display-buffer-same-window) ())
+        (".*" (display-buffer-reuse-window
+               display-buffer-same-window
+               display-buffer-pop-up-frame)
+         (reusable-frames . t))))
+#+END_SRC
 
 * Interface
 
