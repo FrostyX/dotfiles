@@ -2124,6 +2124,10 @@ TODO Day changed message like in weechat
 TODO logging file format like weechat has, see ~lui-logging-file-format~
 TODO change message format (date should go before nick)
 
+TODO ignore non-user messages in tracklist
+TODO read message from tracklist when switching window (not only when switching buffer)
+TODO maximum length for tracklist
+
 ** Spotify
 
 
