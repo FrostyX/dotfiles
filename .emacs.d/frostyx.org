@@ -1981,6 +1981,14 @@ Make sure that we see lags and automatically reconnects if we got disconnected.
 (circe-lagmon-mode)
 #+END_SRC
 
+By default, circe only tries to reconnect back to server a given number of times
+and then gives up. We want to keep trying indefinitely even though it is not
+recommended.
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-server-max-reconnect-attempts nil)
+#+END_SRC
+
 Let us know that it is a new day so we can go to bed already.
 
 FIXME I needed to disable it oterwise it messes with tracking
