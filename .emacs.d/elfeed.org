@@ -67,6 +67,7 @@ configuring something.
 *** https://nullprogram.com/feed/
 *** https://smythp.com/feed.xml
 *** http://vakila.github.io/feed.xml
+*** https://arenzana.org/feed/
 
 ** Gentoo
 
