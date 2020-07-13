@@ -543,6 +543,7 @@ See http://chriskempson.com/projects/base16/#styling-guidelines
 #+BEGIN_SRC emacs-lisp
 (setq my/black (plist-get base16-chalk-colors :base00)
       my/gray (plist-get base16-chalk-colors :base01)
+      my/lgray (plist-get base16-chalk-colors :base03)
       ;; ... grayish colors from base02 to base06
       my/white (plist-get base16-chalk-colors :base07)
       my/red (plist-get base16-chalk-colors :base08)
@@ -1462,6 +1463,27 @@ See https://stackoverflow.com/a/24173780/3285282
 ;; @FIXME doesn't seem to work for GitHub
 (setcar (nthcdr 2 org-emphasis-regexp-components) " \t\r\n\"'")
 (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+#+END_SRC
+
+I use checklists on a daily basis and often they get quite long. Additionally,
+I don't always process them from the beginning to the end but rather randomly,
+they are not numbered, so what. Then it can become quite messy when the
+completed items are not grayed out. This fixes it.
+
+See https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-items-in-org-mode.html
+
+#+BEGIN_SRC emacs-lisp
+(font-lock-add-keywords
+ 'org-mode
+ `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
+ 'append)
+#+END_SRC
+
+The ~org-headline-done prepend~ face has by default some weird color. It should
+be gray ... I mean, we don't say /grayed out/ for no reason.
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'org-headline-done nil :foreground my/lgray)
 #+END_SRC
 
 *** Markdown
