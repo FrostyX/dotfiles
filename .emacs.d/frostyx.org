@@ -783,7 +783,7 @@ Hydra main entry-point allowing us acces to other hydras.
 
    "Workspaces"
    (("e" eyebrowse-switch-to-window-config "switch workspace")
-    ("E" nil "eyebrowse"))
+    ("E" hydra-eyebrowse/body "eyebrowse"))
 
    "Projects"
    (("p" helm-projectile-switch-project "switch project")
@@ -820,6 +820,21 @@ Hydra definitions for ~projectile~ package.
   (:color blue :quit-key ("q" "SPC") :title "Project Management")
   ("Actions"
    (("d" projectile-discover-projects-in-search-path "discover new projects"))))
+#+END_SRC
+
+**** Eyebrowse
+
+Hydra definitions for Eyebrowse commands.
+
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-eyebrowse
+  (:color blue :quit-key ("q" "SPC") :title "Presentations")
+  ("Eyebrowse"
+   (("e" eyebrowse-switch-to-window-config "Switch to config")
+    ("l" eyebrowse-last-window-config "Switch to the latest window config")
+    ("c" eyebrowse-create-window-config "Create a new config")
+    ("r" eyebrowse-rename-window-config "Rename a new config")
+    ("d" eyebrowse-close-window-config "Destroy a window config"))))
 #+END_SRC
 
 **** Dired
