@@ -68,6 +68,7 @@ configuring something.
 *** https://smythp.com/feed.xml
 *** http://vakila.github.io/feed.xml
 *** https://arenzana.org/feed/
+*** https://fuco1.github.io/rss.xml
 
 ** Gentoo
 
