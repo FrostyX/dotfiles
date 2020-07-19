@@ -1212,9 +1212,17 @@ TODO map this for all modes?
 
 ** Completion
 
+When ~company~ autocomplete menu pops-up, we want to move in it using ~C-n~ and
+~C-p~ like in Vim. I am doing this mainly because of Python programming and
+Elpy, so if it makes a mess somewhere else, we can just limit this for
+~python-mode~.
+
 #+BEGIN_SRC emacs-lisp
-  ;; (define-key company-active-map (kbd "C-n") 'company-select-next)
-  ;; (define-key company-active-map (kbd "C-p") 'company-select-previous)
+(define-key company-active-map (kbd "C-n") 'company-select-next)
+(define-key company-active-map (kbd "C-p") 'company-select-previous)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
   ;; (define-key company-search-map (kbd "C-n") 'company-select-next)
   ;; (define-key company-search-map (kbd "C-p") 'company-select-previous)
 #+END_SRC
