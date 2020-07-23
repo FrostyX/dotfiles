@@ -1525,6 +1525,23 @@ be gray ... I mean, we don't say /grayed out/ for no reason.
 (set-face-attribute 'org-headline-done nil :foreground my/lgray)
 #+END_SRC
 
+There are multiple ways to change a state of a TODO item under the cursor, but
+all of them are unnecessarily complicated for simply completing the items (which
+is the case 90% of times). We can use ~C-c C-t~ to select and switch a new
+state, or ~S-RIGHT S-LEFT~ to move in the sequence of states.
+
+See https://orgmode.org/manual/TODO-Basics.html
+
+Let's just have a function to switch TODO item into ~DONE~ state.
+
+#+BEGIN_SRC emacs-lisp
+(defun my/org-todo-done ()
+  (interactive)
+  (org-todo 'done))
+#+END_SRC
+
+@TODO Make a helm interface for ~C-c C-t~
+
 *** Markdown
 
 See https://stackoverflow.com/a/34672923/3285282
