@@ -908,7 +908,9 @@ See https://github.com/jerrypnz/major-mode-hydra.el
 
 #+BEGIN_SRC emacs-lisp
 (use-package major-mode-hydra
-  :ensure t)
+  :ensure t
+  :config
+  (define-key evil-normal-state-map (kbd "S-SPC") 'major-mode-hydra))
 #+END_SRC
 
 ***** Org
