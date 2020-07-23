@@ -919,7 +919,8 @@ See https://github.com/jerrypnz/major-mode-hydra.el
 (major-mode-hydra-define org-mode
   (:color blue :quit-key ("q" "SPC") :title "Org mode")
   ("Actions"
-   (("e" org-edit-special "Edit special")
+   (("t" my/org-todo-done "Mark TODO item as done")
+    ("e" org-edit-special "Edit special")
     ("s" org-edit-src-exit "Save special edit"))))
 #+END_SRC
 
@@ -1525,6 +1526,21 @@ be gray ... I mean, we don't say /grayed out/ for no reason.
 (set-face-attribute 'org-headline-done nil :foreground my/lgray)
 #+END_SRC
 
+Show agendas from these TODO files.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-files '("~/org/gtd/inbox.org"
+                         "~/org/gtd/gtd.org"
+                         "~/org/gtd/tickler.org"))
+#+END_SRC
+
+The sequence of possible states for our TODO items
+
+#+BEGIN_SRC emacs-lisp
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+#+END_SRC
+
 There are multiple ways to change a state of a TODO item under the cursor, but
 all of them are unnecessarily complicated for simply completing the items (which
 is the case 90% of times). We can use ~C-c C-t~ to select and switch a new
@@ -1541,6 +1557,12 @@ Let's just have a function to switch TODO item into ~DONE~ state.
 #+END_SRC
 
 @TODO Make a helm interface for ~C-c C-t~
+
+When a TODO item is completed, automatically insert a timestamp.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-log-done 'time)
+#+END_SRC
 
 *** Markdown
 
