@@ -11,3 +11,4 @@ xset s off -dpms
 
 gnome-screensaver &
 nm-applet &
+blueman-applet &
