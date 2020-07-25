@@ -1222,6 +1222,7 @@ See https://company-mode.github.io/
 #+BEGIN_SRC emacs-lisp
 (use-package company
   :ensure t
+  :config
   (company-mode))
 #+END_SRC
 
