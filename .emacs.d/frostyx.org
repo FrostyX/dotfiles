@@ -1565,6 +1565,12 @@ When a TODO item is completed, automatically insert a timestamp.
 (setq org-log-done 'time)
 #+END_SRC
 
+This is not a piece of configuration but I tend to forget key bindings. It is
+possible to schedule a TODO item by pressing ~C-c C-s~. Use shift + arrow keys
+to move between dates and time optionally is typed in a prompt.
+
+See https://orgmode.org/manual/The-date_002ftime-prompt.html
+
 *** Markdown
 
 See https://stackoverflow.com/a/34672923/3285282
