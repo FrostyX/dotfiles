@@ -1691,6 +1691,10 @@ TODO it uses tabs! Don't use tabs for god sake
 
 * Writing
 
+First see some cool writing setups from other people:
+
+- https://explog.in/notes/writingsetup.html
+
 When coding, we want to be in a full control of line wrapping and their lengths,
 so seeing a vertical ruler and wrapping them manually is ideal. However, when
 writing text, it is more of a drag. Let's just hard-wrap all lines automatically
