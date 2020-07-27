@@ -1535,11 +1535,22 @@ Show agendas from these TODO files.
                          "~/org/gtd/tickler.org"))
 #+END_SRC
 
-The sequence of possible states for our TODO items
+The sequence of possible states for our TODO items. These are just basic ones, I
+am trying to keep this sequence as limited as possible. However, in case we need
+more complicated state management, we can add another sequences. This can be
+useull e.g. for tracking bugs, Trello, JIRA, etc.
+
+See https://orgmode.org/manual/Multiple-sets-in-one-file.html#Multiple-sets-in-one-file
 
 #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+      '((sequence "TODO(t)"
+                  "STARTED(s)"
+                  "WAITING(w)"
+                  "BLOCKED(b)"
+                  "|"
+                  "DONE(d)"
+                  "CANCELLED(c)")))
 #+END_SRC
 
 There are multiple ways to change a state of a TODO item under the cursor, but
