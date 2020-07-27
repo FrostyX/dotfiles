@@ -134,4 +134,5 @@ Software engineer interested in sports. What could go wrong.
 Following websites unfortunatelly don't provide a RSS feed. Ideally, we want to
 contact them or file a RFE for implementing one.
 
+- https://explog.in (contacted on reddit, RSS feed should be available soon)
 - https://whydoesitsuck.com/
