@@ -955,6 +955,20 @@ Lisp interaction mode, aka ~*scratch*~ buffer.
     ("p" eval-print-last-sexp "Evaluate and print to the buffer"))))
 #+END_SRC
 
+***** Circe
+
+Hydra menu for Circe IRC client
+
+#+BEGIN_SRC emacs-lisp
+(major-mode-hydra-define (circe-channel-mode circe-server-mode circe-query-mode)
+  (:color blue :quit-key ("q" "SPC") :title "Circe")
+  ("Away"
+   (("c" (circe-command-GAWAY nil) "Clear away status")
+    ("1" (circe-command-GAWAY "Training, I will be back within two hours") "Gym")
+    ("2" (circe-command-GAWAY "I will be back at work in the evening") "Back in the evening")
+    ("a" circe-command-GAWAY "Custom away message"))))
+#+END_SRC
+
 * Project management
 
 When working on multiple projects at the same time, it is useful keep some level
