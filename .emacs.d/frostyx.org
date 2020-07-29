@@ -1596,6 +1596,10 @@ to move between dates and time optionally is typed in a prompt.
 
 See https://orgmode.org/manual/The-date_002ftime-prompt.html
 
+Similarly, a deadline can be set by pressing ~C-c C-d~.
+
+See https://orgmode.org/manual/Inserting-deadline_002fschedule.html
+
 *** Markdown
 
 See https://stackoverflow.com/a/34672923/3285282
