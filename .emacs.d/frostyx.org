@@ -299,6 +299,22 @@ See:
   (evil-mode))
 #+END_SRC
 
+Let's unbind arrow keys for movement. I exclusively use ~hjkl~, so the arrow
+keys for movement are useless. On the other hand, they might come handy for
+other applications such as IRC client to show previous messages in the prompt or
+for terminal application to show previous commands.
+
+#+BEGIN_SRC emacs-lisp
+(eval-after-load "evil-maps"
+  (dolist (map '(evil-motion-state-map
+                 evil-insert-state-map
+                 evil-emacs-state-map))
+    (define-key (eval map) (kbd "<up>") nil)
+    (define-key (eval map) (kbd "<down>") nil)
+    (define-key (eval map) (kbd "<left>") nil)
+    (define-key (eval map) (kbd "<right>") nil)))
+#+END_SRC
+
 ** Evil packages
 
 TODO evil-indent-surround
@@ -2285,16 +2301,6 @@ Sometimes it is usefull to just navigate with arrow keys in prompt to repeat
 previous messages. By default, this feature is bound to ~M-p~ and ~M-n~ but it
 coildes with my Window Manager key bindings, so let's just use arrow keys. I use
 ~hjkl~ for movement anyway.
-
-@TODO unbind arrow keys and move it up to evil chapter
-
-#+BEGIN_SRC emacs-lisp
-(define-key evil-motion-state-map "<up>" nil)
-(define-key evil-motion-state-map "<down>" nil)
-(define-key evil-motion-state-map "<left>" nil)
-(define-key evil-motion-state-map "<right>" nil)
-#+END_SRC
-
 
 #+BEGIN_SRC emacs-lisp
 (define-key circe-channel-mode-map (kbd "<up>") 'lui-previous-input)
