@@ -2281,6 +2281,26 @@ See https://emacs.stackexchange.com/a/37515
     (helm-buffers-list)))
 #+END_SRC
 
+Sometimes it is usefull to just navigate with arrow keys in prompt to repeat
+previous messages. By default, this feature is bound to ~M-p~ and ~M-n~ but it
+coildes with my Window Manager key bindings, so let's just use arrow keys. I use
+~hjkl~ for movement anyway.
+
+@TODO unbind arrow keys and move it up to evil chapter
+
+#+BEGIN_SRC emacs-lisp
+(define-key evil-motion-state-map "<up>" nil)
+(define-key evil-motion-state-map "<down>" nil)
+(define-key evil-motion-state-map "<left>" nil)
+(define-key evil-motion-state-map "<right>" nil)
+#+END_SRC
+
+
+#+BEGIN_SRC emacs-lisp
+(define-key circe-channel-mode-map (kbd "<up>") 'lui-previous-input)
+(define-key circe-channel-mode-map (kbd "<down>") 'lui-next-input)
+#+END_SRC
+
 
 TODO my messages format
 TODO highlight color
