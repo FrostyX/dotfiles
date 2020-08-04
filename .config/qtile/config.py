@@ -25,6 +25,7 @@ lock         = "gnome-screensaver-command -l"
 scrot        = ""
 scrot_all    = ""
 battery      = "BAT0"
+suspend      = "systemctl suspend"
 
 player_prev = "playerctl previous --player=spotify"
 player_next = "playerctl next --player=spotify"
@@ -90,6 +91,9 @@ keys = [
     Key([sup], "Left", lazy.spawn(player_prev)),
     Key([sup], "Right", lazy.spawn(player_next)),
     Key([sup], "Down", lazy.spawn(player_play_pause)),
+
+    # Quiting
+    Key([mod], "F10", lazy.spawn(suspend)),
 ]
 
 
