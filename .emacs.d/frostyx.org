@@ -1748,6 +1748,7 @@ on 80 characters.
 #+BEGIN_SRC emacs-lisp
 (setq fill-column 80)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
+(add-hook 'markdown-mode-hook 'turn-on-auto-fill)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
