@@ -69,6 +69,7 @@ configuring something.
 *** http://vakila.github.io/feed.xml
 *** https://arenzana.org/feed/
 *** https://fuco1.github.io/rss.xml
+*** https://explog.in/rss.xml
 
 ** Gentoo
 
@@ -134,5 +135,4 @@ Software engineer interested in sports. What could go wrong.
 Following websites unfortunatelly don't provide a RSS feed. Ideally, we want to
 contact them or file a RFE for implementing one.
 
-- https://explog.in (contacted on reddit, RSS feed should be available soon)
 - https://whydoesitsuck.com/
