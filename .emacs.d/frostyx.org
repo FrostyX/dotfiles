@@ -1853,6 +1853,8 @@ name, so running ~M-x term~, switching back to previous buffer and then runnnig
 one. Naming our terminal buffers properly will allow us to spawn mulltiple
 terminal buffers at the same time.
 
+See https://www.youtube.com/watch?v=wRmK7PMnrJg
+
 Also, not naming your terminal windows and terminal tabs (outside the Emacs
 world) is disgusting, messy and just a total chaos. So we wan't to properly name
 our Emacs terminals anyway.
