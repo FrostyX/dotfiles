@@ -315,6 +315,8 @@ for terminal application to show previous commands.
     (define-key (eval map) (kbd "<right>") nil)))
 #+END_SRC
 
+@TODO this ^^ requires restarting ~evil-mode~ to have an effect
+
 ** Evil packages
 
 TODO evil-indent-surround
