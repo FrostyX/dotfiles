@@ -1873,6 +1873,20 @@ our Emacs terminals anyway.
       the one, default ~*terminal*~.
 @TODO don't ask me for ~/bin/bash~ all the time
 
+The brightest possiblity for terminal in Emacs is ~vterm~ which
+supports even interactive ncurses applications.
+
+See https://github.com/akermu/emacs-libvterm
+
+#+BEGIN_SRC emacs-lisp
+(use-package vterm
+  :ensure t)
+#+END_SRC
+
+@TODO When I go from ~insert~ to ~normal~ mode, move my cursor to the
+      midle of the command and press ~i~, the cursor jumps to the end
+      of the command. Which is stupid, I know what ~A~ is for, ...
+
 ** Web
 
 *** EWW
