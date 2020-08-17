@@ -1886,6 +1886,7 @@ See https://github.com/akermu/emacs-libvterm
 @TODO When I go from ~insert~ to ~normal~ mode, move my cursor to the
       midle of the command and press ~i~, the cursor jumps to the end
       of the command. Which is stupid, I know what ~A~ is for, ...
+      See https://github.com/akermu/emacs-libvterm/issues/313#issuecomment-658027284
 
 ** Web
 
