@@ -517,8 +517,7 @@ https://reflexivereflection.com/posts/2018-04-06-disabling-emacs-window-manageme
 (setq display-buffer-alist
       '(("shell.*" (display-buffer-same-window) ())
         (".*" (display-buffer-reuse-window
-               display-buffer-same-window
-               display-buffer-pop-up-frame)
+               display-buffer-same-window)
          (reusable-frames . t))))
 #+END_SRC
 
@@ -811,6 +810,10 @@ Hydra main entry-point allowing us acces to other hydras.
    (("d" dired-jump "open dired in the current directory")
     ("D" hydra-dired/body "dired"))
 
+   "Git"
+   (("g" magit-status "magit")
+    ("G" hydra-magit/body "more magit options"))
+
    "Emacs"
    (("r" (load-file user-init-file) "reload configuration")
     ("c" hydra-configuration/body "reload configuration"))))
@@ -867,6 +870,18 @@ Hydra definition for ~dired~ package.
     ("~" (lambda () (interactive) (dired "~/")) "home directory")
     ("/" (lambda () (interactive) (dired "/")) "root directory")
     ("p" (lambda () (interactive) (dired (projectile-project-root)))))))
+#+END_SRC
+
+**** Magit
+
+Hydra definition for ~magit~ package.
+
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-magit
+  (:color blue :quit-key ("q" "SPC") :title "Magit")
+  ("Open in"
+   (("g" magit-status "magit")
+    ("b" magit-branch-checkout))))
 #+END_SRC
 
 **** Flycheck
@@ -1782,6 +1797,31 @@ on 80 characters.
 If I shoot myself into my leg and accidentally break a buffer by running an
 application in it and panicking how to get back, just kill the buffer with
 ~M-x kill-buffer~.
+
+** Magit
+Magit is a well-known killer feature of Emacs and supposedly the
+greatest ~git~ interface ever invented.
+
+By default, it doesn't play very well with ~evil-mode~ so let
+~evil-magit~ take care of that.
+
+See https://github.com/emacs-evil/evil-magit
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil-magit
+  :ensure t)
+#+END_SRC
+
+The most basic key bindings are
+
+| Key | Action  |
+|-----+---------|
+| s/S | stage   |
+| u   | unstage |
+| c   | commit  |
+| p/P | push    |
+
+For more see https://github.com/emacs-evil/evil-magit#key-bindings
 
 ** File manager
 
