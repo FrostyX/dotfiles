@@ -1814,12 +1814,13 @@ See https://github.com/emacs-evil/evil-magit
 
 The most basic key bindings are
 
-| Key | Action  |
-|-----+---------|
-| s/S | stage   |
-| u   | unstage |
-| c   | commit  |
-| p/P | push    |
+| Key | Action                            | CLI alternative         |
+|-----+-----------------------------------+-------------------------|
+| s/S | stage a hunk, file or all files   | ~git add -p <file>~     |
+| u/U | unstage a hunk, fiel or all files | ~git reset HEAD <file>~ |
+| x   | discard                           | ~git checkout <file>~   |
+| c   | commit                            | ~git commit~            |
+| p/P | push                              | ~git push~              |
 
 For more see https://github.com/emacs-evil/evil-magit#key-bindings
 
