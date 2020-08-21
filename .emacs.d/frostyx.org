@@ -521,6 +521,17 @@ https://reflexivereflection.com/posts/2018-04-06-disabling-emacs-window-manageme
          (reusable-frames . t))))
 #+END_SRC
 
+The ~display-buffer-alist~ isn't respected by every command, so we need to
+specifically set these.
+
+Make sure man pages open in the current window.
+See https://stackoverflow.com/a/7787941/3285282
+
+#+BEGIN_SRC emacs-lisp
+(setq Man-notify-method 'pushy)
+#+END_SRC
+
+
 * Interface
 
 ** GUI
