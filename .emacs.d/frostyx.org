@@ -165,7 +165,6 @@ Let's have some funny message on the top of the ~*scratch*~ buffer.
 (setq initial-scratch-message ";; Do you even lisp, bro? ಠ_ಠ\n\n\n")
 #+END_SRC
 
-
 * Package management
 
 We want to automatically update Emacs packages in order to avoid annoying warnings
@@ -530,7 +529,6 @@ See https://stackoverflow.com/a/7787941/3285282
 #+BEGIN_SRC emacs-lisp
 (setq Man-notify-method 'pushy)
 #+END_SRC
-
 
 * Interface
 
