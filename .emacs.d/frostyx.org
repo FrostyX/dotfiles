@@ -2314,6 +2314,17 @@ just normal messages in a channel.
 (setq tracking-shorten-buffer-names-p nil)
 #+END_SRC
 
+I would prefer to set maximum with of the segment (probably in percentages in
+ratio to the current width of the bar/window) but that doesn't seem to be
+supported and I don't want to implement the feature right now, so let's just set
+the maximum number of displayed buffers in the tracking segment. If we don't do
+so, the output might get too lengthy and not be displayed at all. This still
+might happen, when the channel names are too long but it's better than nothing.
+
+#+BEGIN_SRC emacs-lisp
+(setq tracking-max-mode-line-entries 3)
+#+END_SRC
+
 Define a custom spaceline segment for showing a list of channels with activity.
 See https://github.com/TheBB/spaceline/issues/39#issuecomment-218469366
 
