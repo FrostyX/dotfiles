@@ -686,19 +686,54 @@ they don't take an effect.
         ; (define-key keymap (kbd "C-S-h") 'describe-key))
 
 
-  (use-package helm-posframe
-    :ensure t
-    :config
-    (helm-posframe-enable)
-    (setq helm-posframe-poshandler
-          ;; #'posframe-poshandler-frame-top-center)
-          #'posframe-poshandler-frame-center)
-    (setq helm-posframe-width 200)
-    (setq helm-posframe-height 600)
-    (setq helm-posframe-parameters
-          '((left-fringe . 10)
-            (right-fringe . 10))))
 )
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm-posframe
+  :ensure t
+  :disabled
+  :config
+  (helm-posframe-enable)
+  (setq helm-posframe-poshandler
+        #'posframe-poshandler-frame-center)
+  (setq helm-posframe-width 200)
+  (setq helm-posframe-height 600)
+  (setq helm-posframe-parameters
+        '((left-fringe . 10)
+          (right-fringe . 10))))
+#+END_SRC
+
+Unfortunatelly, ~helm-posframe~ is quite buggy and breaks tab-completion for
+~M-:~, takes a lot of time to appear, sometimes it appears empty or
+whatelse. Let's try to stick with a small helm window at the bottom.
+
+See https://github.com/emacs-helm/helm/issues/2039#issuecomment-390077931
+
+#+BEGIN_SRC emacs-lisp
+(defvar spacemacs-helm-display-help-buffer-regexp '("\\*.*Helm.*Help.*\\*"))
+(defvar spacemacs-helm-display-buffer-regexp `("\\*.*helm.*\\*"
+                                               (display-buffer-in-side-window)
+                                               (inhibit-same-window . nil)
+                                               (side . bottom)
+                                               (window-width . 0.6)
+                                               (window-height . 0.6)))
+
+(defun display-helm-at-bottom (buffer &optional _resume)
+  (let ((display-buffer-alist (list spacemacs-helm-display-help-buffer-regexp
+                                    spacemacs-helm-display-buffer-regexp)))
+    (display-buffer buffer)))
+(setq helm-display-function 'display-helm-at-bottom)
+#+END_SRC
+
+And finally, we want to show a limited number of results.
+
+See https://github.com/emacs-helm/helm/wiki/helm-autoresize
+
+#+BEGIN_SRC emacs-lisp
+(helm-autoresize-mode 1)
+(setq helm-autoresize-max-height 40)
+(setq helm-autoresize-min-height 40)
 #+END_SRC
 
 Buffer management is a bread and butter of every text editor. This is true even
