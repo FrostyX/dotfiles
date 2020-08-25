@@ -178,6 +178,7 @@ def num_screens():
 # https://fortawesome.github.io/Font-Awesome/cheatsheet/
 # For v4.7 see https://fontawesome.com/v4.7.0/cheatsheet/
 icons = {
+    "logo": "",     # all-the-icons python logo
     "temp": "",     # fa-fire-extinguisher
     "battery": "",  # fa-battery-three-quarters
     "light": "",    # fa-lightbulb-o
@@ -199,6 +200,10 @@ sep = {
 screens = [
     Screen(
         top=bar.Bar([
+            # Logo
+            widget.TextBox(text=icons["logo"], fontsize=14, **style),
+            widget.Sep(**sep),
+
             # Temp
             widget.TextBox(text=icons["temp"], **style),
             widget.ThermalSensor(threshold=65, foreground_alert=colors["red"], **style),
