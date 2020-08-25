@@ -233,16 +233,6 @@ screens = [
             Newsboat(dbfile="/home/jkadlcik/.newsboat/cache.db", **style),
             widget.Sep(**sep),
 
-            # Unfinished vimwiki tasks - today
-            widget.TextBox(text=icons["tasks"], **style),
-            VimwikiUnfinished(today=True, filetype="md", section="## Todo", **style),
-            widget.Sep(**sep),
-
-            # Unfinished vimwiki tasks - daily checklist
-            widget.TextBox(text=icons["repeat"], **style),
-            VimwikiUnfinished(today=True, filetype="md", section="## Daily checklist", **style),
-            widget.Sep(**sep),
-
             widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:], **style),
             widget.Spacer(),
             widget.Clock(timezone="Europe/Prague", format="%H:%M  %d. %m. (%b) %Y   #%W", **style),
