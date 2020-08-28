@@ -143,6 +143,18 @@ colors = {
     "green": "#99cc99",
 }
 
+base16_chalk = {
+    "black" : "#151515",
+    "red": "#fb9fb1",
+    "green": "#acc267",
+    "yellow": "#ddb26f",
+    "blue": "#6fc2ef",
+    "magenta": "#e1a3ee",
+    "cyan": "#12cfc0",
+    "white": "#d0d0d0",
+    "gray": "#505050",
+}
+
 # http://docs.qtile.org/en/latest/manual/ref/layouts.html
 layout_theme = {
     "border_width": 1,
@@ -189,7 +201,9 @@ icons = {
 }
 
 style = {
-    "foreground": colors["greyfg"],
+    # "foreground": colors["greyfg"],
+    "foreground": colors["greybg"],
+    "padding": 5,
 }
 
 sep = {
@@ -201,54 +215,107 @@ screens = [
     Screen(
         top=bar.Bar([
             # Logo
-            widget.TextBox(text=icons["logo"], fontsize=14, **style),
-            widget.Sep(**sep),
+            widget.TextBox(text=icons["logo"], fontsize=14,
+                           mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn("urxvt")},
+                           background=base16_chalk["magenta"],
+                           **style),
+            # widget.Sep(**sep),
+
+
+            widget.GroupBox(highlight_method="block", this_current_screen_border=base16_chalk["blue"],
+                            # this_screen_border=base16_chalk["yellow"],
+                            background=base16_chalk["magenta"],
+                            foreground=colors["greybg"],
+
+                            active=colors["greybg"],
+                            inactive=colors["greybg"],
+
+
+
+                            rounded=False,
+                            padding_x=6,
+                            padding_y=6,
+                            margin=0,
+                            hide_unused=True,
+                            ),
+            # widget.Sep(**sep),
+            widget.CurrentLayout(background=base16_chalk["green"], **style),
+            # widget.Sep(**sep),
+
+            widget.TaskList(
+                # background=base16_chalk["yellow"],
+                foreground=colors["greybg"],
+                highlight_method="block",
+
+                border=base16_chalk["blue"],
+                unfocused_border=base16_chalk["yellow"],
+                urgent_border=base16_chalk["red"],
+
+                rounded=False,
+                # padding_x=6,
+                margin=0,
+                padding=6,
+            ),
+            widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:], **style),
 
             # Temp
-            widget.TextBox(text=icons["temp"], **style),
-            widget.ThermalSensor(threshold=65, foreground_alert=colors["red"], **style),
-            widget.Sep(**sep),
+            # widget_style = {"background": base16_chalk["green"]}
+            widget.TextBox(text=icons["temp"], background=base16_chalk["yellow"], **style),
+            widget.ThermalSensor(threshold=65, background=base16_chalk["yellow"], foreground_alert=colors["red"], **style),
+            # widget.Sep(**sep),
 
             # Battery
-            widget.TextBox(text=icons["battery"], **style),
-            widget.Battery(battery_name=battery, low_foreground=colors["red"], **style),
-            widget.Sep(**sep),
+            widget.TextBox(text=icons["battery"], background=base16_chalk["green"], **style),
+            widget.Battery(battery_name=battery, background=base16_chalk["green"], format="{percent:2.0%}",
+                           low_foreground=colors["red"], **style),
+            # widget.Sep(**sep),
 
             # Light
-            widget.TextBox(text=icons["light"], **style),
+            widget.TextBox(text=icons["light"], background=base16_chalk["blue"], **style),
             widget.Backlight(
                 brightness_file="/sys/class/backlight/intel_backlight/actual_brightness",
                 max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness",
+                background=base16_chalk["blue"],
                 **style
             ),
-            widget.Sep(**sep),
+            # widget.Sep(**sep),
 
             # Volume
-            widget.TextBox(text=icons["volume"], **style),
-            widget.Volume(get_volume_command=vol_cur.split(), **style),
-            widget.Sep(**sep),
+            widget.TextBox(text=icons["volume"], background=base16_chalk["magenta"], **style),
+            widget.Volume(get_volume_command=vol_cur.split(), background=base16_chalk["magenta"], **style),
+            # widget.Sep(**sep),
 
             # Unread news count
-            widget.TextBox(text=icons["rss"], **style),
-            Newsboat(dbfile="/home/jkadlcik/.newsboat/cache.db", **style),
-            widget.Sep(**sep),
-
-            widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:], **style),
-            widget.Spacer(),
-            widget.Clock(timezone="Europe/Prague", format="%H:%M  %d. %m. (%b) %Y   #%W", **style),
-        ], 25, background=colors["greybg"]),
-
-        bottom=bar.Bar([
-            widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"], active=colors["greyfg"], inactive=colors["lgrey"], **style),
-            widget.Sep(**sep),
-            widget.CurrentLayout(**style),
-            widget.Sep(**sep),
-            widget.Prompt(),
-			# widget.WindowName(**style),
+            widget.TextBox(text=icons["rss"], background=base16_chalk["yellow"], **style),
+            Newsboat(dbfile="/home/jkadlcik/.newsboat/cache.db", background=base16_chalk["yellow"], **style),
             # widget.Sep(**sep),
-            widget.WindowTabs(separator="    |    ", **style),
+
+            # %H:%M  %d. %m. (%b) %Y   #%W
+            widget.Clock(timezone="Europe/Prague", format="%H:%M",
+                         background=base16_chalk["blue"], **style),
+
+            widget.Clock(timezone="Europe/Prague", format="%d. %m. (%b) %Y",
+                         background=base16_chalk["blue"], **style),
+
+            widget.Clock(timezone="Europe/Prague", format="#%W",
+                         background=base16_chalk["magenta"], **style),
+
             widget.Systray(),
+
+
         ], 25, background=colors["greybg"]),
+
+        # bottom=bar.Bar([
+        #     widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"], active=colors["greyfg"], inactive=colors["lgrey"], **style),
+        #     widget.Sep(**sep),
+        #     widget.CurrentLayout(**style),
+        #     widget.Sep(**sep),
+        #     widget.Prompt(),
+	# 		# widget.WindowName(**style),
+        #     # widget.Sep(**sep),
+        #     widget.WindowTabs(separator="    |    ", **style),
+        #     widget.Systray(),
+        # ], 25, background=colors["greybg"]),
     )
 ]
 
