@@ -1,5 +1,17 @@
 #-*- coding: utf-8 -*-
 
+"""
+FrostyX's Qtile config
+
+Don't be dumb and test it with Xephyr first
+https://wiki.archlinux.org/index.php/Xephyr
+
+    Xephyr -br -ac -noreset -screen 1600x600 :1 &
+    DISPLAY=:1 qtile &
+    DISPLAY=:1 urxvt &
+
+"""
+
 import re
 import subprocess
 from os import uname
