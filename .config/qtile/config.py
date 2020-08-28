@@ -253,6 +253,7 @@ screens = [
                 padding_y=5,
                 **style
             ),
+            widget.Sep(**sep),
 
 
             # Workspaces
@@ -267,6 +268,7 @@ screens = [
                 padding_y=5,
                 margin=0,
                 fontsize=14,
+                hide_unused=True,
             ),
             widget.Sep(**sep),
 
