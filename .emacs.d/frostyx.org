@@ -958,8 +958,7 @@ Hydra launcher for applications
    (("r" elfeed "RSS (elfeed)")
     ("w" eww "web (eww)")
     ("e" mu4e "email (mu4e)")
-    ("p" spotify-my-playlists "spotify - my playlists")
-    ("s" sporify-recently-played "spotify - recently played"))))
+    ("s" hydra-spotify/body "Spotify"))))
 #+END_SRC
 
 **** Configuration
@@ -1063,6 +1062,15 @@ See https://github.com/bbatsov/projectile
   :ensure t
   :config
   (setq projectile-project-search-path '("~/git/")))
+#+END_SRC
+
+The default projectile interface is /meh/ at best, let's use helm.
+
+See https://github.com/bbatsov/helm-projectile
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm-projectile
+  :ensure t)
 #+END_SRC
 
 The only thing that ~projectile~ doesn't allow you to do (at least by default) is
@@ -2488,6 +2496,30 @@ TODO maximum length for tracklist
 
 ** Spotify
 
+For quick searches and control, ~spotify-helm-plus~ is the best available
+client. It has many shortcomings though. It seems like it requires the official
+Spotify client running on the system, it doesn't allow searching albums, and it
+doesn't customizing the output with e.g. colors or string format. Other than
+that, it works quite alright.
+
+See https://github.com/wandersoncferreira/helm-spotify-plus
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm-spotify-plus
+  :ensure t)
+#+END_SRC
+
+The project is an improvment of the former ~helm-spotify~, so for more
+information see the original project.
+
+See https://github.com/krisajenkins/helm-spotify
+
+On the contrary to the documentation, use ~C-z~ to see possible actions, such as
+playing the whole album.
+
+The ~helm-spotify-plus~ is only good for a fast control, it doesn't provide any
+browsing capabilities (I don't know if as a bug or feature, but it could be
+awesome). Hence, let's use some another tool for that.
 
 #+BEGIN_SRC emacs-lisp
 ;; This spotify library is not in MELPA yet,
@@ -2509,6 +2541,27 @@ TODO maximum length for tracklist
 (evil-define-key 'normal spotify-mode-map (kbd "g<") 'spotify-previous-track)
 (evil-define-key 'normal spotify-mode-map (kbd "g>") 'spotify-next-track)
 (evil-define-key 'normal spotify-mode-map (kbd "gd") 'spotify-select-device)
+#+END_SRC
+
+Let's add a hydra menu, so we don't have to remember the commands or shotcuts.
+
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-spotify
+  (:color blue :quit-key ("q" "SPC") :title "Spotify")
+  ("Search"
+   (("s" helm-spotify-plus "Search in helm"))
+
+   ;; These are very likely obsolete by Window manager key bindings but it
+   ;; doesn't hurt to have a spare in case we are in a foreign environment
+   ;; just with Emacs.
+   "Control"
+   (("p" helm-spotify-plus-toggle-play-pause "Play / Pause")
+    ("<" helm-spotify-plus-previous "Previous")
+    (">" helm-spotify-plus-next "Next"))
+
+   "Browse"
+   (("P" spotify-my-playlists "My playlists")
+    ("r" sporify-recently-played "Recently played"))))
 #+END_SRC
 
 *** Vuivet
