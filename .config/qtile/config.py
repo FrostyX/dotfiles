@@ -244,6 +244,8 @@ screens = [
 
         top=bar.Bar([
 
+            widget.Spacer(length=5),
+
             # Logo
             widget.TextBox(
                 text=icons["logo"],
@@ -407,6 +409,7 @@ screens = [
             widget.Systray(),
 
 
+            widget.Spacer(length=5),
         ], 25, background=colors["greybg"]),
     )
 ]
