@@ -124,10 +124,10 @@ icons = {
 
     "chat": "",      # fa-comment-dots
     "web": "",      # fa-internet-explorer
-    "terminal": "", # fa-terminal
-    "dev": "",      # fa-code
+    "terminal": "", # fa-keyboard
+    "dev": "",      # fa-heart
     "doc": "",      # fa-folder
-    "misc": "",     # fa-hashtag
+    "misc": "",     # fa-file
     "ssh": "",      # fa-hashtag
     "virtual": "", # fa-cogs
     "games": "",     # fa-playstation
