@@ -97,23 +97,50 @@ keys = [
 ]
 
 
+# dnf install fontawesome-fonts
+# https://fortawesome.github.io/Font-Awesome/cheatsheet/
+# For v4.7 see https://fontawesome.com/v4.7.0/cheatsheet/
+icons = {
+    "logo": "",     # fa-redhat
+    "temp": "",     # fa-fire-extinguisher
+    "battery": "",  # fa-battery-three-quarters
+    "light": "",    # fa-lightbulb-o
+    "volume": "",   # fa-bullhorn
+    "rss": "",      # fa-rss
+    "tasks": "",    # fa-calendar-check-o
+    "repeat": "",   # fa-repeat
+
+    "chat": "",      # fa-comment-dots
+    "web": "",      # fa-internet-explorer
+    "terminal": "", # fa-terminal
+    "dev": "",      # fa-code
+    "doc": "",      # fa-folder
+    "misc": "",     # fa-hashtag
+    "ssh": "",      # fa-hashtag
+    "virtual": "", # fa-cogs
+    "games": "",     # fa-playstation
+    "music": "",    # fa-headphones
+}
+
+
+
 workspaces = [
-    {"name": "i", "key": "i", "matches": [Match(wm_class=["Pidgin"])]},
-    {"name": "r", "key": "r", "matches": [Match(wm_class=["Chromium-browser", "Firefox", "Google-chrome"])]},
-    {"name": "f", "key": "f", "matches": [Match(wm_class=["dolphin", "Thunar", "File-roller"])]},
-    {"name": "d", "key": "d", "matches": [Match(wm_class=["Lispworks", "jetbrains-pycharm", "Eclipse" ])]},
-    {"name": "q", "key": "q", "matches": [Match(wm_class=["Acroread", "Zathura", "Evince"])]},
-    {"name": "n", "key": "n", "matches": [Match(wm_class=["Claws-mail"])]},
-    {"name": "c", "key": "c"},
-    {"name": "v", "key": "v", "matches": [Match(wm_class=["VirtualBox"])]},
-    {"name": "g", "key": "g", "matches": [Match(wm_class=["Wine", "Python2.7", "Steam", "Progress"])]}, # Python2.7 is playonlinux; Progress is steam updater
-    {"name": "o", "key": "o", "matches": [Match(wm_class=["Vlc", "Totem"])]},
+    {"name": "i", "key": "i", "label": icons["chat"], "matches": [Match(wm_class=["Pidgin"])]},
+    {"name": "r", "key": "r", "label": icons["web"], "matches": [Match(wm_class=["Chromium-browser", "Firefox", "Google-chrome"])]},
+    {"name": "f", "key": "f", "label": icons["terminal"], "matches": [Match(wm_class=["dolphin", "Thunar", "File-roller"])]},
+    {"name": "d", "key": "d", "label": icons["dev"], "matches": [Match(wm_class=["Lispworks", "jetbrains-pycharm", "Eclipse" ])]},
+    {"name": "q", "key": "q", "label": icons["doc"], "matches": [Match(wm_class=["Acroread", "Zathura", "Evince"])]},
+    {"name": "n", "key": "n", "label": icons["misc"], "matches": [Match(wm_class=["Claws-mail"])]},
+    {"name": "c", "key": "c", "label": icons["ssh"]},
+    {"name": "v", "key": "v", "label": icons["virtual"], "matches": [Match(wm_class=["VirtualBox"])]},
+    {"name": "g", "key": "g", "label": icons["games"], "matches": [Match(wm_class=["Wine", "Python2.7", "Steam", "Progress"])]}, # Python2.7 is playonlinux; Progress is steam updater
+    {"name": "o", "key": "o", "label": icons["music"], "matches": [Match(wm_class=["Vlc", "Totem"])]},
 ]
 
 groups = []
 for workspace in workspaces:
     matches = workspace["matches"] if "matches" in workspace else None
-    groups.append(Group(workspace["name"], matches=matches, layout="max"))
+    groups.append(Group(workspace["name"], label=workspace["label"], matches=matches, layout="max"))
     keys.append(Key([mod], workspace["key"], lazy.group[workspace["name"]].toscreen()))
     keys.append(Key([mod, sup], workspace["key"], lazy.window.togroup(workspace["name"])))
 
@@ -186,23 +213,7 @@ def num_screens():
     return i
 
 
-# dnf install fontawesome-fonts
-# https://fortawesome.github.io/Font-Awesome/cheatsheet/
-# For v4.7 see https://fontawesome.com/v4.7.0/cheatsheet/
-icons = {
-    "logo": "",     # all-the-icons python logo
-    "temp": "",     # fa-fire-extinguisher
-    "battery": "",  # fa-battery-three-quarters
-    "light": "",    # fa-lightbulb-o
-    "volume": "",   # fa-bullhorn
-    "rss": "",      # fa-rss
-    "tasks": "",    # fa-calendar-check-o
-    "repeat": "",   # fa-repeat
-}
-
 style = {
-    # "foreground": colors["greyfg"],
-    "foreground": colors["greybg"],
     "padding": 5,
 }
 
@@ -213,109 +224,169 @@ sep = {
 
 screens = [
     Screen(
-        top=bar.Bar([
+        bottom=bar.Bar([
+
             # Logo
-            widget.TextBox(text=icons["logo"], fontsize=14,
-                           mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn("urxvt")},
-                           background=base16_chalk["magenta"],
-                           **style),
-            # widget.Sep(**sep),
+            widget.TextBox(
+                text=icons["logo"],
+                fontsize=14,
+                mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn("urxvt")},
+                foreground=base16_chalk["magenta"],
+                padding_y=5,
+                **style
+            ),
 
 
-            widget.GroupBox(highlight_method="block", this_current_screen_border=base16_chalk["blue"],
-                            # this_screen_border=base16_chalk["yellow"],
-                            background=base16_chalk["magenta"],
-                            foreground=colors["greybg"],
+            # Workspaces
+            widget.GroupBox(
+                highlight_method="text",
+                this_current_screen_border=base16_chalk["blue"],
+                active=base16_chalk["white"],
+                inactive=base16_chalk["gray"],
+                rounded=False,
+                padding_x=6,
+                padding_y=5,
+                margin=0,
+                fontsize=14,
+            ),
+            widget.Sep(**sep),
 
-                            active=colors["greybg"],
-                            inactive=colors["greybg"],
 
+            # Current layout
+            widget.CurrentLayout(
+                foreground=base16_chalk["green"],
+                **style
+            ),
+            widget.Sep(**sep),
 
-
-                            rounded=False,
-                            padding_x=6,
-                            padding_y=6,
-                            margin=0,
-                            hide_unused=True,
-                            ),
-            # widget.Sep(**sep),
-            widget.CurrentLayout(background=base16_chalk["green"], **style),
-            # widget.Sep(**sep),
 
             widget.TaskList(
-                # background=base16_chalk["yellow"],
-                foreground=colors["greybg"],
-                highlight_method="block",
+                icon_size=0,
+                background=colors["greybg"],
+                foreground=base16_chalk["white"],
 
+                highlight_method="text",
                 border=base16_chalk["blue"],
-                unfocused_border=base16_chalk["yellow"],
                 urgent_border=base16_chalk["red"],
-
-                rounded=False,
-                # padding_x=6,
-                margin=0,
-                padding=6,
             ),
-            widget.Notify(foreground_low=colors["red"][1:], foreground_urgent=colors["red"][1:], **style),
+
+
+            widget.Notify(
+                foreground_low=colors["red"][1:],
+                foreground_urgent=colors["red"][1:],
+                **style
+            ),
+
 
             # Temp
-            # widget_style = {"background": base16_chalk["green"]}
-            widget.TextBox(text=icons["temp"], background=base16_chalk["yellow"], **style),
-            widget.ThermalSensor(threshold=65, background=base16_chalk["yellow"], foreground_alert=colors["red"], **style),
-            # widget.Sep(**sep),
+            widget.TextBox(
+                text=icons["temp"],
+                foreground=base16_chalk["yellow"],
+                **style
+            ),
+            widget.ThermalSensor(
+                threshold=65,
+                foreground=base16_chalk["yellow"],
+                foreground_alert=colors["red"],
+                **style
+            ),
+            widget.Sep(**sep),
+
 
             # Battery
-            widget.TextBox(text=icons["battery"], background=base16_chalk["green"], **style),
-            widget.Battery(battery_name=battery, background=base16_chalk["green"], format="{percent:2.0%}",
-                           low_foreground=colors["red"], **style),
-            # widget.Sep(**sep),
+            widget.TextBox(
+                text=icons["battery"],
+                foreground=base16_chalk["magenta"],
+                **style
+            ),
+            widget.Battery(
+                battery_name=battery,
+                foreground=base16_chalk["magenta"],
+                format="{percent:2.0%}",
+                low_foreground=colors["red"],
+                **style
+            ),
+            widget.Sep(**sep),
+
 
             # Light
-            widget.TextBox(text=icons["light"], background=base16_chalk["blue"], **style),
+            widget.TextBox(
+                text=icons["light"],
+                foreground=base16_chalk["blue"],
+                **style
+            ),
             widget.Backlight(
                 brightness_file="/sys/class/backlight/intel_backlight/actual_brightness",
                 max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness",
-                background=base16_chalk["blue"],
+                foreground=base16_chalk["blue"],
                 **style
             ),
-            # widget.Sep(**sep),
+            widget.Sep(**sep),
+
 
             # Volume
-            widget.TextBox(text=icons["volume"], background=base16_chalk["magenta"], **style),
-            widget.Volume(get_volume_command=vol_cur.split(), background=base16_chalk["magenta"], **style),
-            # widget.Sep(**sep),
+            widget.TextBox(
+                text=icons["volume"],
+                foreground=base16_chalk["green"],
+                **style
+            ),
+            widget.Volume(
+                get_volume_command=vol_cur.split(),
+                foreground=base16_chalk["green"],
+                **style
+            ),
+            widget.Sep(**sep),
+
 
             # Unread news count
-            widget.TextBox(text=icons["rss"], background=base16_chalk["yellow"], **style),
-            Newsboat(dbfile="/home/jkadlcik/.newsboat/cache.db", background=base16_chalk["yellow"], **style),
-            # widget.Sep(**sep),
+            widget.TextBox(
+                text=icons["rss"],
+                foreground=base16_chalk["yellow"],
+                **style
+            ),
+            Newsboat(
+                dbfile="/home/jkadlcik/.newsboat/cache.db",
+                foreground=base16_chalk["yellow"],
+                **style
+            ),
+            widget.Sep(**sep),
 
-            # %H:%M  %d. %m. (%b) %Y   #%W
-            widget.Clock(timezone="Europe/Prague", format="%H:%M",
-                         background=base16_chalk["blue"], **style),
 
-            widget.Clock(timezone="Europe/Prague", format="%d. %m. (%b) %Y",
-                         background=base16_chalk["blue"], **style),
+            # Time
+            widget.Clock(
+                timezone="Europe/Prague",
+                format="%H:%M",
+                foreground=base16_chalk["magenta"],
+                **style
+            ),
+            widget.Sep(**sep),
 
-            widget.Clock(timezone="Europe/Prague", format="#%W",
-                         background=base16_chalk["magenta"], **style),
 
+            # Date
+            widget.Clock(
+                timezone="Europe/Prague",
+                format="%d. %m. (%b) %Y",
+                foreground=base16_chalk["blue"],
+                **style
+            ),
+            widget.Sep(**sep),
+
+
+            # Week
+            widget.Clock(
+                timezone="Europe/Prague",
+                format="#%W",
+                foreground=base16_chalk["green"],
+                **style
+            ),
+            widget.Sep(**sep),
+
+
+            # Systray
             widget.Systray(),
 
 
         ], 25, background=colors["greybg"]),
-
-        # bottom=bar.Bar([
-        #     widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"], active=colors["greyfg"], inactive=colors["lgrey"], **style),
-        #     widget.Sep(**sep),
-        #     widget.CurrentLayout(**style),
-        #     widget.Sep(**sep),
-        #     widget.Prompt(),
-	# 		# widget.WindowName(**style),
-        #     # widget.Sep(**sep),
-        #     widget.WindowTabs(separator="    |    ", **style),
-        #     widget.Systray(),
-        # ], 25, background=colors["greybg"]),
     )
 ]
 
