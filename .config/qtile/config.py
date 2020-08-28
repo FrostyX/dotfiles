@@ -14,13 +14,14 @@ https://wiki.archlinux.org/index.php/Xephyr
 
 import re
 import subprocess
+from datetime import date
 from os import uname
 from os.path import expanduser
 from libqtile.config import Key, Screen, Group, Drag, Click, Match, Rule
 from libqtile.command import lazy, Client
 from libqtile import layout, bar, widget, hook
 
-from contrib import VimwikiUnfinished, Newsboat
+from contrib import VimwikiUnfinished, Newsboat, DaysCounter
 
 
 terminal     = "gnome-terminal"
@@ -401,6 +402,14 @@ screens = [
                 format="#%W",
                 foreground=base16_chalk["green"],
                 **style
+            ),
+            widget.Sep(**sep),
+
+
+            # The meaning of this date is a private matter
+            DaysCounter(
+                starting_date=date(year=2019, month=2, day=3),
+                foreground=base16_chalk["yellow"],
             ),
             widget.Sep(**sep),
 

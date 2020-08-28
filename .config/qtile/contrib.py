@@ -2,6 +2,7 @@
 
 import os
 import sqlite3
+from datetime import date
 from subprocess import Popen, PIPE
 from libqtile.widget import GenPollText
 
@@ -74,3 +75,20 @@ class Newsboat(GenPollText):
             return str(cursor.fetchone()[0])
         except sqlite3.OperationalError:
             return "!"
+
+
+class DaysCounter(GenPollText):
+
+    defaults = [
+        ("update_interval", 60 * 60, "The delay in seconds between updates"),
+        ("format", "{D} days", "Format of the displayed text"),
+    ]
+
+    def __init__(self, starting_date=None, **config):
+        GenPollText.__init__(self, **config)
+        self.add_defaults(DaysCounter.defaults)
+        self.starting_date = starting_date
+
+    def func(self):
+        delta = abs(date.today() - self.starting_date)
+        return self.format.format(D=delta.days)

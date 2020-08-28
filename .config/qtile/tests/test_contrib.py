@@ -1,7 +1,9 @@
 import os
 import pytest
 import tempfile
-from contrib import VimwikiUnfinished
+import mock
+from datetime import date
+from contrib import VimwikiUnfinished, DaysCounter
 
 
 example_wiki_content = """# 2019-05-18
@@ -49,3 +51,23 @@ class TestVimwikiUnfinished(object):
         executable = "/nonexisting/bin/vimwiki_unfinished_is_not_installed"
         vw = VimwikiUnfinished(path=self.tmpfile, executable=executable)
         assert vw.poll() == "!"
+
+
+class FakeDate(date):
+    @classmethod
+    def today(cls):
+        return cls(year=2020, month=8, day=27)
+
+
+class TestDaysCounter(object):
+
+    @mock.patch('contrib.date', FakeDate)
+    def test_days(self):
+        counter = DaysCounter(starting_date=date(year=2020, month=9, day=3))
+        assert counter.poll() == "7 days"
+
+        counter = DaysCounter(
+            starting_date=date(year=2020, month=9, day=3),
+            format="{D} freakin days and counting"
+        )
+        assert counter.poll() == "7 freakin days and counting"
