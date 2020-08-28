@@ -202,9 +202,9 @@ layout_theme = {
 }
 layouts = [
     layout.MonadTall(**layout_theme),
-    layout.TreeTab(),
+    layout.TreeTab(**layout_theme),
     layout.xmonad.MonadTall(ratio=0.75, **layout_theme),
-    layout.max.Max(),
+    layout.max.Max(**layout_theme),
 ]
 floating_layout = layout.Floating(**layout_theme)
 
@@ -236,7 +236,11 @@ sep = {
 
 screens = [
     Screen(
-        bottom=bar.Bar([
+        # Let's have a gap on the bottom, but instead of showing a wallpaper,
+        # make it seamless with emacs and termianl backgrounds
+        bottom=bar.Bar([widget.TextBox("")], 15, background=base16_chalk["black"]),
+
+        top=bar.Bar([
 
             # Logo
             widget.TextBox(
@@ -252,6 +256,7 @@ screens = [
             # Workspaces
             widget.GroupBox(
                 highlight_method="text",
+                urgent_alert_method="text",
                 this_current_screen_border=base16_chalk["blue"],
                 active=base16_chalk["white"],
                 inactive=base16_chalk["gray"],
