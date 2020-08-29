@@ -21,7 +21,10 @@ from libqtile.config import Key, Screen, Group, Drag, Click, Match, Rule
 from libqtile.command import lazy, Client
 from libqtile import layout, bar, widget, hook
 
-from contrib import VimwikiUnfinished, Newsboat, DaysCounter
+from contrib import (VimwikiUnfinished,
+                     Newsboat,
+                     DaysCounter,
+                     CurrentLayoutTextIcon)
 
 
 terminal     = "gnome-terminal"
@@ -133,8 +136,19 @@ icons = {
     "virtual": "", # fa-cogs
     "games": "",     # fa-playstation
     "music": "",    # fa-headphones
+
+    "max": "",       # fa-window-maximize
+    "monadtall": "", # fa-columns
+    "treetab": "",   # fa-tree
 }
 
+
+def get_layout_icon(name):
+    return {
+        "max": icons["max"],
+        "monadtall": icons["monadtall"],
+        "treetab": icons["treetab"],
+    }.get(name, name)
 
 
 workspaces = [
@@ -277,7 +291,9 @@ screens = [
 
 
             # Current layout
-            widget.CurrentLayout(
+            CurrentLayoutTextIcon(
+                fun=get_layout_icon,
+                length=20,
                 foreground=base16_chalk["green"],
                 **style
             ),

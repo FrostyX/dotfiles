@@ -4,7 +4,7 @@ import os
 import sqlite3
 from datetime import date
 from subprocess import Popen, PIPE
-from libqtile.widget import GenPollText
+from libqtile.widget import base, GenPollText, CurrentLayoutIcon
 
 
 class VimwikiUnfinished(GenPollText):
@@ -92,3 +92,16 @@ class DaysCounter(GenPollText):
     def func(self):
         delta = abs(date.today() - self.starting_date)
         return self.format.format(D=delta.days)
+
+
+class CurrentLayoutTextIcon(CurrentLayoutIcon):
+
+    def __init__(self, fun, length, **config):
+        CurrentLayoutIcon.__init__(self, **config)
+        self.fun = fun
+        self._len = length
+
+    def draw(self):
+        self.text = self.fun(self.current_layout)
+        self.length = self._len
+        return super(CurrentLayoutIcon, self).draw()
