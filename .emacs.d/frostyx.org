@@ -457,6 +457,13 @@ TODO projectile
   "p" 'helm-projectile-switch-project)
 #+END_SRC
 
+Sometimes it happens that ~helm-projectile~ or ~helm-projectile-find-file~
+suddenly stops working for a project and nothing (including Emacs restart)
+helps. The only solution I accidentally found is running ~helm-ls-git-ls~
+command, close it, and then finding files works again.
+
+See https://github.com/emacs-helm/helm-ls-git
+
 TODO magit
 
 #+BEGIN_SRC emacs-lisp
