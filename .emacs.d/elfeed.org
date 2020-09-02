@@ -70,6 +70,7 @@ configuring something.
 *** https://arenzana.org/feed/
 *** https://fuco1.github.io/rss.xml
 *** https://explog.in/rss.xml
+*** https://blog.jethro.dev/index.xml
 
 ** Gentoo
 
