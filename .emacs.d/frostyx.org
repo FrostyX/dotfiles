@@ -2015,6 +2015,8 @@ Unfortunatelly it is only for one email account.
 
 A ~mu~ index needs to be initialized with an email address.
 
+See https://emacs.stackexchange.com/a/59485
+
 #+BEGIN_SRC bash
 mu init --maildir=seznam --my-address=frostyx@email.cz
 mu index --maildir=~/Mail/seznam
