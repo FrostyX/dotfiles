@@ -2012,6 +2012,11 @@ Here is a great tutorial for setting up ~mbsync~, ~mu~, and ~mu4e~.
 https://www.youtube.com/watch?v=newRHXKm4H4
 Unfortunatelly it is only for one email account.
 
+The prerequisite for this setup is having the following packages installed.
+
+#+BEGIN_SRC bash
+sudo dnf install isync maildir-utils
+#+END_SRC
 
 A ~mu~ index needs to be initialized with an email address.
 
@@ -2022,65 +2027,27 @@ mu init --maildir=seznam --my-address=frostyx@email.cz
 mu index --maildir=~/Mail/seznam
 #+END_SRC
 
+The ~mu4e~ package is not available on MELPA, let's load it from system.
+
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
-;; (add-to-list 'load-path "/home/jkadlcik/git/spotify.el")
-(require 'mu4e)
-
-
-;; sudo dnf install maildir-utils
-
 (use-package mu4e
-  :ensure nil
+  :ensure t
+  :load-path: "/usr/share/emacs/site-lisp/mu4e"
   :config
+
   ;; https://etienne.depar.is/emacs.d/mu4e.html
-  (setq mu4e-split-view 'vertical)
+  (setq mu4e-split-view 'horizontal)
   (setq mu4e-headers-visible-columns 67)
   (setq mu4e-html2text-command "w3m -dump -T text/html -cols 72 -o display_link_number=true -o auto_image=false -o display_image=false -o ignore_null_img_alt=true")
-  (setq mu4e-headers-date-format "%d. %m. %Y")
-  (setq mu4e-headers-time-format "%H:%M")
   (setq mu4e-view-show-addresses t)
   (setq message-kill-buffer-on-exit t)
   (setq mu4e-get-mail-command "mbsync -V seznam")
-
-  ;; (setq )
-  ;; (setq )
-
   (setq mu4e-headers-show-threads t)  ;; does this work?
-
   (setq mu4e-update-interval 120) ;; two minutes
-  (setq mu4e-use-fancy-chars t)
-
   (setq user-full-name "Jakub Kadlčík")
   (setq user-mail-address "frostyx@email.cz")
   (setq mail-user-agent 'message-user-agent)
   (setq mail-specify-envelope-from t)
-
-
-  ;; (setq mu4e-headers-unread-mark  '("u" . "🖂"))
-  ;; (setq mu4e-headers-attach-mark '("a" . "📎"))
-
-  (setq mu4e-headers-unread-mark '("u" . "u")
-        mu4e-headers-draft-mark '("D" . "D") ; draft
-        mu4e-headers-seen-mark '("S" . "S") ; seen
-        mu4e-headers-unseen-mark '("u" . "u") ; unseen
-        mu4e-headers-flagged-mark '("F" . "F") ; flagged
-        mu4e-headers-new-mark '("N" . "N") ; new
-        mu4e-headers-replied-mark '("R" . "R") ; replied
-        mu4e-headers-passed-mark '("P" . "P") ; passed
-        mu4e-headers-encrypted-mark '("x" . "x") ; encrypted
-        mu4e-headers-signed-mark '("s" . "s")) ; signed
-
-  ;; the headers to show in the headers list -- a pair of a field
-  ;; and its width, with `nil' meaning 'unlimited'
-  ;; (better only use that for the last field.
-  ;; These are the defaults:
-  (setq mu4e-headers-fields
-      '((:human-date . 20)    ;; alternatively, use :date
-        (:flags . 10)
-        (:from . 30)
-        (:subject . nil))) ;; alternatively, use :thread-subject
-
 
   ;; @TODO notifications
   ;; https://github.com/iqbalansari/mu4e-alert
@@ -2111,6 +2078,52 @@ mu index --maildir=~/Mail/seznam
 
   nil)
 #+END_SRC
+
+Mu4e offers a possiblity to use symbols instead of letters, however it doesn't
+really work. The output of messages list is weirdly aligned.
+
+See https://github.com/djcb/mu/issues/1062
+
+For the time being, let's go with non-fancy characters. But a possible solution
+would be to add a space after some special characters, see the linked issue.
+
+#+BEGIN_SRC emacs-lisp
+(setq mu4e-use-fancy-chars t)
+(setq mu4e-headers-unread-mark '("u" . "u")
+      mu4e-headers-draft-mark '("D" . "D")
+      mu4e-headers-seen-mark '("S" . "S")
+      mu4e-headers-unseen-mark '("u" . "u")
+      mu4e-headers-flagged-mark '("F" . "F")
+      mu4e-headers-new-mark '("N" . "N")
+      mu4e-headers-replied-mark '("R" . "R")
+      mu4e-headers-passed-mark '("P" . "P")
+      mu4e-headers-encrypted-mark '("x" . "x")
+      mu4e-headers-signed-mark '("s" . "s")
+      mu4e-headers-trashed-mark '("T" . "T")
+      mu4e-headers-attach-mark '("a" . "a"))
+#+END_SRC
+
+Let's customize the columns that should be showed in the messages list. Each
+column should be set as a pair of a field and its width (it can be ~nil~, in
+that case the column width is going to be unlimited. Better to only use that for
+the last column)
+
+#+BEGIN_SRC emacs-lisp
+(setq mu4e-headers-fields
+      '((:human-date . 20)
+        (:flags . 10)
+        (:from . 30)
+        (:thread-subject . nil)))
+#+END_SRC
+
+We set a human-readable date/time format in the messages list view, so we should
+rather a one, that is really readable for us (i.e. not the American one).
+
+#+BEGIN_SRC emacs-lisp
+(setq mu4e-headers-date-format "%d. %m. %Y")
+(setq mu4e-headers-time-format "%H:%M")
+#+END_SRC
+
 
 TODO just redefine the existing bookmarks to somehow use maildir from context
 
