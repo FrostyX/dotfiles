@@ -2008,6 +2008,10 @@ go - open in external browser
 
 ** Email
 
+Here is a great tutorial for setting up ~mbsync~, ~mu~, and ~mu4e~.
+https://www.youtube.com/watch?v=newRHXKm4H4
+Unfortunatelly it is only for one email account.
+
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 ;; (add-to-list 'load-path "/home/jkadlcik/git/spotify.el")
