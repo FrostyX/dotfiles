@@ -105,3 +105,31 @@ class CurrentLayoutTextIcon(CurrentLayoutIcon):
         self.text = self.fun(self.current_layout)
         self.length = self._len
         return super(CurrentLayoutIcon, self).draw()
+
+
+class Mu(GenPollText):
+
+    defaults = [
+        ("update_interval", 10, "The delay in seconds between updates"),
+    ]
+
+    def __init__(self, path, maildir, address, **config):
+        GenPollText.__init__(self, **config)
+        self.add_defaults(Mu.defaults)
+        self.path = path
+        self.maildir = maildir
+        self.address = address
+
+    def func(self):
+        cmd = [
+            "mu", "find",
+            "date:1w..",
+            "and", "flag:unread",
+            "and", "maildir:{0}".format(self.maildir),
+            "and", "to:{0}".format(self.address),
+        ]
+        process = Popen(cmd, stdout=PIPE, stderr=PIPE, cwd=self.path)
+        stdout, _ = process.communicate()
+        if process.returncode:
+            return "err"
+        return str(len(stdout.decode("utf-8").split("\n")) -1)

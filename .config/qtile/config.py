@@ -24,6 +24,7 @@ from libqtile import layout, bar, widget, hook
 from contrib import (VimwikiUnfinished,
                      Newsboat,
                      DaysCounter,
+                     Mu,
                      CurrentLayoutTextIcon)
 
 
@@ -125,6 +126,8 @@ icons = {
     "rss": "",      # fa-rss
     "tasks": "",    # fa-calendar-check-o
     "repeat": "",   # fa-repeat
+    "email": "",    # fa-at
+    "gmail": "",      # fa-google
 
     "chat": "",      # fa-comment-dots
     "web": "",      # fa-internet-explorer
@@ -324,6 +327,34 @@ screens = [
                 **style
             ),
             widget.Spacer(length=100),
+
+
+            # Emails
+            widget.TextBox(
+                text=icons["email"],
+                foreground=base16_chalk["green"],
+                **style
+            ),
+            Mu(
+                "/home/jkadlcik/Mail",
+                "/I/BOX",
+                "frostyx@email.cz",
+                foreground=base16_chalk["green"],
+                **style
+            ),
+            widget.TextBox(
+                text=icons["gmail"],
+                foreground=base16_chalk["green"],
+                **style
+            ),
+            Mu(
+                "/home/jkadlcik/Mail",
+                "/*",
+                "jakub.kadlcik@gmail.com",
+                foreground=base16_chalk["green"],
+                **style
+            ),
+            widget.Sep(**sep),
 
 
             # Temp
