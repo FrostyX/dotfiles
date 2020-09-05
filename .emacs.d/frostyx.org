@@ -2148,6 +2148,27 @@ TODO just redefine the existing bookmarks to somehow use maildir from context
 ;;  ("mime:image/*" "Messages with images" 112))
 #+END_SRC
 
+TODO black magic for sending mail, this doesn't work yet
+
+#+BEGIN_SRC emacs-lisp
+(use-package smtpmail
+  :ensure t
+  :load-path "/usr/share/emacs/site-lisp/mu4e"
+  :config
+  nil)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq message-send-mail-function 'smtpmail-send-it
+      starttls-use-gnutls t
+      smtpmail-starttls-credentials
+      '(("smtp.seznam.cz" 587 "frostyx@email.cz" nil))
+      smtpmail-default-smtp-server "smtp.seznam.cz"
+      smtpmail-smtp-server "smtp.seznam.cz"
+      smtpmail-smtp-service 465
+      smtpmail-debug-info t)
+#+END_SRC
+
 ** RSS
 
 Probably the best available RSS client for Emacs is elfeed. It allows
