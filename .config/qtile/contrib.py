@@ -130,6 +130,6 @@ class Mu(GenPollText):
         ]
         process = Popen(cmd, stdout=PIPE, stderr=PIPE, cwd=self.path)
         stdout, _ = process.communicate()
-        if process.returncode:
-            return "err"
+        if not stdout:
+            return "0"
         return str(len(stdout.decode("utf-8").split("\n")) -1)
