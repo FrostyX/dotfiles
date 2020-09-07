@@ -2025,6 +2025,9 @@ See https://emacs.stackexchange.com/a/59485
 #+BEGIN_SRC bash
 mu init --maildir=seznam --my-address=frostyx@email.cz
 mu index --maildir=~/Mail/seznam
+
+mu init --maildir=gmail --my-address=jakub.kadlcik@gmail.com
+mu index --maildir=~/Mail/gmail
 #+END_SRC
 
 The ~mu4e~ package is not available on MELPA, let's load it from system.
@@ -2055,29 +2058,89 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
   ;; Havent tested it yet, but it looks like a great feature
   ;; https://www.reddit.com/r/emacs/comments/fu8ln7/in_mu4e_1310_how_do_i_open_an_email_in_browser/fmbbfz2?utm_source=share&utm_medium=web2x
   (add-to-list 'mu4e-view-actions
-    '("View in Browser" . mu4e-action-view-in-browser) t)
-
-
-  ;; https://emacs.stackexchange.com/questions/20790/mu4e-folders-for-multiple-accounts-contexts
-  (setq mu4e-maildir (expand-file-name "~/Mail"))
-  (setq mu4e-contexts
- `( ,(make-mu4e-context
-     :name "gmail"
-     :match-func (lambda (msg) (when msg
-       (string-prefix-p "/gmail" (mu4e-message-field msg :maildir))))
-     :vars '(
-       ;; (mu4e-trash-folder . "/gmail/[Gmail].Trash")
-       ;; (mu4e-refile-folder . "/gmail/[Gmail].Archive")
-       (mu4e-bookmarks . ,(my4e-bookmarks "gmail"))
-       ))
-   ,(make-mu4e-context
-     :name "seznam"
-     :match-func (lambda (msg) (when msg
-       (string-prefix-p "/seznam" (mu4e-message-field msg :maildir)))))
-   ))
-
-  nil)
+    '("View in Browser" . mu4e-action-view-in-browser) t))
 #+END_SRC
+
+Everyone has at least two email accounts and who sais he doesn't, he is
+lying. In Mu4e, accounts are managed through "contexts". For an example contexts
+configuration, please see
+
+https://emacs.stackexchange.com/a/50365
+
+First, let's configure my personal email for online stuff.
+
+#+BEGIN_SRC emacs-lisp
+(setq my/mu4e-seznam-context
+      (make-mu4e-context
+       :name "seznam"
+       :enter-func (lambda () (mu4e-message "Entering seznam context"))
+       :leave-func (lambda () (mu4e-message "Leaving seznam context"))
+       :match-func (lambda (msg)
+		     (when msg
+		       (mu4e-message-contact-field-matches
+			msg '(:from :to :cc :bcc) "frostyx@email.cz")))
+       :vars '((user-mail-address . "frostyx@email.cz")
+               (user-full-name . "Jakub Kadlčík")
+               (smtpmail-smtp-user . "frostyx@email.cz")
+               (smtpmail-default-smtp-server . "smtp.seznam.cz")
+               (smtpmail-smtp-server . "smtp.seznam.cz")
+               (smtpmail-smtp-service . 587)
+               (mu4e-sent-messages-behavior . sent))))
+#+END_SRC
+
+Now, my personal Gmail account for IRL stuff.
+
+#+BEGIN_SRC emacs-lisp
+(setq my/mu4e-gmail-context
+      (make-mu4e-context
+       :name "gmail"
+       :enter-func (lambda () (mu4e-message "Entering gmail context"))
+       :leave-func (lambda () (mu4e-message "Leaving gmail context"))
+       :match-func (lambda (msg)
+		     (when msg
+		       (mu4e-message-contact-field-matches
+			msg '(:from :to :cc :bcc) "jakub.kadlcik@gmail.com")))
+       :vars '((user-mail-address . "jakub.kadlcik@gmail.com")
+	       (user-full-name . "Jakub Kadlčík")
+	       (smtpmail-smtp-user . "jakub.kadlcik.gmail.com")
+	       (smtpmail-default-smtp-server . "smtp.gmail.com")
+	       (smtpmail-smtp-server . "smtp.gmail.com")
+	       (smtpmail-smtp-service . 587)
+	       (mu4e-sent-messages-behavior . delete))))
+#+END_SRC
+
+So far, we only created those context configurations. They need to be passed to mu4e.
+
+#+BEGIN_SRC emacs-lisp
+(setq mu4e-contexts (list my/mu4e-seznam-context
+			  my/mu4e-gmail-context))
+#+END_SRC
+
+Authentication for receiving emails is managed elsewhere but for sending emails,
+we need to configure it here. Let's store passwords in the ~pass~ utility (obviously).
+
+#+BEGIN_SRC emacs-lisp
+(setq auth-sources '(password-store))
+#+END_SRC
+
+Try to send an email and see if it fails. If yes, check ~*Messages*~ buffer for
+a bunch of lines like this. Hint, don't launch ~mu4e~ for testing this, use ~C-x
+m~ shortcut.
+
+#+BEGIN_SRC
+auth-source-pass: found no entries matching "frostyx@email.cz@smtp.seznam.cz"
+auth-source-pass: found no entries matching "smtp.seznam.cz:587/frostyx@email.cz"
+auth-source-pass: found no entries matching "smtp.seznam.cz/frostyx@email.cz"
+#+END_SRC
+
+Pick whichever is the most suitable format to you and add a password for it into
+your ~pass~ database. Personally, I did
+
+#+BEGIN_SRC bash
+pass insert email/frostyx@email.cz@seznam.cz
+pass insert email/jakub.kadlcik.gmail.com@gmail.com
+#+END_SRC
+
 
 Mu4e offers a possiblity to use symbols instead of letters, however it doesn't
 really work. The output of messages list is weirdly aligned.
