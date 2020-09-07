@@ -337,7 +337,7 @@ screens = [
             ),
             Mu(
                 "/home/jkadlcik/Mail",
-                "/I/BOX",
+                "/seznam/I/BOX",
                 "frostyx@email.cz",
                 foreground=base16_chalk["green"],
                 **style
@@ -349,7 +349,7 @@ screens = [
             ),
             Mu(
                 "/home/jkadlcik/Mail",
-                "/*",
+                "/gmail/*",
                 "jakub.kadlcik@gmail.com",
                 foreground=base16_chalk["green"],
                 **style
