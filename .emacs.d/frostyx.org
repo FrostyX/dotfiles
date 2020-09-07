@@ -2206,30 +2206,6 @@ rather a one, that is really readable for us (i.e. not the American one).
 (setq mu4e-headers-time-format "%H:%M")
 #+END_SRC
 
-
-TODO just redefine the existing bookmarks to somehow use maildir from context
-
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'mu4e-bookmarks
-  (make-mu4e-bookmark
-    :name  "GMail - Last 7 days"
-    :query "maildir:/gmail/INBOX AND date:7d..now"
-    :key ?g)
-
-  ;; (make-mu4e-bookmark
-  ;;   :name  "Seznam - Last 7 days"
-  ;;   :query "maildir:/seznam/I/BOX AND date:7d..now"
-  ;;   :key ?S))
-)
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-;; (("flag:unread AND NOT flag:trashed" "Unread messages" 117)
-;;  ("date:today..now" "Today's messages" 116)
-;;  ("date:7d..now" "Last 7 days" 119)
-;;  ("mime:image/*" "Messages with images" 112))
-#+END_SRC
-
 ** RSS
 
 Probably the best available RSS client for Emacs is elfeed. It allows
