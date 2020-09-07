@@ -2023,11 +2023,10 @@ A ~mu~ index needs to be initialized with an email address.
 See https://emacs.stackexchange.com/a/59485
 
 #+BEGIN_SRC bash
-mu init --maildir=seznam --my-address=frostyx@email.cz
-mu index --maildir=~/Mail/seznam
-
-mu init --maildir=gmail --my-address=jakub.kadlcik@gmail.com
-mu index --maildir=~/Mail/gmail
+mu init --maildir=~/Mail \
+        --my-address=frostyx@email.cz \
+        --my-address=jakub.kadlcik@gmail.com
+mu index --maildir ~/Mail
 #+END_SRC
 
 The ~mu4e~ package is not available on MELPA, let's load it from system.
