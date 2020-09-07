@@ -2048,10 +2048,8 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
   (setq mu4e-update-interval 120) ;; two minutes
   (setq mail-user-agent 'message-user-agent)
   (setq mail-specify-envelope-from t)
-  (setq message-send-mail-function 'smtpmail-send-it)
   (setq auth-source-debug t)
   (setq auth-source-do-cache nil)
-  (setq smtpmail-debug-info t)
 
   ;; @TODO notifications
   ;; https://github.com/iqbalansari/mu4e-alert
@@ -2060,6 +2058,26 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
   ;; https://www.reddit.com/r/emacs/comments/fu8ln7/in_mu4e_1310_how_do_i_open_an_email_in_browser/fmbbfz2?utm_source=share&utm_medium=web2x
   (add-to-list 'mu4e-view-actions
     '("View in Browser" . mu4e-action-view-in-browser) t))
+#+END_SRC
+
+The ~mu4e~ system package provides also a library for sending emails.
+
+See https://www.djcbsoftware.nl/code/mu/mu4e/Sending-mail.html
+
+#+BEGIN_SRC emacs-lisp
+(use-package smtpmail
+  :ensure t
+  :load-path "/usr/share/emacs/site-lisp/mu4e")
+#+END_SRC
+
+And now some black magic configuration, see
+
+https://www.emacswiki.org/emacs/SendingMail
+
+#+BEGIN_SRC emacs-lisp
+(setq message-send-mail-function 'smtpmail-send-it
+      starttls-use-gnutls t
+      smtpmail-debug-info t)
 #+END_SRC
 
 Everyone has at least two email accounts and who sais he doesn't, he is
@@ -2210,27 +2228,6 @@ TODO just redefine the existing bookmarks to somehow use maildir from context
 ;;  ("date:today..now" "Today's messages" 116)
 ;;  ("date:7d..now" "Last 7 days" 119)
 ;;  ("mime:image/*" "Messages with images" 112))
-#+END_SRC
-
-TODO black magic for sending mail, this doesn't work yet
-
-#+BEGIN_SRC emacs-lisp
-(use-package smtpmail
-  :ensure t
-  :load-path "/usr/share/emacs/site-lisp/mu4e"
-  :config
-  nil)
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(setq message-send-mail-function 'smtpmail-send-it
-      starttls-use-gnutls t
-      smtpmail-starttls-credentials
-      '(("smtp.seznam.cz" 587 "frostyx@email.cz" nil))
-      smtpmail-default-smtp-server "smtp.seznam.cz"
-      smtpmail-smtp-server "smtp.seznam.cz"
-      smtpmail-smtp-service 465
-      smtpmail-debug-info t)
 #+END_SRC
 
 ** RSS
