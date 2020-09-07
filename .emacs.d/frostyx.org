@@ -2043,13 +2043,15 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
   (setq mu4e-html2text-command "w3m -dump -T text/html -cols 72 -o display_link_number=true -o auto_image=false -o display_image=false -o ignore_null_img_alt=true")
   (setq mu4e-view-show-addresses t)
   (setq message-kill-buffer-on-exit t)
-  (setq mu4e-get-mail-command "mbsync -V seznam")
+  (setq mu4e-get-mail-command "mbsync -a")
   (setq mu4e-headers-show-threads t)  ;; does this work?
   (setq mu4e-update-interval 120) ;; two minutes
-  (setq user-full-name "Jakub Kadlčík")
-  (setq user-mail-address "frostyx@email.cz")
   (setq mail-user-agent 'message-user-agent)
   (setq mail-specify-envelope-from t)
+  (setq message-send-mail-function 'smtpmail-send-it)
+  (setq auth-source-debug t)
+  (setq auth-source-do-cache nil)
+  (setq smtpmail-debug-info t)
 
   ;; @TODO notifications
   ;; https://github.com/iqbalansari/mu4e-alert
@@ -2101,7 +2103,7 @@ Now, my personal Gmail account for IRL stuff.
 			msg '(:from :to :cc :bcc) "jakub.kadlcik@gmail.com")))
        :vars '((user-mail-address . "jakub.kadlcik@gmail.com")
 	       (user-full-name . "Jakub Kadlčík")
-	       (smtpmail-smtp-user . "jakub.kadlcik.gmail.com")
+	       (smtpmail-smtp-user . "jakub.kadlcik")
 	       (smtpmail-default-smtp-server . "smtp.gmail.com")
 	       (smtpmail-smtp-server . "smtp.gmail.com")
 	       (smtpmail-smtp-service . 587)
@@ -2137,7 +2139,7 @@ your ~pass~ database. Personally, I did
 
 #+BEGIN_SRC bash
 pass insert email/frostyx@email.cz@seznam.cz
-pass insert email/jakub.kadlcik.gmail.com@gmail.com
+pass insert email/jakub.kadlcik@gmail.com
 #+END_SRC
 
 
