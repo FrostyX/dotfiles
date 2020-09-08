@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Insert quote
+# key: quote
+# --
+
+#+BEGIN_QUOTE
+$0
+#+END_QUOTE
