@@ -1651,6 +1651,7 @@ See https://orgmode.org/manual/Multiple-sets-in-one-file.html#Multiple-sets-in-o
 #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords
       '((sequence "TODO(t)"
+                  "NEXT(n)"
                   "STARTED(s)"
                   "WAITING(w)"
                   "BLOCKED(b)"
