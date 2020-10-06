@@ -1177,9 +1177,14 @@ See https://www.emacswiki.org/emacs/MidnightMode
 #+BEGIN_SRC emacs-lisp
 (use-package midnight
   :ensure t
+  :disabled
   :config
   (midnight-mode))
 #+END_SRC
+
+Unforunatelly my hack for not-killing eyebrowse-visible buffers (see
+further bellow) stopped working so I need to have ~midnight-mode~
+temporarily disabled.
 
 My midnight is definitelly not at midnight because I am definitely up and
 working at that time. It is safer to run automaticall tasks early in the
