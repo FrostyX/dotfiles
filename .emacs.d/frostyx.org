@@ -1125,12 +1125,19 @@ created named."
    (read-string "Tag: ")))
 #+END_SRC
 
+When creating a new workspace do not copy the current window layout to it. I
+will most likely want only a single window there and split it only when
+necessary. This cryptic option means - Create a new workspace with just
+~*scratch*~ buffer.
+
+#+BEGIN_SRC
+(setq eyebrowse-new-workspace t)
+#+END_SRC
+
 My workflow for opening a new project is.
 
 1. Create a new named workspace ~SPC E c~
-2. This preserves splits from previous workspace, which is a little bit
-   inconvenient. Leave just one with ~C-w O~
-3. Switch to the desired project ~<leader>p~
+2. Switch to the desired project ~SPC p~
 
 * Sessions
 
