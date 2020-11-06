@@ -904,7 +904,7 @@ Hydra definitions for Eyebrowse commands.
   ("Eyebrowse"
    (("e" eyebrowse-switch-to-window-config "Switch to config")
     ("l" eyebrowse-last-window-config "Switch to the latest window config")
-    ("c" eyebrowse-create-window-config "Create a new config")
+    ("c" eyebrowse-create-named-window-config "Create a new config")
     ("r" eyebrowse-rename-window-config "Rename a new config")
     ("d" eyebrowse-close-window-config "Destroy a window config"))))
 #+END_SRC
@@ -1115,13 +1115,27 @@ See https://github.com/wasamasa/eyebrowse
      ("g c" . nil)))
 #+END_SRC
 
+I would like to create a named workspaces so until my eyebrowse patch
+gets merged and released, let's create the feature here.
+
+#+BEGIN_SRC emacs-lisp
+(defun eyebrowse-create-named-window-config ()
+  "Creates a window config at a yet unoccupied slot.
+User is prompted to provide a tag name, so the window config is
+created named."
+  (interactive)
+  (eyebrowse-create-window-config)
+  (eyebrowse-rename-window-config
+   (eyebrowse--get 'current-slot)
+   (read-string "Tag: ")))
+#+END_SRC
+
 My workflow for opening a new project is.
 
-1. Create a new workspace ~<leader>c~
+1. Create a new named workspace ~SPC E c~
 2. This preserves splits from previous workspace, which is a little bit
    inconvenient. Leave just one with ~C-w O~
 3. Switch to the desired project ~<leader>p~
-4. Rename the workspace ~<leader>$~
 
 * Sessions
 
