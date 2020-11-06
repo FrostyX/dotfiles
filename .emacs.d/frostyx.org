@@ -1101,11 +1101,6 @@ See https://github.com/wasamasa/eyebrowse
   (eyebrowse-mode t)
   (eyebrowse-setup-opinionated-keys)
 
-  (evil-leader/set-key
-    "e" 'eyebrowse-switch-to-window-config
-    "c" 'eyebrowse-create-window-config
-    "$" 'eyebrowse-rename-window-config)
-
   ;; unmap `gc' because it conflicts with `evil-commentary'
   :bind
   (:map evil-normal-state-map
