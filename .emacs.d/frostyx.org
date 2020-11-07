@@ -1111,7 +1111,7 @@ See https://github.com/wasamasa/eyebrowse
 #+END_SRC
 
 I would like to create a named workspaces so until my eyebrowse patch
-gets merged and released, let's create the feature here.
+gets released (see ~bdc626f~ in eyebrowse repo), let's create the feature here.
 
 #+BEGIN_SRC emacs-lisp
 (defun eyebrowse-create-named-window-config ()
