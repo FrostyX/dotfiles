@@ -165,6 +165,18 @@ Let's have some funny message on the top of the ~*scratch*~ buffer.
 (setq initial-scratch-message ";; Do you even lisp, bro? ಠ_ಠ\n\n\n")
 #+END_SRC
 
+
+We don't want to quit emacs. Ever! Sometimes it happens to me, that I
+accidentally type ~:wq~ because I want to close the current buffer but don't
+realize that I am not in any split, so this is my last visible buffer. In such
+case, Emacs gets killed and it sucks so bad (because I have ten eyebrowse
+workspaces full of things, they are just not currently visible). So, let's take
+this safety measure and ask everytime before quiting.
+
+#+BEGIN_SRC emacs-lisp
+(setq confirm-kill-emacs 'y-or-n-p)
+#+END_SRC
+
 * Package management
 
 We want to automatically update Emacs packages in order to avoid annoying warnings
