@@ -1755,6 +1755,7 @@ TODO this is my WIP implementation of super agenda
 	)))
   (org-todo-list))
 #+END_SRC
+
 The sequence of possible states for our TODO items. These are just basic ones, I
 am trying to keep this sequence as limited as possible. However, in case we need
 more complicated state management, we can add another sequences. This can be
@@ -1806,6 +1807,24 @@ See https://orgmode.org/manual/The-date_002ftime-prompt.html
 Similarly, a deadline can be set by pressing ~C-c C-d~.
 
 See https://orgmode.org/manual/Inserting-deadline_002fschedule.html
+
+
+TODO org-capture
+
+#+BEGIN_SRC emacs-lisp
+(setq org-default-notes-file (concat org-directory "/gtd/inbox.org"))
+#+END_SRC
+
+TODO Capture templates for adding TODOs via ~org-agenda~
+
+#+BEGIN_SRC emacs-lisp
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+olp "~/org/gtd/gtd.org" "2020" "Week 45")
+         "* TODO %?\n  %i\n  %a")
+        ("i" "Inbox" entry (file+headline "~/org/gtd/inbox.org" "Tasks")
+         "* TODO %?\n  %i\n  %a")))
+#+END_SRC
+
 
 *** Markdown
 
