@@ -1703,6 +1703,58 @@ convince applications to behave more friendly one by one.
 (setq org-agenda-window-setup 'current-window)
 #+END_SRC
 
+I find the default agenda view too cluttered. Let's install ~org-super-agenda~
+which allows us to easily show custom groups of tasks (and display them in
+prettified as we want to).
+
+See https://github.com/alphapapa/org-super-agenda
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-super-agenda
+  :ensure t
+  :config
+  (org-super-agenda-mode))
+#+END_SRC
+
+TODO this is my WIP implementation of super agenda
+
+#+BEGIN_SRC emacs-lisp
+(defun my/org-agenda-group-name (icon name)
+  (concat
+   (propertize (fontawesome icon)
+               'face '(:family "FontAwesome"))
+   " "
+   name))
+
+(let ((org-agenda-span 'day)
+      (org-super-agenda-groups
+       `(
+
+	(:name ,(my/org-agenda-group-name "star-o" "Next")
+	 :todo "NEXT")
+
+	(:name ,(my/org-agenda-group-name "flash" "Important")
+               :priority "A")
+
+	(:name ,(my/org-agenda-group-name "thumb-tack" "Started")
+		:todo "STARTED")
+
+	(:name ,(my/org-agenda-group-name "clock-o" "Waiting")
+	       :todo "WAITING")
+
+	(:name ,(my/org-agenda-group-name "check-square-o" "TODO")
+	       :todo "TODO")
+
+	(:name ,(my/org-agenda-group-name "exclamation-triangle" "Blocked")
+	       :todo "BLOCKED")
+
+	;; TODO ideally show finished tasks as a motivation that
+	;; things are being done
+	(:todo ("DONE" "CANCELLED"))
+
+	)))
+  (org-todo-list))
+#+END_SRC
 The sequence of possible states for our TODO items. These are just basic ones, I
 am trying to keep this sequence as limited as possible. However, in case we need
 more complicated state management, we can add another sequences. This can be
