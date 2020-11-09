@@ -617,6 +617,27 @@ See http://chriskempson.com/projects/base16/#styling-guidelines
                                         :foreground my/gray)
 #+END_SRC
 
+Besides normal fonts we also want to setup some icon fonts. Personally, I like
+~Font Awesome~ the best. It is really easy to use and it dominates in the realm
+of website icons so it is like killing two birds with one stone.
+
+See https://github.com/emacsorphanage/fontawesome
+
+#+BEGIN_SRC emacs-lisp
+(use-package fontawesome
+  :ensure t)
+#+END_SRC
+
+By default ~Font Awesome~ icons show quite strangely. It seems that all icons
+work, it's just they are displayed under wrong names. In ~M-x helm-fontawesome~
+it works properly though. The following setting fixes it.
+
+See https://github.com/emacsorphanage/fontawesome/issues/12#issuecomment-284193735
+
+#+BEGIN_SRC emacs-lisp
+(set-fontset-font t 'unicode "FontAwesome" nil 'prepend)
+#+END_SRC
+
 ** UX
 
 *** Modeline
