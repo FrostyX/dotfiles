@@ -2866,6 +2866,45 @@ pacmd list-sink-inputs
 pacmd move-sink-input 1712 1
 #+END_SRC
 
+* Beyond Emacs
+** Edit with Emacs (in Google Chrome)
+/Edit with Emacs/ is a Google Chrome extension allowing to pop-up a new Emacs
+frame to edit a textarea.
+
+See https://chrome.google.com/extensions/detail/ljobjlafonikaiipfkggjbhkghgicgoh
+
+The usage is easy, just right-click a ~<textarea>~ and click ~Edit with
+Emacs~. This feature doesn't work for "rich editors", e.g. Gmail, Grammarly,
+etherpads, etc.
+
+Some configuration is required on the Emacs part.
+
+See https://github.com/stsquad/emacs_chrome
+
+#+BEGIN_SRC emacs-lisp
+(use-package edit-server
+  :ensure t
+  :config
+  (edit-server-start))
+#+END_SRC
+
+I probably don't need (most of) this configuration because of using a tiling
+window manager. The size and position of this new frame will be determined
+solely by my WM workspace layout. I am leaving it here in case I was forced to
+work in a shitty DE.
+
+#+BEGIN_SRC emacs-lisp
+(setq edit-server-new-frame-alist
+      '((name . "Edit with Emacs FRAME")
+        (top . 200)
+        (left . 200)
+        (width . 80)
+        (height . 25)
+        (minibuffer . t)
+        (menu-bar-lines . t)
+        (window-system . x)))
+#+END_SRC
+
 * Resources
 
 ** Other people configs
