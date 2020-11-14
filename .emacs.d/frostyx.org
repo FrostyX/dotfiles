@@ -1143,6 +1143,14 @@ See https://github.com/wasamasa/eyebrowse
      ("g c" . nil)))
 #+END_SRC
 
+Besides hydra, I sometimes use leader key for quickly switching between
+eyebrowse workspaces.
+
+#+BEGIN_SRC emacs-lisp
+(evil-leader/set-key
+  "e" 'eyebrowse-switch-to-window-config)
+#+END_SRC
+
 I would like to create a named workspaces so until my eyebrowse patch
 gets released (see ~bdc626f~ in eyebrowse repo), let's create the feature here.
 
