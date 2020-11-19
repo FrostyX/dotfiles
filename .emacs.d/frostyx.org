@@ -1968,6 +1968,7 @@ on 80 characters.
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 (add-hook 'markdown-mode-hook 'turn-on-auto-fill)
 (add-hook 'rst-mode-hook 'turn-on-auto-fill)
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
