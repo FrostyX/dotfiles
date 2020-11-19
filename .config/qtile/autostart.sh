@@ -2,7 +2,7 @@
 
 xsetroot -cursor_name left_ptr
 
-feh --bg-scale /home/jkadlcik/.config/qtile/img/kde-wallpaper.png
+feh --bg-scale /home/jkadlcik/.config/qtile/img/paint-colorful-overlay.jpg
 
 # Turn off black Screensaver
 # My current laptop has an issue that sometimes causes system to freeze
