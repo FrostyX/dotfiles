@@ -237,7 +237,7 @@ widget_defaults = dict(
 
 def num_screens():
     process = subprocess.Popen(["xrandr"], stdout=subprocess.PIPE)
-    out = str(process.communicate()[0]).split("\n")
+    out = process.communicate()[0].decode("utf-8").split("\n")
     i = 0
     for line in out:
         if " connected " in line:
@@ -254,8 +254,9 @@ sep = {
     "padding": 15,
 }
 
-screens = [
-    Screen(
+
+def create_screen():
+    return Screen(
         # Let's have a gap on the bottom, but instead of showing a wallpaper,
         # make it seamless with emacs and termianl backgrounds
         bottom=bar.Bar([widget.TextBox("")], 15, background=base16_chalk["black"]),
@@ -476,20 +477,11 @@ screens = [
             widget.Spacer(length=5),
         ], 25, background=colors["greybg"]),
     )
-]
 
-if num_screens() == 2:
-    screens.append(
-        Screen(
-            bottom=bar.Bar([
-            widget.GroupBox(highlight_method="block", this_current_screen_border=colors["blue"], active=colors["greyfg"], inactive=colors["lgrey"], **style),
-                widget.Sep(**sep),
-                widget.CurrentLayout(**style),
-                widget.Sep(**sep),
-                widget.Prompt(),
-                widget.WindowTabs(separator="    |    ", **style),
-                widget.Systray(),
-            ], 25, background=colors["greybg"])))
+# Generate the same screen and panel configuration for each monitor
+screens = []
+for i in range(num_screens()):
+    screens.append(create_screen())
 
 
 # Drag floating layouts.
