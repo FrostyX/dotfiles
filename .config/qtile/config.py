@@ -330,31 +330,31 @@ screens = [
 
 
             # Emails
-            widget.TextBox(
-                text=icons["email"],
-                foreground=base16_chalk["green"],
-                **style
-            ),
-            Mu(
-                "/home/jkadlcik/Mail",
-                "/seznam/I/BOX",
-                "frostyx@email.cz",
-                foreground=base16_chalk["green"],
-                **style
-            ),
-            widget.TextBox(
-                text=icons["gmail"],
-                foreground=base16_chalk["green"],
-                **style
-            ),
-            Mu(
-                "/home/jkadlcik/Mail",
-                "/gmail/*",
-                "jakub.kadlcik@gmail.com",
-                foreground=base16_chalk["green"],
-                **style
-            ),
-            widget.Sep(**sep),
+            # widget.TextBox(
+            #     text=icons["email"],
+            #     foreground=base16_chalk["green"],
+            #     **style
+            # ),
+            # Mu(
+            #     "/home/jkadlcik/Mail",
+            #     "/seznam/I/BOX",
+            #     "frostyx@email.cz",
+            #     foreground=base16_chalk["green"],
+            #     **style
+            # ),
+            # widget.TextBox(
+            #     text=icons["gmail"],
+            #     foreground=base16_chalk["green"],
+            #     **style
+            # ),
+            # Mu(
+            #     "/home/jkadlcik/Mail",
+            #     "/gmail/*",
+            #     "jakub.kadlcik@gmail.com",
+            #     foreground=base16_chalk["green"],
+            #     **style
+            # ),
+            # widget.Sep(**sep),
 
 
             # Temp
@@ -462,11 +462,11 @@ screens = [
 
 
             # The meaning of this date is a private matter
-            DaysCounter(
-                starting_date=date(year=2019, month=2, day=3),
-                foreground=base16_chalk["yellow"],
-            ),
-            widget.Sep(**sep),
+            # DaysCounter(
+            #     starting_date=date(year=2019, month=2, day=3),
+            #     foreground=base16_chalk["yellow"],
+            # ),
+            # widget.Sep(**sep),
 
 
             # Systray
