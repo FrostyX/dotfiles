@@ -484,6 +484,7 @@ def create_screen():
 screens = []
 for i in range(num_screens()):
     screens.append(create_screen())
+screens.reverse()
 
 
 # Drag floating layouts.
