@@ -71,6 +71,7 @@ configuring something.
 *** https://fuco1.github.io/rss.xml
 *** https://explog.in/rss.xml
 *** https://blog.jethro.dev/index.xml
+*** https://www.bennee.com/~alex/blog/feeds/all.atom.xml
 
 ** Gentoo
 
