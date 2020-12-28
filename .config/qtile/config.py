@@ -29,7 +29,9 @@ from contrib import (VimwikiUnfinished,
 
 
 terminal     = "gnome-terminal"
-run          = "gmrun"
+run_backup   = "gmrun"
+run          = "rofi -show run"
+applications = "rofi -show drun"
 vol_cur      = "amixer -D pulse get Master"
 vol_up       = "amixer -q -D pulse sset Master 2%+"
 vol_down     = "amixer -q -D pulse sset Master 2%-"
@@ -71,7 +73,9 @@ keys = [
 
     Key([mod], "Return", lazy.spawn(terminal)),
     Key([mod], "F1", lazy.spawn(terminal)),
-    Key([mod], "F2", lazy.spawn(run)),
+    Key([mod], "F2", lazy.spawn(run_backup)),
+    Key([mod], "p", lazy.spawn(run)),
+    Key([mod, sup], "p", lazy.spawn(applications)),
 
     # Toggle between different layouts as defined below
     Key([mod], "space", lazy.next_layout()),
