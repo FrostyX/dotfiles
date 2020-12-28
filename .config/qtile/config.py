@@ -55,7 +55,6 @@ if hostname == "chromie":
     scrot_all = "/home/jkadlcik/git/qtile-screenshot/qtile-screenshot.py -o /home/jkadlcik/images/scrot"
     # https://github.com/FrostyX/qtile-screenshot/blob/master/qtile-screenshot.py
 
-elif hostname == "localhost.localdomain":  # New work laptop is not named yet
 # New work laptop is not named yet
 elif hostname in ["localhost.localdomain", "sagemcom.ip"]:
     scrot = "/home/jkadlcik/.bin/screenshot.sh"
