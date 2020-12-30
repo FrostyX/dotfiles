@@ -2336,9 +2336,8 @@ the last column)
 
 #+BEGIN_SRC emacs-lisp
 (setq mu4e-headers-fields
-      '((:human-date . 20)
-        (:flags . 10)
-        (:from . 30)
+      '((:human-date . 18)
+        (:from . 20)
         (:thread-subject . nil)))
 #+END_SRC
 
