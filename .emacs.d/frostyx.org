@@ -2384,6 +2384,32 @@ rather a one, that is really readable for us (i.e. not the American one).
 (setq mu4e-headers-time-format "%H:%M")
 #+END_SRC
 
+
+We don't always want to dig through the entire mailbox but rather see a filtered
+mail, e.g. last weeks mail for a specific email address. Mu4e bookmarks are the
+thing.
+
+See https://www.djcbsoftware.nl/code/mu/mu4e/Bookmarks.html
+
+#+BEGIN_SRC emacs-lisp
+(custom-reevaluate-setting 'mu4e-bookmarks)
+
+(add-to-list 'mu4e-bookmarks
+  '(:name "Red Hat shortcut"
+    :query "date:1w.. and maildir:/redhat/*/"
+    :key ?r))
+
+(add-to-list 'mu4e-bookmarks
+  '(:name "Gmail shortcut"
+    :query "date:1w.. and maildir:/gmail/*/"
+    :key ?g))
+
+(add-to-list 'mu4e-bookmarks
+  '(:name "Seznam shortcut"
+    :query "date:1w.. and maildir:/seznam/I/BOX/"
+    :key ?s))
+#+END_SRC
+
 ** RSS
 
 Probably the best available RSS client for Emacs is elfeed. It allows
