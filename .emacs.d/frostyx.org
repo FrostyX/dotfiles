@@ -1104,6 +1104,8 @@ See https://github.com/bbatsov/projectile
   (setq projectile-project-search-path '("~/git/")))
 #+END_SRC
 
+TODO Discover projects on startup
+
 The default projectile interface is /meh/ at best, let's use helm.
 
 See https://github.com/bbatsov/helm-projectile
