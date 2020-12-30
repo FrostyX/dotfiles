@@ -2698,12 +2698,18 @@ See https://github.com/jorgenschaefer/circe/wiki/Configuration#channel-name-in-t
 (add-hook 'lui-mode-hook 'my/circe-autoscroll)
 #+END_SRC
 
-Hard wrap at 120 characters. Ideally we would like to indent the message to the
+Hard wrap at 70 characters. This is a limit specifically for the message
+body. With timestamp prefix, the columns are basically 80 characters long.
+
+#+BEGIN_SRC emacs-lisp
+(setq lui-fill-column 70)
+#+END_SRC
+
+Ideally we would like to indent the message to the
 exact column that it started but it is not that easy. So until then, indent new
 lines of a message with a typical 4 spaces.
 
 #+BEGIN_SRC emacs-lisp
-(setq lui-fill-column 120)
 (setq lui-fill-type "    ")
 #+END_SRC
 
