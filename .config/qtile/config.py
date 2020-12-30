@@ -522,3 +522,8 @@ def autostart():
 def restart_on_randr(qtile, ev):
     # qtile.cmd_restart()
     pass
+
+
+
+# Go to the group in the proper monitor, instead of switching the current one
+# https://github.com/qtile/qtile/issues/1271#issuecomment-458107043
