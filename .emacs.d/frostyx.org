@@ -2361,8 +2361,18 @@ the last column)
 
 #+BEGIN_SRC emacs-lisp
 (setq mu4e-headers-fields
-      '((:human-date . 18)
-        (:from . 20)
+      '((:from . 20)
+        (:thread-subject . nil)))
+#+END_SRC
+
+Ideally we would like to have a multiple headers views, one slim, designed for
+80 column window, other full-sized.
+
+#+BEGIN_SRC emacs-lisp
+(setq my/mu4e-headers-fields-full
+      '((:human-date . 20)
+        (:flags . 10)
+        (:from . 30)
         (:thread-subject . nil)))
 #+END_SRC
 
