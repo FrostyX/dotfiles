@@ -1736,34 +1736,32 @@ TODO this is my WIP implementation of super agenda
    " "
    name))
 
-(let ((org-agenda-span 'day)
-      (org-super-agenda-groups
-       `(
+(defun my/org-agenda ()
+  (interactive)
+  (let ((org-agenda-span 'day)
+	(org-super-agenda-groups
+	 `((:name ,(my/org-agenda-group-name "star-o" "Next")
+		  :todo "NEXT")
 
-	(:name ,(my/org-agenda-group-name "star-o" "Next")
-	 :todo "NEXT")
+	   (:name ,(my/org-agenda-group-name "flash" "Important")
+		  :priority "A")
 
-	(:name ,(my/org-agenda-group-name "flash" "Important")
-               :priority "A")
+	   (:name ,(my/org-agenda-group-name "thumb-tack" "Started")
+		  :todo "STARTED")
 
-	(:name ,(my/org-agenda-group-name "thumb-tack" "Started")
-		:todo "STARTED")
+	   (:name ,(my/org-agenda-group-name "clock-o" "Waiting")
+		  :todo "WAITING")
 
-	(:name ,(my/org-agenda-group-name "clock-o" "Waiting")
-	       :todo "WAITING")
+	   (:name ,(my/org-agenda-group-name "check-square-o" "TODO")
+		  :todo "TODO")
 
-	(:name ,(my/org-agenda-group-name "check-square-o" "TODO")
-	       :todo "TODO")
+	   (:name ,(my/org-agenda-group-name "exclamation-triangle" "Blocked")
+		  :todo "BLOCKED")
 
-	(:name ,(my/org-agenda-group-name "exclamation-triangle" "Blocked")
-	       :todo "BLOCKED")
-
-	;; TODO ideally show finished tasks as a motivation that
-	;; things are being done
-	(:todo ("DONE" "CANCELLED"))
-
-	)))
-  (org-todo-list))
+	   ;; TODO ideally show finished tasks as a motivation that
+	   ;; things are being done
+	   (:todo ("DONE" "CANCELLED")))))
+    (org-todo-list)))
 #+END_SRC
 
 The sequence of possible states for our TODO items. These are just basic ones, I
