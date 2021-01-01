@@ -2397,7 +2397,7 @@ See https://www.djcbsoftware.nl/code/mu/mu4e/Bookmarks.html
 
 (add-to-list 'mu4e-bookmarks
   '(:name "Red Hat shortcut"
-    :query "date:1w.. and maildir:/redhat/*/"
+    :query "date:1w.. and maildir:/redhat/INBOX/"
     :key ?r))
 
 (add-to-list 'mu4e-bookmarks
