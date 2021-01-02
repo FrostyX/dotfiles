@@ -2187,7 +2187,6 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
   (setq mu4e-html2text-command "w3m -dump -T text/html -cols 72 -o display_link_number=true -o auto_image=false -o display_image=false -o ignore_null_img_alt=true")
   (setq mu4e-view-show-addresses t)
   (setq message-kill-buffer-on-exit t)
-  (setq mu4e-headers-show-threads t)  ;; does this work?
   (setq mu4e-update-interval 120) ;; two minutes
   (setq mail-user-agent 'message-user-agent)
   (setq mail-specify-envelope-from t)
@@ -2205,6 +2204,18 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
   ;; https://www.reddit.com/r/emacs/comments/fu8ln7/in_mu4e_1310_how_do_i_open_an_email_in_browser/fmbbfz2?utm_source=share&utm_medium=web2x
   (add-to-list 'mu4e-view-actions
     '("View in Browser" . mu4e-action-view-in-browser) t))
+#+END_SRC
+
+
+Do not show threads, they are unnecessarily confusinig. They can easily be
+toggled on and off by ~z t~, and it is really easy to narrow the search to only
+one thread by ~a s~ when reading a message.
+
+Ideally I would prefer something like Gmail threads concept, we might
+investigate it in the future.
+
+#+BEGIN_SRC emacs-lisp
+(setq mu4e-headers-show-threads nil)
 #+END_SRC
 
 The ~mu4e~ system package provides also a library for sending emails.
