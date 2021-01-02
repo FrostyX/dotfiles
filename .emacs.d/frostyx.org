@@ -2451,7 +2451,7 @@ a list of lists.
 (setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org"))
 #+END_SRC
 
-Automatically fetch updates from RSS feeds. Let's do it every hour, but I am
+Automatically fetch updates from RSS feeds. Let's do it every day, but I am
 afraid, that it will lag the whole Emacs, so we will probably need to adjust it
 and run less frequently.
 
@@ -2461,7 +2461,7 @@ See:
 
 #+BEGIN_SRC emacs-lisp
 (setq my/elfeed-update-timer
-  (run-at-time nil (* 1 60 60) #'elfeed-update))
+  (run-at-time nil (* 1 60 60 24) #'elfeed-update))
 #+END_SRC
 
 Use ~M-x helm-timers~ to see (and cancel) executed timers.
