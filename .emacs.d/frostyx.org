@@ -2195,7 +2195,7 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
 
 
   ;; Sync everything by `mbsync -a`
-  (setq mu4e-get-mail-command "mbsync seznam gmail")
+  (setq mu4e-get-mail-command "mbsync seznam gmail redhat")
 
   ;; @TODO notifications
   ;; https://github.com/iqbalansari/mu4e-alert
