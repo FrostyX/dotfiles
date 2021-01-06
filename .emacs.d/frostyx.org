@@ -2218,6 +2218,15 @@ investigate it in the future.
 (setq mu4e-headers-show-threads nil)
 #+END_SRC
 
+We want to wrap long lines, so the message reading is more comfortable.
+See the ".3.3 How can I word-wrap long lines in when viewing a message?" section
+on https://www.djcbsoftware.nl/code/mu/mu4e/Reading-messages.html
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'mu4e-view-mode-hook 'visual-line-mode)
+#+END_SRC
+
+
 The ~mu4e~ system package provides also a library for sending emails.
 
 See https://www.djcbsoftware.nl/code/mu/mu4e/Sending-mail.html
