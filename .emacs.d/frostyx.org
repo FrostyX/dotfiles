@@ -2182,7 +2182,7 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
   :config
 
   ;; https://etienne.depar.is/emacs.d/mu4e.html
-  (setq mu4e-split-view 'horizontal)
+  (setq mu4e-split-view nil)
   (setq mu4e-headers-visible-columns 67)
   (setq mu4e-html2text-command "w3m -dump -T text/html -cols 72 -o display_link_number=true -o auto_image=false -o display_image=false -o ignore_null_img_alt=true")
   (setq mu4e-view-show-addresses t)
