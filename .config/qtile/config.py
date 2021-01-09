@@ -148,6 +148,8 @@ icons = {
     "max": "",       # fa-window-maximize
     "monadtall": "", # fa-columns
     "treetab": "",   # fa-tree
+
+    "systray": "",  # fa-fedora
 }
 
 
@@ -260,7 +262,7 @@ sep = {
 }
 
 
-def create_screen():
+def create_screen(primary=False):
     return Screen(
         # Let's have a gap on the bottom, but instead of showing a wallpaper,
         # make it seamless with emacs and termianl backgrounds
@@ -476,7 +478,11 @@ def create_screen():
 
 
             # Systray
-            widget.Systray(),
+            (widget.Systray() if primary else widget.TextBox(
+                icons["systray"],
+                fontsize=14,
+                foreground=base16_chalk["magenta"]
+            )),
 
 
             widget.Spacer(length=5),
@@ -486,7 +492,8 @@ def create_screen():
 # Generate the same screen and panel configuration for each monitor
 screens = []
 for i in range(num_screens()):
-    screens.append(create_screen())
+    primary = i == 1
+    screens.append(create_screen(primary))
 screens.reverse()
 
 
