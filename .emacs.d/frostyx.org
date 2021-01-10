@@ -2227,6 +2227,13 @@ on https://www.djcbsoftware.nl/code/mu/mu4e/Reading-messages.html
 (add-hook 'mu4e-view-mode-hook 'visual-line-mode)
 #+END_SRC
 
+By default, ~mu4e~ has mapped a scrolling function to the space button, I want
+my hydra instead.
+
+#+BEGIN_SRC emacs-lisp
+(evil-define-key 'normal mu4e-view-mode-map (kbd "SPC") nil)
+(evil-define-key 'normal mu4e-headers-mode-map (kbd "SPC") nil)
+#+END_SRC
 
 The ~mu4e~ system package provides also a library for sending emails.
 
