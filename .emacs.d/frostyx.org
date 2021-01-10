@@ -638,9 +638,7 @@ See https://github.com/emacsorphanage/fontawesome/issues/12#issuecomment-2841937
 (set-fontset-font t 'unicode "FontAwesome" nil 'prepend)
 #+END_SRC
 
-** UX
-
-*** Modeline
+** Modeline
 
 #+BEGIN_SRC emacs-lisp
 (use-package spaceline
@@ -691,7 +689,7 @@ they don't take an effect.
 (spaceline-compile)
 #+END_SRC
 
-*** Helm
+** Helm
 
 #+BEGIN_SRC emacs-lisp
 (use-package helm
@@ -802,7 +800,7 @@ open buffers without any filter.
 (define-key evil-normal-state-map (kbd ",;") 'helm-buffers-list)
 #+END_SRC
 
-*** Hydra
+** Hydra
 
 Hydra, a mythical Greek creature ultimatelly killed by Heracles. The beast
 posseses many heads and for every head that is chopped off, Hydra will seal
@@ -844,7 +842,7 @@ Let's install just the ~hydra~ package and keep it simple.
   (hydra-default-hint nil))
 #+END_SRC
 
-**** Additional Hydra packages
+*** Additional Hydra packages
 
 I would really love to use hydra in posframe, but it doesn't work properly
 
@@ -869,7 +867,7 @@ if allows us to define hydras as lists of columns.
   :ensure t)
 #+END_SRC
 
-**** Main Hydra Menu
+*** Main Hydra Menu
 
 Hydra main entry-point allowing us acces to other hydras.
 
@@ -906,7 +904,7 @@ Hydra main entry-point allowing us acces to other hydras.
 TODO define a hydra menu for creating frames (having also specific purpose
      frames such as for IRC, Mail and RSS
 
-**** Presentations
+*** Presentations
 
 Hydra definitions useful for presentations.
 
@@ -927,7 +925,7 @@ Hydra definitions for ~projectile~ package.
    (("d" projectile-discover-projects-in-search-path "discover new projects"))))
 #+END_SRC
 
-**** Eyebrowse
+*** Eyebrowse
 
 Hydra definitions for Eyebrowse commands.
 
@@ -942,7 +940,7 @@ Hydra definitions for Eyebrowse commands.
     ("d" eyebrowse-close-window-config "Destroy a window config"))))
 #+END_SRC
 
-**** Dired
+*** Dired
 
 Hydra definition for ~dired~ package.
 
@@ -956,7 +954,7 @@ Hydra definition for ~dired~ package.
     ("p" (lambda () (interactive) (dired (projectile-project-root)))))))
 #+END_SRC
 
-**** Magit
+*** Magit
 
 Hydra definition for ~magit~ package.
 
@@ -968,7 +966,7 @@ Hydra definition for ~magit~ package.
     ("b" magit-branch-checkout))))
 #+END_SRC
 
-**** Flycheck
+*** Flycheck
 
 Hydra definition for flycheck or other linter
 
@@ -987,7 +985,7 @@ Hydra definition for flycheck or other linter
     ("i" pylint-disable-current-warning "ignore"))))
 #+END_SRC
 
-**** Applications
+*** Applications
 
 Hydra launcher for applications
 
@@ -1001,7 +999,7 @@ Hydra launcher for applications
     ("s" hydra-spotify/body "Spotify"))))
 #+END_SRC
 
-**** Configuration
+*** Configuration
 
 Hydra for configuration/settings/toggle options
 
@@ -1015,7 +1013,7 @@ Hydra for configuration/settings/toggle options
     ("2" (my/colorcolumn 120) "120 characters"))))
 #+END_SRC
 
-**** Major mode
+*** Major mode
 
 Thanks to ~major~mode~hydra~ it is possible to easily define
 major-mode-specific hydra menus.
@@ -1029,7 +1027,7 @@ See https://github.com/jerrypnz/major-mode-hydra.el
   (define-key evil-normal-state-map (kbd "S-SPC") 'major-mode-hydra))
 #+END_SRC
 
-***** Org
+**** Org
 
 #+BEGIN_SRC emacs-lisp
 (major-mode-hydra-define org-mode
@@ -1040,7 +1038,7 @@ See https://github.com/jerrypnz/major-mode-hydra.el
     ("s" org-edit-src-exit "Save special edit"))))
 #+END_SRC
 
-***** Python
+**** Python
 
 #+BEGIN_SRC emacs-lisp
 (major-mode-hydra-define python-mode
@@ -1050,7 +1048,7 @@ See https://github.com/jerrypnz/major-mode-hydra.el
     ("l" hydra-linter/body "Linter"))))
 #+END_SRC
 
-***** Markdown
+**** Markdown
 
 #+BEGIN_SRC emacs-lisp
 (major-mode-hydra-define markdown-mode
@@ -1059,7 +1057,7 @@ See https://github.com/jerrypnz/major-mode-hydra.el
    (("p" markdown-preview "Preview markdown in external web browser"))))
 #+END_SRC
 
-***** Elisp
+**** Elisp
 
 Lisp interaction mode, aka ~*scratch*~ buffer.
 
@@ -1071,7 +1069,7 @@ Lisp interaction mode, aka ~*scratch*~ buffer.
     ("p" eval-print-last-sexp "Evaluate and print to the buffer"))))
 #+END_SRC
 
-***** Circe
+**** Circe
 
 Hydra menu for Circe IRC client
 
