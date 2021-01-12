@@ -2832,7 +2832,6 @@ TODO change message format (date should go before nick)
 
 TODO ignore non-user messages in tracklist
 TODO read message from tracklist when switching window (not only when switching buffer)
-TODO maximum length for tracklist
 
 ** Spotify
 
