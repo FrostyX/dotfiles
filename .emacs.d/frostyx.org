@@ -2437,6 +2437,27 @@ See https://www.djcbsoftware.nl/code/mu/mu4e/Bookmarks.html
     :key ?s))
 #+END_SRC
 
+*** Mu4e Helm support
+
+This collection of code-snippets should ideally be distribute as a new package
+called e.g. ~mu4e-helm~ and provide out-of-the-box helm completion for Mu4e.
+
+Jump to a maildir using helm
+
+See https://emacs.stackexchange.com/questions/47535/setup-helm-for-mu4e-jump-to-maildir
+
+#+BEGIN_SRC emacs-lisp
+(defun my/mu4e-jump-maildir ()
+  (interactive)
+  (let ((maildir (helm-comp-read "Maildir: " (mu4e-get-maildirs))))
+    (mu4e-headers-search (format "maildir:\"%s\"" maildir))))
+
+(evil-define-key 'normal mu4e-main-mode-map (kbd "J") 'my/mu4e-jump-maildir)
+(evil-define-key 'normal mu4e-headers-mode-map (kbd "J") 'my/mu4e-jump-maildir)
+(evil-define-key 'normal mu4e-view-mode-map (kbd "J") 'my/mu4e-jump-maildir)
+#+END_SRC
+
+
 ** RSS
 
 Probably the best available RSS client for Emacs is elfeed. It allows
