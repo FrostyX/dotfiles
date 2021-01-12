@@ -2813,9 +2813,18 @@ coildes with my Window Manager key bindings, so let's just use arrow keys. I use
 (define-key circe-channel-mode-map (kbd "<down>") 'lui-next-input)
 #+END_SRC
 
+Finally, let's configure circe colors.
+
+My nick highlighted in the chat but more importantly color of a buffer where
+I was mentioned, in the circe-tracking modeline segment
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'circe-highlight-nick-face nil :foreground my/red)
+#+END_SRC
+
+
 
 TODO my messages format
-TODO highlight color
 TODO time stamp gray color and remove brackts
 TODO Day changed message like in weechat
 TODO logging file format like weechat has, see ~lui-logging-file-format~
