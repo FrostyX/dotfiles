@@ -1381,6 +1381,13 @@ TODO map this for all modes?
 (add-hook 'python-mode-hook 'set-newline-and-indent)
 #+END_SRC
 
+In case a project uses TABs for indenting, we want to see them with some
+reasonable size.
+
+#+BEGIN_SRC emacs-lisp
+(setq tab-width 4)
+#+END_SRC
+
 ** Completion
 
 Our completion framework of choice is ~company~.
