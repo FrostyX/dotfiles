@@ -1388,6 +1388,18 @@ reasonable size.
 (setq tab-width 4)
 #+END_SRC
 
+We need to adjust tab width for Evil ~<<~ and ~>>~ separately.
+
+#+BEGIN_SRC emacs-lisp
+(setq evil-shift-width 4)
+#+END_SRC
+
+And lastly, we need to adjust tab width for indenting using ~TAB~ key.
+
+#+BEGIN_SRC emacs-lisp
+(setq python-indent-offset 4)
+#+END_SRC
+
 ** Completion
 
 Our completion framework of choice is ~company~.
