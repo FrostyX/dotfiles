@@ -2447,12 +2447,12 @@ See https://www.djcbsoftware.nl/code/mu/mu4e/Bookmarks.html
 
 (add-to-list 'mu4e-bookmarks
   '(:name "Gmail shortcut"
-    :query "date:1w.. and maildir:/gmail/*/"
+    :query "date:1w.. and maildir:/gmail/INBOX/"
     :key ?g))
 
 (add-to-list 'mu4e-bookmarks
   '(:name "Seznam shortcut"
-    :query "date:1w.. and maildir:/seznam/I/BOX/"
+    :query "date:1w.. and maildir:/seznam/INBOX/"
     :key ?s))
 #+END_SRC
 
