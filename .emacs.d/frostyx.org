@@ -178,6 +178,7 @@ this safety measure and ask everytime before quiting.
 #+END_SRC
 
 * Package management
+** Automatical updates
 
 We want to automatically update Emacs packages in order to avoid annoying warnings
 during startup, that some package is recommended to be updated.
@@ -211,6 +212,25 @@ See https://emacs.stackexchange.com/q/14509
 
 #+BEGIN_SRC emacs-lisp
 (setq kill-buffer-query-functions nil)
+#+END_SRC
+
+** Quelpa
+
+Quelpa is a package management tool to compile and install Emacs Lisp packages
+directly from upstream (i.e from git repository hosted for example on Git Hub),
+in opposite to installing them from ELPA or MELPA.
+
+#+BEGIN_SRC emacs-lisp
+(use-package quelpa
+  :ensure t)
+#+END_SRC
+
+By default, Quelpa is called by its own ~quelpa~ function, which is /meh/. Let's
+use use integration with ~use-package~.
+
+#+BEGIN_SRC emacs-lisp
+(use-package quelpa-use-package
+  :ensure t)
 #+END_SRC
 
 * Secrets
