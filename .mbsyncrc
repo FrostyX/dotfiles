@@ -1,0 +1,71 @@
+# My IMAP email configurations
+
+
+# Personal email configuration for frostyx@email.cz
+# hosted on https://www.seznam.cz/
+
+IMAPStore seznam-remote
+Host imap.seznam.cz
+SSLType IMAPS
+User frostyx@email.cz
+PassCmd "pass email/frostyx@email.cz@seznam.cz"
+
+MaildirStore seznam-local
+Path ~/Mail/seznam/
+Inbox ~/Mail/seznam/INBOX
+Subfolders Verbatim
+
+Channel seznam
+Master :seznam-remote:
+Slave :seznam-local:
+Create Both
+Expunge Both
+Patterns * !spam
+SyncState *
+
+
+# Personal email configuration for jakub.kadlcik@gmail.com
+# hosted on https://gmail.com/
+
+IMAPStore gmail-remote
+Host imap.gmail.com
+SSLType IMAPS
+AuthMechs LOGIN
+User jakub.kadlcik@gmail.com
+PassCmd "pass email/jakub.kadlcik@gmail.com"
+
+MaildirStore gmail-local
+Path ~/Mail/gmail/
+Inbox ~/Mail/gmail/INBOX
+Subfolders Verbatim
+
+Channel gmail
+Master :gmail-remote:
+Slave :gmail-local:
+Create Both
+Expunge Both
+Patterns *
+SyncState *
+
+
+# Work email configuration
+
+IMAPStore redhat-remote
+Host imap.gmail.com
+SSLType IMAPS
+AuthMechs LOGIN
+User jkadlcik@redhat.com
+PassCmd "pass email/jkadlcik@redhat.com@gmail.com"
+
+MaildirStore redhat-local
+Path ~/Mail/redhat/
+Inbox ~/Mail/redhat/INBOX
+Subfolders Verbatim
+
+Channel redhat
+Master :redhat-remote:
+Slave :redhat-local:
+Create Both
+Expunge Both
+Patterns *
+SyncState *
