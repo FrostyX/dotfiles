@@ -2863,6 +2863,8 @@ lines of a message with a typical 4 spaces.
 
 See https://emacs.stackexchange.com/a/37515
 
+TODO Use https://github.com/lesharris/helm-circe instead
+
 #+BEGIN_SRC emacs-lisp
 (setq my/circe-buffers-source
   (helm-make-source "Circe Buffers" 'helm-source-buffers
