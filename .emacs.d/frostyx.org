@@ -1877,9 +1877,13 @@ Let's have more colorful TODO keywords
 
 #+BEGIN_SRC emacs-lisp
 (setq org-todo-keyword-faces
-      `(("STARTED" . (:foreground ,my/yellow))
-        ("WAITING" . (:foreground ,my/lblue))
-        ("BLOCKED" . (:foreground ,my/white))))
+      `(("TODO"      . (:foreground ,my/red))
+        ("NEXT"      . (:foreground ,my/red))
+        ("STARTED"   . (:foreground ,my/yellow))
+        ("WAITING"   . (:foreground ,my/lblue))
+        ("BLOCKED"   . (:foreground ,my/red))
+        ("DONE"      . (:foreground ,my/green))
+        ("CANCELLED" . (:foreground ,my/green))))
 #+END_SRC
 
 TODO org-capture
