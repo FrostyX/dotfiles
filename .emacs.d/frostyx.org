@@ -1873,6 +1873,14 @@ Similarly, a deadline can be set by pressing ~C-c C-d~.
 
 See https://orgmode.org/manual/Inserting-deadline_002fschedule.html
 
+Let's have more colorful TODO keywords
+
+#+BEGIN_SRC emacs-lisp
+(setq org-todo-keyword-faces
+      `(("STARTED" . (:foreground ,my/yellow))
+        ("WAITING" . (:foreground ,my/lblue))
+        ("BLOCKED" . (:foreground ,my/white))))
+#+END_SRC
 
 TODO org-capture
 
