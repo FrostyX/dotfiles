@@ -44,7 +44,7 @@ Master :gmail-remote:
 Slave :gmail-local:
 Create Both
 Expunge Both
-Patterns *
+Patterns * !"[Gmail]/All Mail" !"[Gmail]/Important" !"[Gmail]/Starred" !"[Gmail]/Bin"
 SyncState *
 
 
@@ -67,5 +67,5 @@ Master :redhat-remote:
 Slave :redhat-local:
 Create Both
 Expunge Both
-Patterns *
+Patterns * !"[Gmail]/All Mail" !"[Gmail]/Important" !"[Gmail]/Starred" !"[Gmail]/Bin"
 SyncState *
