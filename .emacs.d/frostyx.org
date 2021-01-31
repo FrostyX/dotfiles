@@ -2528,7 +2528,6 @@ See https://emacs.stackexchange.com/questions/47535/setup-helm-for-mu4e-jump-to-
 (evil-define-key 'normal mu4e-view-mode-map (kbd "J") 'my/mu4e-jump-maildir)
 #+END_SRC
 
-
 ** RSS
 
 Probably the best available RSS client for Emacs is elfeed. It allows
@@ -2926,6 +2925,34 @@ TODO change message format (date should go before nick)
 
 TODO ignore non-user messages in tracklist
 TODO read message from tracklist when switching window (not only when switching buffer)
+
+** Database
+
+We can use ~psql~, for sure. But why leaving Emacs?
+
+See https://truongtx.me/2014/08/23/setup-emacs-as-an-sql-database-client
+
+Almost no configuration is required. For some reason soft line wrapping is
+enabled by default, that's just wrong.
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'sql-interactive-mode-hook 'toggle-truncate-lines)
+#+END_SRC
+
+And now, let's pre-configure our favorite SQL servers.
+
+#+BEGIN_SRC emacs-lisp
+(setq sql-connection-alist
+      '((copr-docker
+         (sql-product 'postgres)
+         (sql-database "postgresql://copr-fe:coprpass@127.0.0.1:5009/coprdb"))))
+#+END_SRC
+
+Yes, I am storing a password into a public document, I know. It is a local dev
+environment database, so I don't care.
+
+Once we have some connections configured, we can simply run ~sql-connect~ and
+pick one.
 
 ** Spotify
 
