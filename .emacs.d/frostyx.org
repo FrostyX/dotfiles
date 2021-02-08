@@ -916,6 +916,9 @@ Hydra main entry-point allowing us acces to other hydras.
    (("g" magit-status "magit")
     ("G" hydra-magit/body "more magit options"))
 
+   "Time"
+   (("t" org-pomodoro "Pomodoro"))
+
    "Emacs"
    (("r" (load-file user-init-file) "reload configuration")
     ("h" hydra-help/body "help")
@@ -1075,7 +1078,10 @@ See https://github.com/jerrypnz/major-mode-hydra.el
   ("Actions"
    (("t" my/org-todo-done "Mark TODO item as done")
     ("e" org-edit-special "Edit special")
-    ("s" org-edit-src-exit "Save special edit"))))
+    ("s" org-edit-src-exit "Save special edit"))
+
+   "Time"
+   (("p" org-pomodoro "Pomodoro"))))
 #+END_SRC
 
 **** Python
@@ -1902,6 +1908,90 @@ TODO Capture templates for adding TODOs via ~org-agenda~
          "* TODO %?\n  %i\n  %a")))
 #+END_SRC
 
+**** Pomodoro
+The Pomodoro Technique is a time management technique that uses a timer to break
+work into short intervals (typically 25 minutes of work followed by 5 minutes of
+rest).
+
+See https://todoist.com/productivity-methods/pomodoro-technique
+See a simple pomodoro timer in the web browser https://pomofocus.io/
+
+Of course, we want to use Emacs and ~org-mode~.
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-pomodoro
+  :ensure t)
+#+END_SRC
+
+For some strange reason, stopping the pomodoro timer prematurely throws away the
+record about working on that, as if we did nothing. That's just wrong, we want
+to keep them.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-pomodoro-keep-killed-pomodoro-time t)
+#+END_SRC
+
+Let's have pretty strings in the modeline.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-pomodoro-format " %s")
+(setq org-pomodoro-short-break-format " Short Break %s")
+(setq org-pomodoro-long-break-format " Long Break %s")
+#+END_SRC
+
+Remove the ugly formatting of a task name.
+
+#+BEGIN_SRC emacs-lisp
+(defun my/org-clock-get-clock-string ()
+  (concat " " org-clock-heading))
+
+(setq spaceline-org-clock-format-function 'my/org-clock-get-clock-string)
+#+END_SRC
+
+And let's have also pretty colors in the modeline.
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'org-pomodoro-mode-line nil :foreground my/green)
+(set-face-attribute 'org-pomodoro-mode-line-overtime nil :foreground my/red)
+#+END_SRC
+
+Initially the idea of having sounds alerts enabled was just
+repuslive. Everything on my system is supposed to just shut the fuck up and
+doesn't interupt my music. On the other hand, the possibility of having Abathur
+saying "Must continue work" and "Terminated" is dope. Let's do that.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-pomodoro-start-sound-p t)
+(setq org-pomodoro-finished-sound-p t)
+#+END_SRC
+
+I downloaded Abathur voice lines from here
+https://heroesofthestorm.fandom.com/wiki/Abathur/Quotes
+
+They come in the ~ogg~ format, which is not supported by ~org-pomodoro~. You can
+convert them into ~wav~ like this.
+
+#+BEGIN_SRC bash
+ffmpeg -i AbathurHero_Revive02.ogg AbathurHero_Revive02.wav
+#+END_SRC
+
+Use our custom voice lines.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-pomodoro-start-sound
+      "/home/jkadlcik/.emacs.d/audio/AbathurHero_Revive02.wav")
+
+(setq org-pomodoro-finished-sound
+      "/home/jkadlcik/.emacs.d/audio/AbathurHero_Kill04.wav")
+#+END_SRC
+
+If something goes wrong, you can test the sounds with
+
+#+BEGIN_SRC lisp
+(org-pomodoro-play-sound :start)
+#+END_SRC
+
+Ah, chills.
 
 *** Markdown
 
