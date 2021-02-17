@@ -2154,6 +2154,19 @@ on 80 characters.
 )
 #+END_SRC
 
+* Documents
+** Man pages
+
+The ~M-x man~ doesn't apply faces that well, see e.g. wrong rendering in
+~M-x man mock~. Let's use default colors and use it only as a fallback
+tool. Instead, let's use ~M-x woman~.
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'woman-bold nil :foreground my/blue)
+(set-face-attribute 'woman-italic nil :foreground my/orange)
+(set-face-attribute 'woman-unknown nil :foreground my/red)
+#+END_SRC
+
 * Applications
 
 If I shoot myself into my leg and accidentally break a buffer by running an
