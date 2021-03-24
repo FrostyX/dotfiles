@@ -2618,6 +2618,33 @@ See https://www.djcbsoftware.nl/code/mu/mu4e/Bookmarks.html
     :key ?s))
 #+END_SRC
 
+TODO Threading
+
+#+BEGIN_SRC emacs-lisp
+(use-package mu4e-thread-folding
+  :quelpa (mu4e-thread-folding :fetcher github :repo "rougier/mu4e-thread-folding"))
+
+(set-face-attribute 'mu4e-thread-folding-root-unfolded-face nil :background my/gray)
+(set-face-attribute 'mu4e-thread-folding-child-face nil :background my/black)
+
+(add-to-list 'mu4e-header-info-custom
+             '(:empty . (:name "Empty"
+                         :shortname ""
+                         :function (lambda (msg) "  "))))
+
+(setq mu4e-headers-fields
+      '((:empty . 0)
+        (:from . 20)
+        (:subject . 65)))
+
+;; (setq mu4e-headers-thread-child-prefix '("|" . "| "))
+;; (setq mu4e-headers-thread-connection-prefix '("|" . "| "))
+;; (setq mu4e-headers-thread-last-child-prefix '("|" . "| "))
+;; (setq mu4e-headers-thread-single-orphan-prefix '("|" . "| "))
+;; (setq mu4e-headers-thread-orphan-prefix '("|" . "| "))
+#+END_SRC
+
+
 *** Mu4e Helm support
 
 This collection of code-snippets should ideally be distribute as a new package
