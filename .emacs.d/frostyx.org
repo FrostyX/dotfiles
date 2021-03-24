@@ -1993,6 +1993,24 @@ If something goes wrong, you can test the sounds with
 
 Ah, chills.
 
+#+BEGIN_SRC emacs-lisp
+(setq org-pomodoro-short-break-sound-p nil)
+(setq org-pomodoro-long-break-sound-p nil)
+
+(setq org-pomodoro-length 30)
+(setq org-pomodoro-short-break-length 0)
+(setq org-pomodoro-long-break-length 0)
+(setq org-pomodoro-long-break-frequency 1)
+(setq org-pomodoro-expiry-time 30)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun my/org-pomodoro ()
+  (interactive)
+  (org-pomodoro '(4)))
+#+END_SRC
+
+
 *** Markdown
 
 See https://stackoverflow.com/a/34672923/3285282
