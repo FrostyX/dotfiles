@@ -2162,6 +2162,13 @@ The ~M-x man~ doesn't apply faces that well, see e.g. wrong rendering in
 tool. Instead, let's use ~M-x woman~.
 
 #+BEGIN_SRC emacs-lisp
+(use-package woman
+  :ensure t)
+#+END_SRC
+
+And set some pretty colors
+
+#+BEGIN_SRC emacs-lisp
 (set-face-attribute 'woman-bold nil :foreground my/blue)
 (set-face-attribute 'woman-italic nil :foreground my/orange)
 (set-face-attribute 'woman-unknown nil :foreground my/red)
