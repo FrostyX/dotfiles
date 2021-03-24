@@ -3087,6 +3087,8 @@ awesome). Hence, let's use some another tool for that.
 #+BEGIN_SRC emacs-lisp
 ;; This spotify library is not in MELPA yet,
 ;; see https://github.com/danielfm/spotify.el/issues/44
+;; TODO This should be on MELPA soon enough as ~smudge~
+;; https://github.com/danielfm/smudge
 ;;
 ;; Also, for playing, web player (or other device) must be opened
 ;; See https://github.com/danielfm/spotify.el/#selecting-a-device-for-playback
