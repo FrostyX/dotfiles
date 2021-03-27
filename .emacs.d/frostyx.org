@@ -2385,7 +2385,7 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
   (setq mu4e-html2text-command "w3m -dump -T text/html -cols 72 -o display_link_number=true -o auto_image=false -o display_image=false -o ignore_null_img_alt=true")
   (setq mu4e-view-show-addresses t)
   (setq message-kill-buffer-on-exit t)
-  (setq mu4e-update-interval 120) ;; two minutes
+  (setq mu4e-update-interval 300) ;; five minutes
   (setq mail-user-agent 'message-user-agent)
   (setq mail-specify-envelope-from t)
   (setq auth-source-debug t)
