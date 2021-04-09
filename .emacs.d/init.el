@@ -58,3 +58,4 @@
  '(markup-title-2-face ((t (:inherit markup-gen-face :height 1.4))))
  '(markup-title-3-face ((t (:inherit markup-gen-face :weight bold :height 1.2))))
  '(markup-verbatim-face ((t (:background "black" :foreground "magenta")))))
+(put 'narrow-to-region 'disabled nil)
