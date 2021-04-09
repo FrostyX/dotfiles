@@ -73,6 +73,8 @@ configuring something.
 *** https://blog.jethro.dev/index.xml
 *** https://www.bennee.com/~alex/blog/feeds/all.atom.xml
 *** https://www.murilopereira.com/index.xml
+*** https://blog.lambda.cx/index.xml
+
 ** Gentoo
 
 My love for Gentoo will probably never fade away. Let's at least see whats up.
