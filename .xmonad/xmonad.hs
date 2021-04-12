@@ -1,3 +1,14 @@
+-- FrostyX's XMonad configuration
+--
+-- This XMonad configuration is a mess. I am a newbie trying to hack things together
+-- and experiment. Do not take anything from this configuration unles you know what
+-- you are doing. Because the odds are, that I am not.
+--
+-- Reload configuration:
+--   xmonad --recompile; xmonad --restart
+
+
+
 --
 -- xmonad example config file.
 --
