@@ -74,6 +74,8 @@ configuring something.
 *** https://www.bennee.com/~alex/blog/feeds/all.atom.xml
 *** https://www.murilopereira.com/index.xml
 *** https://blog.lambda.cx/index.xml
+*** https://truongtx.me/atom.xml
+*** https://www.philnewton.net/blog/feed/
 
 ** Gentoo
 
