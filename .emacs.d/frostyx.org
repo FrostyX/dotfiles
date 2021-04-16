@@ -1051,6 +1051,8 @@ Hydra for configuration/settings/toggle options
   (:color blue :quit-key ("q" "SPC") :title "Configuration")
   ("Vertical Line"
    (("v" turn-off-fci-mode "No vertical line")
+    ("6" (my/colorcolumn 60) "60 characters")
+    ("7" (my/colorcolumn 70) "70 characters")
     ("8" (my/colorcolumn 80) "80 characters")
     ("1" (my/colorcolumn 100) "100 characters")
     ("2" (my/colorcolumn 120) "120 characters"))))
