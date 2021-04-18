@@ -107,15 +107,16 @@ appropriately. Namely we want to differentiate between operating systems
 complete Emacs configuration only on a proper workspace. Everywhere else just a
 compact setup that doesn't require any system dependencies.
 
-The ~android-p~ predicate can produce false-positives but it is good enough for
-my use case. The ~workstation-p~ predicate is based on system hostname.
+The ~android-p~ predicate is based on an environment variable that is defined
+defined at least in Termux. The ~workstation-p~ predicate is based on system
+hostname.
 
 #+BEGIN_SRC emacs-lisp
 (setq gui-p         (display-graphic-p)
       cli-p         (not gui-p)
       linux-p       (eq system-type 'gnu/linux)
       windows-p     (eq system-type 'windows-nt)
-      android-p     (and linux-p cli-p)
+      android-p     (getenv "ANDROID_ROOT")
       workstation-p (member (system-name)
                             '("sagemcom.ip")))
 #+END_SRC
