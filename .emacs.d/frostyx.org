@@ -98,6 +98,28 @@ Reset variable to its default value, press ~M-:~ and run:
 (custom-reevaluate-setting 'emms-player-next-function)
 #+END_SRC
 
+* Facts
+
+Similar to ~ansible_facts~, we are going to inspect the system that we are
+currently running, so we can adjust our Emacs configuration
+appropriately. Namely we want to differentiate between operating systems
+(GNU/Linux, Windows, Android) and also purpose of the OS. We want the most
+complete Emacs configuration only on a proper workspace. Everywhere else just a
+compact setup that doesn't require any system dependencies.
+
+The ~android-p~ predicate can produce false-positives but it is good enough for
+my use case. The ~workstation-p~ predicate is based on system hostname.
+
+#+BEGIN_SRC emacs-lisp
+(setq gui-p         (display-graphic-p)
+      cli-p         (not gui-p)
+      linux-p       (eq system-type 'gnu/linux)
+      windows-p     (eq system-type 'windows-nt)
+      android-p     (and linux-p cli-p)
+      workstation-p (member (system-name)
+                            '("sagemcom.ip")))
+#+END_SRC
+
 * Defaults
 
 #+BEGIN_SRC emacs-lisp
@@ -600,6 +622,7 @@ See http://chriskempson.com/projects/base16/
 
 #+BEGIN_SRC emacs-lisp
 (use-package base16-theme
+  :if workstation-p
   :ensure t
   :config
   (load-theme 'base16-chalk t))
@@ -2330,6 +2353,7 @@ See https://github.com/akermu/emacs-libvterm
 
 #+BEGIN_SRC emacs-lisp
 (use-package vterm
+  :if workstation-p
   :ensure t)
 #+END_SRC
 
@@ -2351,6 +2375,7 @@ go - open in external browser
 
 #+BEGIN_SRC emacs-lisp
 (use-package w3m
+  :if workstation-p
   :ensure t
   :config
   nil)
@@ -2384,6 +2409,7 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
 
 #+BEGIN_SRC emacs-lisp
 (use-package mu4e
+  :if workstation-p
   :ensure nil
   :load-path "/usr/share/emacs/site-lisp/mu4e"
   :config
@@ -2447,6 +2473,7 @@ See https://www.djcbsoftware.nl/code/mu/mu4e/Sending-mail.html
 
 #+BEGIN_SRC emacs-lisp
 (use-package smtpmail
+  :if workstation-p
   :ensure t
   :load-path "/usr/share/emacs/site-lisp/mu4e")
 #+END_SRC
@@ -2649,7 +2676,10 @@ TODO Threading
 
 #+BEGIN_SRC emacs-lisp
 (use-package mu4e-thread-folding
-  :quelpa (mu4e-thread-folding :fetcher github :repo "rougier/mu4e-thread-folding"))
+  :if workstation-p
+  :quelpa (mu4e-thread-folding
+           :fetcher github
+           :repo "rougier/mu4e-thread-folding"))
 
 (set-face-attribute 'mu4e-thread-folding-root-unfolded-face nil :background my/gray)
 (set-face-attribute 'mu4e-thread-folding-child-face nil :background my/black)
@@ -2701,6 +2731,7 @@ opportunity to implement our own views.
 
 #+BEGIN_SRC emacs-lisp
 (use-package elfeed
+  :if workstation-p
   :ensure t
   :commands (elfeed)
   :config
@@ -2712,6 +2743,7 @@ a list of lists.
 
 #+BEGIN_SRC emacs-lisp
 (use-package elfeed-org
+  :if workstation-p
   :ensure t
   :config
   (elfeed-org))
@@ -2802,6 +2834,7 @@ https://github.com/jorgenschaefer/circe/pull/384
 
 #+BEGIN_SRC emacs-lisp
 (use-package circe
+  :if workstation-p
   :ensure t
   :quelpa (circe :fetcher github
                  :repo "FrostyX/circe"
@@ -2857,6 +2890,7 @@ See https://github.com/eqyiel/circe-notifications
 
 #+BEGIN_SRC emacs-lisp
 (use-package circe-notifications
+  :if workstation-p
   :ensure t
   :config
   (enable-circe-notifications))
@@ -3136,6 +3170,7 @@ See https://github.com/wandersoncferreira/helm-spotify-plus
 
 #+BEGIN_SRC emacs-lisp
 (use-package helm-spotify-plus
+  :if workstation-p
   :ensure t)
 #+END_SRC
 
@@ -3208,6 +3243,7 @@ See:
 
 #+BEGIN_SRC emacs-lisp
 (use-package enwc
+  :if workstation-p
   :ensure t
   :config
   (setq enwc-default-backend 'nm)
@@ -3238,6 +3274,7 @@ dnf install bluez-hid2hci
 
 #+BEGIN_SRC emacs-lisp
 (use-package bluetooth
+  :if workstation-p
   :ensure t)
 #+END_SRC
 
@@ -3288,6 +3325,7 @@ See https://github.com/stsquad/emacs_chrome
 
 #+BEGIN_SRC emacs-lisp
 (use-package edit-server
+  :if workstation-p
   :ensure t
   :config
   (edit-server-start))
