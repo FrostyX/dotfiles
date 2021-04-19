@@ -378,6 +378,14 @@ for terminal application to show previous commands.
 
 @TODO this ^^ requires restarting ~evil-mode~ to have an effect
 
+We seem to need to set how undo/redo should work, otherwise it doesn't work.
+https://github.com/syl20bnr/spacemacs/issues/14036#issuecomment-707072523
+
+#+BEGIN_SRC emacs-lisp
+(global-undo-tree-mode)
+(evil-set-undo-system 'undo-tree)
+#+END_SRC
+
 ** Evil packages
 
 TODO evil-indent-surround
