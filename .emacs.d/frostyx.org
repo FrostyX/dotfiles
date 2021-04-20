@@ -1449,17 +1449,15 @@ Let's define a function which will color a given column
   (set-fill-column column))
 #+END_SRC
 
+It is often useful to open the currently viewed buffer or lines selection in the
+web browser.
+
+See https://github.com/rmuslimov/browse-at-remote
+Also see my blog post http://frostyx.cz/posts/emacs-browse-at-pagure
 
 #+BEGIN_SRC emacs-lisp
-;; (use-package browse-at-remote
-;;   ;; https://github.com/rmuslimov/browse-at-remote
-;;   :ensure t
-;;   :config
-;;   nil)
-
-(add-to-list 'load-path "/home/jkadlcik/git/browse-at-remote")
-(require 'browse-at-remote)
-(setq browse-at-remote-add-line-number-if-no-region-selected nil)
+(use-package browse-at-remote
+  :ensure t)
 #+END_SRC
 
 ** Indentation
