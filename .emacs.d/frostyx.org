@@ -114,9 +114,9 @@ hostname.
 #+BEGIN_SRC emacs-lisp
 (setq gui-p         (display-graphic-p)
       cli-p         (not gui-p)
-      linux-p       (eq system-type 'gnu/linux)
-      windows-p     (eq system-type 'windows-nt)
       android-p     (getenv "ANDROID_ROOT")
+      linux-p       (and (eq system-type 'gnu/linux) (not android-p))
+      windows-p     (eq system-type 'windows-nt)
       workstation-p (member (system-name)
                             '("sagemcom.ip")))
 #+END_SRC
