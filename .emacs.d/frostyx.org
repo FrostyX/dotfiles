@@ -2707,7 +2707,7 @@ See https://www.djcbsoftware.nl/code/mu/mu4e/Bookmarks.html
     :key ?s))
 #+END_SRC
 
-TODO Threading
+We would like to have some inteligent threading and Gmail-like conversation view.
 
 #+BEGIN_SRC emacs-lisp
 (use-package mu4e-thread-folding
@@ -2715,19 +2715,25 @@ TODO Threading
   :quelpa (mu4e-thread-folding
            :fetcher github
            :repo "rougier/mu4e-thread-folding"))
+#+END_SRC
 
-(set-face-attribute 'mu4e-thread-folding-root-unfolded-face nil :background my/gray)
-(set-face-attribute 'mu4e-thread-folding-child-face nil :background my/black)
+The configuration is still WIP.
 
-(add-to-list 'mu4e-header-info-custom
-             '(:empty . (:name "Empty"
-                         :shortname ""
-                         :function (lambda (msg) "  "))))
+#+BEGIN_SRC emacs-lisp
+(if (featurep 'mu4e-thread-folding)
+    (progn
+      (set-face-attribute 'mu4e-thread-folding-root-unfolded-face nil :background my/gray)
+      (set-face-attribute 'mu4e-thread-folding-child-face nil :background my/black)
 
-(setq mu4e-headers-fields
-      '((:empty . 0)
-        (:from . 20)
-        (:subject . 65)))
+      (add-to-list 'mu4e-header-info-custom
+                   '(:empty . (:name "Empty"
+                                     :shortname ""
+                                     :function (lambda (msg) "  "))))
+
+      (setq mu4e-headers-fields
+            '((:empty . 0)
+              (:from . 20)
+              (:subject . 65)))))
 
 ;; (setq mu4e-headers-thread-child-prefix '("|" . "| "))
 ;; (setq mu4e-headers-thread-connection-prefix '("|" . "| "))
@@ -2735,7 +2741,6 @@ TODO Threading
 ;; (setq mu4e-headers-thread-single-orphan-prefix '("|" . "| "))
 ;; (setq mu4e-headers-thread-orphan-prefix '("|" . "| "))
 #+END_SRC
-
 
 *** Mu4e Helm support
 
