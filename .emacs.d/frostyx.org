@@ -3222,28 +3222,34 @@ browsing capabilities (I don't know if as a bug or feature, but it could be
 awesome). Hence, let's use some another tool for that.
 
 #+BEGIN_SRC emacs-lisp
-;; This spotify library is not in MELPA yet,
-;; see https://github.com/danielfm/spotify.el/issues/44
-;; TODO This should be on MELPA soon enough as ~smudge~
-;; https://github.com/danielfm/smudge
-;;
-;; Also, for playing, web player (or other device) must be opened
-;; See https://github.com/danielfm/spotify.el/#selecting-a-device-for-playback
-(add-to-list 'load-path "/home/jkadlcik/git/spotify.el")
-(require 'spotify)
-(setq spotify-oauth2-client-id (password-store-get "spotify/client-id"))
-(setq spotify-oauth2-client-secret (password-store-get "spotify/client-secret"))
-(setq spotify-transport 'connect)
-(define-key spotify-mode-map (kbd "C-c .") 'spotify-command-map)
-
-;; https://github.com/danielfm/spotify.el#remote-minor-mode
-(evil-define-key 'normal spotify-mode-map (kbd "q") 'spotify-quit)  ;; @FIXME doesn't work, probably create an issue
-(evil-define-key 'normal spotify-mode-map (kbd "go") 'spotify-track-select)
-(evil-define-key 'normal spotify-mode-map (kbd "gp") 'spotify-toggle-play)
-(evil-define-key 'normal spotify-mode-map (kbd "g<") 'spotify-previous-track)
-(evil-define-key 'normal spotify-mode-map (kbd "g>") 'spotify-next-track)
-(evil-define-key 'normal spotify-mode-map (kbd "gd") 'spotify-select-device)
+(use-package smudge
+  :ensure t)
 #+END_SRC
+
+Load sensitive tokens from keychain
+
+#+BEGIN_SRC emacs-lisp
+(setq smudge-oauth2-client-id (password-store-get "spotify/client-id"))
+(setq smudge-oauth2-client-secret (password-store-get "spotify/client-secret"))
+#+END_SRC
+
+Use Spotify Connect to be able to control other devices
+
+#+BEGIN_SRC emacs-lisp
+(setq smudge-transport 'connect)
+#+END_SRC
+
+See the following table for useful commands
+
+| Command                          | Description                    |
+|----------------------------------+--------------------------------|
+| smudge-my-playlists              | Show your playlists            |
+| smudge-track-search              | Search for tracks              |
+| smudge-recently-played           | List of recently played tracks |
+| smudge-controller-toggle-play    | Play/pause                     |
+| smudge-controller-next-track     | Next track                     |
+| smudge-controller-previous-track | Previous track                 |
+| smudge-select-device             | Select a playback device       |
 
 Let's add a hydra menu, so we don't have to remember the commands or shotcuts.
 
