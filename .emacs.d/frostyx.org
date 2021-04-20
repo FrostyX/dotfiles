@@ -2532,72 +2532,76 @@ https://emacs.stackexchange.com/a/50365
 First, let's configure my personal email for online stuff.
 
 #+BEGIN_SRC emacs-lisp
-(setq my/mu4e-seznam-context
-      (make-mu4e-context
-       :name "seznam"
-       :enter-func (lambda () (mu4e-message "Entering seznam context"))
-       :leave-func (lambda () (mu4e-message "Leaving seznam context"))
-       :match-func (lambda (msg)
-		     (when msg
-		       (mu4e-message-contact-field-matches
-			msg '(:from :to :cc :bcc) "frostyx@email.cz")))
-       :vars '((user-mail-address . "frostyx@email.cz")
-               (user-full-name . "Jakub Kadlčík")
-               (smtpmail-smtp-user . "frostyx@email.cz")
-               (smtpmail-default-smtp-server . "smtp.seznam.cz")
-               (smtpmail-smtp-server . "smtp.seznam.cz")
-               (smtpmail-smtp-service . 587)
-               (mu4e-sent-messages-behavior . sent))))
+(if workstation-p
+    (setq my/mu4e-seznam-context
+          (make-mu4e-context
+           :name "seznam"
+           :enter-func (lambda () (mu4e-message "Entering seznam context"))
+           :leave-func (lambda () (mu4e-message "Leaving seznam context"))
+           :match-func (lambda (msg)
+		                 (when msg
+		                   (mu4e-message-contact-field-matches
+			                msg '(:from :to :cc :bcc) "frostyx@email.cz")))
+           :vars '((user-mail-address . "frostyx@email.cz")
+                   (user-full-name . "Jakub Kadlčík")
+                   (smtpmail-smtp-user . "frostyx@email.cz")
+                   (smtpmail-default-smtp-server . "smtp.seznam.cz")
+                   (smtpmail-smtp-server . "smtp.seznam.cz")
+                   (smtpmail-smtp-service . 587)
+                   (mu4e-sent-messages-behavior . sent)))))
 #+END_SRC
 
 Now, my personal Gmail account for IRL stuff.
 
 #+BEGIN_SRC emacs-lisp
-(setq my/mu4e-gmail-context
-      (make-mu4e-context
-       :name "gmail"
-       :enter-func (lambda () (mu4e-message "Entering gmail context"))
-       :leave-func (lambda () (mu4e-message "Leaving gmail context"))
-       :match-func (lambda (msg)
-		     (when msg
-		       (mu4e-message-contact-field-matches
-			msg '(:from :to :cc :bcc) "jakub.kadlcik@gmail.com")))
-       :vars '((user-mail-address . "jakub.kadlcik@gmail.com")
-	       (user-full-name . "Jakub Kadlčík")
-	       (smtpmail-smtp-user . "jakub.kadlcik")
-	       (smtpmail-default-smtp-server . "smtp.gmail.com")
-	       (smtpmail-smtp-server . "smtp.gmail.com")
-	       (smtpmail-smtp-service . 587)
-	       (mu4e-sent-messages-behavior . delete))))
+(if workstation-p
+    (setq my/mu4e-gmail-context
+          (make-mu4e-context
+           :name "gmail"
+           :enter-func (lambda () (mu4e-message "Entering gmail context"))
+           :leave-func (lambda () (mu4e-message "Leaving gmail context"))
+           :match-func (lambda (msg)
+		                 (when msg
+		                   (mu4e-message-contact-field-matches
+			                msg '(:from :to :cc :bcc) "jakub.kadlcik@gmail.com")))
+           :vars '((user-mail-address . "jakub.kadlcik@gmail.com")
+	               (user-full-name . "Jakub Kadlčík")
+	               (smtpmail-smtp-user . "jakub.kadlcik")
+	               (smtpmail-default-smtp-server . "smtp.gmail.com")
+	               (smtpmail-smtp-server . "smtp.gmail.com")
+	               (smtpmail-smtp-service . 587)
+	               (mu4e-sent-messages-behavior . delete)))))
 #+END_SRC
 
 And lastly, my work email account.
 
 #+BEGIN_SRC emacs-lisp
-(setq my/mu4e-redhat-context
-      (make-mu4e-context
-       :name "redhat"
-       :enter-func (lambda () (mu4e-message "Entering redhat context"))
-       :leave-func (lambda () (mu4e-message "Leaving redhat context"))
-       :match-func (lambda (msg)
-		     (when msg
-		       (mu4e-message-contact-field-matches
-			msg '(:from :to :cc :bcc) "jkadlcik@redhat.com")))
-       :vars '((user-mail-address . "jkadlcik@redhat.com")
-	       (user-full-name . "Jakub Kadlčík")
-	       (smtpmail-smtp-user . "jkadlcik@redhat.com")
-	       (smtpmail-default-smtp-server . "smtp.gmail.com")
-	       (smtpmail-smtp-server . "smtp.gmail.com")
-	       (smtpmail-smtp-service . 587)
-	       (mu4e-sent-messages-behavior . delete))))
+(if workstation-p
+    (setq my/mu4e-redhat-context
+          (make-mu4e-context
+           :name "redhat"
+           :enter-func (lambda () (mu4e-message "Entering redhat context"))
+           :leave-func (lambda () (mu4e-message "Leaving redhat context"))
+           :match-func (lambda (msg)
+		                 (when msg
+		                   (mu4e-message-contact-field-matches
+			                msg '(:from :to :cc :bcc) "jkadlcik@redhat.com")))
+           :vars '((user-mail-address . "jkadlcik@redhat.com")
+	               (user-full-name . "Jakub Kadlčík")
+	               (smtpmail-smtp-user . "jkadlcik@redhat.com")
+	               (smtpmail-default-smtp-server . "smtp.gmail.com")
+	               (smtpmail-smtp-server . "smtp.gmail.com")
+	               (smtpmail-smtp-service . 587)
+	               (mu4e-sent-messages-behavior . delete)))))
 #+END_SRC
 
 So far, we only created those context configurations. They need to be passed to mu4e.
 
 #+BEGIN_SRC emacs-lisp
-(setq mu4e-contexts (list my/mu4e-seznam-context
-			  my/mu4e-gmail-context
-			  my/mu4e-redhat-context))
+(if workstation-p
+    (setq mu4e-contexts (list my/mu4e-seznam-context
+			                  my/mu4e-gmail-context
+			                  my/mu4e-redhat-context)))
 #+END_SRC
 
 Authentication for receiving emails is managed elsewhere but for sending emails,
