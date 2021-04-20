@@ -2279,6 +2279,11 @@ application in it and panicking how to get back, just kill the buffer with
 Magit is a well-known killer feature of Emacs and supposedly the
 greatest ~git~ interface ever invented.
 
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :ensure t)
+#+END_SRC
+
 The most basic key bindings are
 
 | Key | Action                            | CLI alternative         |
