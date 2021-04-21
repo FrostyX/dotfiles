@@ -2279,8 +2279,23 @@ application in it and panicking how to get back, just kill the buffer with
 Magit is a well-known killer feature of Emacs and supposedly the
 greatest ~git~ interface ever invented.
 
+Magit depends on ~git~ executable, make sure it's installed. On Windows, you can
+download and install it from here https://git-scm.com/download/win
+
+Also, git author must be properly configured. Either install ~.gitconfig~ from
+this repository, or manually run the following commands. Works on Windows as
+well.
+
+#+BEGIN_SRC bash
+git config --global user.email "frostyx@email.cz"
+git config --global user.name "Jakub Kadlčík"
+#+END_SRC
+
+Finally, Install the ~magit~ package.
+
 #+BEGIN_SRC emacs-lisp
 (use-package magit
+  :if (executable-find "git")
   :ensure t)
 #+END_SRC
 
