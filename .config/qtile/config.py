@@ -494,7 +494,15 @@ screens = []
 for i in range(num_screens()):
     primary = i == 1
     screens.append(create_screen(primary))
-screens.reverse()
+
+# This won't be that simple as returning screens as they are or returning them
+# in a reversed order. They are somehow being recognized in a random order and
+# we need to define a correct order based on their IDs or inputs.
+#
+# But before doing so, reversing the screens usually temporarily fixes the issue
+# of what screen should be left/right of each other.
+# @FIXME
+# screens.reverse()
 
 
 # Drag floating layouts.
