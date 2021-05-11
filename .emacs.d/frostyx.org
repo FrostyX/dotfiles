@@ -3183,6 +3183,13 @@ I was mentioned, in the circe-tracking modeline segment
 (set-face-attribute 'circe-highlight-nick-face nil :foreground my/red)
 #+END_SRC
 
+Customize modeline colors for channels and personal messages
+
+#+BEGIN_SRC
+(setq tracking-get-face-function #'circe-tracking-get-face)
+(set-face-attribute 'circe-tracking-channel-face nil :foreground my/white)
+(set-face-attribute 'circe-tracking-query-face nil :foreground my/blue)
+#+END_SRC
 
 
 TODO my messages format
