@@ -2744,6 +2744,12 @@ See https://www.djcbsoftware.nl/code/mu/mu4e/Bookmarks.html
     :key ?s))
 #+END_SRC
 
+Show only the results that would command-line ~mu find~ return, nothing else.
+
+#+BEGIN_SRC emacs-lisp
+(setq mu4e-headers-include-related nil)
+#+END_SRC
+
 We would like to have some inteligent threading and Gmail-like conversation view.
 
 #+BEGIN_SRC emacs-lisp
