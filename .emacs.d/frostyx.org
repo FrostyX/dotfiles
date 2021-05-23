@@ -1149,6 +1149,9 @@ See https://github.com/jerrypnz/major-mode-hydra.el
     ("e" org-edit-special "Edit special")
     ("s" org-edit-src-exit "Save special edit"))
 
+   "Navigation"
+   (("h" helm-org-in-buffer-headings "Search headers in Helm"))
+
    "Time"
    (("p" org-pomodoro "Pomodoro"))))
 #+END_SRC
@@ -1985,6 +1988,16 @@ TODO Capture templates for adding TODOs via ~org-agenda~
          "* TODO %?\n  %i\n  %a")))
 #+END_SRC
 
+Install helm support for Org files. The main feature is
+~helm-org-in-buffer-headings~ that provides a navigation based on header names.
+
+See https://github.com/emacs-helm/helm-org
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm-org
+  :ensure t)
+#+END_SRC
+
 **** Pomodoro
 The Pomodoro Technique is a time management technique that uses a timer to break
 work into short intervals (typically 25 minutes of work followed by 5 minutes of
@@ -2086,7 +2099,6 @@ Ah, chills.
   (interactive)
   (org-pomodoro '(4)))
 #+END_SRC
-
 
 *** Markdown
 
