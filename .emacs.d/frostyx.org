@@ -2785,6 +2785,32 @@ The configuration is still WIP.
 ;; (setq mu4e-headers-thread-orphan-prefix '("|" . "| "))
 #+END_SRC
 
+*** Mu4e dashboard
+
+Mu4e dashboard allows to write an Org mode document containing links to ~mu~
+queries and therefore provide a nice navigation and mails count. It is currently
+the best way to implement the standard email client side bar.
+
+See https://github.com/rougier/mu4e-dashboard
+
+#+BEGIN_SRC emacs-lisp
+(use-package mu4e-dashboard
+  :if workstation-p
+  :quelpa (mu4e-dashboard
+           :fetcher github
+           :repo "rougier/mu4e-dashboard"))
+#+END_SRC
+
+My dashboard is defined in ~./mu4e-dashboard.org~ but I cannot publish it yet
+since it contains sensitive personal information. Once I figure out how to alias
+those queries, I will publish it.
+
+The usage is not that straightforward. First, open the document, then run ~M-x
+mu4e-dashboard-mode~ to make it read-only and actionable. Then run ~M-x
+org-toggle-link-display~ to hide full links if needed. It would be also nice to
+hide/render the rest of the Org mode syntax. Once I finish this, I will create a
+simple launcher and possibly submit a PR for it.
+
 *** Mu4e Helm support
 
 This collection of code-snippets should ideally be distribute as a new package
