@@ -98,6 +98,16 @@ Reset variable to its default value, press ~M-:~ and run:
 (custom-reevaluate-setting 'emms-player-next-function)
 #+END_SRC
 
+Sometimes, when the whole Emacs freezes and ~C-g~ doesn't help, poke it from the
+terminal with
+
+#+BEGIN_SRC bash
+kill -SIGUSR2 <pid>
+#+END_SRC
+
+It should get Emacs unstuck. For easier debugging it might be enough to
+~M-x toggle-debug-on-quit~ and then hit ~C-g~ to pop up a ~*Backtrace*~ buffer.
+
 * Facts
 
 Similar to ~ansible_facts~, we are going to inspect the system that we are
