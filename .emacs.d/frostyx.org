@@ -3007,7 +3007,6 @@ Do not forget to kill circe and run it again after modifying
 #+BEGIN_SRC emacs-lisp
 (defun my/circe ()
   (interactive)
-  (circe "Freenode")
   (circe "Libera")
   (circe "OFTC")
   (circe "RedHat"))
