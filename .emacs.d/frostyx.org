@@ -2986,7 +2986,10 @@ Do not forget to kill circe and run it again after modifying
          :sasl-password ,(password-store-get "irc/libera-password")
          :nickserv-nick "FrostyX"
          :nickserv-password ,(password-store-get "irc/libera-password")
-         :channels ("#fedora-buildsys" "#fedora-admin"))
+         :channels ("#fedora-admin"
+                    "#fedora-buildsys"
+                    "#tito"
+                    "#emacs-circe"))
 
         ("OFTC"
          :tls t
