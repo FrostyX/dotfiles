@@ -2545,6 +2545,24 @@ my hydra instead.
 (evil-define-key 'normal mu4e-headers-mode-map (kbd "SPC") nil)
 #+END_SRC
 
+We want to colorize some of the columns, so the email view is better readable
+and more importantly more sexy. The support for this isn't built into mu4e and
+requires an additional package.
+
+See https://github.com/Alexander-Miller/mu4e-column-faces
+
+Unfortunatelly it requires ~maildir-utils~ package in at least version 1.6.0 but
+in Fedora we so far have only 1.4.x. I am not enabling the package until then.
+
+#+BEGIN_SRC emacs-lisp
+(use-package mu4e-column-faces
+  :disabled t
+  :if workstation-p
+  :ensure t
+  :after mu4e
+  :config (mu4e-column-faces-mode))
+#+END_SRC
+
 The ~mu4e~ system package provides also a library for sending emails.
 
 See https://www.djcbsoftware.nl/code/mu/mu4e/Sending-mail.html
