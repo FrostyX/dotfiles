@@ -2334,6 +2334,58 @@ The most basic key bindings are
 
 For more see https://github.com/emacs-evil/evil-magit#key-bindings
 
+** Git Forge
+
+Communication over projects issues and pull requests consumes a big chunk of our
+time as software developers. Let's make it more fun by not leaving Emacs and
+doing it via Magit.
+
+The configuration can be a little tricky so let's move in small steps that are
+easier to debug. First, install the ~ghub~ package which provides API
+implementation for various git forges such as GitHub, GitLab, etc.
+
+See https://magit.vc/manual/ghub/
+
+#+BEGIN_SRC emacs-lisp
+(use-package ghub
+  :ensure t)
+#+END_SRC
+
+To configure a GitHub account, you need to specify your username.
+
+#+BEGIN_SRC bash
+git config --global github.user frostyx
+#+END_SRC
+
+And then generate a token. I use the same one that I got for the official GitHub
+client `gh`. It was stored in ~$HOME/.config/gh/hosts.yml~
+
+See https://cli.github.com/manual/
+
+We need to store the token into password manager, so that ~ghub~ can use it.
+
+#+BEGIN_SRC bash
+pass insert forge/api.github.com
+#+END_SRC
+
+To make sure that everything was configured properly and work as expected, try
+running the following function.
+
+#+BEGIN_SRC
+(ghub-request "GET" "/user")
+#+END_SRC
+
+Now we can proceed to the ~forge~ installation, which is basically a Magit
+interface for ~ghub~.
+
+#+BEGIN_SRC emacs-lisp
+(use-package forge
+  :ensure t
+  :after magit)
+#+END_SRC
+
+TODO table with commands
+
 ** File manager
 
 There is already an awesome file manager built in Emacs, called ~dired~.
