@@ -2424,6 +2424,15 @@ TODO Prevent ^ from jumping to the parent directory
 TODO Bind backspace for accessing the parent directory
 TODO Find useful hacks here https://github.com/Fuco1/dired-hacks
 
+The standard ~ls~ output is a bit too much verbose for casual use. Let's hide
+the details by default. To manually show/hide them,
+use ~M-x dired-hide-details-mode~.
+
+#+BEGIN_SRC emacs-lisp
+(use-package dired
+  :hook (dired-mode . dired-hide-details-mode))
+#+END_SRC
+
 To use ~dired~ as a full-fledged file manager for all desktop environment usage,
 we need to admit, that there exists a world outside of Emacs and that we need to
 open some file types with dedicated applications.
