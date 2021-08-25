@@ -2348,7 +2348,10 @@ See https://magit.vc/manual/ghub/
 
 #+BEGIN_SRC emacs-lisp
 (use-package ghub
-  :ensure t)
+  :ensure t
+  :quelpa (ghub :fetcher github
+                :repo "FrostyX/ghub"
+                :branch "pagure"))
 #+END_SRC
 
 To configure a GitHub account, you need to specify your username.
@@ -2381,10 +2384,30 @@ interface for ~ghub~.
 #+BEGIN_SRC emacs-lisp
 (use-package forge
   :ensure t
-  :after magit)
+  :quelpa (forge :fetcher file
+                 :path "/home/jkadlcik/git/forge/lisp"))
+#+END_SRC
+
+Improve the readability by adjusting colors and other visual elements.
+
+#+BEGIN_SRC emacs-lisp
+;; FIXME doesn't work for some reason
+(set-face-attribute 'forge-post-author nil :foreground my/blue)
+(set-face-attribute 'forge-post-date nil :foreground my/yellow)
 #+END_SRC
 
 TODO table with commands
+
+
+https://pagure.io/settings#nav-api-tab
+
+#+BEGIN_SRC bash
+git config --global pagure.user frostyx
+#+END_SRC
+
+#+BEGIN_SRC bash
+pass insert forge/pagure.io
+#+END_SRC
 
 ** File manager
 
