@@ -2479,6 +2479,7 @@ touched it in the last ten years.
         ("mkv" . "vlc")
         ("mp4" . "vlc")
         ("ogv" . "vlc")
+        ("avi" . "vlc")
         ("odt"  . "libreoffice")
         ("docx" . "libreoffice")
         ("docx" . "libreoffice")))
@@ -2509,7 +2510,7 @@ their colors to ~nil~. And only later specify their faces.
 
 #+BEGIN_SRC emacs-lisp
 (dired-rainbow-define img nil ("gif" "jpg" "png"))
-(dired-rainbow-define video nil ("mp4" "mkv" "ogv"))
+(dired-rainbow-define video nil ("mp4" "mkv" "ogv" "avi"))
 (dired-rainbow-define office nil ("odt" "doc" "docx"))
 (dired-rainbow-define pdf nil ("pdf"))
 #+END_SRC
