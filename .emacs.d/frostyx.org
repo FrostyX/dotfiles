@@ -2519,7 +2519,7 @@ Now we can adjust the file type and permission colors.
 #+BEGIN_SRC emacs-lisp
 (set-face-attribute 'dired-rainbow-img-face nil :foreground my/green)
 (set-face-attribute 'dired-rainbow-office-face nil :foreground my/yellow)
-(set-face-attribute 'dired-rainbow-office-face nil :foreground my/yellow)
+(set-face-attribute 'dired-rainbow-video-face nil :foreground my/orange)
 (set-face-attribute 'dired-rainbow-pdf-face nil :foreground my/purple)
 #+END_SRC
 
