@@ -2549,6 +2549,14 @@ bookmarks for non-project directories (e.g. movies and music folders).
 | ~M-x helm-bookmarks~ | List and jump to bookmarks                                   |
 | ~M-x bookmark-save~  | Permanently save all bookmarks to ~$HOME/.emacs.d/bookmarks~ |
 
+Highlight the whole cursor line when in ~dired~. I am blind as a bat and can't
+easily read the whole filename by just having a cursor at the beginning of the line.
+
+#+BEGIN_SRC emacs-lisp
+(use-package dired
+  :hook (dired-mode . hl-line-mode))
+#+END_SRC
+
 ** Terminal
 
 I am currently not using a terminal emulator inside of Emacs because all
