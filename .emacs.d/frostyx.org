@@ -989,6 +989,9 @@ Hydra main entry-point allowing us acces to other hydras.
    (("d" dired-jump "open dired in the current directory")
     ("D" hydra-dired/body "dired"))
 
+   "Bookmarks"
+   (("B" hydra-bookmarks/body "bookmarks"))
+
    "Git"
    (("g" magit-status "magit")
     ("G" hydra-magit/body "more magit options"))
@@ -1072,6 +1075,19 @@ Hydra definition for ~dired~ package.
     ("~" (lambda () (interactive) (dired "~/")) "home directory")
     ("/" (lambda () (interactive) (dired "/")) "root directory")
     ("p" (lambda () (interactive) (dired (projectile-project-root)))))))
+#+END_SRC
+
+*** Bookmarks
+
+Hydra definition for bookmarks management.
+
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-bookmarks
+  (:color blue :quit-key ("q" "SPC") :title "Bookmarks")
+  ("Bookmarks"
+   (("c" bookmark-set "Create a bookmark")
+    ("l" helm-bookmarks "List and jump bookmarks")
+    ("s" bookmark-save "Save bookmarks to disk"))))
 #+END_SRC
 
 *** Magit
@@ -2523,6 +2539,15 @@ Now we can adjust the file type and permission colors.
 (set-face-attribute 'dired-rainbow-video-face nil :foreground my/orange)
 (set-face-attribute 'dired-rainbow-pdf-face nil :foreground my/purple)
 #+END_SRC
+
+When using ~dired~ as an general purpose file manager, it is convenient to setup
+bookmarks for non-project directories (e.g. movies and music folders).
+
+| Command              | Explanation                                                  |
+|----------------------+--------------------------------------------------------------|
+| ~M-x bookmark-set~   | Create a bookmark                                            |
+| ~M-x helm-bookmarks~ | List and jump to bookmarks                                   |
+| ~M-x bookmark-save~  | Permanently save all bookmarks to ~$HOME/.emacs.d/bookmarks~ |
 
 ** Terminal
 
