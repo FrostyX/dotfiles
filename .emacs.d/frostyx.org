@@ -1228,6 +1228,18 @@ Hydra menu for Circe IRC client
     ("a" circe-command-GAWAY "Custom away message"))))
 #+END_SRC
 
+**** Dired
+
+Hydra menu for Dired file manager
+
+#+BEGIN_SRC emacs-lisp
+(major-mode-hydra-define (dired-mode)
+  (:color blue :quit-key ("q" "SPC") :title "Dired")
+  ("Away"
+   (("o" dired-open-file "Open")
+    ("v" my/dired-vlc-enqueue "Queue in VLC"))))
+#+END_SRC
+
 * Project management
 
 When working on multiple projects at the same time, it is useful keep some level
@@ -2501,6 +2513,20 @@ touched it in the last ten years.
         ("docx" . "libreoffice")))
 #+END_SRC
 
+Sometimes we would like to open a file in different application (e.g. editting
+an image instead of viewing it, queueing a video instead of starting it
+immediately, etc). For that, it would be nice to have an alternative of "open
+with" dialog that is commonly found in GUI file managers. I am not aware of such
+feature for emacs so I am starting my implementation here. The end-goal is
+providing ~M-x helm-dired-open-with~ command.
+
+#+BEGIN_SRC emacs-lisp
+(defun my/dired-vlc-enqueue ()
+  (interactive)
+  (let ((file (ignore-errors (dired-get-file-for-visit))))
+	(dired-open--start-process file "vlc --one-instance --playlist-enqueue")))
+#+END_SRC
+
 To make the ~dired~ output more exciting, we can add some colors to it. There is
 an out-of-the-box solution in the form of ~diredfl~ package but that colorizes
 dired heavily and I feel like I would have to de-colorize it a little.
@@ -2555,6 +2581,14 @@ easily read the whole filename by just having a cursor at the beginning of the l
 #+BEGIN_SRC emacs-lisp
 (use-package dired
   :hook (dired-mode . hl-line-mode))
+#+END_SRC
+
+By default ~dired~ uses space for moving the cursor to the next line, we want to
+unbind that so that hydra works.
+
+#+BEGIN_SRC emacs-lisp
+(evil-define-key 'normal dired-mode-map (kbd "SPC") nil)
+(evil-define-key 'normal dired-mode-map (kbd "S-SPC") nil)
 #+END_SRC
 
 ** Terminal
