@@ -714,6 +714,8 @@ based on the default Emacs theme.
                                         :foreground my/gray)
 #+END_SRC
 
+** Icons and Emojis
+
 Besides normal fonts we also want to setup some icon fonts. Personally, I like
 ~Font Awesome~ the best. It is really easy to use and it dominates in the realm
 of website icons so it is like killing two birds with one stone.
@@ -731,8 +733,23 @@ it works properly though. The following setting fixes it.
 
 See https://github.com/emacsorphanage/fontawesome/issues/12#issuecomment-284193735
 
+Not doing this though because it breaks ~all-the-icons~ filetype icons.
+
+See https://www.reddit.com/r/emacs/comments/pdviti/why_are_alltheicons_displaying_wrong_icons/
+
 #+BEGIN_SRC emacs-lisp
-(set-fontset-font t 'unicode "FontAwesome" nil 'prepend)
+;; (set-fontset-font t 'unicode "FontAwesome" nil 'prepend)
+#+END_SRC
+
+The most commonly used collection of icons in Emacs is ~all-the-icons~. It
+encapsulates FontAwesome, filetype icons, major mode icons, and more. If the
+icons are not displayed correctly, run ~M-x all-the-icons-install-fonts~.
+
+See https://github.com/domtronn/all-the-icons.el
+
+#+BEGIN_SRC emacs-lisp
+(use-package all-the-icons
+  :ensure t)
 #+END_SRC
 
 ** Modeline
@@ -2482,6 +2499,18 @@ use ~M-x dired-hide-details-mode~.
 #+BEGIN_SRC emacs-lisp
 (use-package dired
   :hook (dired-mode . dired-hide-details-mode))
+#+END_SRC
+
+We can make Dired more beautiful and utilize the ~all-the-icons~ packge to
+display filetype icons.
+
+See https://github.com/jtbm37/all-the-icons-dired
+
+#+BEGIN_SRC emacs-lisp
+(use-package all-the-icons-dired
+  :ensure t
+  :hook
+  (dired-mode . all-the-icons-dired-mode))
 #+END_SRC
 
 To use ~dired~ as a full-fledged file manager for all desktop environment usage,
