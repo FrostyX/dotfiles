@@ -2544,10 +2544,18 @@ touched it in the last ten years.
 
 Sometimes we would like to open a file in different application (e.g. editting
 an image instead of viewing it, queueing a video instead of starting it
-immediately, etc). For that, it would be nice to have an alternative of "open
-with" dialog that is commonly found in GUI file managers. I am not aware of such
-feature for emacs so I am starting my implementation here. The end-goal is
-providing ~M-x helm-dired-open-with~ command.
+immediately, etc). For that, it is nice to have an "open with" dialog that is
+commonly used in GUI file managers.
+
+See https://github.com/FrostyX/helm-dired-open
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm-dired-open
+  :ensure t
+  :quelpa (helm-dired-open
+           :fetcher file
+           :path "~/git/helm-dired-open"))
+#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
 (defun my/dired-vlc-enqueue ()
