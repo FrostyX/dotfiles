@@ -3276,7 +3276,14 @@ Do not forget to kill circe and run it again after modifying
          :port 6667
          :tls nil
          :nick "jkadlcik"
-         :channels ("#brno" "#copr"))))
+         :channels ("#brno" "#copr"))
+
+        ("Gnome"
+         :host "irc.gnome.org"
+         :port 6667
+         :tls nil
+         :nick "FrostyX"
+         :channels ("#nautilus"))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
