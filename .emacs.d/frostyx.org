@@ -3264,6 +3264,7 @@ Do not forget to kill circe and run it again after modifying
          :channels ("#fedora-admin"
                     "#fedora-buildsys"
                     "#tito"
+                    "#emacs"
                     "#emacs-circe"))
 
         ("OFTC"
