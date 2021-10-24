@@ -1,59 +1,21 @@
 # dotfiles
+
 ## Installation
 
-	# Choose method which suits better for you
-	git clone git@github.com:FrostyX/dotfiles.git ~/.dotfiles
-	git clone https://github.com/FrostyX/dotfiles.git ~/.dotfiles
+    # Choose method which suits better for you
+    git clone git@github.com:FrostyX/dotfiles.git ~/.dotfiles
+    git clone https://github.com/FrostyX/dotfiles.git ~/.dotfiles
 
-	# Create all parent directories
-	mkdir -p ~/.config/cava
+    # Optionally symlink dotfiles next to other git projects
+    ln -s ~/.dotfiles ~/git/dotfiles
 
-	# Make symlinks for configuration files
-	ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
-	ln -s ~/.dotfiles/.Xresources ~/.Xresources
-	ln -s ~/.dotfiles/.vim ~/.vim
-	ln -s ~/.dotfiles/.vimrc ~/.vimrc
-	ln -s ~/.dotfiles/.emacs.d/ ~/.emacs.d
-	ln -s ~/.dotfiles/.mbsyncrc ~/.mbsyncrc
-	ln -s ~/.dotfiles/.local/share/applications/gvim.desktop ~/.local/share/applications/gvim.desktop
-	ln -s ~/.dotfiles/.config/cava/config ~/.config/cava/config
+    # Make symlinks for configuration files
+    stow . -d ~/.dotfiles/ -t ~
 
-	ln -s ~/.dotfiles/.config/qtile ~/.config/qtile
+    # Get git submodules (required for Vundle)
+    cd ~/.dotfiles
+    git submodule update --init --recursive
 
-	# VLC can't handle symlink
-	ln ~/.dotfiles/.config/vlc/vlcrc ~/.config/vlc/vlcrc
+## Remove dotfiles
 
-	# Get git submodules
-	cd ~/.dotfiles
-	git submodule update --init --recursive
-
-## Update submodules
-
-	git submodule update
-
-## VIM
-
-	# Run every time when new Vundle module is added
-	vim +PluginInstall +qall
-
-### YouCompleteMe
-YouCompleteMe is a fast, as-you-type, fuzzy-search code completion engine for Vim. It's the best choice for using Vim as IDE, but so bad for portability.
-
-When you want portable configuration, just dont install YouCompleteMe. It will be used alternative tools providing similar feature as YouCompleteMe.
-
-Requires:
-
-- C++ compiler (Clang for semantic completion, else g++)
-- CMake & Make
-- About 15 minutes
-
-
-Installation:
-
-	cd ~/.dotfiles/.vim/bundle/YouCompleteMe
-
-	# For semantic completion
-	./install.sh --clang-completer
-
-	# Or without semantic completion
-	./install.sh
+    stow -D . -d ~/.dotfiles/ -t ~
