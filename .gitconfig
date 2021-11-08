@@ -7,3 +7,7 @@
 
 [alias]
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+[github]
+	user = frostyx
+[pagure]
+	user = frostyx
