@@ -1535,9 +1535,7 @@ same, we need some longer observation.
 TODO map this for all modes?
 
 #+BEGIN_SRC emacs-lisp
-(defun set-newline-and-indent ()
-  (local-set-key (kbd "RET") 'newline-and-indent))
-(add-hook 'python-mode-hook 'set-newline-and-indent)
+(define-key global-map (kbd "RET") 'newline-and-indent)
 #+END_SRC
 
 In case a project uses TABs for indenting, we want to see them with some
@@ -1545,6 +1543,14 @@ reasonable size.
 
 #+BEGIN_SRC emacs-lisp
 (setq tab-width 4)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun hook-tab-width ()
+  (setq tab-width 4)
+  (setq evil-shift-width 4)
+  (setq python-indent-offset 4))
+(add-hook 'prog-mode-hook #'hook-tab-width)
 #+END_SRC
 
 We need to adjust tab width for Evil ~<<~ and ~>>~ separately.
