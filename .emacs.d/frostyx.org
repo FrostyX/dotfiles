@@ -234,6 +234,15 @@ See https://emacs.stackexchange.com/q/14509
 (setq kill-buffer-query-functions nil)
 #+END_SRC
 
+Some packages won't properly reload their configuration after update and break.
+We need to take care of that.
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'auto-package-update-after-hook
+          (lambda ()
+            (load-library "yasnippet-snippets.el")))
+#+END_SRC
+
 ** Quelpa
 
 Quelpa is a package management tool to compile and install Emacs Lisp packages
@@ -1747,6 +1756,15 @@ and then write/override whatever is needed.
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet-snippets
   :ensure t)
+#+END_SRC
+
+Specify paths to snippets and reload all of them
+
+#+BEGIN_SRC emacs-lisp
+(setq yas-snippet-dirs
+      (list (expand-file-name "snippets/" user-emacs-directory)
+            yasnippet-snippets-dir))
+(yas-reload-all)
 #+END_SRC
 
 You can find my custom snippets in ~./snippets/~ directory. When creating
