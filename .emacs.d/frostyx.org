@@ -2382,6 +2382,7 @@ See https://magit.vc/manual/ghub/
 #+BEGIN_SRC emacs-lisp
 (use-package ghub
   :ensure t
+  :disabled t
   :quelpa (ghub :fetcher github
                 :repo "FrostyX/ghub"
                 :branch "pagure"))
@@ -2417,6 +2418,7 @@ interface for ~ghub~.
 #+BEGIN_SRC emacs-lisp
 (use-package forge
   :ensure t
+  :disabled t
   :quelpa (forge :fetcher file
                  :path "/home/jkadlcik/git/forge/lisp"))
 #+END_SRC
@@ -2424,9 +2426,9 @@ interface for ~ghub~.
 Improve the readability by adjusting colors and other visual elements.
 
 #+BEGIN_SRC emacs-lisp
-;; FIXME doesn't work for some reason
-(set-face-attribute 'forge-post-author nil :foreground my/blue)
-(set-face-attribute 'forge-post-date nil :foreground my/yellow)
+;; The forge package is currently disabled
+;; (set-face-attribute 'forge-post-author nil :foreground my/blue)
+;; (set-face-attribute 'forge-post-date nil :foreground my/yellow)
 #+END_SRC
 
 TODO table with commands
