@@ -1134,6 +1134,7 @@ Hydra launcher for applications
   (:color blue :quit-key ("q" "SPC") :title "Applications")
   ("Launch"
    (("r" elfeed "RSS (elfeed)")
+    ("t" frostyx/multi-vterm-named "Terminal (vterm)")
     ("w" eww "web (eww)")
     ("e" mu4e "email (mu4e)")
     ("s" hydra-spotify/body "Spotify"))))
@@ -2749,6 +2750,29 @@ See https://github.com/akermu/emacs-libvterm
 (use-package vterm
   :if workstation-p
   :ensure t)
+#+END_SRC
+
+Running ~M-x vterm~, spawns a terminal buffer, and all consequent calls of
+~M-x vterm~ doesn't spawn a new terminal, but jumps to the previous one. Thanks
+to ~multi-vterm~, we can have more of them.
+
+See https://github.com/suonlight/multi-vterm
+
+#+BEGIN_SRC emacs-lisp
+(use-package multi-vterm
+  :if workstation-p
+  :ensure t)
+#+END_SRC
+
+For convenience, let's create a wrapper for spawning a named terminal. Unnamed
+terminal buffers are a giant mess.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/multi-vterm-named ()
+  (interactive)
+  (multi-vterm)
+  (multi-vterm-rename-buffer
+   (read-string "Name: ")))
 #+END_SRC
 
 ** Web
