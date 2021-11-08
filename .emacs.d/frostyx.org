@@ -2658,6 +2658,29 @@ See https://github.com/legoscia/archive-rpm
   :ensure t)
 #+END_SRC
 
+One of the most killer features in GUI file managers is a menu for mounting
+removable disks such as USB sticks and external drives. Let's do this in Emacs
+as well.
+
+See https://gitlab.com/tuedachu/udiskie.el
+
+First, install the Fedora package that is internally used.
+
+#+BEGIN_SRC bash
+dnf install udiskie
+#+END_SRC
+
+And install the Emacs ~udiskie~ pacakge
+
+#+BEGIN_SRC emacs-lisp
+(use-package udiskie
+  :if workstation-p
+  :ensure t
+  :quelpa (udiskie
+           :fetcher git
+           :url "https://gitlab.com/tuedachu/udiskie.el.git"))
+#+END_SRC
+
 ** Terminal
 
 I am currently not using a terminal emulator inside of Emacs because all
