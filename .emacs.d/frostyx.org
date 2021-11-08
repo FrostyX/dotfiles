@@ -2218,6 +2218,37 @@ with the rest of our theme.
 
 TODO it uses tabs! Don't use tabs for god sake
 
+*** PlantUML
+
+PlantUML is a language for describing UML diagrams such as Sequence
+diagram, Usecase diagram, Class diagram, Activity diagram, etc. Bye
+bye slow, ugly, and annoying UML editors.
+
+See https://plantuml.com/
+
+In Emacs, we have ~plantuml-mode~. It even provides previews with
+~C-c C-c~.
+
+See https://github.com/skuro/plantuml-mode
+
+#+BEGIN_SRC emacs-lisp
+(use-package plantuml-mode
+  :ensure t)
+#+END_SRC
+
+Don't forget to install the ~plantuml~ package.
+
+#+BEGIN_SRC bash
+dnf install plantuml
+#+END_SRC
+
+Use the binary provided by Fedora
+
+#+BEGIN_SRC emacs-lisp
+(setq plantuml-executable-path "/usr/bin/plantuml")
+(setq plantuml-default-exec-mode 'executable)
+#+END_SRC
+
 ** LSP
 
 #+BEGIN_SRC emacs-lisp
