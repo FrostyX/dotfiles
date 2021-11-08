@@ -290,6 +290,47 @@ See:
   :ensure t)
 #+END_SRC
 
+* Key bindings
+
+As per usual, we have half a dozen ways to do something in Emacs, in this case
+customizing key bindings. There is ~global-set-key~ for global key definitions,
+~define-key~ for mode-specific definitions (or global definitions as well, when
+using ~global-map~), ~evil-define-key~ for Vim users, and many more than I am
+not aware of. For unbinding keys, we have ~global-unset-key~ or binding
+something to ~nil~. Brace yourselves, we are going to introduce even more
+options.
+
+General seems to be the most convinient and consitent way manage key bindings
+for both octopuses and Evil users.
+
+See https://github.com/noctuid/general.el
+
+#+BEGIN_SRC emacs-lisp
+(use-package general
+  :ensure t)
+#+END_SRC
+
+Provide Vim-like definers such as ~general-nmap~, ~general-imap~,
+~general-vmap~, etc.
+
+See https://github.com/noctuid/general.el#vim-like-definers
+
+#+BEGIN_SRC emacs-lisp
+(general-evil-setup)
+#+END_SRC
+
+Be consistent and map key bindings like this
+
+#+BEGIN_EXAMPLE emacs-lisp
+(general-nmap "KEY" 'command)
+#+END_EXAMPLE
+
+And unbind key bindings like this (you can ommit the mode map)
+
+#+BEGIN_EXAMPLE emacs-lisp
+(general-unbind 'normal some-mode-map "KEY")
+#+END_EXAMPLE
+
 * Living in Evil
 
 @TODO link the great blog post explaining emacs key bindings
@@ -462,10 +503,11 @@ commands. To comment e.g. next 3 lines, use ~3gcc~. To comment a ~VISUAL~ select
 TODO ctrl+w hjkl is too slow
 
 #+BEGIN_SRC emacs-lisp
-(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+(general-nmap
+ "C-h" 'evil-window-left
+ "C-j" 'evil-window-down
+ "C-k" 'evil-window-up
+ "C-l" 'evil-window-right)
 #+END_SRC
 
 TODO package manager key bindings, these needs to go somewhere else
@@ -906,8 +948,8 @@ be suitable for 99% of cases and for the rest, there is a fallback showing all
 open buffers without any filter.
 
 #+BEGIN_SRC emacs-lisp
-(define-key evil-normal-state-map (kbd ";") 'my/smart-buffers-list)
-(define-key evil-normal-state-map (kbd ",;") 'helm-buffers-list)
+(general-nmap ";"  'my/smart-buffers-list)
+(general-nmap ",;" 'helm-buffers-list)
 #+END_SRC
 
 ** Hydra
@@ -944,12 +986,14 @@ Let's install just the ~hydra~ package and keep it simple.
 #+BEGIN_SRC emacs-lisp
 (use-package hydra
   :ensure t
-  :bind
-  ("C-SPC" . hydra-main/body)
-  :config
-  (define-key evil-normal-state-map (kbd "SPC") 'hydra-main/body)
   :custom
   (hydra-default-hint nil))
+#+END_SRC
+
+Press spacebar to spawn a main hydra window.
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap "SPC" 'hydra-main/body)
 #+END_SRC
 
 *** Additional Hydra packages
@@ -1174,9 +1218,13 @@ See https://github.com/jerrypnz/major-mode-hydra.el
 
 #+BEGIN_SRC emacs-lisp
 (use-package major-mode-hydra
-  :ensure t
-  :config
-  (define-key evil-normal-state-map (kbd "S-SPC") 'major-mode-hydra))
+  :ensure t)
+#+END_SRC
+
+Press Shift+spacebar to spawn a hydra specific to the current major-mode
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap "S-SPC" 'major-mode-hydra)
 #+END_SRC
 
 **** Org
@@ -2517,7 +2565,7 @@ In Vim, I was used to open and close NerdTree with ~C-n~. Side-tree
 file managers sux but let's keep the shortcut.
 
 #+BEGIN_SRC emacs-lisp
-(define-key evil-normal-state-map (kbd "C-n") 'dired-jump)
+(general-nmap "C-n" 'dired-jump)
 #+END_SRC
 
 You will probably find these Evil keybindings useful.
@@ -2669,8 +2717,9 @@ By default ~dired~ uses space for moving the cursor to the next line, we want to
 unbind that so that hydra works.
 
 #+BEGIN_SRC emacs-lisp
-(evil-define-key 'normal dired-mode-map (kbd "SPC") nil)
-(evil-define-key 'normal dired-mode-map (kbd "S-SPC") nil)
+(general-unbind 'normal dired-mode-map
+  "SPC"
+  "S-SPC")
 #+END_SRC
 
 It is well-known that Emacs can open archives (.tar, .zip, etc) but thanks to
