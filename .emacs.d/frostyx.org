@@ -1053,6 +1053,9 @@ Hydra main entry-point allowing us acces to other hydras.
    (("g" magit-status "magit")
     ("G" hydra-magit/body "more magit options"))
 
+   "LSP"
+   (("l" hydra-lsp/body "LSP"))
+
    "Time"
    (("t" org-pomodoro "Pomodoro"))
 
@@ -1157,6 +1160,19 @@ Hydra definition for ~magit~ package.
   ("Open in"
    (("g" magit-status "magit")
     ("b" magit-branch-checkout))))
+#+END_SRC
+
+*** LSP
+
+Hydra definition for ~LSP~.
+
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-lsp
+  (:color blue :quit-key ("q" "SPC") :title "Magit")
+  ("Action"
+   (("d" lsp-find-definition "Jump to definition")
+    ("r" lsp-find-references "Find references")
+    ("R" lsp-rename "Rename this thing"))))
 #+END_SRC
 
 *** Flycheck
@@ -2311,58 +2327,48 @@ Use the binary provided by Fedora
 
 ** LSP
 
+See https://emacs-lsp.github.io/lsp-mode/
+
 #+BEGIN_SRC emacs-lisp
-;; When messing with the configuration and going back to elpy, delete
-;; these packages with `M-x package-delete'
-;;
-;; (use-package company
-;;   :ensure t
-;;   :config
-;;   (global-company-mode))
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook
+  (lsp-mode . frostyx/lsp-mode-hook)
+  (python-mode . lsp)
+  :init
+  (setq lsp-keymap-prefix "C-c l"))
+#+END_SRC
 
-;; (use-package flycheck
-;;   :ensure t)
+Let's define custom function that can be used for autocompletion
+menu.
 
-;; (use-package lsp-mode
-;;   :ensure t
-;;   ;; Support for specific languages:
-;;   ;; Python: pip-3 install --user python-language-server[all]
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/company-complete (&optional arg)
+  (interactive)
+  (company-complete))
+#+END_SRC
 
-;;   :init
-;;   (setq lsp-keymap-prefix "s-l")
+Let's map ~evil-complete-next-func~ which is used by ~C-n~ to use
+company.
 
-;;   ;;@FIXME autocompletion inserts function arguments and it sux
-;;   ;;       using elpy until that
-;;   ;; :hook
-;;   ;; ((python-mode . lsp))
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/lsp-mode-hook ()
+  (setq-local evil-complete-next-func 'frostyx/company-complete))
+#+END_SRC
 
-;;   :config
-;;   (setq lsp-enable-symbol-highlighting nil)
-;;   (setq lsp-signature-auto-activate nil)
-;;   (setq lsp-enable-snippet nil)
-;;   (setq lsp-enable-completion-at-point nil)
+Hide the ugly header navigation that comes with the default ~lsp-mode~
+package.
 
-;;   :commands lsp)
+#+BEGIN_SRC emacs-lisp
+(setq lsp-headerline-breadcrumb-enable nil)
+#+END_SRC
 
-;; (use-package lsp-ui
-;;   :disabled
-;;   :ensure t
-;;   :commands lsp-ui-mode)
+See https://emacs-lsp.github.io/lsp-mode/page/languages/
+See https://github.com/palantir/python-language-server
 
-;; (use-package company-lsp
-;;   :ensure t
-;;   :config
-;;   (setq company-lsp-enable-snippet nil)
-;;   :commands company-lsp)
-
-;; (use-package helm-lsp
-;;   :ensure t
-;;   :commands helm-lsp-workspace-symbol)
-
-;; (setq company-minimum-prefix-length 1
-;;       company-idle-delay 0) ;; default is 0.2
-
-;; (add-hook 'prog-mode-hook (lambda () (highlight-indentation-mode -1)))
+#+BEGIN_SRC bash
+sudo dnf install python3-language-server
 #+END_SRC
 
 * Writing
