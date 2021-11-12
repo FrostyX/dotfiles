@@ -1169,12 +1169,21 @@ Hydra definition for ~LSP~.
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-lsp
   (:color blue :quit-key ("q" "SPC") :title "Magit")
-  ("Action"
-   (("w" lsp-describe-session "Describe session")
-    ("d" lsp-find-definition "Jump to definition")
-    ("r" lsp-find-references "Find references")
-    ("R" lsp-rename "Rename this thing")
-    ("s" lsp-grammarly-check-grammar "Spellcheck using Grammarly.com")
+  ("Server"
+   (("w" lsp-describe-session "Describe session"))
+
+   "Navigation"
+   (("d" lsp-find-definition "Jump to definition")
+    ("r" lsp-find-references "Find references"))
+
+   "Documentation"
+   (("D" lsp-describe-thing-at-point "Show documentation"))
+
+   "Refactoring"
+   (("R" lsp-rename "Rename this thing"))
+
+   "Spellcheck"
+   (("s" lsp-grammarly-check-grammar "Spellcheck using Grammarly.com")
     ("S" lsp-grammarly-stop "Disable spellcheck"))))
 #+END_SRC
 
