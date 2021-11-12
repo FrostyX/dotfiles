@@ -2418,7 +2418,9 @@ Highlighting all occurences of thing under cursor is useful but
 please, do not underline it.
 
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute 'lsp-face-highlight-read nil :underline nil)
+(with-eval-after-load 'lsp-mode
+  (set-face-attribute 'lsp-face-highlight-read nil :underline nil))
+#+END_SRC
 #+END_SRC
 
 *** Python
