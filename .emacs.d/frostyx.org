@@ -1702,17 +1702,6 @@ Make the icons less disruptive and cooler
 (setq company-icon-margin 3)
 #+END_SRC
 
-When ~company~ autocomplete menu pops-up, we want to move in it using ~C-n~ and
-~C-p~ like in Vim. I am doing this mainly because of Python programming and
-Elpy, so if it makes a mess somewhere else, we can just limit this for
-~python-mode~.
-
-#+BEGIN_SRC emacs-lisp
-(with-eval-after-load 'company
-  (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous))
-#+END_SRC
-
 Automatically insert candidates while ~C-n~ and ~C-p~ through them.
 
 #+BEGIN_SRC emacs-lisp
