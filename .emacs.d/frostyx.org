@@ -1698,13 +1698,21 @@ Elpy, so if it makes a mess somewhere else, we can just limit this for
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 #+END_SRC
 
-Automatically insert candidates while ~C-n~ and ~C-p~ through them. We
-need to turn off the auto configuration because it messes up with
-brackets.
+Automatically insert candidates while ~C-n~ and ~C-p~ through them.
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'after-init-hook 'company-tng-mode)
+#+END_SRC
+
+We need to turn off the auto configuration because it messes up with
+brackets. But now we need to remap the ~company-active-map~ manually
+otherwise pressing ~RET~ without selecting a candiate does nothing
+(instead of simply inserting a new line)
 
 #+BEGIN_SRC emacs-lisp
 (setq company-tng-auto-configure nil)
-(add-hook 'after-init-hook 'company-tng-mode)
+(with-eval-after-load 'company-tng
+  (setq company-active-map company-tng-map))
 #+END_SRC
 
 Use ~company-mode~ everywhere
