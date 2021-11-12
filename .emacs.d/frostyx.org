@@ -1321,6 +1321,21 @@ Hydra menu for Dired file manager
     ("v" my/dired-vlc-enqueue "Queue in VLC"))))
 #+END_SRC
 
+** Which-key
+
+Nobody can really remember all the Emacs key chords. Let's use
+~which-key~ to show us a nice little help once we start some chord and
+get stuck remembering how it goes next.
+
+See https://github.com/justbur/emacs-which-key
+
+#+BEGIN_SRC emacs-lisp
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode))
+#+END_SRC
+
 * Project management
 
 When working on multiple projects at the same time, it is useful keep some level
