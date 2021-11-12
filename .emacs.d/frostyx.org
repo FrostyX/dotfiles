@@ -1170,9 +1170,12 @@ Hydra definition for ~LSP~.
 (pretty-hydra-define hydra-lsp
   (:color blue :quit-key ("q" "SPC") :title "Magit")
   ("Action"
-   (("d" lsp-find-definition "Jump to definition")
+   (("w" lsp-describe-session "Describe session")
+    ("d" lsp-find-definition "Jump to definition")
     ("r" lsp-find-references "Find references")
-    ("R" lsp-rename "Rename this thing"))))
+    ("R" lsp-rename "Rename this thing")
+    ("s" lsp-grammarly-check-grammar "Spellcheck using Grammarly.com")
+    ("S" lsp-grammarly-stop "Disable spellcheck"))))
 #+END_SRC
 
 *** Flycheck
@@ -1648,8 +1651,40 @@ See https://company-mode.github.io/
 #+BEGIN_SRC emacs-lisp
 (use-package company
   :ensure t
-  :config
-  (company-mode))
+  :hook
+  (company-mode . frostyx/company-mode-hook))
+#+END_SRC
+
+When ~company-mode~ is activated for a buffer, use do some
+configuration, such as, changing ~C-n~ to use it. Also automatically
+insert candidates while ~C-n~ and ~C-p~ through them.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/company-mode-hook ()
+  (setq-local evil-complete-next-func 'frostyx/company-complete))
+#+END_SRC
+
+Unfortunatelly we cannot use the default ~company-complete~ because it
+takes no arguments.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/company-complete (&optional arg)
+  (interactive)
+  (company-complete-common-or-cycle))
+#+END_SRC
+
+For the love of god, be case-sensitive. This setting IMHO applies only
+to plain text completions.
+
+#+BEGIN_SRC emacs-lisp
+(setq company-dabbrev-ignore-case nil)
+(setq company-dabbrev-downcase nil)
+#+END_SRC
+
+Make the icons less disruptive and cooler
+
+#+BEGIN_SRC emacs-lisp
+(setq company-icon-margin 3)
 #+END_SRC
 
 When ~company~ autocomplete menu pops-up, we want to move in it using ~C-n~ and
@@ -1663,9 +1698,19 @@ Elpy, so if it makes a mess somewhere else, we can just limit this for
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 #+END_SRC
 
+Automatically insert candidates while ~C-n~ and ~C-p~ through them. We
+need to turn off the auto configuration because it messes up with
+brackets.
+
 #+BEGIN_SRC emacs-lisp
-  ;; (define-key company-search-map (kbd "C-n") 'company-select-next)
-  ;; (define-key company-search-map (kbd "C-p") 'company-select-previous)
+(setq company-tng-auto-configure nil)
+(add-hook 'after-init-hook 'company-tng-mode)
+#+END_SRC
+
+Use ~company-mode~ everywhere
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'after-init-hook 'global-company-mode)
 #+END_SRC
 
 ** Whitespace
@@ -1845,6 +1890,7 @@ See ~M-x yas-describe-tables~ for all available snippets.
 (use-package elpy
   ;; sudo dnf install python3-virtualenv
   :ensure t
+  :disabled t
   :init
   ;; @TODO have some module for snippets
   (setq elpy-modules
@@ -2334,27 +2380,10 @@ See https://emacs-lsp.github.io/lsp-mode/
   :ensure t
   :commands (lsp lsp-deferred)
   :hook
-  (lsp-mode . frostyx/lsp-mode-hook)
-  (python-mode . lsp)
+  (python-mode . lsp-deferred)
+  (markdown-mode . lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l"))
-#+END_SRC
-
-Let's define custom function that can be used for autocompletion
-menu.
-
-#+BEGIN_SRC emacs-lisp
-(defun frostyx/company-complete (&optional arg)
-  (interactive)
-  (company-complete))
-#+END_SRC
-
-Let's map ~evil-complete-next-func~ which is used by ~C-n~ to use
-company.
-
-#+BEGIN_SRC emacs-lisp
-(defun frostyx/lsp-mode-hook ()
-  (setq-local evil-complete-next-func 'frostyx/company-complete))
 #+END_SRC
 
 Hide the ugly header navigation that comes with the default ~lsp-mode~
@@ -2364,11 +2393,47 @@ package.
 (setq lsp-headerline-breadcrumb-enable nil)
 #+END_SRC
 
+*** Python
+
 See https://emacs-lsp.github.io/lsp-mode/page/languages/
 See https://github.com/palantir/python-language-server
 
 #+BEGIN_SRC bash
 sudo dnf install python3-language-server
+#+END_SRC
+
+The python language server shows deprecation warnings, I hope this is
+going to be fixed in a new Fedora, otherwise we would have to do
+something about it.
+
+*** Grammarly
+
+For some reason ~lsp-grammarly~ requires this ~keytar~ thing and for
+some other reason, it doesn't pull it automatically as a dependency.
+
+#+BEGIN_SRC emacs-lisp
+(use-package keytar
+  :ensure t)
+#+END_SRC
+
+It requires a Javascript package installed via ~npm~.
+TODO Package it for Fedora as a RPM
+
+#+BEGIN_SRC emacs-lisp
+(keytar-install)
+#+END_SRC
+
+Now we can finally install the ~lsp-grammarly~ package.
+
+See https://github.com/emacs-grammarly/lsp-grammarly
+
+For the first time, you need to manually log-in to your Grammarly
+account. If I understand this properly, the credentials will then be
+stored to ~keytar~ and preserved after closing Emacs.
+
+#+BEGIN_SRC emacs-lisp
+(use-package lsp-grammarly
+  :ensure t)
 #+END_SRC
 
 * Writing
