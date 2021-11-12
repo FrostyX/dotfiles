@@ -2421,6 +2421,18 @@ please, do not underline it.
 (with-eval-after-load 'lsp-mode
   (set-face-attribute 'lsp-face-highlight-read nil :underline nil))
 #+END_SRC
+
+Don't auto-complete function arguments in Company. Its implemented via
+snippets and therefore takes over and provides jumping between
+arguments and stuff. It's too annoying.
+The problem with disabling this feature is that (at least in
+combination with ~company-tng-mode~ it now auto-completes functions
+without parentheses. Therefore, after selecting the correct function
+using ~C-n~ and ~C-p~, the next pressed key must be opening bracket
+~(~ instead of ~SPC~, ~TAB~, ~RET~, or whatever.
+
+#+BEGIN_SRC emacs-lisp
+(setq lsp-enable-snippet nil)
 #+END_SRC
 
 *** Python
