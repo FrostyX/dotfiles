@@ -16,8 +16,8 @@ call vundle#begin()
 Bundle 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb'  " Enable :Gbrowse in fugitive
+" Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-rhubarb'  " Enable :Gbrowse in fugitive
 Plugin 'tomtom/tcomment_vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'Glench/Vim-Jinja2-Syntax'
