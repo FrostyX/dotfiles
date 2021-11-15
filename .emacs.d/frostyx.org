@@ -2583,6 +2583,27 @@ The most basic key bindings are
 
 For more see https://github.com/emacs-evil/evil-magit#key-bindings
 
+There is currently some upstream bug prioritizing normal Evil keys
+over magit rebase keys. Which wouldn't be that awful but it affects
+only normal mode. Insert mode uses the default rebase keys, and that
+is super annoying.
+
+See https://www.reddit.com/r/spacemacs/comments/q0eqcd/how_to_get_my_magit_keybindings_back_mode/
+
+I am temporarily fixing the bug in my setup.
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap
+  :keymaps 'helm-ls-git-rebase-todo-mode-map
+  "d" 'helm-ls-git-rebase-drop
+  "e" 'helm-ls-git-rebase-edit
+  "f" 'helm-ls-git-rebase-fixup
+  "p" 'helm-ls-git-rebase-pick
+  "r" 'helm-ls-git-rebase-reword
+  "s" 'helm-ls-git-rebase-squash
+  "x" 'helm-ls-git-rebase-exec)
+#+END_SRC
+
 ** Git Forge
 
 Communication over projects issues and pull requests consumes a big chunk of our
