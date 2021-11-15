@@ -325,6 +325,14 @@ Be consistent and map key bindings like this
 (general-nmap "KEY" 'command)
 #+END_EXAMPLE
 
+Or for a specific mode
+
+#+BEGIN_EXAMPLE emacs-lisp
+(general-nmap
+  :keymaps 'some-mode-map
+  "KEY" 'command)
+#+END_EXAMPLE
+
 And unbind key bindings like this (you can ommit the mode map)
 
 #+BEGIN_EXAMPLE emacs-lisp
