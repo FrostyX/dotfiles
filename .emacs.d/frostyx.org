@@ -290,7 +290,8 @@ specify packages for each package manager explicitly.
 
 #+BEGIN_SRC emacs-lisp
 (defun frostyx/dnf (&key install)
-  (let ((system-packages-package-manager 'dnf))
+  (let ((system-packages-package-manager 'dnf)
+        (system-packages-use-sudo t))
 	(or (frostyx/rpm-query install)
 	  (system-packages-install install))))
 #+END_SRC
