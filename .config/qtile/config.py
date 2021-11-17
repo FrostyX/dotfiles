@@ -130,6 +130,7 @@ icons = {
     "light": "",    # fa-lightbulb-o
     "volume": "",   # fa-bullhorn
     "rss": "",      # fa-rss
+    "sync" ""       # fa-sync-alt
     "tasks": "",    # fa-calendar-check-o
     "repeat": "",   # fa-repeat
     "email": "",    # fa-at
@@ -424,16 +425,20 @@ def create_screen(primary=False):
             widget.Sep(**sep),
 
 
-            # Unread news count
+            # Available updates
             widget.TextBox(
-                text=icons["rss"],
+                text=icons["sync"],
                 foreground=base16_chalk["yellow"],
                 **style
             ),
-            Newsboat(
-                dbfile="/home/jkadlcik/.newsboat/cache.db",
+            widget.CheckUpdates(
+                distro="Fedora",
+                display_format="{updates}",
+                no_update_string="0",
                 foreground=base16_chalk["yellow"],
-                **style
+                colour_no_updates=base16_chalk["yellow"],
+                colour_have_updates=base16_chalk["yellow"],
+                **style,
             ),
             widget.Sep(**sep),
 
