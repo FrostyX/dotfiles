@@ -269,6 +269,42 @@ otherwise available and previously installed from MELPA.
 (setq quelpa-upgrade-p t)
 #+END_SRC
 
+** System packages
+
+Some third-party Emacs packages are built around or internally use
+system packages or executables. We can install them from within the
+Emacs configuration.
+
+See https://gitlab.com/jabranham/system-packages
+
+#+BEGIN_SRC emacs-lisp
+(use-package system-packages
+  :ensure t)
+#+END_SRC
+
+I don't want to guess my package manager because running this
+configuration on a different system could lead to inconsistencies or
+failures because of different package names. Instead, let's define
+helper functions for each package manager that we care about and
+specify packages for each package manager explicitly.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/dnf (&key install)
+  (let ((system-packages-package-manager 'dnf))
+	(or (frostyx/rpm-query install)
+	  (system-packages-install install))))
+#+END_SRC
+
+We need to use ~system-packages-install~ instead of
+~system-packages-ensure~ to avoid asking for sudo password even though
+the packages are already installed.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/rpm-query (pack)
+  (equal 0 (shell-command
+            (concat "rpm -q " pack))))
+#+END_SRC
+
 * Secrets
 
 Please do not hardcode your passwords or secret information into source code.
@@ -1916,8 +1952,11 @@ See ~M-x yas-describe-tables~ for all available snippets.
 *** Python
 
 #+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "python3-virtualenv")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
 (use-package elpy
-  ;; sudo dnf install python3-virtualenv
   :ensure t
   :disabled t
   :init
@@ -2389,8 +2428,8 @@ See https://github.com/skuro/plantuml-mode
 
 Don't forget to install the ~plantuml~ package.
 
-#+BEGIN_SRC bash
-dnf install plantuml
+#+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "plantuml")
 #+END_SRC
 
 Use the binary provided by Fedora
@@ -2448,8 +2487,8 @@ using ~C-n~ and ~C-p~, the next pressed key must be opening bracket
 See https://emacs-lsp.github.io/lsp-mode/page/languages/
 See https://github.com/palantir/python-language-server
 
-#+BEGIN_SRC bash
-sudo dnf install python3-language-server
+#+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "python3-language-server")
 #+END_SRC
 
 The python language server shows deprecation warnings, I hope this is
@@ -2882,8 +2921,8 @@ See https://gitlab.com/tuedachu/udiskie.el
 
 First, install the Fedora package that is internally used.
 
-#+BEGIN_SRC bash
-dnf install udiskie
+#+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "udiskie")
 #+END_SRC
 
 And install the Emacs ~udiskie~ pacakge
@@ -3011,8 +3050,8 @@ Unfortunatelly it is only for one email account.
 
 The prerequisite for this setup is having the following packages installed.
 
-#+BEGIN_SRC bash
-sudo dnf install isync maildir-utils
+#+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "isync maildir-utils")
 #+END_SRC
 
 A ~mu~ index needs to be initialized with an email address.
@@ -3983,8 +4022,8 @@ See:
 ** Bluetooth
 See https://github.com/emacsmirror/bluetooth
 
-#+BEGIN_SRC bash
-dnf install bluez-hid2hci
+#+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "bluez-hid2hci")
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
