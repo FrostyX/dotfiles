@@ -18,7 +18,7 @@ from datetime import date
 from os import uname
 from os.path import expanduser
 from libqtile.config import Key, Screen, Group, Drag, Click, Match, Rule
-from libqtile.command.client Client
+from libqtile.command.client import Client
 from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook
 
