@@ -305,6 +305,14 @@ the packages are already installed.
             (concat "rpm -q " pack))))
 #+END_SRC
 
+Just in case, set the package manager defaults to something expected
+
+#+BEGIN_SRC emacs-lisp
+(setq system-packages-package-manager 'dnf)
+(setq system-packages-use-sudo t)
+#+END_SRC
+
+
 * Secrets
 
 Please do not hardcode your passwords or secret information into source code.
