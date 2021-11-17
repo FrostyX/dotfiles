@@ -130,7 +130,7 @@ icons = {
     "light": "",    # fa-lightbulb-o
     "volume": "",   # fa-bullhorn
     "rss": "",      # fa-rss
-    "sync" ""       # fa-sync-alt
+    "sync": ""      # fa-sync-alt
     "tasks": "",    # fa-calendar-check-o
     "repeat": "",   # fa-repeat
     "email": "",    # fa-at
