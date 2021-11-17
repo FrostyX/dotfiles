@@ -1,0 +1,3 @@
+configuration {
+  theme: "base16-chalk";
+}
