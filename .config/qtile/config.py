@@ -18,7 +18,8 @@ from datetime import date
 from os import uname
 from os.path import expanduser
 from libqtile.config import Key, Screen, Group, Drag, Click, Match, Rule
-from libqtile.command import lazy, Client
+from libqtile.command.client Client
+from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook
 
 from contrib import (VimwikiUnfinished,
@@ -84,7 +85,7 @@ keys = [
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "control"], "q", lazy.shutdown()),
 
-    Key([mod], "w", lazy.screen.togglegroup()),
+    Key([mod], "w", lazy.screen.toggle_group()),
 
     # cycle to previous and next group
     Key([mod], "h", lazy.screen.prev_group(skip_managed=True)),
@@ -292,11 +293,9 @@ def create_screen(primary=False):
                 active=base16_chalk["white"],
                 inactive=base16_chalk["gray"],
                 rounded=False,
-                padding_x=6,
-                padding_y=5,
-                margin=0,
                 fontsize=14,
                 hide_unused=True,
+                **style,
             ),
             widget.Sep(**sep),
 
