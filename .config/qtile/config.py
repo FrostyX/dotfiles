@@ -33,10 +33,6 @@ terminal     = "gnome-terminal"
 run_backup   = "gmrun"
 run          = "rofi -show run"
 applications = "rofi -show drun"
-vol_cur      = "amixer -D pulse get Master"
-vol_up       = "amixer -q -D pulse sset Master 2%+"
-vol_down     = "amixer -q -D pulse sset Master 2%-"
-mute         = "amixer -q -D pulse set Master toggle"
 #bright_up    = "xbacklight -inc 10"
 #bright_down  = "xbacklight -dec 10"
 bright_up    = "light -A 5"
@@ -50,6 +46,19 @@ suspend      = "systemctl suspend"
 player_prev = "playerctl previous --player=spotify"
 player_next = "playerctl next --player=spotify"
 player_play_pause = "playerctl play-pause --player=spotify"
+
+
+if True:
+    vol_cur  = None
+    vol_up   = "pactl set-sink-volume @DEFAULT_SINK@ +2%"
+    vol_down = "pactl set-sink-volume @DEFAULT_SINK@ -2%"
+    mute     = "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+else:
+    vol_cur  = "amixer -D pulse get Master"
+    vol_up   = "amixer -q -D pulse sset Master 2%+"
+    vol_down = "amixer -q -D pulse sset Master 2%-"
+    mute     = "amixer -q -D pulse set Master toggle"
+
 
 hostname = uname()[1]
 if hostname == "chromie":
@@ -418,7 +427,7 @@ def create_screen(primary=False):
                 **style
             ),
             widget.Volume(
-                get_volume_command=vol_cur.split(),
+                get_volume_command=(vol_cur.split() if vol_cur else None),
                 foreground=base16_chalk["green"],
                 **style
             ),
