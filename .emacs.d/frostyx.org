@@ -3032,6 +3032,42 @@ terminal buffers are a giant mess.
    (read-string "Name: ")))
 #+END_SRC
 
+** Tmux
+
+Having terminal inside of Emacs is sick AF but I won't be running
+anything outside of Tmux anymore. We want persistent terminals!
+
+There is a library for Emacs -> Tmux communication
+See https://github.com/emacsorphanage/emamux
+
+#+BEGIN_SRC emacs-lisp
+(use-package emamux
+  :load-path "/home/jkadlcik/git/emamux"
+  :ensure t)
+#+END_SRC
+
+My goal is to implement helm-centric interface for Tmux. The following
+code is still work in progress.
+
+List all Tmux sessions
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/tmux-sessions ()
+  (interactive)
+  (let* ((choices (emamux:get-sessions)))
+	(completing-read "Sessions: " choices)))
+#+END_SRC
+
+List all windows inside of a specific Tmux session
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/tmux-windows ()
+  (interactive)
+  (let* ((emamux:session "51")
+		 (choices (emamux:list-windows)))
+	(completing-read "Window: " choices)))
+#+END_SRC
+
 ** Web
 
 *** EWW
