@@ -189,7 +189,7 @@ groups = []
 for workspace in workspaces:
     matches = workspace["matches"] if "matches" in workspace else None
     groups.append(Group(workspace["name"], label=workspace["label"], matches=matches, layout="max"))
-    keys.append(Key([mod], workspace["key"], lazy.group[workspace["name"]].toscreen()))
+    keys.append(Key([mod], workspace["key"], lazy.group[workspace["name"]].toscreen(toggle=False)))
     keys.append(Key([mod, sup], workspace["key"], lazy.window.togroup(workspace["name"])))
 
 
