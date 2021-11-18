@@ -3069,6 +3069,56 @@ List all windows inside of a specific Tmux session
 	(completing-read "Window: " choices)))
 #+END_SRC
 
+Rename window
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/tmux-rename-window ()
+  (interactive)
+  (let* ((emamux:session "2")
+		 (window (emamux:get-window))
+		 (name (read-string "Name: ")))
+	(emamux:tmux-run-command t "rename-window" name)))
+#+END_SRC
+
+Rename session
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/tmux-rename-session ()
+  (interactive)
+  (let* ((emamux:session "2")
+		 (name (read-string "Name: ")))
+	(emamux:tmux-run-command t "rename-session" "-t" emamux:session name)))
+#+END_SRC
+
+Hide status bar
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/hide-status-bar ()
+  (interactive)
+  (let* ((emamux:session "9"))
+	(emamux:tmux-run-command t "set" "-t" emamux:session "status" "off")))
+#+END_SRC
+
+TODO
+
+- Modeline indicator that we are in tmux (Tmux: Session -> Window)
+
+- Figuring out tmux session for the current emacs window
+    - https://github.com/akermu/emacs-libvterm/issues/482
+      echo $TMUX
+	  tmux display-message -p '#S'
+	  tmux display-message -p '#W'
+
+	- Spawn and keep opened a new vterm named ~*tmux-observer*~ and run commands
+      in it. AFAIK if command starts with a space it doesn't go to bash history
+
+	  tmux list-clients -F "#{client_pid} #{session_name} #{window_name}"
+      (alist-get 'ppid (process-attributes 263378))
+
+- Actions for our ~completing-read~ commands
+- ~A~, ~G~, ~I~, etc shouild go to prompt
+- Unbind ~C-b~ for normal vterm mode so it is always tmux
+
 ** Web
 
 *** EWW
