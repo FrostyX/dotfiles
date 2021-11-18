@@ -85,7 +85,7 @@ hostname.
       linux-p       (and (eq system-type 'gnu/linux) (not android-p))
       windows-p     (eq system-type 'windows-nt)
       workstation-p (member (system-name)
-                            '("sagemcom.ip")))
+                            '("sagemcom.ip" "localhost.localdomain")))
 #+END_SRC
 
 * Defaults
