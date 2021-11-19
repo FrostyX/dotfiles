@@ -20,7 +20,7 @@ Far :seznam-remote:
 Near :seznam-local:
 Create Both
 Expunge Both
-Patterns * !spam
+Patterns * !spam !"gmail/[Gmail].Trash" !"I/BOX"
 SyncState *
 
 
@@ -44,7 +44,7 @@ Far :gmail-remote:
 Near :gmail-local:
 Create Both
 Expunge Both
-Patterns * !"[Gmail]/All Mail" !"[Gmail]/Important" !"[Gmail]/Starred" !"[Gmail]/Bin"
+Patterns * !"[Gmail]/All Mail" !"[Gmail]/Important" !"[Gmail]/Starred" !"[Gmail]/Bin" !Travel
 SyncState *
 
 
