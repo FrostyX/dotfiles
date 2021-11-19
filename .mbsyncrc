@@ -16,8 +16,8 @@ Inbox ~/Mail/seznam/INBOX
 Subfolders Verbatim
 
 Channel seznam
-Master :seznam-remote:
-Slave :seznam-local:
+Far :seznam-remote:
+Near :seznam-local:
 Create Both
 Expunge Both
 Patterns * !spam
@@ -40,8 +40,8 @@ Inbox ~/Mail/gmail/INBOX
 Subfolders Verbatim
 
 Channel gmail
-Master :gmail-remote:
-Slave :gmail-local:
+Far :gmail-remote:
+Near :gmail-local:
 Create Both
 Expunge Both
 Patterns * !"[Gmail]/All Mail" !"[Gmail]/Important" !"[Gmail]/Starred" !"[Gmail]/Bin"
@@ -63,8 +63,8 @@ Inbox ~/Mail/redhat/INBOX
 Subfolders Verbatim
 
 Channel redhat
-Master :redhat-remote:
-Slave :redhat-local:
+Far :redhat-remote:
+Near :redhat-local:
 Create Both
 Expunge Both
 Patterns * !"[Gmail]/All Mail" !"[Gmail]/Important" !"[Gmail]/Starred" !"[Gmail]/Bin"
