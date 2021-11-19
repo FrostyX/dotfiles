@@ -2658,7 +2658,9 @@ I am temporarily fixing the bug in my setup.
   "p" 'helm-ls-git-rebase-pick
   "r" 'helm-ls-git-rebase-reword
   "s" 'helm-ls-git-rebase-squash
-  "x" 'helm-ls-git-rebase-exec)
+  "x" 'helm-ls-git-rebase-exec
+  "M-k" 'helm-ls-git-rebase-todo-move-up
+  "M-j" 'helm-ls-git-rebase-todo-move-down)
 #+END_SRC
 
 ** Git Forge
