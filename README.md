@@ -16,6 +16,13 @@
     cd ~/.dotfiles
     git submodule update --init --recursive
 
+
 ## Remove dotfiles
 
     stow -D . -d ~/.dotfiles/ -t ~
+
+
+## Playbooks
+
+I use ansible playbooks to bootstrap my new workstations
+https://github.com/FrostyX/playbooks
