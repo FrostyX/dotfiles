@@ -65,6 +65,13 @@ kill -SIGUSR2 <pid>
 It should get Emacs unstuck. For easier debugging it might be enough to
 ~M-x toggle-debug-on-quit~ and then hit ~C-g~ to pop up a ~*Backtrace*~ buffer.
 
+Also, it may be useful to see all processes running within Emacs. Try ~M-x
+list-processes~. To kill a process, run
+
+#+BEGIN_EXAMPLE emacs-lisp
+(kill-process "process-name")
+#+END_EXAMPLE
+
 * Facts
 
 Similar to ~ansible_facts~, we are going to inspect the system that we are
