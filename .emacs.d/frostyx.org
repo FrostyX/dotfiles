@@ -3077,6 +3077,17 @@ See https://github.com/emacsorphanage/emamux
 My goal is to implement helm-centric interface for Tmux. The following
 code is still work in progress.
 
+Access Tmux even in normal mode using ~C-b~
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap
+  :keymaps 'vterm-mode-map
+  "C-b" (lambda ()
+          (interactive)
+          (evil-collection-vterm-insert)
+          (vterm-send-key "b" nil nil t)))
+#+END_SRC
+
 List all Tmux sessions
 
 #+BEGIN_SRC emacs-lisp
@@ -3144,7 +3155,6 @@ TODO
 
 - Actions for our ~completing-read~ commands
 - ~A~, ~G~, ~I~, etc shouild go to prompt
-- Unbind ~C-b~ for normal vterm mode so it is always tmux
 
 ** Web
 
