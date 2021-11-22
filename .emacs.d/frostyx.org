@@ -2663,6 +2663,14 @@ I am temporarily fixing the bug in my setup.
   "M-j" 'helm-ls-git-rebase-todo-move-down)
 #+END_SRC
 
+Make sure magit doesn't override our hydra key binding
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap
+  :keymaps '(magit-status-mode-map magit-log-mode-map)
+  "SPC" 'hydra-main/body)
+#+END_SRC
+
 ** Git Forge
 
 Communication over projects issues and pull requests consumes a big chunk of our
