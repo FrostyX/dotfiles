@@ -3213,6 +3213,13 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
   :if workstation-p
   :ensure nil
   :load-path "/usr/share/emacs/site-lisp/mu4e"
+  :init
+  ;; New versions of mu4e use Gnus-based email viewer that has more features than the
+  ;; old one (namely images support, calendar support, etc). However, it sometimes
+  ;; lags the whole Emacs and needs to be killed. Let's continue using the old viewer
+  ;; for a little longer and see if the situation improves in the future.
+  (setq mu4e-view-use-old t)
+
   :config
 
   ;; https://etienne.depar.is/emacs.d/mu4e.html
