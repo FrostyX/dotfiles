@@ -3050,6 +3050,16 @@ terminal buffers are a giant mess.
    (read-string "Name: ")))
 #+END_SRC
 
+We need some easy way to jump back to prompt. Since it is at the bottom of the
+buffer, I am choosing ~G~, but I think keys like ~I~, ~A~, ~i~, ~a~ should work
+as well.
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap
+  :keymaps 'vterm-mode-map
+  "G" #'vterm-reset-cursor-point)
+#+END_SRC
+
 ** Tmux
 
 Having terminal inside of Emacs is sick AF but I won't be running
