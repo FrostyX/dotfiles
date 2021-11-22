@@ -2471,6 +2471,13 @@ package.
 (setq lsp-headerline-breadcrumb-enable nil)
 #+END_SRC
 
+The documentation pop-ups at the bottom are too annoying, disable them. Don't
+worry, this will still show single line with signatures below the modeline.
+
+#+BEGIN_SRC emacs-lisp
+(setq lsp-signature-render-documentation nil)
+#+END_SRC
+
 Highlighting all occurences of thing under cursor is useful but
 please, do not underline it.
 
