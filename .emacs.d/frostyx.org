@@ -97,6 +97,18 @@ hostname.
 
 * Defaults
 
+For whatever reason, Emacs modifies hand-written ~init.el~ and puts random
+customizations in there. Git tracks them and throws them at us. I do not care
+about them! Emacs, please write customizations to a separate file that I can put
+into ~.gitignore~.
+
+#+BEGIN_SRC emacs-lisp
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(if (file-exists-p custom-file)
+    (load custom-file))
+#+END_SRC
+
+
 #+BEGIN_SRC emacs-lisp
 ;; https://www.emacswiki.org/emacs/AutoPairs
 ;; TODO try https://github.com/Fuco1/smartparens instead
