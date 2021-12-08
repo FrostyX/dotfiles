@@ -4034,9 +4034,11 @@ I was mentioned, in the circe-tracking modeline segment
 Customize modeline colors for channels and personal messages
 
 #+BEGIN_SRC emacs-lisp
-(setq tracking-get-face-function #'circe-tracking-get-face)
-(set-face-attribute 'circe-tracking-channel-face nil :foreground my/white)
-(set-face-attribute 'circe-tracking-query-face nil :foreground my/blue)
+(if workstation-p
+	(progn
+	  (setq tracking-get-face-function #'circe-tracking-get-face)
+	  (set-face-attribute 'circe-tracking-channel-face nil :foreground my/white)
+	  (set-face-attribute 'circe-tracking-query-face nil :foreground my/blue)))
 #+END_SRC
 
 
