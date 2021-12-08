@@ -216,6 +216,18 @@ packages.
   :ensure t)
 #+END_SRC
 
+* Daemon mode
+
+See this great blogpost about running multiple Emacs daemons using systemd
+https://tychoish.com/post/running-emacs/
+
+See https://www.youtube.com/watch?v=ZjCRxAMPdNc
+See https://github.com/daviwil/emacs-from-scratch/blob/d24357b488862223fecaebdad758b136b0ca96e7/show-notes/Emacs-Tips-08.org
+
+The biggest blocker for me to switch to daemon mode is that Eyebrowse doesn't
+support sharing workspaces accross all frames (i.e. closing an emacsclient will
+destroy all its workspaces)
+
 * Package management
 ** Automatical updates
 
