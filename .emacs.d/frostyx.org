@@ -2885,8 +2885,8 @@ See https://github.com/FrostyX/helm-dired-open
 (use-package helm-dired-open
   :ensure t
   :quelpa (helm-dired-open
-           :fetcher file
-           :path "~/git/helm-dired-open"))
+           :fetcher github
+           :repo "FrostyX/helm-dired-open"))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
