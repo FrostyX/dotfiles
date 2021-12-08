@@ -2989,6 +2989,7 @@ And install the Emacs ~udiskie~ pacakge
 (use-package udiskie
   :if workstation-p
   :ensure t
+  :disabled t
   :quelpa (udiskie
            :fetcher git
            :url "https://gitlab.com/tuedachu/udiskie.el.git"))
