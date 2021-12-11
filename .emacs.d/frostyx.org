@@ -3053,6 +3053,14 @@ supports even interactive ncurses applications.
 
 See https://github.com/akermu/emacs-libvterm
 
+Install the dependencies first
+
+#+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "libvterm")
+#+END_SRC
+
+Install ~vterm~ package.
+
 #+BEGIN_SRC emacs-lisp
 (use-package vterm
   :if workstation-p
@@ -3198,6 +3206,14 @@ o - open
 go - open in external browser
 
 *** w3m
+
+First we need to install the ~w3m~ dependency.
+
+#+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "w3m")
+#+END_SRC
+
+Now we can install the Emacs w3m interface.
 
 #+BEGIN_SRC emacs-lisp
 (use-package w3m
