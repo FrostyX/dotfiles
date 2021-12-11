@@ -73,6 +73,10 @@ elif hostname in ["localhost.localdomain", "sagemcom.ip"]:
     terminal = "urxvt256c -e tmux"
     lock = "i3lock -i /home/jkadlcik/.dotfiles/.config/qtile/img/bsod.png"
 
+elif hostname in ["zeratul"]:
+    terminal = "urxvt256c -e tmux"
+    lock = "i3lock -i /home/jkadlcik/.dotfiles/.config/qtile/img/bsod.png"
+
 
 mod = "mod1" # Left alt
 sup = "mod4" # Left win-key
