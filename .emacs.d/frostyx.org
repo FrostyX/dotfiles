@@ -4184,32 +4184,6 @@ See:
 - http://mihaiolteanu.me/vuiet/
 - https://github.com/mihaiolteanu/vuiet
 
-** NetworkManager
-
-#+BEGIN_SRC emacs-lisp
-(use-package enwc
-  :if workstation-p
-  :ensure t
-  :config
-  (setq enwc-default-backend 'nm)
-  (setq enwc-wireless-device 'wlp2s0)
-  ;; (define-key enwc-mode-map (kbd "C") 'enwc-connect-to-network-essid)
-  nil)
-
-;; (evil-add-hjkl-bindings enwc-mode-map 'emacs
-;;   (kbd "/")       'evil-search-forward
-;;   (kbd "n")       'evil-search-next
-;;   (kbd "N")       'evil-search-previous
-;;   (kbd "C-d")     'evil-scroll-down
-;;   (kbd "C-u")     'evil-scroll-up
-;;   (kbd "C-w C-w") 'other-window)
-
-;; (use-package powerline
-;;   :ensure t
-;;   :config
-;;   (powerline-default-theme))
-#+END_SRC
-
 ** Bluetooth
 See https://github.com/emacsmirror/bluetooth
 
