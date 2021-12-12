@@ -3245,7 +3245,7 @@ mu init --maildir=~/Mail \
         --my-address=frostyx@email.cz \
         --my-address=jakub.kadlcik@gmail.com \
         --my-address=jkadlcik@redhat.com
-mu index --maildir ~/Mail
+mu index
 #+END_SRC
 
 The ~mu4e~ package is not available on MELPA, let's load it from system.
