@@ -21,7 +21,12 @@ singlehead () {
     cmd+=" --output DP-1-1 --off"
     cmd+=" --output DP-1-2 --off"
     cmd+=" --output DP-1-3 --off"
+    cmd+=" --output DP-3-1 --off"
+    cmd+=" --output DP-3-2 --off"
+    cmd+=" --output DP-3-3 --off"
     cmd+=" --output DP-2 --off"
+    cmd+=" --output DP-3 --off"
+    cmd+=" --output DP-4 --off"
     cmd+=" --output eDP-1 --auto"
     $cmd
 }
@@ -43,9 +48,9 @@ multihead () {
 3head () {
     cmd="xrandr"
     cmd+=" --output eDP-1 --off"
-    cmd+=" --output DP-2 --auto"
-    cmd+=" --output DP-1-1 --auto --right-of DP-2"
-    cmd+=" --output DP-1-2 --auto --right-of DP-1-1"
+    cmd+=" --output DP-4 --auto"
+    cmd+=" --output DP-3-1 --auto --right-of DP-4"
+    cmd+=" --output DP-3-2 --auto --right-of DP-3-1"
     $cmd
 }
 
