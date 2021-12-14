@@ -3972,6 +3972,12 @@ See https://github.com/jorgenschaefer/circe/wiki/Configuration#channel-name-in-t
 (enable-circe-color-nicks)
 #+END_SRC
 
+Don't put server name into the buffer name
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-chat-buffer-name "{target}")
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp
 (defun my/circe-autoscroll ()
   (setq scroll-down-aggressively 0.5))
