@@ -2390,6 +2390,14 @@ Ah, chills.
 
 *** Markdown
 
+For previews, we need an external command.
+The ~discount~ is a weird name but it in fact provides ~/usr/bin/markdown~
+command.
+
+#+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "discount")
+#+END_SRC
+
 See https://stackoverflow.com/a/34672923/3285282
 
 #+BEGIN_SRC emacs-lisp
