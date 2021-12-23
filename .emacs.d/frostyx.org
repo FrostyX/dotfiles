@@ -4096,6 +4096,10 @@ TODO read message from tracklist when switching window (not only when switching 
 
 We can use ~psql~, for sure. But why leaving Emacs?
 
+#+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "postgresql")
+#+END_SRC
+
 See https://truongtx.me/2014/08/23/setup-emacs-as-an-sql-database-client
 
 Almost no configuration is required. For some reason soft line wrapping is
