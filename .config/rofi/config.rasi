@@ -1,3 +1,1 @@
-configuration {
-  theme: "base16-chalk";
-}
+@theme "base16-chalk"
