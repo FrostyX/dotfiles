@@ -1528,6 +1528,20 @@ My workflow for opening a new project is.
 1. Create a new named workspace ~SPC E c~
 2. Switch to the desired project ~SPC p~
 
+Have some backups of Eyebrowse configurations in case Emacs crashes.
+
+#+BEGIN_SRC emacs-lisp
+(use-package eyebrowse-restore
+  :ensure t
+  :quelpa (eyebrowse-restore
+           :fetcher github
+           :repo "FrostyX/eyebrowse-restore"
+           :branch "main")
+  :config
+  (eyebrowse-restore-mode))
+#+END_SRC
+
+
 * Sessions
 
 With Emacs, the idea is to launch it, use it and then never ever close it. Basically
