@@ -4,10 +4,9 @@
 ;; load package manager, add the Melpa package registry
 (require 'package)
 (setq package-archives
-   '(("org" . "https://orgmode.org/elpa/")
-    ("melpa" . "https://melpa.org/packages/")
-    ("melpa-stable" . "https://stable.melpa.org/packages/")
-    ("gnu" . "http://elpa.gnu.org/packages/")))
+   '(("melpa" . "https://melpa.org/packages/")
+     ("melpa-stable" . "https://stable.melpa.org/packages/")
+     ("gnu" . "http://elpa.gnu.org/packages/")))
 
 (setq package-enable-at-startup nil)
 (package-initialize)
