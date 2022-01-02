@@ -3291,7 +3291,9 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
   ;; old one (namely images support, calendar support, etc). However, it sometimes
   ;; lags the whole Emacs and needs to be killed. Let's continue using the old viewer
   ;; for a little longer and see if the situation improves in the future.
-  (setq mu4e-view-use-old t)
+  ;; ...
+  ;; Trying the new view now
+  (setq mu4e-view-use-old nil)
 
   :config
 
@@ -3320,6 +3322,20 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
     '("View in Browser" . mu4e-action-view-in-browser) t))
 #+END_SRC
 
+Fix the awful font in the message view. Using the default font here but
+duplicating its definition. There should probably be a better way to do
+it. Also, please note that the face is not mu4e-specific and therefore it may
+affect other packages.
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+  'variable-pitch nil
+  :family "vera sans"
+  :height 90
+  :weight 'normal
+  :width 'normal
+  :slant 'normal)
+#+END_SRC
 
 Do not show threads, they are unnecessarily confusinig. They can easily be
 toggled on and off by ~z t~, and it is really easy to narrow the search to only
