@@ -76,6 +76,7 @@ configuring something.
 *** https://blog.lambda.cx/index.xml
 *** https://truongtx.me/atom.xml
 *** https://www.philnewton.net/blog/feed/
+*** https://sqrtminusone.xyz/posts/index.xml
 
 ** Gentoo
 
