@@ -3337,6 +3337,17 @@ affect other packages.
   :slant 'normal)
 #+END_SRC
 
+Mu4e sometimes stucks, locks the whole mail cache and doesn't update
+anymore. And refuses to update even from the outside via ~mu index~ because of
+the existing lock. This helps and unfortunatelly, I need to run it several times
+every day.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/unfuck-mu4e ()
+  (interactive)
+  (kill-process " *mu4e-proc*"))
+#+END_SRC
+
 Do not show threads, they are unnecessarily confusinig. They can easily be
 toggled on and off by ~z t~, and it is really easy to narrow the search to only
 one thread by ~a s~ when reading a message.
