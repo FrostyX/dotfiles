@@ -7,7 +7,7 @@ Don't be dumb and test it with Xephyr first
 https://wiki.archlinux.org/index.php/Xephyr
 
     Xephyr -br -ac -noreset -screen 1600x600 :1 &
-    DISPLAY=:1 qtile &
+    DISPLAY=:1 qtile start &
     DISPLAY=:1 urxvt &
 
 """
