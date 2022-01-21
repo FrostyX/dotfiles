@@ -3346,6 +3346,28 @@ See https://github.com/Alexander-Miller/mu4e-column-faces
   (mu4e-column-faces-mode))
 #+END_SRC
 
+Customize the ~from~ column color:
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'mu4e-column-faces-to-from nil
+                    :foreground my/blue)
+#+END_SRC
+
+Don't highlight unread emails with bold text, we have colors for that.
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'mu4e-unread-face nil
+                    :weight 'normal)
+#+END_SRC
+
+Customize the font of currently highlighted line
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'mu4e-header-highlight-face nil
+                    :weight 'normal
+                    :underline nil)
+#+END_SRC
+
 Mu4e offers a possiblity to use symbols instead of letters, however it doesn't
 really work. The output of messages list is weirdly aligned.
 
