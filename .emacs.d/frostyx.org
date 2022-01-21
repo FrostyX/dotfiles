@@ -3337,16 +3337,13 @@ requires an additional package.
 
 See https://github.com/Alexander-Miller/mu4e-column-faces
 
-Unfortunatelly it requires ~maildir-utils~ package in at least version 1.6.0 but
-in Fedora we so far have only 1.4.x. I am not enabling the package until then.
-
 #+BEGIN_SRC emacs-lisp
 (use-package mu4e-column-faces
-  :disabled t
   :if workstation-p
   :ensure t
   :after mu4e
-  :config (mu4e-column-faces-mode))
+  :config
+  (mu4e-column-faces-mode))
 #+END_SRC
 
 Mu4e offers a possiblity to use symbols instead of letters, however it doesn't
