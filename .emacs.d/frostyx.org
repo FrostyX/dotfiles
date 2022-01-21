@@ -1504,7 +1504,7 @@ will most likely want only a single window there and split it only when
 necessary. This cryptic option means - Create a new workspace with just
 ~*scratch*~ buffer.
 
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp
 (setq eyebrowse-new-workspace t)
 #+END_SRC
 
