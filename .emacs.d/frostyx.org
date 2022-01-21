@@ -346,7 +346,6 @@ Just in case, set the package manager defaults to something expected
 (setq system-packages-use-sudo t)
 #+END_SRC
 
-
 * Secrets
 
 Please do not hardcode your passwords or secret information into source code.
@@ -745,7 +744,6 @@ See https://stackoverflow.com/a/7787941/3285282
 #+END_SRC
 
 * Interface
-
 ** GUI
 
 Disable all the GUI nonsense. Even though we are running graphical version of Emacs,
@@ -1432,6 +1430,7 @@ See https://github.com/justbur/emacs-which-key
 #+END_SRC
 
 * Project management
+** Projectile
 
 When working on multiple projects at the same time, it is useful keep some level
 of separation between them. This is where ~projectile~ comes handy. It allows you
@@ -1472,6 +1471,8 @@ Such behavior can be achieved using ~eyebrowse~ even though it feels a little
 like a workaround. Eyebrowse is not project-oriented by design, it gives you
 free hand on what to use workspaces for. For this reason, it lacks certain
 project management shortcuts, that I would appreciate.
+
+** Eyebrowse
 
 See https://github.com/wasamasa/eyebrowse
 
@@ -1525,7 +1526,6 @@ Have some backups of Eyebrowse configurations in case Emacs crashes.
   :config
   (eyebrowse-restore-mode))
 #+END_SRC
-
 
 * Sessions
 
@@ -1643,7 +1643,6 @@ when the buffer should never be killed.
 #+END_SRC
 
 * Development
-
 
 #+BEGIN_SRC emacs-lisp
 (use-package fic-mode
@@ -3165,7 +3164,6 @@ TODO
 - ~A~, ~G~, ~I~, etc shouild go to prompt
 
 ** Web
-
 *** EWW
 EWW notes here
 Key bindings
@@ -3284,6 +3282,28 @@ every day.
   (kill-process " *mu4e-proc*"))
 #+END_SRC
 
+** Mu4e Helm support
+
+This collection of code-snippets should ideally be distribute as a new package
+called e.g. ~mu4e-helm~ and provide out-of-the-box helm completion for Mu4e.
+
+Jump to a maildir using helm
+
+See https://emacs.stackexchange.com/questions/47535/setup-helm-for-mu4e-jump-to-maildir
+
+#+BEGIN_SRC emacs-lisp
+(defun my/mu4e-jump-maildir ()
+  (interactive)
+  (let ((maildir (helm-comp-read "Maildir: " (mu4e-get-maildirs))))
+    (mu4e-headers-search (format "maildir:\"%s\"" maildir))))
+
+(evil-define-key 'normal mu4e-main-mode-map (kbd "J") 'my/mu4e-jump-maildir)
+(evil-define-key 'normal mu4e-headers-mode-map (kbd "J") 'my/mu4e-jump-maildir)
+(evil-define-key 'normal mu4e-view-mode-map (kbd "J") 'my/mu4e-jump-maildir)
+#+END_SRC
+
+*** Listing emails
+
 Do not show threads, they are unnecessarily confusinig. They can easily be
 toggled on and off by ~z t~, and it is really easy to narrow the search to only
 one thread by ~a s~ when reading a message.
@@ -3293,13 +3313,6 @@ investigate it in the future.
 
 #+BEGIN_SRC emacs-lisp
 (setq mu4e-headers-show-threads nil)
-#+END_SRC
-
-Don't try to colorize text in html emails. Sometimes it is nice and
-pretty but very often it just shows black text on black background.
-
-#+BEGIN_SRC emacs-lisp
-(setq shr-use-colors nil)
 #+END_SRC
 
 We want to wrap long lines, so the message reading is more comfortable.
@@ -3336,6 +3349,103 @@ in Fedora we so far have only 1.4.x. I am not enabling the package until then.
   :config (mu4e-column-faces-mode))
 #+END_SRC
 
+Mu4e offers a possiblity to use symbols instead of letters, however it doesn't
+really work. The output of messages list is weirdly aligned.
+
+See https://github.com/djcb/mu/issues/1062
+
+For the time being, let's go with non-fancy characters. But a possible solution
+would be to add a space after some special characters, see the linked issue.
+
+#+BEGIN_SRC emacs-lisp
+(setq mu4e-use-fancy-chars t)
+(setq mu4e-headers-unread-mark '("u" . "u")
+      mu4e-headers-draft-mark '("D" . "D")
+      mu4e-headers-seen-mark '("S" . "S")
+      mu4e-headers-unseen-mark '("u" . "u")
+      mu4e-headers-flagged-mark '("F" . "F")
+      mu4e-headers-new-mark '("N" . "N")
+      mu4e-headers-replied-mark '("R" . "R")
+      mu4e-headers-passed-mark '("P" . "P")
+      mu4e-headers-encrypted-mark '("x" . "x")
+      mu4e-headers-signed-mark '("s" . "s")
+      mu4e-headers-trashed-mark '("T" . "T")
+      mu4e-headers-attach-mark '("a" . "a"))
+#+END_SRC
+
+Let's customize the columns that should be showed in the messages list. Each
+column should be set as a pair of a field and its width (it can be ~nil~, in
+that case the column width is going to be unlimited. Better to only use that for
+the last column)
+
+#+BEGIN_SRC emacs-lisp
+(setq mu4e-headers-fields
+      '((:from . 20)
+        (:thread-subject . nil)))
+#+END_SRC
+
+Ideally we would like to have a multiple headers views, one slim, designed for
+80 column window, other full-sized.
+
+#+BEGIN_SRC emacs-lisp
+(setq my/mu4e-headers-fields-full
+      '((:human-date . 20)
+        (:flags . 10)
+        (:from . 30)
+        (:thread-subject . nil)))
+#+END_SRC
+
+We set a human-readable date/time format in the messages list view, so we should
+rather a one, that is really readable for us (i.e. not the American one).
+
+#+BEGIN_SRC emacs-lisp
+(setq mu4e-headers-date-format "%d. %m. %Y")
+(setq mu4e-headers-time-format "%H:%M")
+#+END_SRC
+
+Show only the results that would command-line ~mu find~ return, nothing else.
+
+#+BEGIN_SRC emacs-lisp
+(setq mu4e-headers-include-related nil)
+#+END_SRC
+
+We would like to have some inteligent threading and Gmail-like conversation view.
+
+#+BEGIN_SRC emacs-lisp
+(use-package mu4e-thread-folding
+  :if workstation-p
+  :quelpa (mu4e-thread-folding
+           :fetcher github
+           :repo "rougier/mu4e-thread-folding"))
+#+END_SRC
+
+The configuration is still WIP.
+
+#+BEGIN_SRC emacs-lisp
+(if (featurep 'mu4e-thread-folding)
+    (progn
+      (set-face-attribute 'mu4e-thread-folding-root-unfolded-face nil :background my/gray)
+      (set-face-attribute 'mu4e-thread-folding-child-face nil :background my/black)
+
+      (add-to-list 'mu4e-header-info-custom
+                   '(:empty . (:name "Empty"
+                                     :shortname ""
+                                     :function (lambda (msg) "  "))))
+
+      (setq mu4e-headers-fields
+            '((:empty . 0)
+              (:from . 20)
+              (:subject . 65)))))
+
+;; (setq mu4e-headers-thread-child-prefix '("|" . "| "))
+;; (setq mu4e-headers-thread-connection-prefix '("|" . "| "))
+;; (setq mu4e-headers-thread-last-child-prefix '("|" . "| "))
+;; (setq mu4e-headers-thread-single-orphan-prefix '("|" . "| "))
+;; (setq mu4e-headers-thread-orphan-prefix '("|" . "| "))
+#+END_SRC
+
+*** Sending emails
+
 The ~mu4e~ system package provides also a library for sending emails.
 
 See https://www.djcbsoftware.nl/code/mu/mu4e/Sending-mail.html
@@ -3356,6 +3466,44 @@ https://www.emacswiki.org/emacs/SendingMail
       starttls-use-gnutls t
       smtpmail-debug-info t)
 #+END_SRC
+
+*** Reading emails
+
+Don't try to colorize text in html emails. Sometimes it is nice and
+pretty but very often it just shows black text on black background.
+
+#+BEGIN_SRC emacs-lisp
+(setq shr-use-colors nil)
+#+END_SRC
+
+*** Email queries
+
+We don't always want to dig through the entire mailbox but rather see a filtered
+mail, e.g. last weeks mail for a specific email address. Mu4e bookmarks are the
+thing.
+
+See https://www.djcbsoftware.nl/code/mu/mu4e/Bookmarks.html
+
+#+BEGIN_SRC emacs-lisp
+(custom-reevaluate-setting 'mu4e-bookmarks)
+
+(add-to-list 'mu4e-bookmarks
+  '(:name "Red Hat shortcut"
+    :query "date:1w.. and maildir:/redhat/INBOX/"
+    :key ?r))
+
+(add-to-list 'mu4e-bookmarks
+  '(:name "Gmail shortcut"
+    :query "date:1w.. and maildir:/gmail/INBOX/"
+    :key ?g))
+
+(add-to-list 'mu4e-bookmarks
+  '(:name "Seznam shortcut"
+    :query "date:1w.. and maildir:/seznam/INBOX/"
+    :key ?s))
+#+END_SRC
+
+*** Email accounts
 
 Everyone has at least two email accounts and who sais he doesn't, he is
 lying. In Mu4e, accounts are managed through "contexts". For an example contexts
@@ -3464,128 +3612,6 @@ pass insert email/jakub.kadlcik@gmail.com
 pass insert email/jkadlcik@redhat.com@gmail.com
 #+END_SRC
 
-
-Mu4e offers a possiblity to use symbols instead of letters, however it doesn't
-really work. The output of messages list is weirdly aligned.
-
-See https://github.com/djcb/mu/issues/1062
-
-For the time being, let's go with non-fancy characters. But a possible solution
-would be to add a space after some special characters, see the linked issue.
-
-#+BEGIN_SRC emacs-lisp
-(setq mu4e-use-fancy-chars t)
-(setq mu4e-headers-unread-mark '("u" . "u")
-      mu4e-headers-draft-mark '("D" . "D")
-      mu4e-headers-seen-mark '("S" . "S")
-      mu4e-headers-unseen-mark '("u" . "u")
-      mu4e-headers-flagged-mark '("F" . "F")
-      mu4e-headers-new-mark '("N" . "N")
-      mu4e-headers-replied-mark '("R" . "R")
-      mu4e-headers-passed-mark '("P" . "P")
-      mu4e-headers-encrypted-mark '("x" . "x")
-      mu4e-headers-signed-mark '("s" . "s")
-      mu4e-headers-trashed-mark '("T" . "T")
-      mu4e-headers-attach-mark '("a" . "a"))
-#+END_SRC
-
-Let's customize the columns that should be showed in the messages list. Each
-column should be set as a pair of a field and its width (it can be ~nil~, in
-that case the column width is going to be unlimited. Better to only use that for
-the last column)
-
-#+BEGIN_SRC emacs-lisp
-(setq mu4e-headers-fields
-      '((:from . 20)
-        (:thread-subject . nil)))
-#+END_SRC
-
-Ideally we would like to have a multiple headers views, one slim, designed for
-80 column window, other full-sized.
-
-#+BEGIN_SRC emacs-lisp
-(setq my/mu4e-headers-fields-full
-      '((:human-date . 20)
-        (:flags . 10)
-        (:from . 30)
-        (:thread-subject . nil)))
-#+END_SRC
-
-We set a human-readable date/time format in the messages list view, so we should
-rather a one, that is really readable for us (i.e. not the American one).
-
-#+BEGIN_SRC emacs-lisp
-(setq mu4e-headers-date-format "%d. %m. %Y")
-(setq mu4e-headers-time-format "%H:%M")
-#+END_SRC
-
-
-We don't always want to dig through the entire mailbox but rather see a filtered
-mail, e.g. last weeks mail for a specific email address. Mu4e bookmarks are the
-thing.
-
-See https://www.djcbsoftware.nl/code/mu/mu4e/Bookmarks.html
-
-#+BEGIN_SRC emacs-lisp
-(custom-reevaluate-setting 'mu4e-bookmarks)
-
-(add-to-list 'mu4e-bookmarks
-  '(:name "Red Hat shortcut"
-    :query "date:1w.. and maildir:/redhat/INBOX/"
-    :key ?r))
-
-(add-to-list 'mu4e-bookmarks
-  '(:name "Gmail shortcut"
-    :query "date:1w.. and maildir:/gmail/INBOX/"
-    :key ?g))
-
-(add-to-list 'mu4e-bookmarks
-  '(:name "Seznam shortcut"
-    :query "date:1w.. and maildir:/seznam/INBOX/"
-    :key ?s))
-#+END_SRC
-
-Show only the results that would command-line ~mu find~ return, nothing else.
-
-#+BEGIN_SRC emacs-lisp
-(setq mu4e-headers-include-related nil)
-#+END_SRC
-
-We would like to have some inteligent threading and Gmail-like conversation view.
-
-#+BEGIN_SRC emacs-lisp
-(use-package mu4e-thread-folding
-  :if workstation-p
-  :quelpa (mu4e-thread-folding
-           :fetcher github
-           :repo "rougier/mu4e-thread-folding"))
-#+END_SRC
-
-The configuration is still WIP.
-
-#+BEGIN_SRC emacs-lisp
-(if (featurep 'mu4e-thread-folding)
-    (progn
-      (set-face-attribute 'mu4e-thread-folding-root-unfolded-face nil :background my/gray)
-      (set-face-attribute 'mu4e-thread-folding-child-face nil :background my/black)
-
-      (add-to-list 'mu4e-header-info-custom
-                   '(:empty . (:name "Empty"
-                                     :shortname ""
-                                     :function (lambda (msg) "  "))))
-
-      (setq mu4e-headers-fields
-            '((:empty . 0)
-              (:from . 20)
-              (:subject . 65)))))
-
-;; (setq mu4e-headers-thread-child-prefix '("|" . "| "))
-;; (setq mu4e-headers-thread-connection-prefix '("|" . "| "))
-;; (setq mu4e-headers-thread-last-child-prefix '("|" . "| "))
-;; (setq mu4e-headers-thread-single-orphan-prefix '("|" . "| "))
-;; (setq mu4e-headers-thread-orphan-prefix '("|" . "| "))
-#+END_SRC
-
 *** Mu4e dashboard
 
 Mu4e dashboard allows to write an Org mode document containing links to ~mu~
@@ -3611,26 +3637,6 @@ mu4e-dashboard-mode~ to make it read-only and actionable. Then run ~M-x
 org-toggle-link-display~ to hide full links if needed. It would be also nice to
 hide/render the rest of the Org mode syntax. Once I finish this, I will create a
 simple launcher and possibly submit a PR for it.
-
-*** Mu4e Helm support
-
-This collection of code-snippets should ideally be distribute as a new package
-called e.g. ~mu4e-helm~ and provide out-of-the-box helm completion for Mu4e.
-
-Jump to a maildir using helm
-
-See https://emacs.stackexchange.com/questions/47535/setup-helm-for-mu4e-jump-to-maildir
-
-#+BEGIN_SRC emacs-lisp
-(defun my/mu4e-jump-maildir ()
-  (interactive)
-  (let ((maildir (helm-comp-read "Maildir: " (mu4e-get-maildirs))))
-    (mu4e-headers-search (format "maildir:\"%s\"" maildir))))
-
-(evil-define-key 'normal mu4e-main-mode-map (kbd "J") 'my/mu4e-jump-maildir)
-(evil-define-key 'normal mu4e-headers-mode-map (kbd "J") 'my/mu4e-jump-maildir)
-(evil-define-key 'normal mu4e-view-mode-map (kbd "J") 'my/mu4e-jump-maildir)
-#+END_SRC
 
 ** RSS
 
@@ -3754,6 +3760,8 @@ https://github.com/jorgenschaefer/circe/pull/384
 Do not forget to kill circe and run it again after modifying
 ~circe-network-options~ variable.
 
+*** Network & channels
+
 #+BEGIN_SRC emacs-lisp
 (setq circe-network-options
       `(("Freenode"
@@ -3811,48 +3819,7 @@ Do not forget to kill circe and run it again after modifying
   (circe "RedHat"))
 #+END_SRC
 
-TODO If you want to quit IRC ... insert funny joke from wiki use
-     ~M-x kill-buffer~ and select the freenode server buffer.
-
-By default, circe doesn't support notifications. Luckily it is a matter of
-installing one additional package.
-
-See https://github.com/eqyiel/circe-notifications
-
-#+BEGIN_SRC emacs-lisp
-(use-package circe-notifications
-  :if workstation-p
-  :ensure t
-  :config
-  (enable-circe-notifications))
-#+END_SRC
-
-By default, typical ~libnotify~ notifications are sent. You can emulate them by
-~/usr/bin/notify-send~ command. This is not what I like.
-My notification style of choice is setting window urgency. Window managers
-typically know that there is an urgent window on some workspace/group and
-highlight them in the panel.
-
-See https://github.com/jwiegley/alert#builtin-alert-styles
-
-#+BEGIN_SRC emacs-lisp
-(setq circe-notifications-alert-style 'x11)
-#+END_SRC
-
-It doesn't matter when I was notified from some user the last time. Notify me
-again. It's not spam.
-
-#+BEGIN_SRC emacs-lisp
-(setq circe-notifications-wait-for 0)
-#+END_SRC
-
-Chat history is important. Enable logging.
-
-#+BEGIN_SRC emacs-lisp
-(setq lui-logging-directory "~/.emacs.d/circe")
-(load "lui-logging" nil t)
-(enable-lui-logging-globally)
-#+END_SRC
+*** General configuration
 
 Make sure that we see lags and automatically reconnects if we got disconnected.
 
@@ -3893,6 +3860,39 @@ See https://github.com/jorgenschaefer/circe/wiki/Configuration#tab-completion
         circe-server-mode))
 (setq helm-mode-no-completion-in-region-in-modes my/circe-major-modes)
 #+END_SRC
+
+Don't put server name into the buffer name
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-chat-buffer-name "{target}")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun my/circe-autoscroll ()
+  (setq scroll-down-aggressively 0.5))
+(add-hook 'lui-mode-hook 'my/circe-autoscroll)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq lui-time-stamp-only-when-changed-p nil)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-reduce-lurker-spam t)
+#+END_SRC
+
+TODO If you want to quit IRC ... insert funny joke from wiki use
+     ~M-x kill-buffer~ and select the freenode server buffer.
+
+Chat history is important. Enable logging.
+
+#+BEGIN_SRC emacs-lisp
+(setq lui-logging-directory "~/.emacs.d/circe")
+(load "lui-logging" nil t)
+(enable-lui-logging-globally)
+#+END_SRC
+
+*** Circe Modeline
 
 See the newest buffer activity fist. But also, prioritize notifications over
 just normal messages in a channel.
@@ -3950,6 +3950,52 @@ TODO When lag <= 0.1, show "online" in green color
 (spaceline-compile)
 #+END_SRC
 
+Customize modeline colors for channels and personal messages
+
+#+BEGIN_SRC emacs-lisp
+(if workstation-p
+	(progn
+	  (setq tracking-get-face-function #'circe-tracking-get-face)
+	  (set-face-attribute 'circe-tracking-channel-face nil :foreground my/white)
+	  (set-face-attribute 'circe-tracking-query-face nil :foreground my/blue)))
+#+END_SRC
+
+*** Circe Notifications
+
+By default, circe doesn't support notifications. Luckily it is a matter of
+installing one additional package.
+
+See https://github.com/eqyiel/circe-notifications
+
+#+BEGIN_SRC emacs-lisp
+(use-package circe-notifications
+  :if workstation-p
+  :ensure t
+  :config
+  (enable-circe-notifications))
+#+END_SRC
+
+By default, typical ~libnotify~ notifications are sent. You can emulate them by
+~/usr/bin/notify-send~ command. This is not what I like.
+My notification style of choice is setting window urgency. Window managers
+typically know that there is an urgent window on some workspace/group and
+highlight them in the panel.
+
+See https://github.com/jwiegley/alert#builtin-alert-styles
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-notifications-alert-style 'x11)
+#+END_SRC
+
+It doesn't matter when I was notified from some user the last time. Notify me
+again. It's not spam.
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-notifications-wait-for 0)
+#+END_SRC
+
+*** Messages format
+
 #+BEGIN_SRC emacs-lisp
 (setq circe-format-say "<{nick}>  {body}")
 #+END_SRC
@@ -3960,29 +4006,13 @@ See https://github.com/jorgenschaefer/circe/wiki/Configuration#inline-nick-reply
 (setq circe-format-self-say "<{nick}>  {body}")
 #+END_SRC
 
-See https://github.com/jorgenschaefer/circe/wiki/Configuration#channel-name-in-the-prompt
+Finally, let's configure circe colors.
+
+My nick highlighted in the chat but more importantly color of a buffer where
+I was mentioned, in the circe-tracking modeline segment
 
 #+BEGIN_SRC emacs-lisp
-(add-hook 'circe-chat-mode-hook 'my-circe-prompt)
-(defun my-circe-prompt ()
-  (lui-set-prompt
-   (concat "[" (propertize (buffer-name) 'face 'circe-prompt-face) "]  ")))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(enable-circe-color-nicks)
-#+END_SRC
-
-Don't put server name into the buffer name
-
-#+BEGIN_SRC emacs-lisp
-(setq circe-chat-buffer-name "{target}")
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(defun my/circe-autoscroll ()
-  (setq scroll-down-aggressively 0.5))
-(add-hook 'lui-mode-hook 'my/circe-autoscroll)
+(set-face-attribute 'circe-highlight-nick-face nil :foreground my/red)
 #+END_SRC
 
 Hard wrap at 70 characters. This is a limit specifically for the message
@@ -4005,13 +4035,32 @@ lines of a message with a typical 4 spaces.
 (setq lui-time-stamp-format "[%H:%M]  ")
 #+END_SRC
 
+*** Prompt
+
+See https://github.com/jorgenschaefer/circe/wiki/Configuration#channel-name-in-the-prompt
+
 #+BEGIN_SRC emacs-lisp
-(setq lui-time-stamp-only-when-changed-p nil)
+(add-hook 'circe-chat-mode-hook 'my-circe-prompt)
+(defun my-circe-prompt ()
+  (lui-set-prompt
+   (concat "[" (propertize (buffer-name) 'face 'circe-prompt-face) "]  ")))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(setq circe-reduce-lurker-spam t)
+(enable-circe-color-nicks)
 #+END_SRC
+
+Sometimes it is usefull to just navigate with arrow keys in prompt to repeat
+previous messages. By default, this feature is bound to ~M-p~ and ~M-n~ but it
+coildes with my Window Manager key bindings, so let's just use arrow keys. I use
+~hjkl~ for movement anyway.
+
+#+BEGIN_SRC emacs-lisp
+(define-key circe-channel-mode-map (kbd "<up>") 'lui-previous-input)
+(define-key circe-channel-mode-map (kbd "<down>") 'lui-next-input)
+#+END_SRC
+
+*** Helm support for Circe
 
 See https://emacs.stackexchange.com/a/37515
 
@@ -4037,35 +4086,7 @@ TODO Use https://github.com/lesharris/helm-circe instead
     (helm-buffers-list)))
 #+END_SRC
 
-Sometimes it is usefull to just navigate with arrow keys in prompt to repeat
-previous messages. By default, this feature is bound to ~M-p~ and ~M-n~ but it
-coildes with my Window Manager key bindings, so let's just use arrow keys. I use
-~hjkl~ for movement anyway.
-
-#+BEGIN_SRC emacs-lisp
-(define-key circe-channel-mode-map (kbd "<up>") 'lui-previous-input)
-(define-key circe-channel-mode-map (kbd "<down>") 'lui-next-input)
-#+END_SRC
-
-Finally, let's configure circe colors.
-
-My nick highlighted in the chat but more importantly color of a buffer where
-I was mentioned, in the circe-tracking modeline segment
-
-#+BEGIN_SRC emacs-lisp
-(set-face-attribute 'circe-highlight-nick-face nil :foreground my/red)
-#+END_SRC
-
-Customize modeline colors for channels and personal messages
-
-#+BEGIN_SRC emacs-lisp
-(if workstation-p
-	(progn
-	  (setq tracking-get-face-function #'circe-tracking-get-face)
-	  (set-face-attribute 'circe-tracking-channel-face nil :foreground my/white)
-	  (set-face-attribute 'circe-tracking-query-face nil :foreground my/blue)))
-#+END_SRC
-
+*** Circe TODO
 
 TODO my messages format
 TODO time stamp gray color and remove brackts
@@ -4337,7 +4358,6 @@ But ... is it even worth it? ... Nope. It is fun though!
 Hint: Use ~M-x org-toggle-inline-images~ to see images in Emacs
 
 * Resources
-
 ** Other people configs
 
 - https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org
