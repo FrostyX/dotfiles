@@ -1499,21 +1499,6 @@ eyebrowse workspaces.
   "e" 'eyebrowse-switch-to-window-config)
 #+END_SRC
 
-I would like to create a named workspaces so until my eyebrowse patch
-gets released (see ~bdc626f~ in eyebrowse repo), let's create the feature here.
-
-#+BEGIN_SRC emacs-lisp
-(defun eyebrowse-create-named-window-config ()
-  "Creates a window config at a yet unoccupied slot.
-User is prompted to provide a tag name, so the window config is
-created named."
-  (interactive)
-  (eyebrowse-create-window-config)
-  (eyebrowse-rename-window-config
-   (eyebrowse--get 'current-slot)
-   (read-string "Tag: ")))
-#+END_SRC
-
 When creating a new workspace do not copy the current window layout to it. I
 will most likely want only a single window there and split it only when
 necessary. This cryptic option means - Create a new workspace with just
