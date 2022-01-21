@@ -3019,55 +3019,6 @@ available options handle terminal applications such as top, htop, docker, etc
 very poorly. However, I would like to slowly collect my notes about terminal
 emulators here, hoping that one day they will be usable for me.
 
-It is probably related to my current color scheme (~base16-chalk~) but for some
-reason, colors doesn't work, ~ls~ fails with ~error in process filter invalid
-face unspecified~, and some other strange behavior. Setting
-~ansi-term-color-vector~ fixes the issue.
-
-See https://github.com/hlissner/emacs-doom-themes/issues/54#issuecomment-300012999
-
-#+BEGIN_SRC emacs-lisp
-(setq ansi-term-color-vector
-      [term
-       term-color-black
-       term-color-red
-       term-color-green
-       term-color-yellow
-       term-color-blue
-       term-color-magenta
-       term-color-cyan
-       term-color-white])
-#+END_SRC
-
-First of all, emacs doesn't allow you to create multiple terminals with the same
-name, so running ~M-x term~, switching back to previous buffer and then runnnig
-~M-x term~ again, it won't spawn a new terminal, but pop-up the previous
-one. Naming our terminal buffers properly will allow us to spawn mulltiple
-terminal buffers at the same time.
-
-See https://www.youtube.com/watch?v=wRmK7PMnrJg
-
-Also, not naming your terminal windows and terminal tabs (outside the Emacs
-world) is disgusting, messy and just a total chaos. So we wan't to properly name
-our Emacs terminals anyway.
-
-#+BEGIN_SRC emacs-lisp
-(defun named-term (name)
-  (interactive "sName: ")
-  (command-execute 'term)
-  (if (not (string= name ""))
-      (rename-buffer name)))
-#+END_SRC
-
-@TODO generate a default terminal name with a timestamp or some counter so
-      basically everytime ~named-term~ is used, the default spawns a new
-      terminal. Only removing the default and leaving empty input would give us
-      the one, default ~*terminal*~.
-@TODO don't ask me for ~/bin/bash~ all the time
-
-The brightest possiblity for terminal in Emacs is ~vterm~ which
-supports even interactive ncurses applications.
-
 See https://github.com/akermu/emacs-libvterm
 
 Install the dependencies first
