@@ -1702,6 +1702,12 @@ and adjust them. Also make sure, that any major mode won't turn it on again.
 (add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
 #+END_SRC
 
+By default, use spaces, not tabs
+
+#+BEGIN_SRC emacs-lisp
+(setq-default indent-tabs-mode nil)
+#+END_SRC
+
 Set tab width and other indentation settings based on the analysis of the
 current project.
 
