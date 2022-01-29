@@ -2070,7 +2070,8 @@ revoir Haskell, see you again later this year. Every year.
 *** Jinja2
 
 #+BEGIN_SRC emacs-lisp
-;; @TODO use jinja2-mode package
+(use-package jinja2-mode
+  :ensure t)
 #+END_SRC
 
 *** Org
