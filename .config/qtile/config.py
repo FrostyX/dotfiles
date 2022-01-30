@@ -550,7 +550,7 @@ def autostart():
 
 # xrandr --output DP2 --auto --right-of eDP1
 @hook.subscribe.screen_change
-def restart_on_randr(qtile, ev):
+def restart_on_randr(*args, **kwargs):
     # qtile.cmd_restart()
     pass
 
