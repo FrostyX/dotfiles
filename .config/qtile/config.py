@@ -22,11 +22,7 @@ from libqtile.command.client import Client
 from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook
 
-from contrib import (VimwikiUnfinished,
-                     Newsboat,
-                     DaysCounter,
-                     Mu,
-                     CurrentLayoutTextIcon)
+from contrib import CurrentLayoutTextIcon
 
 
 terminal     = "gnome-terminal"
