@@ -244,7 +244,6 @@ layout_theme = {
 }
 layouts = [
     layout.MonadTall(**layout_theme),
-    layout.TreeTab(**layout_theme),
     layout.xmonad.MonadTall(ratio=0.75, **layout_theme),
     layout.max.Max(**layout_theme),
 ]
