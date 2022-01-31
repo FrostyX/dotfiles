@@ -72,6 +72,11 @@ elif hostname in ["zeratul"]:
     terminal = "urxvt256c -e tmux"
     lock = "i3lock -i /home/jkadlcik/.dotfiles/.config/qtile/img/bsod.png"
 
+    # The pactl commands sometimes work, sometimes doesn't,
+    # let's try amixer again
+    vol_up = "amixer -D pipewire sset Master 2%+"
+    vol_down = "amixer -D pipewire sset Master 2%-"
+
 
 mod = "mod1" # Left alt
 sup = "mod4" # Left win-key
