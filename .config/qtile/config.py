@@ -63,8 +63,7 @@ if hostname == "chromie":
     scrot_all = "/home/jkadlcik/git/qtile-screenshot/qtile-screenshot.py -o /home/jkadlcik/images/scrot"
     # https://github.com/FrostyX/qtile-screenshot/blob/master/qtile-screenshot.py
 
-# New work laptop is not named yet
-elif hostname in ["localhost.localdomain", "sagemcom.ip"]:
+elif hostname in ["alarak"]:
     scrot = "/home/jkadlcik/.bin/screenshot.sh"
     terminal = "urxvt256c -e tmux"
     lock = "i3lock -i /home/jkadlcik/.dotfiles/.config/qtile/img/bsod.png"
