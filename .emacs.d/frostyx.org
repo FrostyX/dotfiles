@@ -4122,6 +4122,138 @@ TODO change message format (date should go before nick)
 TODO ignore non-user messages in tracklist
 TODO read message from tracklist when switching window (not only when switching buffer)
 
+** Matrix
+
+See https://matrix.org/
+If confused, use web client https://app.element.io
+
+In Emacs, we are going to use Ement.el
+See https://github.com/alphapapa/ement.el
+
+We need to install ~plz~ dependency first.
+
+#+BEGIN_SRC emacs-lisp
+(use-package plz
+  :quelpa (plz :fetcher github
+               :repo "alphapapa/plz.el"))
+#+END_SRC
+
+Now the actual ement client.
+
+#+BEGIN_SRC emacs-lisp
+(use-package ement
+  :quelpa (ement :fetcher github
+                 :repo "alphapapa/ement.el"))
+#+END_SRC
+
+I have two accounts, ~@frostyx:fedora.im~ and
+~@frostyx:matrix.org~. So far I have now idea if I need them both or
+not, if I can connect from Fedora account to matrix.org rooms and how
+to connect to the Fedora account from ement.
+
+Use ~M-x ement-connect~ to open the client.
+
+*** Matrix rooms
+
+Don't display room icons in the top line
+
+#+BEGIN_SRC emacs-lisp
+(setq ement-room-avatars nil)
+#+END_SRC
+
+Don't put any prefixes and suffixes into room names. They have
+specific major modes anyway, so we know what those buffers are.
+
+#+BEGIN_SRC emacs-lisp
+(setq ement-room-buffer-name-prefix "")
+(setq ement-room-buffer-name-suffix "")
+#+END_SRC
+
+I am trying to imitate 15 years of my IRC user experience, that
+started with Irssi, hence no margins and both timestamp and nick on
+the left.
+
+#+BEGIN_SRC emacs-lisp
+(setq ement-room-right-margin-width 0)
+(setq ement-room-left-margin-width 0)
+(setq ement-room-message-format-spec "[%t] <%S>  %B%r")
+#+END_SRC
+
+Save a little bit of space by not showing seconds in timestamps
+
+#+BEGIN_SRC emacs-lisp
+(setq ement-room-timestamp-format "%H:%M")
+#+END_SRC
+
+Customize timestamp face to have the same color as in Circe. It seems
+that the color is not in our base16 theme, so we should change it.
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+ 'ement-room-timestamp nil
+ :foreground "#12cfc0")
+#+END_SRC
+
+There is a horizontal separating the unread messages in the
+buffer. Ideally, I would like to disable it but I can live with it
+having a gray color.
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+ 'ement-room-fully-read-marker nil
+ :foreground my/gray)
+
+(set-face-attribute
+ 'ement-room-read-receipt-marker nil
+ :foreground my/gray)
+#+END_SRC
+
+Use normal font size for lurker spam
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+ 'ement-room-membership nil
+ :height 90)
+#+END_SRC
+
+*** Matrix room list
+
+Don't show room avatars
+
+#+BEGIN_SRC emacs-lisp
+(setq ement-room-list-avatars nil)
+#+END_SRC
+
+No bold faces
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+ 'ement-room-list-unread nil
+ :weight 'normal)
+#+END_SRC
+
+The default color for direct messages looks too much like an unread
+message.
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+ 'ement-room-list-direct nil
+ :foreground my/purple)
+#+END_SRC
+
+*** Matrix TODO
+
+- Sending messages via ~M-x ement-room-send-message~ is just awful. I
+  want prompt like Circe has
+- Showing lag and channels in modeline
+- Room membership messages starts with a space and it annoys the hell
+  out of me
+- Hide the whole headerline. We know the room name from buffer name
+- We desperatelly need to have customizable tabulated list format for
+  the room list view
+- We need to format reply messages better
+- Unread indicator in the room list is incorrect
+
 ** Database
 
 We can use ~psql~, for sure. But why leaving Emacs?
