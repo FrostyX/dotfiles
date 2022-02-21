@@ -4253,6 +4253,7 @@ message.
   the room list view
 - We need to format reply messages better
 - Unread indicator in the room list is incorrect
+- We need to reduce lurker spam like in Circe
 
 ** Database
 
