@@ -6,7 +6,8 @@
 (setq package-archives
    '(("melpa" . "https://melpa.org/packages/")
      ("melpa-stable" . "https://stable.melpa.org/packages/")
-     ("gnu" . "http://elpa.gnu.org/packages/")))
+     ("gnu" . "http://elpa.gnu.org/packages/")
+     ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 
 (setq package-enable-at-startup nil)
 (package-initialize)
@@ -18,7 +19,11 @@
 (require 'use-package)
 
 ;; Use latest Org
-(use-package org :ensure org-plus-contrib)
+(use-package org
+  :ensure t)
+
+(use-package org-contrib
+  :ensure t)
 
 ;; Tangle configuration
 (org-babel-load-file (expand-file-name "frostyx.org" user-emacs-directory))
