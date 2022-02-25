@@ -13,6 +13,10 @@ xset s off -dpms
 xset b off
 xset b 0 0 0
 
-gnome-screensaver &
+# Enable tap-to-click
+# Use `xinput list` to see available devices
+# Use e.g. `xinput list-props "Synaptics TM3289-021"` to see device properties
+xinput set-prop "Synaptics TM3289-021" "libinput Tapping Enabled" 1
+
 nm-applet &
 blueman-applet &
