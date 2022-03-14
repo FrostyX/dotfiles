@@ -3770,6 +3770,46 @@ Define custom key bindings for when reading an article
     "gk" #'elfeed-show-prev))
 #+END_SRC
 
+Finally, customize colors
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+ 'elfeed-search-date-face nil
+ :foreground my/blue)
+
+(set-face-attribute
+ 'elfeed-search-title-face nil
+ :foreground nil)
+
+(set-face-attribute
+ 'elfeed-search-feed-face nil
+ :foreground my/blue)
+
+(set-face-attribute
+ 'elfeed-search-tag-face nil
+ :foreground my/green)
+
+(set-face-attribute
+ 'elfeed-search-unread-title-face nil
+ :foreground my/purple
+ :weight 'normal
+ :width 'normal)
+#+END_SRC
+
+Don't show any date, we don't have enough space for that
+
+#+BEGIN_SRC emacs-lisp
+(defun elfeed-search-format-date (date)
+  "")
+#+END_SRC
+
+We also need a less space for article authors in favor of their
+titles.
+
+#+BEGIN_SRC emacs-lisp
+(setq elfeed-search-trailing-width 15)
+#+END_SRC
+
 ** IRC
 
 There are several Emacs IRC clients available (such as ERC, rcirc and others)
