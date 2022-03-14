@@ -3694,6 +3694,13 @@ a list of lists.
 (setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org"))
 #+END_SRC
 
+We have so many feeds subscribed and not enough time to read them
+all. By default show only the work-related articles.
+
+#+BEGIN_SRC emacs-lisp
+(setq elfeed-search-filter "+work")
+#+END_SRC
+
 Automatically fetch updates from RSS feeds. Let's do it every day, but I am
 afraid, that it will lag the whole Emacs, so we will probably need to adjust it
 and run less frequently.

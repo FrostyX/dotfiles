@@ -2,7 +2,7 @@
 
 Here follows a list of RSS feeds that I am subscribed to.
 
-** Work
+** Work                                                                :work:
 
 Mainly Red Hatters, former colleagues and work related feeds.
 
