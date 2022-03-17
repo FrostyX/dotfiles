@@ -4308,6 +4308,8 @@ message.
 - We need to format reply messages better
 - Unread indicator in the room list is incorrect
 - We need to reduce lurker spam like in Circe
+- Configure automatical reconnect, so we don't have to run ~M-x
+  ement-connect~ when buffer is not syncing
 
 ** Database
 
