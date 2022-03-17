@@ -2290,6 +2290,13 @@ See https://github.com/emacs-helm/helm-org
   :ensure t)
 #+END_SRC
 
+Show breadcrumbs for each heading, see more eplanation here
+https://github.com/emacs-helm/helm-org/issues/27
+
+#+BEGIN_SRC emacs-lisp
+(setq helm-org-format-outline-path t)
+#+END_SRC
+
 **** Pomodoro
 The Pomodoro Technique is a time management technique that uses a timer to break
 work into short intervals (typically 25 minutes of work followed by 5 minutes of
