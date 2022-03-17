@@ -539,6 +539,16 @@ TODO evil-indent-textobject
 ;;   :ensure t)
 #+END_SRC
 
+TODO
+
+See https://github.com/redguardtoo/evil-matchit
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil-matchit
+  :ensure t
+  :config
+  (global-evil-matchit-mode))
+#+END_SRC
 
 When programming, it is usefull to comment-out pieces of a code to temporarily disable them.
 This is valuable when refactoring something and deciding what implementation to use, when
