@@ -2135,9 +2135,9 @@ be gray ... I mean, we don't say /grayed out/ for no reason.
 Show agendas from these TODO files.
 
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-files '("~/org/gtd/inbox.org"
-                         "~/org/gtd/gtd.org"
-                         "~/org/gtd/tickler.org"))
+(setq org-agenda-files '("~/Org/gtd/inbox.org"
+                         "~/Org/gtd/gtd.org"
+                         "~/Org/gtd/tickler.org"))
 #+END_SRC
 
 For the love of god, do not do ~\'reorganize-frame~, nor any other shenanigans.
