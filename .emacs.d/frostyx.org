@@ -522,13 +522,15 @@ https://github.com/syl20bnr/spacemacs/issues/14036#issuecomment-707072523
 
 ** Evil packages
 
-TODO evil-indent-surround
+TODO
+
+See https://github.com/emacs-evil/evil-surround
 
 #+BEGIN_SRC emacs-lisp
-;; (use-package evil-surround
-;;   :ensure t
-;;   :config
-;;   (global-evil-surround-mode))
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode))
 #+END_SRC
 
 TODO evil-indent-textobject
