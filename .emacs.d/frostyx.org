@@ -1699,7 +1699,11 @@ Also see my blog post http://frostyx.cz/posts/emacs-browse-at-pagure
 
 #+BEGIN_SRC emacs-lisp
 (use-package browse-at-remote
-  :ensure t)
+  :ensure t
+  :quelpa (browse-at-remote
+           :fetcher github
+           :repo "FrostyX/browse-at-remote"
+           :branch "pagure-commit-url"))
 #+END_SRC
 
 ** Indentation
