@@ -713,6 +713,7 @@ This command is mainly an example how to do it. I have probably never used it.
 #+END_SRC
 
 * Window management
+** Window rules
 
 Emacs default window management makes me want to kill myself. After six months,
 I still have absolutely no idea how it works. New windows literaly appear on the
@@ -752,6 +753,31 @@ See https://stackoverflow.com/a/7787941/3285282
 
 #+BEGIN_SRC emacs-lisp
 (setq Man-notify-method 'pushy)
+#+END_SRC
+
+** Ace window
+
+Upon calling, ~ace-window~ displays a number for each open window and allows to
+jump into, swap, etc by simply pressing its number. This works accross multiple
+Emacs frames.
+
+See https://github.com/abo-abo/ace-window
+
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :ensure t)
+#+END_SRC
+
+By default, the window numbers are too small and can be overlooked. Let's use
+larger font and theme-based color. The numbers are not displayed over a buffer
+but in it, and therefore a larger number shifts the output a bit while
+displayed. It's just a minor inconvenience but it's worth noting.
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+  'aw-leading-char-face nil
+  :foreground my/red
+  :height 360)
 #+END_SRC
 
 * Interface
@@ -1137,6 +1163,10 @@ Hydra main entry-point allowing us acces to other hydras.
    (("p" helm-projectile-switch-project "switch project")
     ("P" hydra-project/body "projectile"))
 
+   "Window management"
+   (("w" ace-window "ace-window")
+    ("W" hydra-window/body "window management"))
+
    "File Management"
    (("d" dired-jump "open dired in the current directory")
     ("D" hydra-dired/body "dired"))
@@ -1216,6 +1246,17 @@ Hydra definitions for Eyebrowse commands.
     ("c" eyebrowse-create-named-window-config "Create a new config")
     ("r" eyebrowse-rename-window-config "Rename a new config")
     ("d" eyebrowse-close-window-config "Destroy a window config"))))
+#+END_SRC
+
+*** Windows
+
+Hydra definition for bookmarks management.
+
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-window
+  (:color blue :quit-key ("q" "SPC") :title "Window management")
+  ("Ace window"
+   (("s" ace-swap-window "Swap window"))))
 #+END_SRC
 
 *** Dired
