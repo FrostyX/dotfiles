@@ -4279,6 +4279,17 @@ Don't display room icons in the top line
 (setq ement-room-avatars nil)
 #+END_SRC
 
+There is some colision with Evil key bindings. Ement doesn't have a prompt, see
+https://github.com/alphapapa/ement.el/issues/55
+so you need to start writing message by pressing ~RET~. Reply to a message can
+be done via ~S-RET~ but that works by default.
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap
+  :keymaps 'ement-room-mode-map
+  "RET" 'ement-room-send-message)
+#+END_SRC
+
 Don't put any prefixes and suffixes into room names. They have
 specific major modes anyway, so we know what those buffers are.
 
@@ -4332,6 +4343,24 @@ Use normal font size for lurker spam
 (set-face-attribute
  'ement-room-membership nil
  :height 90)
+#+END_SRC
+
+Don't use any background color for messaages that are meant for me
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+ 'ement-room-mention nil
+ :inverse-video nil
+ :foreground my/red
+ :background nil)
+#+END_SRC
+
+Don't insert additional timestamp lines above the actual messages. This setting
+is not ideal and might sometime cause printing blank lines.
+
+#+BEGIN_SRC emacs-lisp
+(setq ement-room-timestamp-header-format "")
+(setq ement-room-timestamp-header-with-date-format "")
 #+END_SRC
 
 *** Matrix room list
@@ -4391,6 +4420,11 @@ It is also not necessary for messages sent by me to be red
 - We need to reduce lurker spam like in Circe
 - Configure automatical reconnect, so we don't have to run ~M-x
   ement-connect~ when buffer is not syncing
+- We need to have a variable for configuring accounts, so they don't have to be
+  inserted on ~M-x ement-connect~
+- I just don't want any ~ement-room-timestamp-header-format~ lines
+- We need automatical scroll of the rooms
+
 
 ** Database
 
