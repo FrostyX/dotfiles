@@ -522,7 +522,12 @@ https://github.com/syl20bnr/spacemacs/issues/14036#issuecomment-707072523
 
 ** Evil packages
 
-TODO
+Thanks to ~evil-surround~ it is easy to change the surroundings of the current
+text object. Most commonly, this can be used for:
+
+1. Changing quotes - Doing ~cs'"~ in ~'Hello world'~ changes single quotes to
+   double quotes
+2. Changing tags - TODO visual mode
 
 See https://github.com/emacs-evil/evil-surround
 
