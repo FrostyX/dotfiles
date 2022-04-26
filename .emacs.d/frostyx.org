@@ -717,6 +717,69 @@ This command is mainly an example how to do it. I have probably never used it.
   '(evil-ex-define-cmd "Gbrowse" 'browse-at-remote))
 #+END_SRC
 
+* Colorscheme
+** Themes
+
+Let's install all the interesting themes.
+
+See http://chriskempson.com/projects/base16/
+
+#+BEGIN_SRC emacs-lisp
+(use-package base16-theme
+  :ensure t)
+#+END_SRC
+
+At this point, my whole desktop environment uses ~base16-chalk~
+
+#+BEGIN_SRC emacs-lisp
+(if workstation-p
+   (load-theme 'base16-chalk t))
+#+END_SRC
+
+** Colors
+
+Let's define our set of colors based on current theme, so we can easily use them
+for customizing third-party packages.
+
+See http://chriskempson.com/projects/base16/#styling-guidelines
+
+#+BEGIN_SRC emacs-lisp
+(if workstation-p
+    (setq my/black (plist-get base16-chalk-colors :base00)
+          my/gray (plist-get base16-chalk-colors :base01)
+          my/lgray (plist-get base16-chalk-colors :base03)
+          ;; ... grayish colors from base02 to base06
+          my/white (plist-get base16-chalk-colors :base07)
+          my/red (plist-get base16-chalk-colors :base08)
+          my/orange (plist-get base16-chalk-colors :base09)
+          my/yellow (plist-get base16-chalk-colors :base0A)
+          my/green (plist-get base16-chalk-colors :base0B)
+          my/lblue (plist-get base16-chalk-colors :base0C)
+          my/blue (plist-get base16-chalk-colors :base0D)
+          my/purple (plist-get base16-chalk-colors :base0E)
+          my/brown (plist-get base16-chalk-colors :base0F)))
+#+END_SRC
+
+The custom theme and its colors looks great on my workstation but it won't be
+ideal on various systems and devices. Let's define a fallback set of colors
+based on the default Emacs theme.
+
+#+BEGIN_SRC emacs-lisp
+(if (not workstation-p)
+    (setq my/black "black"
+          my/gray  "gray75"
+          my/lgray "gray60"
+          my/white "white"
+          my/red "Firebrick"
+          my/orange "orange red"
+          my/yellow "lightyellow"
+          my/green "ForestGreen"
+          my/lblue "midnight blue"
+          my/blue "blue"
+          my/purple "Purple"
+          my/brown "brown"))
+#+END_SRC
+
 * Window management
 ** Window rules
 
@@ -798,68 +861,6 @@ Get rid of menu, scrollbars, toolbars and everything that can be clicked on.
 (tool-bar-mode -1)
 (customize-set-variable 'scroll-bar-mode nil)
 (customize-set-variable 'horizontal-scroll-bar-mode nil)
-#+END_SRC
-
-** Themes
-
-Let's install all the interesting themes.
-
-See http://chriskempson.com/projects/base16/
-
-#+BEGIN_SRC emacs-lisp
-(use-package base16-theme
-  :ensure t)
-#+END_SRC
-
-At this point, my whole desktop environment uses ~base16-chalk~
-
-#+BEGIN_SRC emacs-lisp
-(if workstation-p
-   (load-theme 'base16-chalk t))
-#+END_SRC
-
-** Colors
-
-Let's define our set of colors based on current theme, so we can easily use them
-for customizing third-party packages.
-
-See http://chriskempson.com/projects/base16/#styling-guidelines
-
-#+BEGIN_SRC emacs-lisp
-(if workstation-p
-    (setq my/black (plist-get base16-chalk-colors :base00)
-          my/gray (plist-get base16-chalk-colors :base01)
-          my/lgray (plist-get base16-chalk-colors :base03)
-          ;; ... grayish colors from base02 to base06
-          my/white (plist-get base16-chalk-colors :base07)
-          my/red (plist-get base16-chalk-colors :base08)
-          my/orange (plist-get base16-chalk-colors :base09)
-          my/yellow (plist-get base16-chalk-colors :base0A)
-          my/green (plist-get base16-chalk-colors :base0B)
-          my/lblue (plist-get base16-chalk-colors :base0C)
-          my/blue (plist-get base16-chalk-colors :base0D)
-          my/purple (plist-get base16-chalk-colors :base0E)
-          my/brown (plist-get base16-chalk-colors :base0F)))
-#+END_SRC
-
-The custom theme and its colors looks great on my workstation but it won't be
-ideal on various systems and devices. Let's define a fallback set of colors
-based on the default Emacs theme.
-
-#+BEGIN_SRC emacs-lisp
-(if (not workstation-p)
-    (setq my/black "black"
-          my/gray  "gray75"
-          my/lgray "gray60"
-          my/white "white"
-          my/red "Firebrick"
-          my/orange "orange red"
-          my/yellow "lightyellow"
-          my/green "ForestGreen"
-          my/lblue "midnight blue"
-          my/blue "blue"
-          my/purple "Purple"
-          my/brown "brown"))
 #+END_SRC
 
 ** Fonts
