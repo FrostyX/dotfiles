@@ -4269,6 +4269,7 @@ not, if I can connect from Fedora account to matrix.org rooms and how
 to connect to the Fedora account from ement.
 
 Use ~M-x ement-connect~ to open the client.
+Use ~M-x ement-disconnect~ for quitting.
 
 *** Matrix rooms
 
