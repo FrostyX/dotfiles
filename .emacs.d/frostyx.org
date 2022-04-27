@@ -3143,6 +3143,15 @@ as well.
   "G" #'vterm-reset-cursor-point)
 #+END_SRC
 
+Commands like ~dd~, ~I~, ~S~, etc doesn't work and complain about read-only
+buffer. This is because they are trying to change prompt as well. By setting
+~term-prompt-regexp~, we are letting them know where prompt ends and where the
+actual command starts.
+
+#+BEGIN_SRC emacs-lisp
+(setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+#+END_SRC
+
 ** Tmux
 
 Having terminal inside of Emacs is sick AF but I won't be running
