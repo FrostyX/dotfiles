@@ -13,6 +13,7 @@ https://wiki.archlinux.org/index.php/Xephyr
 """
 
 import re
+import logging
 import subprocess
 from datetime import date
 from os import uname
@@ -21,8 +22,14 @@ from libqtile.config import Key, Screen, Group, Drag, Click, Match, Rule
 from libqtile.command.client import Client
 from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook
+from libqtile.log_utils import logger
 
 from contrib import CurrentLayoutTextIcon
+
+
+# https://docs.qtile.org/en/latest/manual/troubleshooting.html
+# See errors in ~/.local/share/qtile/qtile.log
+logger.setLevel(logging.DEBUG)
 
 
 terminal     = "gnome-terminal"
