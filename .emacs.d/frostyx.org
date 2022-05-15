@@ -3063,6 +3063,12 @@ See https://github.com/legoscia/archive-rpm
   :ensure t)
 #+END_SRC
 
+In Emacs 29, it will be possible to drag-and-drop files from dired to
+other applications outside of Emacs (Images to browser, subtitles to
+vlc, etc).
+
+See https://www.reddit.com/r/emacs/comments/uq6gxy/comment/i8p3c0m/?utm_source=share&utm_medium=web2x&context=3
+
 One of the most killer features in GUI file managers is a menu for mounting
 removable disks such as USB sticks and external drives. Let's do this in Emacs
 as well.
