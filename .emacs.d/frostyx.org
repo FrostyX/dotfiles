@@ -4406,19 +4406,21 @@ Don't show room avatars
 No bold faces
 
 #+BEGIN_SRC emacs-lisp
-(dolist (face '(ement-room-user
-                ement-room-list-unread
-                ement-room-self))
-  (set-face-attribute face nil :weight 'normal))
+(with-eval-after-load "ement-room-list"
+  (dolist (face '(ement-room-user
+                  ement-room-list-unread
+                  ement-room-self))
+    (set-face-attribute face nil :weight 'normal)))
 #+END_SRC
 
 The default color for direct messages looks too much like an unread
 message.
 
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute
- 'ement-room-list-direct nil
- :foreground my/purple)
+(with-eval-after-load "ement-room-list"
+  (set-face-attribute
+   'ement-room-list-direct nil
+   :foreground my/purple))
 #+END_SRC
 
 My username should be purple
