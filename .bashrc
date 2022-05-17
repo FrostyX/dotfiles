@@ -46,11 +46,25 @@ multihead () {
 }
 
 3head () {
-    cmd="xrandr"
+    case $HOSTNAME in
+        "zeratul")
+            L="DP-4"
+            M="DP-3-1"
+            R="DP-3-2"
+            ;;
+        "alarak")
+            L="DP-2"
+            M="DP-1-1"
+            R="DP-1-2"
+            ;;
+        *) echo "Unrecognized hostname"; exit 1;;
+    esac
+
+    cmd="echo xrandr"
     cmd+=" --output eDP-1 --off"
-    cmd+=" --output DP-4 --auto"
-    cmd+=" --output DP-3-1 --auto --right-of DP-4"
-    cmd+=" --output DP-3-2 --auto --right-of DP-3-1"
+    cmd+=" --output $L --auto"
+    cmd+=" --output $M --auto --right-of DP-2"
+    cmd+=" --output $R --auto --right-of DP-1-1"
     $cmd
 }
 
