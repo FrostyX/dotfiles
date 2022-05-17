@@ -60,7 +60,7 @@ multihead () {
         *) echo "Unrecognized hostname"; exit 1;;
     esac
 
-    cmd="echo xrandr"
+    cmd="xrandr"
     cmd+=" --output eDP-1 --off"
     cmd+=" --output $L --auto"
     cmd+=" --output $M --auto --right-of DP-2"
