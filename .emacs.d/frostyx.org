@@ -2095,6 +2095,20 @@ See https://elpy.readthedocs.io/en/latest/customization_tips.html#use-flycheck-i
   (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
 #+END_SRC
 
+*** JSON
+
+#+BEGIN_SRC emacs-lisp
+(use-package json-mode
+  :ensure t)
+#+END_SRC
+
+*** YAML
+
+#+BEGIN_SRC emacs-lisp
+(use-package yaml-mode
+  :ensure t)
+#+END_SRC
+
 *** Elm
 
 Elm command line tools (such as ~elm-format~) are not properly packaged in Fedora,
