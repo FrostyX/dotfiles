@@ -3070,7 +3070,7 @@ unbind that so that hydra works.
 It is well-known that Emacs can open archives (.tar, .zip, etc) but thanks to
 ~archive-rpm~, it can browse also SRPM and RPM packages. This is a game changer.
 
-See https://github.com/legoscia/archive-rpm
+See https://github.com/nbarrientos/archive-rpm
 
 #+BEGIN_SRC emacs-lisp
 (use-package archive-rpm
