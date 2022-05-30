@@ -291,6 +291,7 @@ def create_screen(primary=False):
             # Logo
             widget.TextBox(
                 text=icons["logo"],
+                font="Font Awesome",
                 fontsize=14,
                 mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn("urxvt")},
                 foreground=base16_chalk["magenta"],
@@ -308,6 +309,7 @@ def create_screen(primary=False):
                 active=base16_chalk["white"],
                 inactive=base16_chalk["gray"],
                 rounded=False,
+                font="Font Awesome",
                 fontsize=14,
                 hide_unused=True,
                 **style,
@@ -498,6 +500,7 @@ def create_screen(primary=False):
             # Systray
             (widget.Systray() if primary else widget.TextBox(
                 icons["systray"],
+                font="Font Awesome",
                 fontsize=14,
                 foreground=base16_chalk["magenta"]
             )),
