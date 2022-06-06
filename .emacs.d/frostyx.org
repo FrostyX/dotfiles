@@ -1412,7 +1412,10 @@ Press Shift+spacebar to spawn a hydra specific to the current major-mode
    (("h" helm-org-in-buffer-headings "Search headers in Helm"))
 
    "Time"
-   (("p" org-pomodoro "Pomodoro"))))
+   (("p" org-pomodoro "Pomodoro"))
+
+   "Books"
+   (("b" org-books-add-url "Add book from URL"))))
 #+END_SRC
 
 **** Python
@@ -2677,6 +2680,19 @@ Install syntax highlighting for dockerfiles
 #+BEGIN_SRC emacs-lisp
 (use-package dockerfile-mode
   :ensure t)
+#+END_SRC
+
+**** Org Books
+
+See https://github.com/lepisma/org-books
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-books
+  :ensure t)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq org-books-file "~/Org/gtd/wiki.org")
 #+END_SRC
 
 * Writing
