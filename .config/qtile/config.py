@@ -18,11 +18,13 @@ import subprocess
 from datetime import date
 from os import uname
 from os.path import expanduser
+from libqtile import qtile
 from libqtile.config import Key, Screen, Group, Drag, Click, Match, Rule
 from libqtile.command.client import Client
 from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.log_utils import logger
+from qtile_extras.widget import StatusNotifier
 
 from contrib import CurrentLayoutTextIcon
 
@@ -78,6 +80,13 @@ elif hostname in ["alarak", "zeratul"]:
     # let's try amixer again
     vol_up = "amixer -D pipewire sset Master 2%+"
     vol_down = "amixer -D pipewire sset Master 2%-"
+
+
+# For some reason this condition doesn't work
+# if qtile.core.name == "wayland":
+WAYLAND = False
+if False:
+    WAYLAND = True
 
 
 mod = "mod1" # Left alt
@@ -259,6 +268,9 @@ widget_defaults = dict(
 
 
 def num_screens():
+    if WAYLAND:
+        return 1
+
     process = subprocess.Popen(["xrandr"], stdout=subprocess.PIPE)
     out = process.communicate()[0].decode("utf-8").split("\n")
     i = 0
@@ -498,17 +510,29 @@ def create_screen(primary=False):
 
 
             # Systray
-            (widget.Systray() if primary else widget.TextBox(
-                icons["systray"],
-                font="Font Awesome",
-                fontsize=14,
-                foreground=base16_chalk["magenta"]
-            )),
+            systray(primary),
 
 
             widget.Spacer(length=5),
         ], 25, background=colors["greybg"]),
     )
+
+
+def systray(primary=True):
+    if WAYLAND:
+        return StatusNotifier()
+
+    if primary:
+        return widget.Systray()
+
+    return widget.TextBox(
+        icons["systray"],
+        font="Font Awesome",
+        fontsize=14,
+        foreground=base16_chalk["magenta"]
+    )
+
+
 
 # Generate the same screen and panel configuration for each monitor
 screens = []
@@ -549,8 +573,12 @@ wmname = "LG3D"
 # Autostart
 @hook.subscribe.startup_once
 def autostart():
+    filename = "autostart.sh"
+    if WAYLAND:
+        filename = "autostart-wayland.sh"
+
     home = expanduser("~")
-    subprocess.Popen([home + "/.config/qtile/autostart.sh"])
+    subprocess.Popen([home + "/.config/qtile/" + filename])
 
 
 # xrandr --output DP2 --auto --right-of eDP1
