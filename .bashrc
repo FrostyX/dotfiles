@@ -63,8 +63,8 @@ multihead () {
     cmd="xrandr"
     cmd+=" --output eDP-1 --off"
     cmd+=" --output $L --auto"
-    cmd+=" --output $M --auto --right-of DP-2"
-    cmd+=" --output $R --auto --right-of DP-1-1"
+    cmd+=" --output $M --auto --right-of $L"
+    cmd+=" --output $R --auto --right-of $M"
     $cmd
 }
 
