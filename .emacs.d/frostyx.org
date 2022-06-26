@@ -3633,6 +3633,15 @@ pretty but very often it just shows black text on black background.
 (setq shr-use-colors nil)
 #+END_SRC
 
+Occasionally, when I open an email (maybe one in twenty emails), Emacs hangs
+forever, while trying to load the message. I am able to press ~ctrl+g~ and then
+immediatelly, a non-rendered version of the message is displayed (I can scroll
+down the headers and still read it, but its annoying). This seems to help.
+
+#+BEGIN_SRC emacs-lisp
+(setq gnus-cite-parse-max-size 10000)
+#+END_SRC
+
 *** Email queries
 
 We don't always want to dig through the entire mailbox but rather see a filtered
