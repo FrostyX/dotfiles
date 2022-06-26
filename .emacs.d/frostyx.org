@@ -3420,7 +3420,7 @@ every day.
   (kill-process " *mu4e-proc*"))
 #+END_SRC
 
-** Mu4e Helm support
+*** Mu4e Helm support
 
 This collection of code-snippets should ideally be distribute as a new package
 called e.g. ~mu4e-helm~ and provide out-of-the-box helm completion for Mu4e.
