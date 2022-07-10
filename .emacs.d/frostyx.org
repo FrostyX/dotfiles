@@ -745,19 +745,19 @@ See http://chriskempson.com/projects/base16/#styling-guidelines
 
 #+BEGIN_SRC emacs-lisp
 (if workstation-p
-    (setq my/black (plist-get base16-chalk-colors :base00)
-          my/gray (plist-get base16-chalk-colors :base01)
-          my/lgray (plist-get base16-chalk-colors :base03)
+    (setq my/black (plist-get base16-chalk-theme-colors :base00)
+          my/gray (plist-get base16-chalk-theme-colors :base01)
+          my/lgray (plist-get base16-chalk-theme-colors :base03)
           ;; ... grayish colors from base02 to base06
-          my/white (plist-get base16-chalk-colors :base07)
-          my/red (plist-get base16-chalk-colors :base08)
-          my/orange (plist-get base16-chalk-colors :base09)
-          my/yellow (plist-get base16-chalk-colors :base0A)
-          my/green (plist-get base16-chalk-colors :base0B)
-          my/lblue (plist-get base16-chalk-colors :base0C)
-          my/blue (plist-get base16-chalk-colors :base0D)
-          my/purple (plist-get base16-chalk-colors :base0E)
-          my/brown (plist-get base16-chalk-colors :base0F)))
+          my/white (plist-get base16-chalk-theme-colors :base07)
+          my/red (plist-get base16-chalk-theme-colors :base08)
+          my/orange (plist-get base16-chalk-theme-colors :base09)
+          my/yellow (plist-get base16-chalk-theme-colors :base0A)
+          my/green (plist-get base16-chalk-theme-colors :base0B)
+          my/lblue (plist-get base16-chalk-theme-colors :base0C)
+          my/blue (plist-get base16-chalk-theme-colors :base0D)
+          my/purple (plist-get base16-chalk-theme-colors :base0E)
+          my/brown (plist-get base16-chalk-theme-colors :base0F)))
 #+END_SRC
 
 The custom theme and its colors looks great on my workstation but it won't be
