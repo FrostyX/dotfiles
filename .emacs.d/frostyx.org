@@ -2695,6 +2695,12 @@ See https://github.com/lepisma/org-books
 (setq org-books-file "~/Org/gtd/wiki.org")
 #+END_SRC
 
+Allow to add books under more nested headings
+
+#+BEGIN_SRC emacs-lisp
+(setq org-books-file-depth 3)
+#+END_SRC
+
 * Writing
 
 First see some cool writing setups from other people:
