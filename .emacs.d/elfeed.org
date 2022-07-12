@@ -94,6 +94,8 @@ There is always something new in the Emacs world.
 *** http://doyouevenlisp.com/feed/
 *** https://nyxt.atlas.engineer/feed
 
+*** https://emacsredux.com/atom.xml
+
 ** Vim
 
 There is more interesting Vim development happening than ever before.
