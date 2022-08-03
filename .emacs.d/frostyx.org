@@ -3992,6 +3992,7 @@ Do not forget to kill circe and run it again after modifying
          :nickserv-password ,(password-store-get "irc/freenode-password")
          :channels ("#fedora-admin"
                     "#fedora-buildsys"
+                    "#copr-team"
                     "#tito"
                     "#emacs-circe"))
 
