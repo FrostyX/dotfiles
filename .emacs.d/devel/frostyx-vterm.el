@@ -53,5 +53,19 @@ project, only switch to its buffer."
     (switch-to-buffer result)))
 
 
-;; Usage
-;; (frostyx/projectile-run-vterm "barr" "~/git/dotfiles")
+(setq frostyx-initial-vterms
+      '(
+        ;; TODO What about non-git terminals
+        ;; (misc . (ansible maint))))
+        ;; (hacking . (hacking blog))
+
+        ("~/git/copr" . ("copr" "frontend" "backend"))))
+
+
+(defun frostyx/run-initial-vterms ()
+  (interactive)
+  (let ((current-buffer (current-buffer)))
+    (dolist (tuple frostyx-initial-vterms)
+      (dolist (vterm-name (cdr tuple))
+        (frostyx/projectile-run-vterm vterm-name (car tuple))))
+    (switch-to-buffer current-buffer)))
