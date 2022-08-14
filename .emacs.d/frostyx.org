@@ -3217,6 +3217,13 @@ Don't let Emacs eat common shell keyboard shotcuts
   :keymaps 'vterm-mode-map
   "C-c" 'vterm-send-C-c)
 #+END_SRC
+
+Load a bunch of my functions
+
+#+BEGIN_SRC emacs-lisp
+(load "~/.emacs.d/devel/frostyx-vterm.el")
+#+END_SRC
+
 ** Dtache
 
 https://gitlab.com/niklaseklund/dtache
