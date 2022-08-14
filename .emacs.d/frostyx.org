@@ -577,6 +577,22 @@ commands. To comment e.g. next 3 lines, use ~3gcc~. To comment a ~VISUAL~ select
   (evil-commentary-mode))
 #+END_SRC
 
+There is no ~:set~ command in Evil. I wrote my own package for this.
+
+See https://github.com/FrostyX/evil-set-option
+See http://frostyx.cz/posts/emacs-evil-set-option
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil-set-option
+  :ensure t
+  :quelpa (evil-set-option
+           :fetcher github
+           :repo "FrostyX/evil-set-option"
+           :branch "main")
+  :config
+  (evil-set-option-mode))
+#+END_SRC
+
 ** Vim keybindings everywhere
 
 #+BEGIN_SRC emacs-lisp
