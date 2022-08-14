@@ -3269,53 +3269,10 @@ Access Tmux even in normal mode using ~C-b~
           (vterm-send-key "b" nil nil t)))
 #+END_SRC
 
-List all Tmux sessions
+Load some custom tmux functions
 
 #+BEGIN_SRC emacs-lisp
-(defun frostyx/tmux-sessions ()
-  (interactive)
-  (let* ((choices (emamux:get-sessions)))
-	(completing-read "Sessions: " choices)))
-#+END_SRC
-
-List all windows inside of a specific Tmux session
-
-#+BEGIN_SRC emacs-lisp
-(defun frostyx/tmux-windows ()
-  (interactive)
-  (let* ((emamux:session "51")
-		 (choices (emamux:list-windows)))
-	(completing-read "Window: " choices)))
-#+END_SRC
-
-Rename window
-
-#+BEGIN_SRC emacs-lisp
-(defun frostyx/tmux-rename-window ()
-  (interactive)
-  (let* ((emamux:session "2")
-		 (window (emamux:get-window))
-		 (name (read-string "Name: ")))
-	(emamux:tmux-run-command t "rename-window" name)))
-#+END_SRC
-
-Rename session
-
-#+BEGIN_SRC emacs-lisp
-(defun frostyx/tmux-rename-session ()
-  (interactive)
-  (let* ((emamux:session "2")
-		 (name (read-string "Name: ")))
-	(emamux:tmux-run-command t "rename-session" "-t" emamux:session name)))
-#+END_SRC
-
-Hide status bar
-
-#+BEGIN_SRC emacs-lisp
-(defun frostyx/hide-status-bar ()
-  (interactive)
-  (let* ((emamux:session "9"))
-	(emamux:tmux-run-command t "set" "-t" emamux:session "status" "off")))
+(load "~/.emacs.d/devel/frostyx-tmux.el")
 #+END_SRC
 
 TODO
