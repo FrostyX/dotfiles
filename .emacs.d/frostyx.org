@@ -3210,6 +3210,13 @@ actual command starts.
 (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
 #+END_SRC
 
+Don't let Emacs eat common shell keyboard shotcuts
+
+#+BEGIN_SRC emacs-lisp
+(general-imap
+  :keymaps 'vterm-mode-map
+  "C-c" 'vterm-send-C-c)
+#+END_SRC
 ** Dtache
 
 https://gitlab.com/niklaseklund/dtache
