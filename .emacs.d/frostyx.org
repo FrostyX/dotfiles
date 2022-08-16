@@ -719,6 +719,15 @@ Random garbage
   "def" 'evil-jump-to-tag)
 #+END_SRC
 
+These are not exactly Vim based but I don't want to start a separate
+section.
+
+#+BEGIN_SRC emacs-lisp
+(general-define-key
+ :states '(normal visual insert emacs)
+ "C-x l" 'evil-switch-to-windows-last-buffer)
+#+END_SRC
+
 ** Custom Evil commands
 
 Evil even allows you to create your own colon commands. I don't need it, most folks
