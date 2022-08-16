@@ -3224,6 +3224,12 @@ Load a bunch of my functions
 (load "~/.emacs.d/devel/frostyx-vterm.el")
 #+END_SRC
 
+TODO
+
+- [ ] ~x~ doesn't work, strange
+- [ ] Prompt line continuity doesn't work (from last char, to the
+  first on the next line by using right arrow)
+
 ** Dtache
 
 https://gitlab.com/niklaseklund/dtache
