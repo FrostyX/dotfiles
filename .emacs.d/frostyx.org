@@ -1091,6 +1091,12 @@ chatting on IRC?
 (defun my/smart-buffers-list ()
   (interactive)
   (cond ((derived-mode-p 'lui-mode) (my/circe-switch-to-buffer))
+
+        ((derived-mode-p 'vterm-mode)
+         (if (projectile-project-root)
+             (frostyx/projectile-switch-to-vterm-buffer)
+           (frostyx/switch-to-vterm-buffer)))
+
         ((projectile-project-root) (helm-projectile-switch-to-buffer))
         (t (helm-buffers-list))))
 #+END_SRC
