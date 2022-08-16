@@ -30,7 +30,8 @@ project, only switch to its buffer."
 
 
 (defun frostyx/projectile-vterm-buffers ()
-  (let ((project-root (projectile-acquire-root)))
+  (let ((project-root (string-remove-suffix
+                       "/" (projectile-acquire-root))))
     (if project-root
         (cl-intersection
          (frostyx/vterm-buffers)
