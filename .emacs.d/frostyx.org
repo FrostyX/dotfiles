@@ -368,6 +368,13 @@ See:
 
 * Key bindings
 
+You might be interested in Emacs key binding conventions.
+Please read the "Demystifying Emacs bindings" section here
+https://yiufung.net/post/emacs-key-binding-conventions-and-why-you-should-try-it/
+
+Or the official documentation
+https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
+
 As per usual, we have half a dozen ways to do something in Emacs, in this case
 customizing key bindings. There is ~global-set-key~ for global key definitions,
 ~define-key~ for mode-specific definitions (or global definitions as well, when
