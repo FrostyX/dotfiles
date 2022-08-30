@@ -4554,6 +4554,68 @@ environment database, so I don't care.
 Once we have some connections configured, we can simply run ~sql-connect~ and
 pick one.
 
+** JIRA
+
+TODO
+
+See https://github.com/ahungry/org-jira
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-jira
+  :ensure t)
+#+END_SRC
+
+The ~org-jira~ package uses a temporary directory for storing
+generated Org files.
+
+#+BEGIN_SRC emacs-lisp
+(make-directory "~/.org-jira" t)
+#+END_SRC
+
+URL and login
+
+#+BEGIN_SRC emacs-lisp
+(setq jiralib-url
+      (concat "https://" (password-store-get "jira/redhat-host") "/"))
+(setq jiralib-user (password-store-get "jira/redhat-user"))
+#+END_SRC
+
+The ~jiralib-token~ is automatically generated after using ~M-x
+jiralib-login~ and therefore almost any ~M-x org-jira-*~ command. But
+since I am using API token instead of a password, I think I need to
+define the variable manually.
+
+#+BEGIN_SRC emacs-lisp
+(setq jiralib-token
+      (cons
+       "Authorization"
+       (concat "Bearer "
+               (auth-source-pick-first-password
+                :host (password-store-get "jira/redhat-host")))))
+#+END_SRC
+
+Don't forget to put the token into ~pass~ storage.
+
+#+BEGIN_SRC bash
+pass insert jira/issues.redhat.com
+pass insert jira/redhat-user
+pass insert jira/redhat-host
+#+END_SRC
+
+TODO
+
+#+BEGIN_SRC emacs-lisp
+(setq org-jira-jira-status-to-org-keyword-alist
+      '(("To Do" . "TODO")
+        ("In Progress" . "STARTED")
+        ("Done" . "DONE")))
+#+END_SRC
+
+Usage:
+
+org-jira-get-issues-by-board
+org-jira-refresh-issues-in-buffer
+
 ** Spotify
 
 For quick searches and control, ~spotify-helm-plus~ is the best available
