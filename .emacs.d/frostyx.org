@@ -2174,6 +2174,24 @@ Extend ~$PATH~ so Emacs can use them.
   (add-hook 'elm-mode-hook 'elm-format-on-save-mode))
 #+END_SRC
 
+By default ~elm-indent-mode~ is trying to be too smart and behaves
+insanely. Let's use simpler indentation mode.
+
+See https://github.com/jcollard/elm-mode#simpler-indentation
+
+#+BEGIN_SRC emacs-lisp
+(setq elm-mode-hook '(elm-indent-simple-mode))
+#+END_SRC
+
+I am not sure, possibly ~elm-indent-simple-mode~ interferes with
+automatical ~elm-format~ on save. Let's enable it explicitly.
+
+(Yep, I am setting the previous hook instead of adding it)
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'elm-mode-hook 'elm-format-on-save-mode)
+#+END_SRC
+
 *** Haskell
 
 Nope, I don't know haskell. I successfully fail learning it every time. Au
