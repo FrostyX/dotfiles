@@ -2127,6 +2127,14 @@ See https://elpy.readthedocs.io/en/latest/customization_tips.html#use-flycheck-i
 (add-hook 'elpy-mode-hook 'flycheck-mode)
 #+END_SRC
 
+Use ~K~ for reading python documentation
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap
+  :keymaps 'python-mode-map
+  "K" #'lsp-describe-thing-at-point)
+#+END_SRC
+
 *** Lisp
 
 #+BEGIN_SRC emacs-lisp
