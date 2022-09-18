@@ -78,6 +78,7 @@ configuring something.
 *** https://www.philnewton.net/blog/feed/
 *** https://sqrtminusone.xyz/posts/index.xml
 *** https://niklaseklund.gitlab.io/blog/index.xml
+*** https://ro-che.info/articles/rss.xml
 
 ** Gentoo
 
