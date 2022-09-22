@@ -4024,20 +4024,7 @@ Do not forget to kill circe and run it again after modifying
 
 #+BEGIN_SRC emacs-lisp
 (setq circe-network-options
-      `(("Freenode"
-         :tls t
-         :nick "FrostyX"
-         :sasl-username "FrostyX"
-         :sasl-password ,(password-store-get "irc/freenode-password")
-         :nickserv-nick "FrostyX"
-         :nickserv-password ,(password-store-get "irc/freenode-password")
-         :channels ("#fedora-admin"
-                    "#fedora-buildsys"
-                    "#copr-team"
-                    "#tito"
-                    "#emacs-circe"))
-
-        ("Libera"
+      `(("Libera"
          :host "irc.libera.chat"
          :port 6697
          :tls t
