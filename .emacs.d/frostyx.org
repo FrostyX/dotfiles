@@ -4033,8 +4033,15 @@ Do not forget to kill circe and run it again after modifying
          :sasl-password ,(password-store-get "irc/libera-password")
          :nickserv-nick "FrostyX"
          :nickserv-password ,(password-store-get "irc/libera-password")
-         :channels ("#fedora-admin"
+         :channels ("#fedora"
+                    "#fedora-admin"
                     "#fedora-buildsys"
+                    "#fedora-websites"
+                    "#fedora-devel"
+                    "#fedora-noc"
+                    "#fedora-python"
+                    "#fedora-haskell"
+                    "#fedora-cs"
                     "#copr-team"
                     "#tito"
                     "#emacs"
