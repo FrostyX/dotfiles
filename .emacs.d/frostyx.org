@@ -2151,6 +2151,14 @@ Use ~K~ for reading python documentation
   (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
 #+END_SRC
 
+Select a code block in a visual mode and press ~TAB~ to re-indent it
+
+#+BEGIN_SRC emacs-lisp
+(general-vmap
+  :keymaps 'lisp-interaction-mode-map
+  "<tab>" #'indent-region)
+#+END_SRC
+
 *** JSON
 
 #+BEGIN_SRC emacs-lisp
