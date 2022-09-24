@@ -699,7 +699,8 @@ TODO projectile
 #+BEGIN_SRC emacs-lisp
 (evil-leader/set-key
   "f" 'helm-projectile
-  "p" 'helm-projectile-switch-project)
+  "p" 'helm-projectile-switch-project
+  "s" 'helm-lsp-workspace-symbol)
 #+END_SRC
 
 Sometimes it happens that ~helm-projectile~ or ~helm-projectile-find-file~
@@ -2723,6 +2724,14 @@ Don't just randomly pop flycheck buffer into my windows
 #+BEGIN_SRC emacs-lisp
 (setq lsp-diagnostic-provider :none)
 #+END_SRC
+
+See https://github.com/emacs-lsp/helm-lsp
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm-lsp
+  :ensure t)
+#+END_SRC
+
 *** Python
 
 See https://emacs-lsp.github.io/lsp-mode/page/languages/
