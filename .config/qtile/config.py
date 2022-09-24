@@ -251,7 +251,8 @@ layout_theme = {
     "border_focus": colors["blue"],
     "border_normal": colors["lgrey"],
     "margin": 10,
-    "single_margin": 10,
+    "single_border_width": 0,
+    "single_margin": 0,
 }
 layouts = [
     layout.MonadTall(**layout_theme),
