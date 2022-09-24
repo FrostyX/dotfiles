@@ -2182,6 +2182,8 @@ so we need to install them using ~npm~.
 npm install elm
 npm install elm-format
 npm install elm-test
+npm install elm-review
+npm install @elm-tooling/elm-language-server
 #+END_SRC
 
 Extend ~$PATH~ so Emacs can use them.
