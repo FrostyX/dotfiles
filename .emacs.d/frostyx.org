@@ -898,12 +898,17 @@ Get rid of menu, scrollbars, toolbars and everything that can be clicked on.
 ** Fonts
 
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute
-  'default nil
-  :family "vera sans"
-  :height 90
-  :weight 'normal
-  :width 'normal)
+(defun frostyx/set-default-font (size)
+  (set-face-attribute
+   'default nil
+   :family "vera sans"
+   :height size
+   :weight 'normal
+   :width 'normal))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(frostyx/set-default-font 90)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -1264,7 +1269,9 @@ Hydra definitions useful for presentations.
 (pretty-hydra-define hydra-presentations
   (:color blue :quit-key ("q" "SPC") :title "Presentations")
   ("Actions"
-   (("l" text-scale-decrease "lesser")
+   (("e" frostyx/presentation-mode-start "Enable / Start")
+    ("d" frostyx/presentation-mode-stop "Disable / Stop")
+    ("l" text-scale-decrease "lesser")
     ("g" text-scale-increase "greated"))))
 #+END_SRC
 
@@ -2806,6 +2813,20 @@ on 80 characters.
   ; :foreground "base03"
   ; :background "base01")
 )
+#+END_SRC
+
+* Presentations
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/presentation-mode-start ()
+  (interactive)
+  (frostyx/set-default-font 110))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/presentation-mode-stop ()
+  (interactive)
+  (frostyx/set-default-font 90))
 #+END_SRC
 
 * Documents
