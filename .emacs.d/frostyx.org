@@ -2712,6 +2712,17 @@ using ~C-n~ and ~C-p~, the next pressed key must be opening bracket
 (setq lsp-enable-snippet nil)
 #+END_SRC
 
+Please don't put any layer with text over my code
+
+#+BEGIN_SRC emacs-lisp
+(setq lsp-lens-enable nil)
+#+END_SRC
+
+Don't just randomly pop flycheck buffer into my windows
+
+#+BEGIN_SRC emacs-lisp
+(setq lsp-diagnostic-provider :none)
+#+END_SRC
 *** Python
 
 See https://emacs-lsp.github.io/lsp-mode/page/languages/
