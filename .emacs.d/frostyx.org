@@ -2670,6 +2670,7 @@ See https://emacs-lsp.github.io/lsp-mode/
   :hook
   (python-mode . lsp-deferred)
   (markdown-mode . lsp-deferred)
+  (elm-mode . lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l"))
 #+END_SRC
