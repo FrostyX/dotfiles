@@ -957,53 +957,158 @@ See https://github.com/domtronn/all-the-icons.el
 
 ** Modeline
 
+See https://dev.to/gonsie/beautifying-the-mode-line-3k10
+
 #+BEGIN_SRC emacs-lisp
-(use-package spaceline
+(use-package doom-modeline
   :ensure t
-  :config)
+  :init
+  (doom-modeline-mode 1))
 #+END_SRC
 
+Some basic modeline customizations
+
 #+BEGIN_SRC emacs-lisp
-(use-package spaceline-config
-  :ensure spaceline
-  :config
-  (spaceline-helm-mode 1)
-  (spaceline-spacemacs-theme)
-  (spaceline-toggle-org-clock-on)
-  (spaceline-toggle-minor-modes-off)
-  (spaceline-toggle-version-control-on)
-  (spaceline-toggle-buffer-size-off)
-  (spaceline-toggle-buffer-encoding-abbrev-off)
-  (spaceline-toggle-buffer-position-on))
+;; Make it smaller
+(setq doom-modeline-height 22)
+
+;; By default the icons are larger than the rest of the text, we don't want that
+(setq all-the-icons-scale-factor 1.0)
+
+;; Don't show icons, I have some bug rendering them incorrectly
+(setq doom-modeline-icon nil)
+
+;; Display only buffer names, not full paths
+(setq doom-modeline-buffer-file-name-style 'buffer-name)
+
+;; Don't show buffer encoding
+(setq doom-modeline-buffer-encoding nil)
+
+;; Don't show any mess next to major-mode
+(setq doom-modeline-env-version nil)
 #+END_SRC
 
+General modeline (non doom-modeline specific) settings
+
 #+BEGIN_SRC emacs-lisp
-(setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-(set-face-attribute 'spaceline-evil-normal nil :background my/gray :foreground my/orange)
-(set-face-attribute 'spaceline-evil-emacs nil :background my/gray :foreground my/blue)
-(set-face-attribute 'spaceline-evil-insert nil :background my/gray :foreground my/green)
-(set-face-attribute 'spaceline-evil-replace nil :background my/gray :foreground my/blue)
-(set-face-attribute 'spaceline-evil-motion nil :background my/gray :foreground my/blue)
-(set-face-attribute 'spaceline-evil-visual nil :background my/gray :foreground my/purple)
+(set-face-attribute
+ 'mode-line nil
+ :background my/gray)
+
+(set-face-attribute
+ 'mode-line-inactive nil
+ :foreground my/lgray
+ :background my/gray)
 #+END_SRC
 
-
-See:
-- https://dev.to/gonsie/beautifying-the-mode-line-3k10
-- https://github.com/TheBB/spaceline/issues/20#issuecomment-150488572
+No bold or italic texts and other font configurations
 
 #+BEGIN_SRC emacs-lisp
-(spaceline-define-segment version-control
-  (when vc-mode
-    (let ((gitlogo (replace-regexp-in-string "^ Git." "  " vc-mode)))
-      (powerline-raw (s-trim gitlogo)))))
+(set-face-attribute
+ 'doom-modeline-emphasis nil
+ :weight 'normal
+ :slant 'normal)
+
+(set-face-attribute
+ 'doom-modeline-bar nil)
+
+(set-face-attribute
+ 'doom-modeline-buffer-file nil
+ :weight 'normal)
+
+(set-face-attribute
+ 'doom-modeline-buffer-modified nil
+ :weight 'normal)
+
+(set-face-attribute
+ 'doom-modeline-buffer-major-mode nil
+ :foreground my/orange)
 #+END_SRC
 
-After making changes in spaceline segments, it needs to be recompiled, otherwise
-they don't take an effect.
+Configure fonts for the evil segment
 
 #+BEGIN_SRC emacs-lisp
-(spaceline-compile)
+(set-face-attribute
+ 'doom-modeline-evil-normal-state nil
+ :background my/gray
+ :foreground my/orange)
+
+(set-face-attribute
+ 'doom-modeline-evil-emacs-state nil
+ :background my/gray
+ :foreground my/blue)
+
+(set-face-attribute
+ 'doom-modeline-evil-insert-state nil
+ :background my/gray
+ :foreground my/green)
+
+(set-face-attribute
+ 'doom-modeline-evil-replace-state nil
+ :background my/gray
+ :foreground my/blue)
+
+(set-face-attribute
+ 'doom-modeline-evil-motion-state nil
+ :background my/gray
+ :foreground my/blue)
+
+(set-face-attribute
+ 'doom-modeline-evil-visual-state nil
+ :background my/gray
+ :foreground my/purple)
+#+END_SRC
+
+Custom segments will be defined further down in this config file. In
+order to not fail with undefined variable errors, let's just
+mock-define them for now.
+
+#+BEGIN_SRC emacs-lisp
+(doom-modeline-def-segment circe-lagmon t)
+(doom-modeline-def-segment circe-track t)
+#+END_SRC
+
+Segments in the modeline can be placed into 3 separate groups - left,
+middle, and right. The left group is somewhat non-customizable, here
+comes the configuration of the middle
+
+#+BEGIN_SRC emacs-lisp
+(setq frostyx/doom-modeline-middle-segments
+      '(workspace-name window-number modals matches follow buffer-info-simple
+        major-mode remote-host word-count parrot selection-info))
+#+END_SRC
+
+And lastly the right group
+
+#+BEGIN_SRC emacs-lisp
+(setq frostyx/doom-modeline-right-segments
+      '(compilation objed-state persp-name battery grip mu4e gnus
+        github debug repl lsp minor-modes input-method indent-info
+        buffer-encoding process vcs checker time circe-lagmon circe-track
+        buffer-position))
+#+END_SRC
+
+Define the main modeline
+
+#+BEGIN_SRC emacs-lisp
+(doom-modeline-def-modeline 'main
+  frostyx/doom-modeline-middle-segments
+  frostyx/doom-modeline-right-segments)
+#+END_SRC
+
+Define modeline for helm
+
+#+BEGIN_SRC emacs-lisp
+(doom-modeline-def-modeline 'helm
+  '(helm-buffer-id helm-number helm-follow helm-prefix-argument)
+  '(helm-help time))
+#+END_SRC
+
+Don't use any pre-defined modelines for various major modes. We will
+define our own later, though.
+
+#+BEGIN_SRC emacs-lisp
+(setq doom-modeline-mode-alist '())
 #+END_SRC
 
 ** Helm
@@ -4224,37 +4329,51 @@ might happen, when the channel names are too long but it's better than nothing.
 (setq tracking-max-mode-line-entries 3)
 #+END_SRC
 
-Define a custom spaceline segment for showing a list of channels with activity.
+Define a custom modeline segment for showing a list of channels with activity.
 See https://github.com/TheBB/spaceline/issues/39#issuecomment-218469366
 
 TODO we want better colors here, highlight needs to be red
 
 #+BEGIN_SRC emacs-lisp
-(spaceline-define-segment circe-track
+(doom-modeline-def-segment circe-track
   (when (and tracking-buffers
              (member major-mode my/circe-major-modes))
-    (tracking-status))
-  :priority 99)
+    (mapcar
+     (lambda (x)
+       (cond ((equal x ",") " , ")
+             ((equal x " [") " [ ")
+             ((equal x "] ") " ] ")
+             (t x)))
+     (tracking-status))))
 #+END_SRC
 
-Define a custom spaceline segment for showing the current IRC network lag.
+Define a custom modeline segment for showing the current IRC network lag.
 
 TODO When lag <= 0.1, show "online" in green color
 
 #+BEGIN_SRC emacs-lisp
-(spaceline-define-segment circe-lagmon
+(doom-modeline-def-segment circe-lagmon
   (when (and circe-lagmon-mode
              (member major-mode my/circe-major-modes))
-    (circe-lagmon-format-mode-line-entry))
-  :face other-face
-  :priority 99)
+    (circe-lagmon-format-mode-line-entry)))
 #+END_SRC
 
+Define a custom modeline for circe
+
 #+BEGIN_SRC emacs-lisp
-(spaceline-toggle-circe-track-on)
-(spaceline-toggle-circe-lagmon-on)
-(spaceline-spacemacs-theme 'circe-lagmon 'circe-track)
-(spaceline-compile)
+(doom-modeline-def-modeline 'frostyx-circe
+ (cl-set-difference frostyx/doom-modeline-middle-segments
+                    '(buffer-info-simple major-mode buffer-position))
+
+ (cl-set-difference frostyx/doom-modeline-right-segments
+                    '(buffer-position)))
+#+END_SRC
+
+And apply it for all circe major modes
+
+#+BEGIN_SRC emacs-lisp
+(dolist (mode my/circe-major-modes)
+  (add-to-list 'doom-modeline-mode-alist (cons mode 'frostyx-circe)))
 #+END_SRC
 
 Customize modeline colors for channels and personal messages
