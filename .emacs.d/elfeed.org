@@ -79,6 +79,7 @@ configuring something.
 *** https://sqrtminusone.xyz/posts/index.xml
 *** https://niklaseklund.gitlab.io/blog/index.xml
 *** https://ro-che.info/articles/rss.xml
+*** https://theevilskeleton.gitlab.io/feed.xml
 
 ** Gentoo
 
