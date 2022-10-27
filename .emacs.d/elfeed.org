@@ -80,6 +80,7 @@ configuring something.
 *** https://niklaseklund.gitlab.io/blog/index.xml
 *** https://ro-che.info/articles/rss.xml
 *** https://theevilskeleton.gitlab.io/feed.xml
+*** https://www.wilfred.me.uk/rss.xml
 
 ** Gentoo
 
