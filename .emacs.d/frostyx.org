@@ -2908,6 +2908,15 @@ Allow to add books under more nested headings
 (setq org-books-file-depth 3)
 #+END_SRC
 
+*** Systemd services
+
+For systemd services and unit files
+
+#+BEGIN_SRC emacs-lisp
+(use-package systemd
+  :ensure t)
+#+END_SRC
+
 * Writing
 
 First see some cool writing setups from other people:
