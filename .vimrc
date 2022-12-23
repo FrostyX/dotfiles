@@ -245,7 +245,7 @@ elseif hostname == "unused-4-222.brq.redhat.com"
 	highlight SpecialKey guifg=#4a4a59  " Tab and space character color
 	highlight SpecialKey guibg=#2d2d2d
 
-elseif hostname == "chromie" || hostname == "localhost.localdomain"
+elseif hostname == "chromie" || hostname == "localhost.localdomain" || hostname == "zeratul"
 	if terminal == "rxvt-xpm"
 		colorscheme base16-chalk
 	end
