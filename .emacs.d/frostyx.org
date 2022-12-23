@@ -3876,19 +3876,24 @@ See https://www.djcbsoftware.nl/code/mu/mu4e/Bookmarks.html
 (custom-reevaluate-setting 'mu4e-bookmarks)
 
 (add-to-list 'mu4e-bookmarks
-  '(:name "Red Hat shortcut"
+  '(:name "Red Hat"
     :query "date:1w.. and maildir:/redhat/INBOX/"
     :key ?r))
 
 (add-to-list 'mu4e-bookmarks
-  '(:name "Gmail shortcut"
+  '(:name "Gmail"
     :query "date:1w.. and maildir:/gmail/INBOX/"
     :key ?g))
 
 (add-to-list 'mu4e-bookmarks
-  '(:name "Seznam shortcut"
+  '(:name "Seznam"
     :query "date:1w.. and maildir:/seznam/INBOX/"
     :key ?s))
+
+(add-to-list 'mu4e-bookmarks
+  '(:name "Interesting"
+    :query mu4e-alert-interesting-mail-query
+    :key ?i))
 #+END_SRC
 
 *** Email accounts
