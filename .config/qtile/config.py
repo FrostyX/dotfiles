@@ -335,6 +335,7 @@ def create_screen(primary=False):
                 fun=get_layout_icon,
                 length=20,
                 foreground=base16_chalk["green"],
+                font="Font Awesome",
                 **style
             ),
             widget.Sep(**sep),
@@ -398,6 +399,7 @@ def create_screen(primary=False):
             widget.TextBox(
                 text=icons["temp"],
                 foreground=base16_chalk["yellow"],
+                font="Font Awesome",
                 **style
             ),
             widget.ThermalSensor(
@@ -413,6 +415,7 @@ def create_screen(primary=False):
             widget.TextBox(
                 text=icons["battery"],
                 foreground=base16_chalk["magenta"],
+                font="Font Awesome",
                 **style
             ),
             widget.Battery(
@@ -429,6 +432,7 @@ def create_screen(primary=False):
             widget.TextBox(
                 text=icons["light"],
                 foreground=base16_chalk["blue"],
+                font="Font Awesome",
                 **style
             ),
             widget.Backlight(
@@ -444,6 +448,7 @@ def create_screen(primary=False):
             widget.TextBox(
                 text=icons["volume"],
                 foreground=base16_chalk["green"],
+                font="Font Awesome",
                 **style
             ),
             widget.Volume(
@@ -458,6 +463,7 @@ def create_screen(primary=False):
             widget.TextBox(
                 text=icons["sync"],
                 foreground=base16_chalk["yellow"],
+                font="Font Awesome",
                 **style
             ),
             widget.CheckUpdates(
