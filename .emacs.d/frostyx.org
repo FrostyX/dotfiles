@@ -3854,6 +3854,16 @@ down the headers and still read it, but its annoying). This seems to help.
 (setq gnus-cite-parse-max-size 10000)
 #+END_SRC
 
+Render Google Calendar invitations as normal HTML emails. Otherwise there are no
+direct links to the calendar event.
+
+See https://github.com/djcb/mu/issues/857#issuecomment-1363498998
+
+#+BEGIN_SRC emacs-lisp
+(setq mm-automatic-display
+      (remove "text/calendar" mm-automatic-display))
+#+END_SRC
+
 *** Email queries
 
 We don't always want to dig through the entire mailbox but rather see a filtered
