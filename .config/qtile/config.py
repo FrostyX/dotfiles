@@ -432,8 +432,8 @@ def create_screen(primary=False):
                 **style
             ),
             widget.Backlight(
-                brightness_file="/sys/class/backlight/intel_backlight/actual_brightness",
-                max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness",
+                brightness_file="/sys/class/backlight/acpi_video0/actual_brightness",
+                max_brightness_file="/sys/class/backlight/acpi_video0/max_brightness",
                 foreground=base16_chalk["blue"],
                 **style
             ),
