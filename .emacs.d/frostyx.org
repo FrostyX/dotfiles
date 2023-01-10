@@ -2265,6 +2265,15 @@ Select a code block in a visual mode and press ~TAB~ to re-indent it
   "<tab>" #'indent-region)
 #+END_SRC
 
+When submitting packages to MELPA, they need to be checked using ~package-lint~
+
+See https://github.com/purcell/package-lint
+
+#+BEGIN_SRC emacs-lisp
+(use-package package-lint
+  :ensure t)
+#+END_SRC
+
 *** JSON
 
 #+BEGIN_SRC emacs-lisp
