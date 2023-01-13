@@ -1,3 +1,5 @@
+;; emacs -q --load ~/.emacs.d/minimal.el
+
 (require 'package)
 (setq package-archives
    '(("melpa" . "https://melpa.org/packages/")
