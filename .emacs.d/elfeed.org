@@ -26,6 +26,7 @@ tied to my day to day work-related tasks.
 *** https://tatica.org/feed/
 *** https://fedoramagazine.org/feed/
 *** https://mojefedora.cz/feed/
+*** https://quantum-integration.org/feeds/all.atom.xml
 
 ** Nerds
 
