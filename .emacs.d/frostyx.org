@@ -627,7 +627,8 @@ See http://frostyx.cz/posts/emacs-evil-set-option
 TODO ctrl+w hjkl is too slow
 
 #+BEGIN_SRC emacs-lisp
-(general-nmap
+(general-define-key
+ :states '(normal insert motion)
  "C-h" 'evil-window-left
  "C-j" 'evil-window-down
  "C-k" 'evil-window-up
