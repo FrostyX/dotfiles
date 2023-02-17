@@ -1271,6 +1271,7 @@ Press spacebar to spawn a main hydra window.
 
 #+BEGIN_SRC emacs-lisp
 (general-nmap "SPC" 'hydra-main/body)
+(general-mmap "SPC" 'hydra-main/body)
 #+END_SRC
 
 *** Additional Hydra packages
@@ -1547,6 +1548,7 @@ Press Shift+spacebar to spawn a hydra specific to the current major-mode
 
 #+BEGIN_SRC emacs-lisp
 (general-nmap "S-SPC" 'major-mode-hydra)
+(general-mmap "S-SPC" 'major-mode-hydra)
 #+END_SRC
 
 **** Org
