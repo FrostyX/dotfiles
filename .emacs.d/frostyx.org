@@ -869,6 +869,24 @@ See https://stackoverflow.com/a/7787941/3285282
 (setq Man-notify-method 'pushy)
 #+END_SRC
 
+Org agenda is disrespecting every rule I tried. Capture and calendar windows are
+being displayed in ~other-window~ no matter what. This awful hack fixes it.
+
+#+BEGIN_SRC emacs-lisp
+(defun switch-to-buffer-other-window (buffer-or-name &optional norecord)
+  (switch-to-buffer buffer-or-name norecord t))
+#+END_SRC
+
+Some commands (e.g. ~org-capture~) temporarily maximize the current window and
+then return back to the previous window configuration once they are done. It's
+only mildly annoying but annoying enough to introduce this uly hack. It breaks
+Evil ~W-o~ key binding but whatever.
+
+#+BEGIN_SRC emacs-lisp
+(defun delete-other-windows (&optional window interactive)
+  nil)
+#+END_SRC
+
 ** Ace window
 
 Upon calling, ~ace-window~ displays a number for each open window and allows to
