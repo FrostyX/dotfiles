@@ -5109,6 +5109,21 @@ But ... is it even worth it? ... Nope. It is fun though!
 
 Hint: Use ~M-x org-toggle-inline-images~ to see images in Emacs
 
+* Interesting packages
+I don't use these but they are worth checking out
+
+- https://gitlab.com/niklaseklund/dtache
+- https://karthinks.com/software/declickbait-elfeed/ (not a package yet)
+- https://github.com/yuya373/emacs-slack
+- https://github.com/SqrtMinusOne/elfeed-summary
+- https://github.com/emacs-evil/evil-cleverparens
+- https://github.com/karthink/elfeed-tube
+- https://github.com/fbkarsdorp/org-agenda-dashboard
+- https://github.com/sp1ff/elfeed-score
+- https://codeberg.org/akib/emacs-eat
+- https://github.com/jrblevin/deft
+- https://github.com/zevlg/telega.el
+
 * Resources
 ** Other people configs
 
