@@ -3502,6 +3502,15 @@ TODO
 - [ ] Prompt line continuity doesn't work (from last char, to the
   first on the next line by using right arrow)
 
+** dwim-shell-command
+
+See https://github.com/xenodium/dwim-shell-command
+
+#+BEGIN_SRC emacs-lisp
+(use-package dwim-shell-command
+  :ensure t)
+#+END_SRC
+
 ** Dtache
 
 https://gitlab.com/niklaseklund/dtache
