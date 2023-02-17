@@ -745,7 +745,7 @@ section.
 
 #+BEGIN_SRC emacs-lisp
 (general-define-key
- :states '(normal visual insert emacs)
+ :states '(normal visual insert emacs motion)
  "C-x l" 'evil-switch-to-windows-last-buffer)
 #+END_SRC
 
