@@ -1,4 +1,6 @@
 ;; emacs -q --load ~/.emacs.d/minimal.el
+;;
+;; For demos, you might want to `M-x load-theme RET ef-light'
 
 (require 'package)
 (setq package-archives
