@@ -2746,6 +2746,12 @@ with the rest of our theme.
 
 TODO it uses tabs! Don't use tabs for god sake
 
+I have some custom functions for RPM packaging.
+
+#+BEGIN_SRC emacs-lisp
+(load "~/.emacs.d/devel/frostyx-fedora.el")
+#+END_SRC
+
 *** PlantUML
 
 PlantUML is a language for describing UML diagrams such as Sequence
