@@ -152,3 +152,26 @@ Following websites unfortunatelly don't provide a RSS feed. Ideally, we want to
 contact them or file a RFE for implementing one.
 
 - https://whydoesitsuck.com/
+
+* Youtube                                                    :elfeed:youtube:
+
+Open a youtube video in the web browser and copy its URL. Then run
+~M-x elfeed-tube-add-feeds~, and paste the URL there. Then run
+~M-x elfeed-tube-add--copy~.
+
+** Games                                                          :games:wow:
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC9cM11yEZH_caN0b7tN9wFA][Cobrak]]
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCfeaD828rBBXgpaBP59XmjQ][Hansol]]
+** Movies                                                            :movies:
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCSJPFQdZwrOutnmSFYtbstA][The Critical Drinker]]
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC5T0tXJN5CrMZUEJuz4oovw][Nerdrotic]]
+** Politics                                                        :politics:
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCnQC_G5Xsjhp9fEJKuIcrSw][Ben Shapiro]]
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCO01ytfzgXYy4glnPJm4PPQ][Matt Walsh]]
+** Gym                                                                  :gym:
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCfQgsKhHjSyRLOp9mnffqVg][RP]]
+** IT                                                                    :it:
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCaSCt8s_4nfkRglWCvNSDrg][CodeAesthetic]]
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg][DistroTube]]
+** Lifestyle                                                      :lifestyle:
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCk9SqfJYu5HP5e2dfClpr0g][TNL]]
