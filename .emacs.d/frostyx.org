@@ -3430,6 +3430,16 @@ Install ~vterm~ package.
   :ensure t)
 #+END_SRC
 
+In comparison with external terminal emulator, there is a noticable lag when,
+ehm, doing things. Even a short output takes a bit longer to display and the lag
+is most noticable when e.g. sending ~C-c~ to kill the current command. Lowering
+the delay value should fix the issue but may cause a worse performance when
+receiving large bursts of data. We should keep that in mind.
+
+#+BEGIN_SRC emacs-lisp
+(setq vterm-timer-delay 0.01)
+#+END_SRC
+
 Running ~M-x vterm~, spawns a terminal buffer, and all consequent calls of
 ~M-x vterm~ doesn't spawn a new terminal, but jumps to the previous one. Thanks
 to ~multi-vterm~, we can have more of them.
