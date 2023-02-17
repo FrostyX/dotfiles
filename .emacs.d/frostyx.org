@@ -635,6 +635,18 @@ TODO ctrl+w hjkl is too slow
  "C-l" 'evil-window-right)
 #+END_SRC
 
+I hate that ~keyboard-escape-quit~ breaks the current window configuration and
+leaves only one window opened. As an Evil user, I press ~ESC~ thousands of times
+a day and sometimes it hapens that I press ~ESC ESC ESC~ and call that
+function. It's a prefix key, so it cannot be unbound the standard way.
+
+See https://emacs.stackexchange.com/questions/14755/how-to-remove-bindings-to-the-esc-prefix-key
+
+#+BEGIN_SRC emacs-lisp
+;; (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+(global-unset-key (kbd "ESC ESC ESC"))
+#+END_SRC
+
 TODO package manager key bindings, these needs to go somewhere else
 
 See https://www.reddit.com/r/emacs/comments/7dsm0j/how_to_get_evilmode_hjkl_to_work_inside_mx/
