@@ -2709,6 +2709,20 @@ Just some syntax highlighting for asciidoc manual pages.
   :ensure t)
 #+END_SRC
 
+*** RST
+
+#+BEGIN_SRC emacs-lisp
+(use-package rst
+  :ensure t)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'rst-level-1 nil :foreground my/purple :background nil)
+(set-face-attribute 'rst-level-2 nil :foreground my/purple :background nil)
+(set-face-attribute 'rst-level-3 nil :foreground my/purple :background nil)
+(set-face-attribute 'rst-level-4 nil :foreground my/purple :background nil)
+#+END_SRC
+
 *** RPM spec
 
 Install a package with support for RPM packaging and writing ~.spec~ files.
