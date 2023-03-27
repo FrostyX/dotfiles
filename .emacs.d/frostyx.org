@@ -4881,6 +4881,30 @@ Usage:
 org-jira-get-issues-by-board
 org-jira-refresh-issues-in-buffer
 
+** ChatGPT
+
+ChatGPT: https://chat.openai.com/chat
+
+See https://github.com/xenodium/chatgpt-shell
+
+#+BEGIN_SRC emacs-lisp
+(use-package chatgpt-shell
+  :quelpa (chatgpt-shell
+           :fetcher github
+           :repo "xenodium/chatgpt-shell"))
+#+END_SRC
+
+Create an API key here
+https://platform.openai.com/account/api-keys
+
+#+BEGIN_SRC bash
+pass insert openai/token
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq chatgpt-shell-openai-key (password-store-get "openai/token"))
+#+END_SRC
+
 ** Spotify
 
 For quick searches and control, ~spotify-helm-plus~ is the best available
