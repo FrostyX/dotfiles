@@ -1549,6 +1549,7 @@ Press Shift+spacebar to spawn a hydra specific to the current major-mode
 #+BEGIN_SRC emacs-lisp
 (general-nmap "S-SPC" 'major-mode-hydra)
 (general-mmap "S-SPC" 'major-mode-hydra)
+(general-emap "S-SPC" 'major-mode-hydra)
 #+END_SRC
 
 **** Org
@@ -1627,6 +1628,27 @@ Hydra menu for Dired file manager
   ("Away"
    (("o" dired-open-file "Open")
     ("v" my/dired-vlc-enqueue "Queue in VLC"))))
+#+END_SRC
+
+**** Vterm
+
+Hydra menu for Vterm
+
+#+BEGIN_SRC emacs-lisp
+(major-mode-hydra-define (vterm-mode)
+  (:color blue :quit-key ("q" "SPC") :title "Vterm" :idle 1.0)
+  ("Windows"
+   (("h" evil-window-left)
+    ("j" evil-window-down)
+    ("k" evil-window-up)
+    ("l" evil-window-right))
+
+   "Buffers"
+   ((";" my/smart-buffers-list)
+    ("," helm-buffers-list))
+
+   "Other"
+   (("s" frostyx/vterm-copy-mode))))
 #+END_SRC
 
 ** Which-key
@@ -3501,6 +3523,39 @@ TODO
 - [ ] ~x~ doesn't work, strange
 - [ ] Prompt line continuity doesn't work (from last char, to the
   first on the next line by using right arrow)
+*** Vterm without Evil
+
+Sadly, it is easier to use Vterm without Evil mode.
+
+#+BEGIN_SRC emacs-lisp
+(evil-set-initial-state 'vterm-mode 'emacs)
+#+END_SRC
+
+We can easily emulate Evil-like window switching.
+
+#+BEGIN_SRC emacs-lisp
+(general-emap
+  :keymaps 'vterm-mode-map
+  "C-c" 'vterm-send-C-c
+  "C-w h" 'evil-window-left
+  "C-w j" 'evil-window-down
+  "C-w k" 'evil-window-up
+  "C-w l" 'evil-window-right)
+#+END_SRC
+
+We want to enable Evil mode when going to ~vterm-copy-mode~
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/vterm-copy-mode ()
+  (interactive)
+  (if vterm-copy-mode
+      (progn
+        (vterm-copy-mode -1)
+        (evil-emacs-state))
+    (progn
+      (vterm-copy-mode)
+      (evil-normal-state))))
+#+END_SRC
 
 ** dwim-shell-command
 
