@@ -1648,7 +1648,8 @@ Hydra menu for Vterm
     ("," helm-buffers-list))
 
    "Other"
-   (("s" frostyx/vterm-copy-mode))))
+   (("s" frostyx/vterm-copy-mode)
+    ("t" frostyx/multi-vterm-named))))
 #+END_SRC
 
 ** Which-key
