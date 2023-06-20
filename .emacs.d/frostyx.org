@@ -1647,6 +1647,11 @@ Hydra menu for Vterm
    ((";" my/smart-buffers-list)
     ("," helm-buffers-list))
 
+   "Font size"
+   (("+" text-scale-increase)
+    ("-" text-scale-decrease)
+    ("0" (text-scale-set 0)))
+
    "Other"
    (("s" frostyx/vterm-copy-mode)
     ("t" frostyx/multi-vterm-named))))
