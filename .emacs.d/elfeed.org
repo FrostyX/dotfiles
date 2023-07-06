@@ -83,6 +83,7 @@ configuring something.
 *** https://ro-che.info/articles/rss.xml
 *** https://theevilskeleton.gitlab.io/feed.xml
 *** https://www.wilfred.me.uk/rss.xml
+*** https://johnhame.link/index.xml
 
 ** Gentoo
 
