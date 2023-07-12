@@ -5050,6 +5050,7 @@ pass insert openai/token
 
 #+BEGIN_SRC emacs-lisp
 (setq chatgpt-shell-openai-key (password-store-get "openai/token"))
+(setq dall-e-shell-openai-key (password-store-get "openai/token"))
 #+END_SRC
 
 ** Spotify
