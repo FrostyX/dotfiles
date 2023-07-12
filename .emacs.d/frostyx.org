@@ -3586,6 +3586,21 @@ Don't let Emacs eat common shell keyboard shotcuts
   "C-c" 'vterm-send-C-c)
 #+END_SRC
 
+The other way around, don't let vterm eat some keyboard shortcuts
+
+#+BEGIN_SRC emacs-lisp
+(general-unbind 'insert vterm-mode-map
+  "C-l"
+  "C-k")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+;; FIXME I need to change the key binding
+(general-nmap
+  :keymaps 'vterm-mode-map
+  "C-c l" 'vterm-clear)
+#+END_SRC
+
 Load a bunch of my functions
 
 #+BEGIN_SRC emacs-lisp
@@ -3597,6 +3612,8 @@ TODO
 - [ ] ~x~ doesn't work, strange
 - [ ] Prompt line continuity doesn't work (from last char, to the
   first on the next line by using right arrow)
+- [ ] ESC moves cursor to the right instead of to the left
+
 *** Vterm without Evil
 
 Sadly, it is easier to use Vterm without Evil mode.
