@@ -5282,6 +5282,10 @@ Hint: Use ~M-x org-toggle-inline-images~ to see images in Emacs
 * Interesting packages
 I don't use these but they are worth checking out
 
+- https://github.com/rougier/mastodon-alt
+- https://github.com/org-roam/org-roam-ui
+- https://github.com/minad/jinx
+- https://github.com/justbur/emacs-vdiff
 - https://gitlab.com/niklaseklund/dtache
 - https://karthinks.com/software/declickbait-elfeed/ (not a package yet)
 - https://github.com/yuya373/emacs-slack
