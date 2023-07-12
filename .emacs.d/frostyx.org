@@ -474,34 +474,8 @@ otherwise it doesn't work in ~org-mode~.
   (global-evil-leader-mode))
 #+END_SRC
 
-The code below is an example and not evaluated. I am thinking about
-using something like this instead of my Hydra setup.
-
-#+BEGIN_EXAMPLE emacs-lisp
-;; TODO motion keymap
-
-(general-create-definer leader-spc
-  :keymaps '(normal visual)
-  :prefix "SPC")
-
-(general-create-definer leader-eyebrowse
-  :keymaps '(normal visual)
-  :prefix "SPC E")
-
-(general-create-definer leader-window
-  :keymaps '(normal visual)
-  :prefix "SPC W")
-
-(leader-window
-  "" '(nil :which-key "Window management")
-  "s" '(ace-swap-window :which-key "Swap window"))
-
-(leader-eyebrowse
-  "" '(nil :which-key "Eyebrowse")
-  "e" 'eyebrowse-switch-to-window-config
-  "c" 'eyebrowse-create-named-window-config
-  "l" 'eyebrowse-last-window-config)
-#+END_EXAMPLE
+I am thinking about replacing my Hydra setup with General leader keys,
+see ~devel/frostyx-future.el~.
 
 ** Evil Mode
 
