@@ -4419,6 +4419,7 @@ Do not forget to kill circe and run it again after modifying
                     "#fedora-python"
                     "#fedora-haskell"
                     "#fedora-cs"
+                    "#fedora-apps"
                     "#copr-team"
                     "#tito"
                     "#emacs"
