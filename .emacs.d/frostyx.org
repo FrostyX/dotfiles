@@ -4412,6 +4412,26 @@ yet. We need to re-implement the whole displaying function.
       (insert "(" tags-str ")"))))
 #+END_SRC
 
+** RSS Youtube
+
+See https://github.com/karthink/elfeed-tube
+
+#+BEGIN_SRC emacs-lisp
+(use-package elfeed-tube
+  :ensure t
+  :after elfeed
+  :demand t
+  :config
+  (elfeed-tube-setup)
+
+  :bind (:map elfeed-show-mode-map
+         ("F" . elfeed-tube-fetch)
+         ([remap save-buffer] . elfeed-tube-save)
+         :map elfeed-search-mode-map
+         ("F" . elfeed-tube-fetch)
+         ([remap save-buffer] . elfeed-tube-save)))
+#+END_SRC
+
 ** IRC
 
 There are several Emacs IRC clients available (such as ERC, rcirc and others)
