@@ -4933,7 +4933,6 @@ It is also not necessary for messages sent by me to be red
 - I just don't want any ~ement-room-timestamp-header-format~ lines
 - We need automatical scroll of the rooms
 
-
 ** Database
 
 We can use ~psql~, for sure. But why leaving Emacs?
