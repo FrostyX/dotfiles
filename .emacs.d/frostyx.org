@@ -4239,6 +4239,32 @@ org-toggle-link-display~ to hide full links if needed. It would be also nice to
 hide/render the rest of the Org mode syntax. Once I finish this, I will create a
 simple launcher and possibly submit a PR for it.
 
+*** Mu4e modeline
+
+#+BEGIN_SRC emacs-lisp
+(use-package mu4e-alert
+  :ensure t)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq doom-modeline-mu4e t)
+(mu4e-alert-enable-mode-line-display)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq mu4e-alert-interesting-mail-query "(list:copr-devel.lists.fedorahosted.org OR from:msuchy@redhat.com OR from:praiskup@redhat.com OR from:schlupov@redhat.com OR from:jkyjovsk@redhat.com OR from:tdudlak@redhat.com OR from:fede@evolware.org) AND NOT flag:trashed AND date:2w.. AND flag:unread")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(doom-modeline-def-modeline 'frostyx-mu4e
+ frostyx/doom-modeline-middle-segments
+ (cl-adjoin 'mu4e frostyx/doom-modeline-right-segments))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'doom-modeline-mode-alist (cons 'mu4e-headers-mode 'frostyx-mu4e))
+#+END_SRC
+
 ** RSS
 
 Probably the best available RSS client for Emacs is elfeed. It allows
