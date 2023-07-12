@@ -13,3 +13,9 @@
           "--new"
           version)
     " ")))
+
+
+;; TODO frostyx/copr-build
+;; It will upload the current .spec or SRPM file to Copr
+;; It will pop up helm with all my projects to select in which project
+;; is should be built
