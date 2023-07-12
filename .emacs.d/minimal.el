@@ -1,6 +1,12 @@
 ;; emacs -q --load ~/.emacs.d/minimal.el
 ;;
-;; For demos, you might want to `M-x load-theme RET ef-light'
+;; For demos, you might want to:
+;;   `M-x load-theme RET ef-light'
+;;   `M-x auto-dim-other-buffers-mode'
+
+;; More ef themes:
+;; https://protesilaos.com/emacs/ef-themes-pictures
+;; (ef-day, ef-summer)
 
 (require 'package)
 (setq package-archives
