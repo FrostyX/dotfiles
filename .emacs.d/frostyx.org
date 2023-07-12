@@ -1099,6 +1099,7 @@ mock-define them for now.
 #+BEGIN_SRC emacs-lisp
 (doom-modeline-def-segment circe-lagmon t)
 (doom-modeline-def-segment circe-track t)
+(doom-modeline-def-segment frostyx-org-agenda-count t)
 #+END_SRC
 
 Segments in the modeline can be placed into 3 separate groups - left,
@@ -1108,14 +1109,15 @@ comes the configuration of the middle
 #+BEGIN_SRC emacs-lisp
 (setq frostyx/doom-modeline-middle-segments
       '(workspace-name window-number modals matches follow buffer-info-simple
-        major-mode remote-host word-count parrot selection-info))
+        major-mode remote-host word-count parrot selection-info
+        frostyx-org-agenda-count))
 #+END_SRC
 
 And lastly the right group
 
 #+BEGIN_SRC emacs-lisp
 (setq frostyx/doom-modeline-right-segments
-      '(compilation objed-state persp-name battery grip mu4e gnus
+      '(compilation objed-state persp-name battery grip gnus
         github debug repl lsp minor-modes input-method indent-info
         buffer-encoding process vcs checker time circe-lagmon circe-track
         buffer-position))
@@ -1541,7 +1543,8 @@ Hydra launcher for applications
 (pretty-hydra-define hydra-applications
   (:color blue :quit-key ("q" "SPC") :title "Applications" :idle 1.0)
   ("Launch"
-   (("r" elfeed "RSS (elfeed)")
+   (("a" (org-agenda nil "f") "Org agenda")
+    ("r" elfeed "RSS (elfeed)")
     ("t" frostyx/multi-vterm-named "Terminal (vterm)")
     ("w" eww "web (eww)")
     ("e" mu4e "email (mu4e)")
@@ -1660,6 +1663,28 @@ Hydra menu for Dired file manager
   ("Away"
    (("o" dired-open-file "Open")
     ("v" my/dired-vlc-enqueue "Queue in VLC"))))
+#+END_SRC
+
+**** Agenda
+
+Hydra menu for Org agenda
+
+#+BEGIN_SRC emacs-lisp
+(major-mode-hydra-define (org-agenda-mode)
+  (:color blue :quit-key ("q" "SPC") :title "Agenda" :idle 1.0)
+  ("Actions"
+   (("a" (org-agenda nil "f") "Agenda")
+    ("c" (org-capture) "Create a new inbox entry")
+    ("m" (org-agenda) "Menu"))
+
+   "List"
+   (("l" (org-todo-list) "List TODO items")
+    ("t" (frostyx/org-todo-list-priority "1") "List items for today")
+    ("w" (frostyx/org-todo-list-priority "2") "List items for this week")
+    ("s" (frostyx/org-todo-list-priority "3") "List items for next week")
+    ("f" (frostyx/org-todo-list-priority "4") "List items for the future")
+    ("d" (org-todo-list "DONE") "List finished items")
+    ("n" (frostyx/org-todo-list-without-priority ) "List items with no priority"))))
 #+END_SRC
 
 **** Vterm
@@ -2456,6 +2481,19 @@ https://www.gnu.org/software/emacs/refcards/pdf/orgcard.pdf
 Hint: see straightforward, yet comprehensive Org-Mode manual
 http://doc.norang.ca/org-mode.html
 
+Use Evil key bindings, of course.
+See https://github.com/Somelauw/evil-org-mode
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil-org
+  :ensure t
+  :after org
+  :hook (org-mode . (lambda () evil-org-mode))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+#+END_SRC
+
 Every larger document that is trying to look professionally should have
 a table of contents. Don't try to maintain it manually, it is the first
 step towards insanity. Use ~toc-org~ package instead.
@@ -2507,73 +2545,6 @@ be gray ... I mean, we don't say /grayed out/ for no reason.
 (set-face-attribute 'org-headline-done nil :foreground my/lgray)
 #+END_SRC
 
-Show agendas from these TODO files.
-
-#+BEGIN_SRC emacs-lisp
-(setq org-agenda-files '("~/Org/gtd/inbox.org"
-                         "~/Org/gtd/gtd.org"
-                         "~/Org/gtd/tickler.org"))
-#+END_SRC
-
-For the love of god, do not do ~\'reorganize-frame~, nor any other shenanigans.
-Why can't Emacs let me do my window management manually instead of trying to
-convince applications to behave more friendly one by one.
-
-#+BEGIN_SRC emacs-lisp
-(setq org-agenda-window-setup 'current-window)
-#+END_SRC
-
-I find the default agenda view too cluttered. Let's install ~org-super-agenda~
-which allows us to easily show custom groups of tasks (and display them in
-prettified as we want to).
-
-See https://github.com/alphapapa/org-super-agenda
-
-#+BEGIN_SRC emacs-lisp
-(use-package org-super-agenda
-  :ensure t
-  :config
-  (org-super-agenda-mode))
-#+END_SRC
-
-TODO this is my WIP implementation of super agenda
-
-#+BEGIN_SRC emacs-lisp
-(defun my/org-agenda-group-name (icon name)
-  (concat
-   (propertize (fontawesome icon)
-               'face '(:family "FontAwesome"))
-   " "
-   name))
-
-(defun my/org-agenda ()
-  (interactive)
-  (let ((org-agenda-span 'day)
-	(org-super-agenda-groups
-	 `((:name ,(my/org-agenda-group-name "star-o" "Next")
-		  :todo "NEXT")
-
-	   (:name ,(my/org-agenda-group-name "flash" "Important")
-		  :priority "A")
-
-	   (:name ,(my/org-agenda-group-name "thumb-tack" "Started")
-		  :todo "STARTED")
-
-	   (:name ,(my/org-agenda-group-name "clock-o" "Waiting")
-		  :todo "WAITING")
-
-	   (:name ,(my/org-agenda-group-name "check-square-o" "TODO")
-		  :todo "TODO")
-
-	   (:name ,(my/org-agenda-group-name "exclamation-triangle" "Blocked")
-		  :todo "BLOCKED")
-
-	   ;; TODO ideally show finished tasks as a motivation that
-	   ;; things are being done
-	   (:todo ("DONE" "CANCELLED")))))
-    (org-todo-list)))
-#+END_SRC
-
 The sequence of possible states for our TODO items. These are just basic ones, I
 am trying to keep this sequence as limited as possible. However, in case we need
 more complicated state management, we can add another sequences. This can be
@@ -2593,10 +2564,19 @@ See https://orgmode.org/manual/Multiple-sets-in-one-file.html#Multiple-sets-in-o
                   "CANCELLED(c)")))
 #+END_SRC
 
+It is really not neccessary to spawn a whole new window for TODO keyword
+selection. Just show them in a prompt. Also, we are /experts/ now.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-use-fast-todo-selection 'expert)
+#+END_SRC
+
+
 There are multiple ways to change a state of a TODO item under the cursor, but
 all of them are unnecessarily complicated for simply completing the items (which
 is the case 90% of times). We can use ~C-c C-t~ to select and switch a new
-state, or ~S-RIGHT S-LEFT~ to move in the sequence of states.
+state, or ~S-RIGHT S-LEFT~ to move in the sequence of states. If you modify the
+keywords, you will probably have to run ~org-mode-restart~ to reload them.
 
 See https://orgmode.org/manual/TODO-Basics.html
 
@@ -2633,12 +2613,87 @@ Let's have more colorful TODO keywords
       `(("TODO"      . (:foreground ,my/red))
         ("NEXT"      . (:foreground ,my/red))
         ("STARTED"   . (:foreground ,my/yellow))
-        ("WAITING"   . (:foreground ,my/lblue))
+        ("WAITING"   . (:foreground ,my/blue))
         ("BLOCKED"   . (:foreground ,my/red))
         ("DONE"      . (:foreground ,my/green))
         ("CANCELLED" . (:foreground ,my/green))))
 #+END_SRC
 
+**** Priorities
+
+Setup TODO item priorities. My usage, starting from the highest priority will be
+~Today -> This week -> Soon (Next week) -> Future~.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-highest-priority 1)
+(setq org-lowest-priority 4)
+(setq org-default-priority 4)
+#+END_SRC
+1
+The priorities are not displayed fancily enough. We want fancy priorities
+See https://github.com/harrybournis/org-fancy-priorities
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-fancy-priorities
+  :ensure t
+  :hook
+  (org-mode . org-fancy-priorities-mode))
+#+END_SRC
+
+We can use icons (which is more fancy) but I find these easier to read
+
+#+BEGIN_SRC emacs-lisp
+(setq org-fancy-priorities-list
+      '((?1 . "[TODAY]")
+        (?2 . "[WEEK]")
+        (?3 . "[SOON]")
+        (?4 . "[FUTURE]")))
+#+END_SRC
+
+And colors, of course
+
+#+BEGIN_SRC emacs-lisp
+(setq org-priority-faces
+      `((?1 . (:foreground ,my/orange))
+        (?2 . (:foreground ,my/blue))))
+#+END_SRC
+
+Add function for listing TODO items by their priority
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/org-todo-list-priority (priority)
+  (let ((org-super-agenda-groups
+         `(( :name ,(concat "Items with priority: " priority)
+             :priority ,priority)
+           ( :discard (:anything t)))))
+    (org-todo-list)))
+#+END_SRC
+
+And also for items without any priority. Org mode uses ~org-priority-default~
+for TODO items without explicitly defined priority. But ~org-ql~ and
+~org-super-agenda~ ignores it when fitlering by ~:priority~.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/org-todo-list-without-priority ()
+  (let ((org-super-agenda-groups
+         `(( :name "Items without priority"
+             :not (:priority> ,(number-to-string (+ org-priority-lowest 1))))
+           ( :discard (:anything t)))))
+    (org-todo-list)))
+#+END_SRC
+
+Also, it looks much better when items are sorted by their TODO keywords within
+each group.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-sorting-strategy
+      '((agenda habit-down time-up priority-down category-keep)
+        (todo todo-state-down priority-down category-keep)
+        (tags priority-down category-keep)
+        (search category-keep)))
+#+END_SRC
+
+**** Unsorted category
 TODO org-capture
 
 #+BEGIN_SRC emacs-lisp
@@ -2649,11 +2704,16 @@ TODO Capture templates for adding TODOs via ~org-agenda~
 
 #+BEGIN_SRC emacs-lisp
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+olp "~/org/gtd/gtd.org" "2020" "Week 45")
-         "* TODO %?\n  %i\n  %a")
-        ("i" "Inbox" entry (file+headline "~/org/gtd/inbox.org" "Tasks")
-         "* TODO %?\n  %i\n  %a")))
+      '(("t" "Todo" entry (file "~/Org/gtd/todo.org")
+         "* TODO %?\n  %i\n")
+
+        ("i" "Inbox" entry (file "~/Org/gtd/inbox.org")
+         "* TODO %?\n  %i\n")))
 #+END_SRC
+
+When a new /capture/ is stored, Emacs automatically bookmarks it
+https://www.reddit.com/r/orgmode/comments/u156dd/strange_orange_marker_on_captured_tasks/
+We could make a use of it.
 
 Install helm support for Org files. The main feature is
 ~helm-org-in-buffer-headings~ that provides a navigation based on header names.
@@ -2670,6 +2730,156 @@ https://github.com/emacs-helm/helm-org/issues/27
 
 #+BEGIN_SRC emacs-lisp
 (setq helm-org-format-outline-path t)
+#+END_SRC
+
+**** Archiving
+
+I have a custom archiving function
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/org-archive-subtree ()
+  (interactive)
+  (let ((org-archive-location
+         (format-time-string "archive.org::* %Y - Week #%W")))
+    (org-archive-subtree)))
+#+END_SRC
+
+Let's bind it to some key
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap
+  :keymaps 'org-mode-map
+  "ga" 'frostyx/org-archive-subtree)
+#+END_SRC
+
+**** Org Agenda
+
+Show agendas from these TODO files.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-files '("~/Org/gtd/inbox.org"
+                         "~/Org/gtd/todo.org"))
+#+END_SRC
+
+For the love of god, do not do ~\'reorganize-frame~, nor any other shenanigans.
+Why can't Emacs let me do my window management manually instead of trying to
+convince applications to behave more friendly one by one.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-window-setup 'current-window)
+#+END_SRC
+
+I have some agenda development going on, now it' probably a good time to load it
+
+#+BEGIN_SRC emacs-lisp
+(load "~/.emacs.d/devel/frostyx-org-agenda.el")
+#+END_SRC
+
+I find the default agenda view too cluttered. Let's install ~org-super-agenda~
+which allows us to easily show custom groups of tasks (and display them in
+prettified as we want to).
+
+See https://github.com/alphapapa/org-super-agenda
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-super-agenda
+  :ensure t
+  :config
+  (org-super-agenda-mode))
+#+END_SRC
+
+Super agenda breaks some Evil key bindings. Let's fix it.
+see https://github.com/alphapapa/org-super-agenda/issues/50#issuecomment-821448607
+
+#+BEGIN_SRC emacs-lisp
+(setq org-super-agenda-header-map (make-sparse-keymap))
+#+END_SRC
+
+Now the actual agenda
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/org-agenda-group (icon name)
+  (concat (all-the-icons-faicon icon) " " name))
+
+(setq org-agenda-custom-commands
+      '(("f" "FrostyX's agenda view"
+         ((alltodo
+           ""
+           ((org-agenda-overriding-header
+             (format-time-string "Week #%W"))
+            (org-super-agenda-groups
+             `(( :name ,(frostyx/org-agenda-group
+                         "bookmark" "As soon as possible:")
+                 :and ( :todo ("TODO" "NEXT" "STARTED")
+                        :priority "1"))
+
+               ( :name ,(frostyx/org-agenda-group
+                         "calendar" "This week:")
+                 :and ( :todo ("TODO" "STARTED")
+                        :priority>= "2"
+                        :not (:file-path "inbox")))
+
+               ( :name ,(frostyx/org-agenda-group
+                         "clock-o" "Waiting:")
+
+                 :and ( :todo ("WAITING" "BLOCKED")
+                        :not (:priority< "4"))
+                 :transformer
+                 (--> it
+                      (replace-regexp-in-string "\\[#[2-4]\\] " "" it)))
+
+               ( :name ,(frostyx/org-agenda-group
+                         "folder" "Needs triage:")
+                 :and ( :todo "TODO"
+                        :file-path "inbox")
+                 :transformer
+                 (--> it
+                      (s-replace "TODO " "" it)))
+
+               (:discard (:anything t))))))))))
+#+END_SRC
+
+Update the ~todo~ prefix to not show the org file at the beginning of the each
+TODO entry.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-prefix-format
+      '((agenda . " %i %-12:c%?-12t% s")
+        (todo . " - ")
+        (tags . " %i %-12:c")
+        (search . " %i %-12:c")))
+#+END_SRC
+
+I want a custom modeline for agenda.
+
+#+BEGIN_SRC emacs-lisp
+(doom-modeline-def-modeline 'frostyx-org-agenda
+ (cl-set-difference frostyx/doom-modeline-middle-segments
+                    '(buffer-info-simple major-mode buffer-position))
+
+ (cl-set-difference frostyx/doom-modeline-right-segments
+                    '(buffer-position)))
+
+
+(add-to-list 'doom-modeline-mode-alist
+             (cons 'org-agenda-mode 'frostyx-org-agenda))
+#+END_SRC
+
+By default ~org-agenda~ uses space for jumping to Org mode files,
+we want to unbind that so that hydra works.
+
+#+BEGIN_SRC emacs-lisp
+(general-unbind 'motion org-agenda-mode-map
+  "SPC"
+  "S-SPC")
+#+END_SRC
+
+Automatically save agenda org files when refreshing or quitting the agenda. How
+is that not a default.
+
+#+BEGIN_SRC emacs-lisp
+(advice-add 'org-agenda-redo :after 'org-save-all-org-buffers)
+(advice-add 'org-agenda-quit :after 'org-save-all-org-buffers)
 #+END_SRC
 
 **** Pomodoro
