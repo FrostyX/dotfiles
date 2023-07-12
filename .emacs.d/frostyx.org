@@ -2319,6 +2319,18 @@ See https://github.com/purcell/package-lint
   :ensure t)
 #+END_SRC
 
+Browsing Ansible documentation in Emacs sounds like a good idea. Just
+press ~C-c ?~.
+
+See https://github.com/emacsorphanage/ansible-doc
+
+#+BEGIN_SRC emacs-lisp
+(use-package ansible-doc
+  :ensure t
+  :hook
+  (yaml-mode . #'ansible-doc-mode))
+#+END_SRC
+
 *** Elm
 
 Elm command line tools (such as ~elm-format~) are not properly packaged in Fedora,
