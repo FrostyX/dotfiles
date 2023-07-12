@@ -903,10 +903,13 @@ Get rid of menu, scrollbars, toolbars and everything that can be clicked on.
 (defun frostyx/set-default-font (size)
   (set-face-attribute
    'default nil
-   :family "vera sans"
+   :family "Source Code Pro"
+   :foundry "ADBO"
    :height size
    :weight 'normal
-   :width 'normal))
+   :width 'normal
+   :slant 'normal
+   :foreground (plist-get base16-chalk-theme-colors :base05)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -3762,7 +3765,7 @@ affect other packages.
 #+BEGIN_SRC emacs-lisp
 (set-face-attribute
   'variable-pitch nil
-  :family "vera sans"
+  :family "bitstream vera sans mono"
   :height 90
   :weight 'normal
   :width 'normal
