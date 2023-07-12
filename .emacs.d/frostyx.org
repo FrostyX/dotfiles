@@ -1308,7 +1308,7 @@ Hydra main entry-point allowing us acces to other hydras.
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-main
-  (:color blue :quit-key ("q" "SPC") :title "Hydra")
+  (:color blue :quit-key ("q" "SPC") :title "Hydra" :idle 1.0)
   ("Misc"
    (("m" major-mode-hydra "major mode")
     ("a" hydra-applications/body "applications")
@@ -1359,7 +1359,7 @@ Hydra definition for documentation and helper functions.
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-help
-  (:color blue :quit-key ("q" "SPC") :title "Help")
+  (:color blue :quit-key ("q" "SPC") :title "Help" :idle 1.0)
   ("Help"
    (("h" #'help "help"))
 
@@ -1378,7 +1378,7 @@ Hydra definitions useful for presentations.
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-presentations
-  (:color blue :quit-key ("q" "SPC") :title "Presentations")
+  (:color blue :quit-key ("q" "SPC") :title "Presentations" :idle 1.0)
   ("Actions"
    (("e" frostyx/presentation-mode-start "Enable / Start")
     ("d" frostyx/presentation-mode-stop "Disable / Stop")
@@ -1390,7 +1390,7 @@ Hydra definitions for ~projectile~ package.
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-project
-  (:color blue :quit-key ("q" "SPC") :title "Project Management")
+  (:color blue :quit-key ("q" "SPC") :title "Project Management" :idle 1.0)
   ("Actions"
    (("d" projectile-discover-projects-in-search-path "discover new projects"))))
 #+END_SRC
@@ -1401,7 +1401,7 @@ Hydra definitions for Eyebrowse commands.
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-eyebrowse
-  (:color blue :quit-key ("q" "SPC") :title "Presentations")
+  (:color blue :quit-key ("q" "SPC") :title "Presentations" :idle 1.0)
   ("Eyebrowse"
    (("e" eyebrowse-switch-to-window-config "Switch to config")
     ("l" eyebrowse-last-window-config "Switch to the latest window config")
@@ -1416,7 +1416,7 @@ Hydra definition for bookmarks management.
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-window
-  (:color blue :quit-key ("q" "SPC") :title "Window management")
+  (:color blue :quit-key ("q" "SPC") :title "Window management" :idle 1.0)
   ("Ace window"
    (("s" ace-swap-window "Swap window"))))
 #+END_SRC
@@ -1427,7 +1427,7 @@ Hydra definition for ~dired~ package.
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-dired
-  (:color blue :quit-key ("q" "SPC") :title "Dired")
+  (:color blue :quit-key ("q" "SPC") :title "Dired" :idle 1.0)
   ("Open in"
    (("." dired-jump "current directory")
     ("~" (lambda () (interactive) (dired "~/")) "home directory")
@@ -1441,7 +1441,7 @@ Hydra definition for bookmarks management.
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-bookmarks
-  (:color blue :quit-key ("q" "SPC") :title "Bookmarks")
+  (:color blue :quit-key ("q" "SPC") :title "Bookmarks" :idle 1.0)
   ("Bookmarks"
    (("c" bookmark-set "Create a bookmark")
     ("l" helm-bookmarks "List and jump bookmarks")
@@ -1454,7 +1454,7 @@ Hydra definition for ~magit~ package.
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-magit
-  (:color blue :quit-key ("q" "SPC") :title "Magit")
+  (:color blue :quit-key ("q" "SPC") :title "Magit" :idle 1.0)
   ("Open in"
    (("g" magit-status "magit")
     ("b" magit-branch-checkout))))
@@ -1466,7 +1466,7 @@ Hydra definition for ~LSP~.
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-lsp
-  (:color blue :quit-key ("q" "SPC") :title "Magit")
+  (:color blue :quit-key ("q" "SPC") :title "Magit" :idle 1.0)
   ("Server"
    (("w" lsp-describe-session "Describe session"))
 
@@ -1491,7 +1491,7 @@ Hydra definition for flycheck or other linter
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-linter
-  (:color blue :quit-key ("q" "SPC") :title "Linter")
+  (:color blue :quit-key ("q" "SPC") :title "Linter" :idle 1.0)
   ("Flycheck"
    (("v" flycheck-verify-setup "verify setup")
     ("t" flycheck-mode "toggle on/off"))
@@ -1510,7 +1510,7 @@ Hydra launcher for applications
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-applications
-  (:color blue :quit-key ("q" "SPC") :title "Applications")
+  (:color blue :quit-key ("q" "SPC") :title "Applications" :idle 1.0)
   ("Launch"
    (("r" elfeed "RSS (elfeed)")
     ("t" frostyx/multi-vterm-named "Terminal (vterm)")
@@ -1525,7 +1525,7 @@ Hydra for configuration/settings/toggle options
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-configuration
-  (:color blue :quit-key ("q" "SPC") :title "Configuration")
+  (:color blue :quit-key ("q" "SPC") :title "Configuration" :idle 1.0)
   ("Vertical Line"
    (("v" turn-off-fci-mode "No vertical line")
     ("6" (my/colorcolumn 60) "60 characters")
@@ -1559,7 +1559,7 @@ Press Shift+spacebar to spawn a hydra specific to the current major-mode
 
 #+BEGIN_SRC emacs-lisp
 (major-mode-hydra-define org-mode
-  (:color blue :quit-key ("q" "SPC") :title "Org mode")
+  (:color blue :quit-key ("q" "SPC") :title "Org mode" :idle 1.0)
   ("Actions"
    (("e" eval-last-sexp "Eval")
     ("t" my/org-todo-done "Mark TODO item as done")
@@ -1580,7 +1580,7 @@ Press Shift+spacebar to spawn a hydra specific to the current major-mode
 
 #+BEGIN_SRC emacs-lisp
 (major-mode-hydra-define python-mode
-  (:color blue :quit-key ("q" "SPC") :title "Python mode")
+  (:color blue :quit-key ("q" "SPC") :title "Python mode" :idle 1.0)
   ("Actions"
    (("d" elpy-doc "Show documentation")
     ("l" hydra-linter/body "Linter"))))
@@ -1590,7 +1590,7 @@ Press Shift+spacebar to spawn a hydra specific to the current major-mode
 
 #+BEGIN_SRC emacs-lisp
 (major-mode-hydra-define markdown-mode
-  (:color blue :quit-key ("q" "SPC") :title "Markdown mode")
+  (:color blue :quit-key ("q" "SPC") :title "Markdown mode" :idle 1.0)
   ("Actions"
    (("p" markdown-preview "Preview markdown in external web browser"))))
 #+END_SRC
@@ -1601,7 +1601,7 @@ Lisp interaction mode, aka ~*scratch*~ buffer.
 
 #+BEGIN_SRC emacs-lisp
 (major-mode-hydra-define (emacs-lisp-mode lisp-interaction-mode)
-  (:color blue :quit-key ("q" "SPC") :title "Lisp interaction mode")
+  (:color blue :quit-key ("q" "SPC") :title "Lisp interaction mode" :idle 1.0)
   ("Actions"
    (("e" eval-defun "Evaluate this function")
     ("p" eval-print-last-sexp "Evaluate and print to the buffer"))))
@@ -1613,7 +1613,7 @@ Hydra menu for Circe IRC client
 
 #+BEGIN_SRC emacs-lisp
 (major-mode-hydra-define (circe-channel-mode circe-server-mode circe-query-mode)
-  (:color blue :quit-key ("q" "SPC") :title "Circe")
+  (:color blue :quit-key ("q" "SPC") :title "Circe" :idle 1.0)
   ("Away"
    (("c" (circe-command-GAWAY nil) "Clear away status")
     ("1" (circe-command-GAWAY "Training, I will be back within two hours") "Gym")
@@ -1627,7 +1627,7 @@ Hydra menu for Dired file manager
 
 #+BEGIN_SRC emacs-lisp
 (major-mode-hydra-define (dired-mode)
-  (:color blue :quit-key ("q" "SPC") :title "Dired")
+  (:color blue :quit-key ("q" "SPC") :title "Dired" :idle 1.0)
   ("Away"
    (("o" dired-open-file "Open")
     ("v" my/dired-vlc-enqueue "Queue in VLC"))))
@@ -5067,7 +5067,7 @@ Let's add a hydra menu, so we don't have to remember the commands or shotcuts.
 
 #+BEGIN_SRC emacs-lisp
 (pretty-hydra-define hydra-spotify
-  (:color blue :quit-key ("q" "SPC") :title "Spotify")
+  (:color blue :quit-key ("q" "SPC") :title "Spotify" :idle 1.0)
   ("Search"
    (("s" helm-spotify-plus "Search in helm"))
 
