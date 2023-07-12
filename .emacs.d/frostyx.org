@@ -3634,6 +3634,17 @@ We can easily emulate Evil-like window switching.
   "C-w l" 'evil-window-right)
 #+END_SRC
 
+A quick access to scrolling and copy mode
+
+#+BEGIN_SRC emacs-lisp
+;; (global-unset-key (kbd "C-s"))
+
+(general-define-key
+ :keymaps '(vterm-mode-map vterm-copy-mode-map)
+ "C-s" 'frostyx/vterm-copy-mode)
+#+END_SRC
+
+
 We want to enable Evil mode when going to ~vterm-copy-mode~
 
 #+BEGIN_SRC emacs-lisp
