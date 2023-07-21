@@ -15,6 +15,10 @@ alias undo="git reset --soft HEAD~1"
 alias killjobs="for x in `jobs -p`; do kill -9 $x; done"
 alias youtube-mp3="youtube-dl --extract-audio --audio-format mp3"
 
+# TODO Use this instead
+# https://wiki.archlinux.org/title/Session_lock
+alias suspend="i3lock -i ~/.dotfiles/.config/qtile/img/bsod.png && systemctl suspend"
+
 
 singlehead () {
     cmd="xrandr"
