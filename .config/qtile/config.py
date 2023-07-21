@@ -73,7 +73,8 @@ if hostname == "chromie":
     # https://github.com/FrostyX/qtile-screenshot/blob/master/qtile-screenshot.py
 
 elif hostname in ["alarak", "zeratul"]:
-    terminal = "urxvt256c -e tmux"
+    # terminal = "urxvt256c -e tmux"
+    terminal = "alacritty -e tmux"
     lock = "i3lock -i /home/jkadlcik/.dotfiles/.config/qtile/img/bsod.png"
 
     # The pactl commands sometimes work, sometimes doesn't,
