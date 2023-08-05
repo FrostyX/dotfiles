@@ -85,6 +85,7 @@ configuring something.
 *** https://theevilskeleton.gitlab.io/feed.xml
 *** https://www.wilfred.me.uk/rss.xml
 *** https://johnhame.link/index.xml
+*** https://mayacostantini.github.io/feed.xml
 
 ** Gentoo
 
