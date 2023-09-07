@@ -28,7 +28,7 @@ tied to my day to day work-related tasks.
 *** https://fedoramagazine.org/feed/
 *** https://mojefedora.cz/feed/
 *** https://quantum-integration.org/feeds/all.atom.xml
-
+*** [[https://www.winglemeyer.org/feed.xml][Brian "bex" Exelbierd]]
 ** Nerds
 
 I found them somewhere on the internet. I have no idea who they are. But they
