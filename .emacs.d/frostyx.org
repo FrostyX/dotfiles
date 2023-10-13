@@ -297,7 +297,7 @@ We often want to use Quelpa for our own patched versions of packages that are
 otherwise available and previously installed from MELPA.
 
 #+BEGIN_SRC emacs-lisp
-(setq quelpa-upgrade-p t)
+;; (setq quelpa-upgrade-p t)
 #+END_SRC
 
 ** System packages
