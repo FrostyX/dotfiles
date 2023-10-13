@@ -5629,6 +5629,8 @@ Hint: Use ~M-x org-toggle-inline-images~ to see images in Emacs
 * Interesting packages
 I don't use these but they are worth checking out
 
+- https://github.com/licht1stein/obsidian.el
+- https://github.com/alphapapa/pocket-reader.el
 - https://github.com/rougier/mastodon-alt
 - https://github.com/org-roam/org-roam-ui
 - https://github.com/minad/jinx
