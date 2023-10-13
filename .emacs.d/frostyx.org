@@ -829,6 +829,23 @@ based on the default Emacs theme.
           my/brown "brown"))
 #+END_SRC
 
+* Frame management
+
+It is annoying to manually setup my PIM frame
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/make-pim-frame ()
+  (interactive)
+  (select-frame-set-input-focus (make-frame))
+  (switch-to-buffer "*scratch*")
+  (evil-window-vsplit)
+  (evil-window-vsplit)
+  (evil-window-left 1)
+  (evil-window-split)
+  (evil-window-left 1)
+  (evil-window-split))
+#+END_SRC
+
 * Window management
 ** Window rules
 
