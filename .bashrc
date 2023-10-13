@@ -78,6 +78,11 @@ pyclean () {
     sudo find . -type d -name "__pycache__" -delete
 }
 
+pulseaudio-unfuck() {
+    # https://knowledgebase.frame.work/fedora-audio-troubleshooting-guide-BJAe1Kr0o
+    systemctl --user restart wireplumber pipewire pipewire-pulse
+}
+
 
 make_prompt () {
     default="\[\e[0m\]"
