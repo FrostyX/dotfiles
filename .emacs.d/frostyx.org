@@ -5080,6 +5080,17 @@ to connect to the Fedora account from ement.
 Use ~M-x ement-connect~ to open the client.
 Use ~M-x ement-disconnect~ for quitting.
 
+I want a simple command for connecting to Matrix
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/ement-connect ()
+  (interactive)
+  (ement-connect
+   :user-id "@frostyx:matrix.org"
+   :password (password-store-get "matrix/frostyx@matrix.org")))
+#+END_SRC
+
+
 *** Matrix rooms
 
 Don't display room icons in the top line
