@@ -1,5 +1,13 @@
 ;; https://crontab.guru/
 
+;; Great demo for transient
+;; https://github.com/positron-solutions/transient-showcase/blob/master/transient-showcase.el
+;;
+;; (use-package transient-showcase
+;;   :quelpa (transient-showcase
+;;            :fetcher github
+;;            :repo "positron-solutions/transient-showcase"))
+
 
 ;; TODO Theese need custom reader. It needs to allow *, -, /, and comma.
 
