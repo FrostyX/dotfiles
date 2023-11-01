@@ -1972,6 +1972,13 @@ Let's define a function which will color a given column
   (set-fill-column column))
 #+END_SRC
 
+The ~fill-column-mode~ shouldn't be used, we now have
+~display-fill-column-indicator-mode~ built in the Emacs itself.
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'fill-column-indicator nil :foreground my/lgray)
+#+END_SRC
+
 It is often useful to open the currently viewed buffer or lines selection in the
 web browser.
 
