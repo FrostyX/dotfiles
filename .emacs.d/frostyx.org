@@ -4323,8 +4323,8 @@ See https://www.djcbsoftware.nl/code/mu/mu4e/Bookmarks.html
     :key ?s))
 
 (add-to-list 'mu4e-bookmarks
-  '(:name "Interesting"
-    :query mu4e-alert-interesting-mail-query
+  `(:name "Interesting"
+    :query ,mu4e-alert-interesting-mail-query
     :key ?i))
 #+END_SRC
 
