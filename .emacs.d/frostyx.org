@@ -1176,6 +1176,14 @@ define our own later, though.
 )
 #+END_SRC
 
+Helm introduced some "Emacs Command History" section in ~M-x~ and it
+doesn't automatically move cursor to the "Emacs Commands" section when
+simply pressing down arrow. This fixes it.
+
+#+BEGIN_SRC emacs-lisp
+(setq helm-move-to-line-cycle-in-source nil)
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp
 (use-package helm-posframe
   :ensure t
