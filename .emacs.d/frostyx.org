@@ -2806,7 +2806,7 @@ Now the actual agenda
 
 #+BEGIN_SRC emacs-lisp
 (defun frostyx/org-agenda-group (icon name)
-  (concat (all-the-icons-faicon icon) " " name))
+  (concat (all-the-icons-octicon icon) " " name))
 
 (setq org-agenda-custom-commands
       '(("f" "FrostyX's agenda view"
@@ -2827,7 +2827,7 @@ Now the actual agenda
                         :not (:file-path "inbox")))
 
                ( :name ,(frostyx/org-agenda-group
-                         "clock-o" "Waiting:")
+                         "clock" "Waiting:")
 
                  :and ( :todo ("WAITING" "BLOCKED")
                         :not (:priority< "4"))
@@ -2836,7 +2836,7 @@ Now the actual agenda
                       (replace-regexp-in-string "\\[#[2-4]\\] " "" it)))
 
                ( :name ,(frostyx/org-agenda-group
-                         "folder" "Needs triage:")
+                         "file-directory" "Needs triage:")
                  :and ( :todo "TODO"
                         :file-path "inbox")
                  :transformer
