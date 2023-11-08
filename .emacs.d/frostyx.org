@@ -4277,6 +4277,20 @@ pretty but very often it just shows black text on black background.
 (setq shr-use-colors nil)
 #+END_SRC
 
+Please, normal font size.
+
+#+BEGIN_SRC emacs-lisp
+;; TODO Use the default face attributes, don't redefine them
+(set-face-attribute
+ 'shr-text nil
+ :family "Source Code Pro"
+ :foundry "ADBO"
+ :weight 'normal
+ :width 'normal
+ :slant 'normal
+ :height 90)
+#+END_SRC
+
 Occasionally, when I open an email (maybe one in twenty emails), Emacs hangs
 forever, while trying to load the message. I am able to press ~ctrl+g~ and then
 immediatelly, a non-rendered version of the message is displayed (I can scroll
