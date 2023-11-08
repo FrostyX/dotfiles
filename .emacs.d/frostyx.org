@@ -4319,6 +4319,10 @@ thing.
 See https://www.djcbsoftware.nl/code/mu/mu4e/Bookmarks.html
 
 #+BEGIN_SRC emacs-lisp
+(setq mu4e-alert-interesting-mail-query "(list:copr-devel.lists.fedorahosted.org OR from:msuchy@redhat.com OR from:praiskup@redhat.com OR from:schlupov@redhat.com OR from:jkyjovsk@redhat.com OR from:tdudlak@redhat.com OR from:fede@evolware.org) AND NOT flag:trashed AND date:2w.. AND flag:unread")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
 (custom-reevaluate-setting 'mu4e-bookmarks)
 
 (add-to-list 'mu4e-bookmarks
@@ -4487,10 +4491,6 @@ simple launcher and possibly submit a PR for it.
 #+BEGIN_SRC emacs-lisp
 (setq doom-modeline-mu4e t)
 (mu4e-alert-enable-mode-line-display)
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(setq mu4e-alert-interesting-mail-query "(list:copr-devel.lists.fedorahosted.org OR from:msuchy@redhat.com OR from:praiskup@redhat.com OR from:schlupov@redhat.com OR from:jkyjovsk@redhat.com OR from:tdudlak@redhat.com OR from:fede@evolware.org) AND NOT flag:trashed AND date:2w.. AND flag:unread")
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
