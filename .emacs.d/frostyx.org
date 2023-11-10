@@ -3876,6 +3876,16 @@ We want to enable Evil mode when going to ~vterm-copy-mode~
       (evil-normal-state))))
 #+END_SRC
 
+** Eshell
+
+See https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'eshell-mode-hook (lambda () (setenv "TERM" "xterm-256color")))
+#+END_SRC
+
+TODO Probably remap TAB to whatever C-n is
+
 ** dwim-shell-command
 
 See https://github.com/xenodium/dwim-shell-command
