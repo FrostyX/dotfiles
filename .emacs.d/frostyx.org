@@ -5419,6 +5419,24 @@ See https://codeberg.org/martianh/mastodon.el
 (setq mastodon-active-user "FrostyX")
 #+END_SRC
 
+** Pocket reader
+
+I want to read in the morning. On my phone. In my bed. Yes, I am a
+lazy piece of shit.
+
+See https://getpocket.com/saves
+
+There is a nice Emacs client for Pocket
+https://github.com/alphapapa/pocket-reader.el
+
+#+BEGIN_SRC emacs-lisp
+(use-package pocket-reader
+  :ensure t)
+#+END_SRC
+
+I want to write some automation to streamline interesting articles
+from Elfeed to Pocket.
+
 ** Slack
 
 #+BEGIN_SRC emacs-lisp
