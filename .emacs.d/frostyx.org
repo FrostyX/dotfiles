@@ -3904,6 +3904,16 @@ See https://www.emacswiki.org/emacs/EshellPrompt
 (setq eshell-prompt-function #'frostyx/eshell-prompt)
 #+END_SRC
 
+We want multiple terminals
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/eshell-named ()
+  (interactive)
+  (eshell)
+  (rename-buffer
+   (concat "*eshell* " (read-string "Name: "))))
+#+END_SRC
+
 ** dwim-shell-command
 
 See https://github.com/xenodium/dwim-shell-command
