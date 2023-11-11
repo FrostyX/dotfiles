@@ -3886,6 +3886,24 @@ See https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/
 
 TODO Probably remap TAB to whatever C-n is
 
+I like my bash prompt and it is also less confusing for others.
+
+See https://www.emacswiki.org/emacs/EshellPrompt
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/eshell-prompt ()
+  (let ((path (if (string= (eshell/pwd) (getenv "HOME"))
+	              "~" (eshell/basename (eshell/pwd))))
+        (symbol (if (= (user-uid) 0) "#" "$"))
+        (color (if (= eshell-last-command-status 0) my/green my/red)))
+    (concat
+	 "[" (user-login-name) "@" (system-name) " " path "]"
+	 (propertize symbol 'face `(:foreground ,color)) " ")))
+
+(setq eshell-prompt-regexp "^[^#$\n]*[#$] ")
+(setq eshell-prompt-function #'frostyx/eshell-prompt)
+#+END_SRC
+
 ** dwim-shell-command
 
 See https://github.com/xenodium/dwim-shell-command
