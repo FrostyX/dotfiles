@@ -4927,9 +4927,11 @@ See https://github.com/TheBB/spaceline/issues/39#issuecomment-218469366
 TODO we want better colors here, highlight needs to be red
 
 #+BEGIN_SRC emacs-lisp
+(setq frostyx/tracking-major-modes my/circe-major-modes)
+
 (doom-modeline-def-segment circe-track
   (when (and tracking-buffers
-             (member major-mode my/circe-major-modes))
+             (member major-mode frostyx/tracking-major-modes))
     (mapcar
      (lambda (x)
        (cond ((equal x ",") " , ")
@@ -5292,6 +5294,29 @@ It is also not necessary for messages sent by me to be red
 (set-face-attribute
  'ement-room-self-message nil
  :foreground my/green)
+#+END_SRC
+
+*** Matrix modeline
+
+Define a custom modeline for Ement
+
+#+BEGIN_SRC emacs-lisp
+(doom-modeline-def-modeline 'frostyx-ement
+ (cl-set-difference frostyx/doom-modeline-middle-segments
+                    '(buffer-info-simple major-mode buffer-position))
+
+ (cl-set-difference frostyx/doom-modeline-right-segments
+                    '(buffer-position)))
+#+END_SRC
+
+And apply it for all Ement major modes
+
+#+BEGIN_SRC emacs-lisp
+(setq frostyx/ement-major-modes '(ement-room-mode))
+
+(dolist (mode frostyx/ement-major-modes)
+  (add-to-list 'frostyx/tracking-major-modes mode)
+  (add-to-list 'doom-modeline-mode-alist (cons mode 'frostyx-ement)))
 #+END_SRC
 
 *** Matrix TODO
