@@ -157,6 +157,8 @@ contact them or file a RFE for implementing one.
 
 - https://whydoesitsuck.com/
 
+* Events                                                             :events:
+** [[https://pyvo.cz/api/series/olomouc-pyvo.rss][Pyvo Olomouc]]
 * Youtube                                                    :elfeed:youtube:
 
 Open a youtube video in the web browser and copy its URL. Then run
