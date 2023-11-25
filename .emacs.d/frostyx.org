@@ -5319,6 +5319,14 @@ And apply it for all Ement major modes
   (add-to-list 'doom-modeline-mode-alist (cons mode 'frostyx-ement)))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+;; This doesn't work but it will be very usefull for my implementation
+;; https://gist.github.com/viiru-/685134a1781816e83df68520a4862599
+;;
+;; This works
+;; (tracking-add-buffer (get-buffer "Fedora Devel"))
+#+END_SRC
+
 *** Matrix TODO
 
 - Sending messages via ~M-x ement-room-send-message~ is just awful. I
