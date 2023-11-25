@@ -23,6 +23,7 @@ Fedora is my daily driver, develpment platform and news in Fedora are strongly
 tied to my day to day work-related tasks.
 
 *** https://eischmann.wordpress.com/feed/
+*** https://enblog.eischmann.cz/feed/
 *** https://blog.linuxgrrl.com/feed/
 *** https://tatica.org/feed/
 *** https://fedoramagazine.org/feed/
