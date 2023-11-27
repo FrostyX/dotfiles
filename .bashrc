@@ -15,6 +15,7 @@ alias undo="git reset --soft HEAD~1"
 alias killjobs="for x in `jobs -p`; do kill -9 $x; done"
 alias youtube-dl="yt-dlp"
 alias youtube-mp3="youtube-dl --extract-audio --audio-format mp3"
+alias untar="tar -xvzf"
 
 # TODO Use this instead
 # https://wiki.archlinux.org/title/Session_lock
