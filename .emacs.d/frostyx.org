@@ -1596,7 +1596,8 @@ Press Shift+spacebar to spawn a hydra specific to the current major-mode
    (("e" eval-last-sexp "Eval")
     ("t" my/org-todo-done "Mark TODO item as done")
     ("E" org-edit-special "Edit special")
-    ("s" org-edit-src-exit "Save special edit"))
+    ("s" org-edit-src-exit "Save special edit")
+    ("l" org-toggle-link-display "Toggle link display"))
 
    "Navigation"
    (("h" helm-org-in-buffer-headings "Search headers in Helm"))
