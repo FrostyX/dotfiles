@@ -3212,7 +3212,7 @@ See https://emacs-lsp.github.io/lsp-mode/page/languages/
 See https://github.com/palantir/python-language-server
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "python3-language-server")
+;; (frostyx/dnf :install "python3-language-server")
 #+END_SRC
 
 The python language server shows deprecation warnings, I hope this is
@@ -3450,7 +3450,8 @@ See https://magit.vc/manual/ghub/
 
 #+BEGIN_SRC emacs-lisp
 (use-package ghub
-  :ensure t)
+  :ensure t
+  :disabled t)
 #+END_SRC
 
 To configure a GitHub account, you need to specify your username.
@@ -3482,7 +3483,8 @@ interface for ~ghub~.
 
 #+BEGIN_SRC emacs-lisp
 (use-package forge
-  :ensure t)
+  :ensure t
+  :disabled t)
 #+END_SRC
 
 Improve the readability by adjusting colors and other visual elements.
