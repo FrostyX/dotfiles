@@ -13,14 +13,20 @@
 
 
 (ert-deftest test-human-friendly-simple ()
+  (should (equal (crontab-human-friendly "* * * * *")
+                 "At every minute."))
+
+  (should (equal (crontab-human-friendly "1 * * * *")
+                 "At minute 1."))
+
   (should (equal (crontab-human-friendly "5 4 * * 7")
                  "At 04:05 on Sunday."))
 
-  (should (equal (crontab-human-friendly "15 14 1 * *")
-                 "At 14:15 on day-of-month 1."))
-
   (should (equal (crontab-human-friendly "5 0 * 8 *")
                  "At 00:05 in August."))
+
+  (should (equal (crontab-human-friendly "5 0 * 8 1")
+                 "At 00:05 on Monday in August."))
 
   (should (equal (crontab-human-friendly "15 14 1 * *")
                  "At 14:15 on day-of-month 1.")))
