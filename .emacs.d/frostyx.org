@@ -3877,6 +3877,41 @@ We want to enable Evil mode when going to ~vterm-copy-mode~
       (evil-normal-state))))
 #+END_SRC
 
+** Eat
+
+Always create a new terminal, don't switch to an existing one.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/eat ()
+  (interactive)
+  (eat "/bin/bash" t))
+#+END_SRC
+
+FIXME Eat named, this doesn't work
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/eat-named ()
+  (interactive)
+  (frostyx/eat)
+  (rename-buffer
+   (concat "*eat* " (read-string "Name: "))))
+#+END_SRC
+
+Keybindings
+
+#+BEGIN_SRC emacs-lisp
+(general-define-key
+ :states '(normal insert motion)
+ :keymaps 'eat-mode-map
+ "C-c" 'eat-self-input
+ "C-d" 'eat-self-input
+ "C-r" 'eat-self-input
+ "C-w h" 'evil-window-left
+ "C-w j" 'evil-window-down
+ "C-w k" 'evil-window-up
+ "C-w l" 'evil-window-right)
+#+END_SRC
+
 ** Eshell
 
 See https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/
