@@ -5723,19 +5723,10 @@ work in a shitty DE.
 #+END_SRC
 
 * Things to do
-** TODO Dired sorting per directory
-   https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html
 
-** TODO Dired image previews
-   http://pragmaticemacs.com/emacs/quickly-preview-images-and-other-files-with-peep-dired/
-   https://lucidmanager.org/productivity/using-emacs-image-dired/
-
-** TODO Youtube downloader
-   https://www.reddit.com/r/emacs/comments/hxbmda/ytdl_an_emacs_interface_for_youtubedl/
-   https://github.com/skeeto/youtube-dl-emacs
-
-** TODO Dired open multiple files at once
-https://www.reddit.com/r/emacs/comments/egbz7i/opening_multiple_windows_at_once_from_dired/
+Features that I want to implement and bugs that I'd like to fix are
+reported against my dotfiles repository.
+https://github.com/FrostyX/dotfiles/issues/
 
 ** Bugs
 
@@ -5751,26 +5742,19 @@ once these TODO items are done. Try ~C-c C-c~ to toggle them.
 - [ ] Correct indentation for non-standard filetypes, such as ~.elm~
 - [ ] Unified auto-completion across all programming languages
 - [ ] Not messing up whitespace by either removing or showing it
-- [X] Working snippets for e.g. ~ipdb~
 - [ ] Code cleanup, unified way to do things
   - [ ] All package imports using ~use-package~, even the local ones
   - [ ] Key bindings - ~:bind~ vs ~:config~ vs whatever else
   - [ ] Get rid of all ~:config nil~ lines
   - [ ] Closing brackets where they should be
 - [ ] Evil ~C-o~ jumps to a file regardles of a project
-- [ ] File backups should go to ~/.emacs/swp, not to mess git repos
 - [ ] Searching with ~/~ is somehow broken and doesn't support arrow keys
 
 
 These are less important, but we still want to keep track of them.
 
-- [ ] These checklists doesn't render proprely at GitHub
 - [ ] Inline code blocks containing commas doesn't render properly on GitHub
 - [ ] Spell checker
-- [ ] ~:set colorcolumn=120~ alternative (should be built in Emacs 27)
-- [ ] Figure out how to have multiple Emacs windows/instances in order to
-      utilize window manager workspaces/groups and multiple monitors
-- [X] Generate TOC list
 
 
 But ... is it even worth it? ... Nope. It is fun though!
