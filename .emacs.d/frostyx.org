@@ -3903,7 +3903,7 @@ Keybindings
 
 #+BEGIN_SRC emacs-lisp
 (general-define-key
- :states '(normal insert motion)
+ :states '(emacs normal insert motion)
  :keymaps 'eat-mode-map
  "C-c" 'eat-self-input
  "C-d" 'eat-self-input
@@ -3911,7 +3911,9 @@ Keybindings
  "C-w h" 'evil-window-left
  "C-w j" 'evil-window-down
  "C-w k" 'evil-window-up
- "C-w l" 'evil-window-right)
+ "C-w l" 'evil-window-right
+ "C-w s" 'evil-window-split
+ "C-w v" 'evil-window-vsplit)
 #+END_SRC
 
 ** Eshell
