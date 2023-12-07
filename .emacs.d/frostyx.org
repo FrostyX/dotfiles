@@ -2831,7 +2831,7 @@ Now the actual agenda
                          "clock" "Waiting:")
 
                  :and ( :todo ("WAITING" "BLOCKED")
-                        :not (:priority< "4"))
+                        :priority>= "3")
                  :transformer
                  (--> it
                       (replace-regexp-in-string "\\[#[2-4]\\] " "" it)))
