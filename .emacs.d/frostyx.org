@@ -766,6 +766,28 @@ This command is mainly an example how to do it. I have probably never used it.
   '(evil-ex-define-cmd "Gbrowse" 'browse-at-remote))
 #+END_SRC
 
+I very much liked the ~:retab~ command, which is missing in Evil.
+See https://github.com/emacs-evil/evil/pull/1846
+
+#+BEGIN_SRC emacs-lisp
+(evil-define-command evil-retab (tabstop)
+  "Convert all tabs to spaces or the other way around.
+Replace all sequences of white-space containing a <Tab> with new
+strings of white-space using the new TABSTOP value given.
+If you do not specify a new TABSTOP size or it is zero, Evil uses the
+current value of `tab-width'."
+  (interactive "<a>")
+  (let ((beg (if (use-region-p) (region-beginning) (point-min)))
+        (end (if (use-region-p) (region-end) (point-max)))
+        (retab (if indent-tabs-mode #'tabify #'untabify))
+        (tab-width (cond ((not tabstop) tab-width)
+                         ((equal tabstop "0") tab-width)
+                         (t (string-to-number tabstop)))))
+    (funcall retab beg end)))
+
+(evil-ex-define-cmd "ret[ab]" 'evil-retab)
+#+END_SRC
+
 * Colorscheme
 ** Themes
 
