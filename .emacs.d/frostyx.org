@@ -4807,6 +4807,38 @@ See https://github.com/karthink/elfeed-tube
          ([remap save-buffer] . elfeed-tube-save)))
 #+END_SRC
 
+** Elfeed Web UI
+
+See https://github.com/skeeto/elfeed?tab=readme-ov-file#web-interface
+
+#+BEGIN_SRC emacs-lisp
+(use-package elfeed-web
+  :ensure t)
+#+END_SRC
+
+The default port is 8080 which clashes with too many projects that I
+develop.
+
+#+BEGIN_SRC emacs-lisp
+(setq httpd-port 8090)
+(setq httpd-host "0.0.0.0")
+#+END_SRC
+
+Start the server. We need to ignore the errors because running a second Emacs
+instance would fail that the port is already used.
+
+#+BEGIN_SRC emacs-lisp
+(ignore-error
+  (elfeed-web-start))
+#+END_SRC
+
+The web interface is available at http://localhost:8090/elfeed/
+
+The main motivation is to be able to access Elfeed from my phone
+https://play.google.com/store/apps/details?id=com.elfeedcljsrn
+When starting it, use the only the host and port, without the
+~/elfeed/~ part.
+
 ** IRC
 
 There are several Emacs IRC clients available (such as ERC, rcirc and others)
