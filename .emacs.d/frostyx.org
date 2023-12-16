@@ -5793,6 +5793,9 @@ Hint: Use ~M-x org-toggle-inline-images~ to see images in Emacs
 * Interesting packages
 I don't use these but they are worth checking out
 
+- https://github.com/maio/eink-emacs
+- https://github.com/skeeto/emacs-web-server
+- https://github.com/emacscollective/auto-compile
 - https://github.com/NicolasPetton/pass
 - https://github.com/Artawower/orgnote
 - https://github.com/licht1stein/obsidian.el
