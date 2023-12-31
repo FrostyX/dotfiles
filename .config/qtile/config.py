@@ -24,6 +24,7 @@ from libqtile.command.client import Client
 from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.log_utils import logger
+from libqtile.backend.wayland import InputConfig
 from qtile_extras.widget import StatusNotifier
 
 from contrib import CurrentLayoutTextIcon
@@ -83,11 +84,18 @@ elif hostname in ["alarak", "zeratul"]:
     vol_down = "amixer -D pipewire sset Master 2%-"
 
 
-# For some reason this condition doesn't work
-# if qtile.core.name == "wayland":
 WAYLAND = False
-if False:
+if qtile and qtile.core.name == "wayland":
     WAYLAND = True
+
+
+# https://docs.qtile.org/en/latest/manual/wayland.html
+wl_input_rules = {
+    "type:touchpad": InputConfig(tap=True, pointer_accel=0.1),
+    # The comma before bksl is not a typo, see
+    # https://www.x.org/releases/X11R7.5/doc/input/XKB-Config.html
+    "type:keyboard": InputConfig(kb_layout="cz", kb_variant=",bksl"),
+}
 
 
 mod = "mod1" # Left alt
@@ -269,10 +277,7 @@ widget_defaults = dict(
 )
 
 
-def num_screens():
-    if WAYLAND:
-        return 1
-
+def num_screens_x11():
     process = subprocess.Popen(["xrandr"], stdout=subprocess.PIPE)
     out = process.communicate()[0].decode("utf-8").split("\n")
     i = 0
@@ -280,6 +285,25 @@ def num_screens():
         if " connected " in line:
             i += 1
     return i
+
+
+def num_screens_wayland():
+    process = subprocess.Popen(["wlr-randr"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    try:
+        out = process.communicate(timeout=1)[0].decode("utf-8").split("\n")
+    except subprocess.TimeoutExpired:
+        return 1
+
+    i = 0
+    for line in out:
+        if "Enabled: yes" in line:
+            i += 1
+    return i
+
+
+def num_screens():
+    screens = num_screens_wayland() if WAYLAND else num_screens_x11()
+    return screens or 1
 
 
 style = {

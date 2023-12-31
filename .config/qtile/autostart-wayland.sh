@@ -1,12 +1,7 @@
 #!/bin/bash
 
-# Does not work at all, Argh!
-export XKB_DEFAULT_LAYOUT=cz
-export XKB_DEDAULT_OPTIONS=compose:ralt,ctrl:nocaps
-setxkbmap -layout cz -variant bksl
-
-
 # Wayland has no business loading ~/.Xresources, we need to do that manually
+# This is maybe needed for Emacs terminals. Otherwise, I dont use urxvt anymore
 xrdb -load ~/.Xresources
 
 
@@ -38,3 +33,4 @@ xset b 0 0 0
 nm-applet --indicator &
 
 blueman-applet &
+ulauncher --hide-window &
