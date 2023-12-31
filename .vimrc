@@ -105,6 +105,7 @@ set shiftwidth=4
 set softtabstop=4
 set autoindent
 set smartindent
+set expandtab
 
 " Lines around cursor when scrolling
 set scrolloff=5
