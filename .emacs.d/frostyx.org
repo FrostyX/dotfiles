@@ -216,6 +216,13 @@ packages.
   :ensure t)
 #+END_SRC
 
+Don't clutter project directories with undo tree files,
+e.g. ~.README.\~undo-tree\~~
+
+#+BEGIN_SRC emacs-lisp
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+#+END_SRC
+
 * Daemon mode
 
 See this great blogpost about running multiple Emacs daemons using systemd
