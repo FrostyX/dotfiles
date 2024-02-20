@@ -756,7 +756,8 @@ section.
 #+BEGIN_SRC emacs-lisp
 (general-define-key
  :states '(normal visual insert emacs motion)
- "C-x l" 'evil-switch-to-windows-last-buffer)
+ "C-x l" 'evil-switch-to-windows-last-buffer
+ "C-x SPC" 'hydra-main/body)
 #+END_SRC
 
 ** Custom Evil commands
