@@ -3935,6 +3935,12 @@ Emacs keybindings.
 (evil-set-initial-state 'eat-mode 'emacs)
 #+END_SRC
 
+Render clickable links
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'eat-mode-hook 'goto-address-mode)
+#+END_SRC
+
 Keybindings
 
 #+BEGIN_SRC emacs-lisp
