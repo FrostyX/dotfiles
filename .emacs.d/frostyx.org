@@ -3928,6 +3928,13 @@ FIXME Eat named, this doesn't work
    (concat "*eat* " (read-string "Name: "))))
 #+END_SRC
 
+It is cumbersome to use Evil keybindings in terminal emulators, use
+Emacs keybindings.
+
+#+BEGIN_SRC emacs-lisp
+(evil-set-initial-state 'eat-mode 'emacs)
+#+END_SRC
+
 Keybindings
 
 #+BEGIN_SRC emacs-lisp
