@@ -3462,8 +3462,11 @@ Make sure magit doesn't override our hydra key binding
 
 #+BEGIN_SRC emacs-lisp
 (general-nmap
-  :keymaps '(magit-status-mode-map magit-log-mode-map)
-  "SPC" 'hydra-main/body)
+  :keymaps '(magit-status-mode-map
+             magit-log-mode-map
+             magit-revision-mode-map)
+  "SPC" 'hydra-main/body
+  "S-SPC" 'major-mode-hydra)
 #+END_SRC
 
 ** Git Forge
