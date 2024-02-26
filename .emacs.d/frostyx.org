@@ -2336,6 +2336,27 @@ major mode.
 
 See ~M-x yas-describe-tables~ for all available snippets.
 
+** Scratch buffers
+
+It is often useful to create a scratch buffer for any major mode
+
+See https://codeberg.org/emacs-weirdware/scratch
+
+#+BEGIN_SRC emacs-lisp
+(use-package scratch
+  :ensure t)
+#+END_SRC
+
+The most interesting command is ~C-u M-x scratch~ but I don't
+generally like to use the ~C-u~ prefix.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/scratch-for-major-mode ()
+  (interactive)
+  (let ((current-prefix-arg 4)) ;; Emulate C-u
+    (call-interactively 'scratch)))
+#+END_SRC
+
 ** Languages
 *** Python
 
