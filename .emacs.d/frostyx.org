@@ -3811,7 +3811,7 @@ And install the Emacs ~udiskie~ pacakge
            :url "https://gitlab.com/tuedachu/udiskie.el.git"))
 #+END_SRC
 
-** Terminal
+** Vterm
 
 I am currently not using a terminal emulator inside of Emacs because all
 available options handle terminal applications such as top, htop, docker, etc
@@ -3867,14 +3867,10 @@ terminal buffers are a giant mess.
    (read-string "Name: ")))
 #+END_SRC
 
-We need some easy way to jump back to prompt. Since it is at the bottom of the
-buffer, I am choosing ~G~, but I think keys like ~I~, ~A~, ~i~, ~a~ should work
-as well.
+Render clickable links
 
 #+BEGIN_SRC emacs-lisp
-(general-nmap
-  :keymaps 'vterm-mode-map
-  "G" #'vterm-reset-cursor-point)
+(add-hook 'vterm-mode-hook 'goto-address-mode)
 #+END_SRC
 
 Commands like ~dd~, ~I~, ~S~, etc doesn't work and complain about read-only
@@ -3884,6 +3880,102 @@ actual command starts.
 
 #+BEGIN_SRC emacs-lisp
 (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+#+END_SRC
+
+Load a bunch of my functions
+
+#+BEGIN_SRC emacs-lisp
+(load "~/.emacs.d/devel/frostyx-vterm.el")
+#+END_SRC
+
+Fix tmux panel colors
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'term-color-green nil :background nil)
+(set-face-attribute 'term-color-yellow nil :background nil)
+(set-face-attribute 'term-color-cyan nil :background nil)
+(set-face-attribute 'term-color-red nil :background nil)
+(set-face-attribute 'term-color-blue nil :background nil)
+(set-face-attribute 'term-color-white nil :background nil)
+(set-face-attribute 'term-color-black nil :background nil)
+(set-face-attribute 'term-color-magenta nil :background nil)
+#+END_SRC
+
+TODO Disable blink-cursor-mode
+TODO Cursor color https://github.com/akermu/emacs-libvterm/issues/313#issuecomment-624575161
+
+Paste without wierdly selecting all text between the selection and
+prompt.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/vterm-paste ()
+  (interactive)
+  (deactivate-mark)
+  (vterm-yank-primary))
+
+(global-set-key [mouse-2] 'frostyx/vterm-paste)
+#+END_SRC
+
+*** Vterm without Evil
+
+Sadly, it is easier to use Vterm without Evil mode.
+
+#+BEGIN_SRC emacs-lisp
+(evil-set-initial-state 'vterm-mode 'emacs)
+#+END_SRC
+
+We can easily emulate Evil-like window management.
+
+#+BEGIN_SRC emacs-lisp
+(general-emap
+  :keymaps 'vterm-mode-map
+  "C-c" 'vterm-send-C-c
+  "C-w h" 'evil-window-left
+  "C-w j" 'evil-window-down
+  "C-w k" 'evil-window-up
+  "C-w l" 'evil-window-right
+  "C-w s" 'evil-window-split
+  "C-w v" 'evil-window-vsplit
+  "C-w c" 'evil-window-delete)
+#+END_SRC
+
+A quick access to scrolling and copy mode
+
+#+BEGIN_SRC emacs-lisp
+;; (global-unset-key (kbd "C-s"))
+
+(general-define-key
+ :keymaps '(vterm-mode-map vterm-copy-mode-map)
+ "C-s" 'frostyx/vterm-copy-mode)
+#+END_SRC
+
+We want to enable Evil mode when going to ~vterm-copy-mode~
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/vterm-copy-mode ()
+  (interactive)
+  (if vterm-copy-mode
+      (progn
+        (vterm-copy-mode -1)
+        (evil-emacs-state))
+    (progn
+      (vterm-copy-mode)
+      (evil-normal-state))))
+#+END_SRC
+
+*** Vterm with Evil
+
+I am not using Vterm with Evil mode enabled but once the support works
+well enough, I might.
+
+We need some easy way to jump back to prompt. Since it is at the bottom of the
+buffer, I am choosing ~G~, but I think keys like ~I~, ~A~, ~i~, ~a~ should work
+as well.
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap
+  :keymaps 'vterm-mode-map
+  "G" #'vterm-reset-cursor-point)
 #+END_SRC
 
 Don't let Emacs eat common shell keyboard shotcuts
@@ -3907,64 +3999,6 @@ The other way around, don't let vterm eat some keyboard shortcuts
 (general-nmap
   :keymaps 'vterm-mode-map
   "C-c l" 'vterm-clear)
-#+END_SRC
-
-Load a bunch of my functions
-
-#+BEGIN_SRC emacs-lisp
-(load "~/.emacs.d/devel/frostyx-vterm.el")
-#+END_SRC
-
-TODO
-
-- [ ] ~x~ doesn't work, strange
-- [ ] Prompt line continuity doesn't work (from last char, to the
-  first on the next line by using right arrow)
-- [ ] ESC moves cursor to the right instead of to the left
-
-*** Vterm without Evil
-
-Sadly, it is easier to use Vterm without Evil mode.
-
-#+BEGIN_SRC emacs-lisp
-(evil-set-initial-state 'vterm-mode 'emacs)
-#+END_SRC
-
-We can easily emulate Evil-like window switching.
-
-#+BEGIN_SRC emacs-lisp
-(general-emap
-  :keymaps 'vterm-mode-map
-  "C-c" 'vterm-send-C-c
-  "C-w h" 'evil-window-left
-  "C-w j" 'evil-window-down
-  "C-w k" 'evil-window-up
-  "C-w l" 'evil-window-right)
-#+END_SRC
-
-A quick access to scrolling and copy mode
-
-#+BEGIN_SRC emacs-lisp
-;; (global-unset-key (kbd "C-s"))
-
-(general-define-key
- :keymaps '(vterm-mode-map vterm-copy-mode-map)
- "C-s" 'frostyx/vterm-copy-mode)
-#+END_SRC
-
-
-We want to enable Evil mode when going to ~vterm-copy-mode~
-
-#+BEGIN_SRC emacs-lisp
-(defun frostyx/vterm-copy-mode ()
-  (interactive)
-  (if vterm-copy-mode
-      (progn
-        (vterm-copy-mode -1)
-        (evil-emacs-state))
-    (progn
-      (vterm-copy-mode)
-      (evil-normal-state))))
 #+END_SRC
 
 ** Eat
