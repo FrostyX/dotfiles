@@ -528,7 +528,7 @@ See:
 (use-package evil
   :ensure t ;; install the evil package if not installed
   :init ;; tweak evil's configuration before loading it
-  (setq evil-search-module 'evil-search)
+  (evil-select-search-module 'evil-search-module 'evil-search)
   (setq evil-ex-complete-emacs-commands nil)
   (setq evil-vsplit-window-right t)
   (setq evil-split-window-below t)
