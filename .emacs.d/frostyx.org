@@ -429,6 +429,40 @@ And unbind key bindings like this (you can ommit the mode map)
 (general-unbind 'normal some-mode-map "KEY")
 #+END_EXAMPLE
 
+* Mouse
+
+I want mouse double-click to behave and select exactly the same range
+of words as in a terminal emulator like alacritty.
+
+See https://superuser.com/a/901624
+
+TODO Create a MELPA package for this (called e.g. ~double-click~,
+~terminal-like-double-click~).
+
+#+BEGIN_SRC emacs-lisp
+(defun get-word-boundary ()
+  "Return the boundary of the current word.
+ The return value is of the form: (cons pos1 pos2)."
+  (save-excursion
+    (let (p1 p2)
+      (progn
+        (skip-chars-backward "-A-Za-z0-9_.@") ;; here you can choose which symbols to use
+        (setq p1 (point))
+        (skip-chars-forward "-A-Za-z0-9_.@") ;; put the same here
+        (setq p2 (point)))
+      (cons p1 p2))))
+
+(defun select-word ()
+  "Mark the url under cursor."
+  (interactive)
+  (let (bds)
+    (setq bds (get-word-boundary))
+    (set-mark (car bds))
+    (goto-char (cdr bds))))
+
+(global-set-key [double-mouse-1] 'select-word)
+#+END_SRC
+
 * Living in Evil
 
 @TODO link the great blog post explaining emacs key bindings
