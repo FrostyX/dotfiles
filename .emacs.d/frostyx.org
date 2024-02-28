@@ -656,7 +656,7 @@ See http://frostyx.cz/posts/emacs-evil-set-option
 ;; use evil mode in the buffer created from calling `M-x list-packages'.
 ;; https://blog.aaronbieber.com/2016/01/23/living-in-evil.html#adding-hjkl-bindings-
 (evil-add-hjkl-bindings occur-mode-map 'emacs
-  (kbd "/")       'evil-search-forward
+  (kbd "/")       'evil-ex-search-forward
   (kbd "n")       'evil-search-next
   (kbd "N")       'evil-search-previous
   (kbd "C-d")     'evil-scroll-down
