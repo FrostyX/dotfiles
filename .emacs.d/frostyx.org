@@ -5534,6 +5534,22 @@ And apply it for all Ement major modes
 ;; (tracking-add-buffer (get-buffer "Fedora Devel"))
 #+END_SRC
 
+*** Helm ement
+
+I'd like to avoid switching Ement buffers using the default "dashboard". Let's
+try helm interface.
+
+See https://github.com/FrostyX/helm-ement/
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm-ement
+  :ensure t
+  :quelpa (helm-ement
+           :fetcher github
+           :repo "FrostyX/helm-ement"
+           :branch "main"))
+#+END_SRC
+
 *** Matrix TODO
 
 - Sending messages via ~M-x ement-room-send-message~ is just awful. I
