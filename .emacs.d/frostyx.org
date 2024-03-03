@@ -4061,7 +4061,10 @@ Keybindings
  "C-w k" 'evil-window-up
  "C-w l" 'evil-window-right
  "C-w s" 'evil-window-split
- "C-w v" 'evil-window-vsplit)
+ "C-w v" 'evil-window-vsplit
+ "C-w c" 'evil-window-delete
+ "C-b" 'scroll-down
+ "C-f" 'scroll-up)
 #+END_SRC
 
 ** Eshell
