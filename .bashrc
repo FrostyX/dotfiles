@@ -85,6 +85,11 @@ pulseaudio-unfuck() {
     systemctl --user restart wireplumber pipewire pipewire-pulse
 }
 
+swapflush() {
+    sudo swapoff -a
+    sudo swapon -a
+}
+
 
 make_prompt () {
     default="\[\e[0m\]"
