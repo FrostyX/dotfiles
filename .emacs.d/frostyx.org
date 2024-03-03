@@ -5954,6 +5954,11 @@ Hint: Use ~M-x org-toggle-inline-images~ to see images in Emacs
 * Interesting packages
 I don't use these but they are worth checking out
 
+- https://github.com/minad/corfu
+- https://github.com/minad/tempel
+- https://github.com/karthink/gptel
+- https://github.com/kidd/org-gcal.el
+- https://github.com/rougier/mu4e-thread
 - https://github.com/maio/eink-emacs
 - https://github.com/skeeto/emacs-web-server
 - https://github.com/emacscollective/auto-compile
