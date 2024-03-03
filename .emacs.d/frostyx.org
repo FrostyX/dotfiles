@@ -1314,6 +1314,11 @@ chatting on IRC?
              (frostyx/projectile-switch-to-vterm-buffer)
            (frostyx/switch-to-vterm-buffer)))
 
+        ((derived-mode-p 'ement-room-list-mode
+                         'ement-room-mode
+                         'ement-directory-mode)
+         (helm-ement-buffers))
+
         ((projectile-project-root) (helm-projectile-switch-to-buffer))
         (t (helm-buffers-list))))
 #+END_SRC
