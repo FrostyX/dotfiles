@@ -3225,6 +3225,14 @@ worry, this will still show single line with signatures below the modeline.
 (setq eglot-ignored-server-capabilities '(:hoverProvider))
 #+END_SRC
 
+*** Python
+
+See https://github.com/python-lsp/python-lsp-server
+
+#+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "python3-lsp-server+all")
+#+END_SRC
+
 ** LSP
 
 See https://emacs-lsp.github.io/lsp-mode/
