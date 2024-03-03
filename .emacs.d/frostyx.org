@@ -5570,6 +5570,69 @@ See https://github.com/FrostyX/helm-ement/
 - I just don't want any ~ement-room-timestamp-header-format~ lines
 - We need automatical scroll of the rooms
 
+** Desktop notifications
+
+See https://github.com/sinic/ednc
+
+The package is in MELPA but I am installing from my fork because of a
+custom changes.
+
+See https://github.com/sinic/ednc/pull/12
+
+#+BEGIN_SRC emacs-lisp
+(use-package ednc
+  :quelpa (ednc
+           :fetcher github
+           :repo "FrostyX/ednc"
+           :branch "ednc-faces")
+  :config
+  (ednc-mode 1))
+#+END_SRC
+
+Use pretty colors
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'ednc-app-name nil :foreground my/blue)
+(set-face-attribute 'ednc-title nil :foreground my/green)
+(set-face-attribute 'ednc-body nil :foreground my/yellow)
+#+END_SRC
+
+Setup some basic key bindings
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap
+  :keymaps 'ednc-view-mode-map
+  "TAB" 'ednc-toggle-expanded-view)
+#+END_SRC
+
+For debugging, you can send a notification from Emacs like this
+
+#+BEGIN_EXAMPLE emacs-lisp
+(notifications-notify
+ :app-name "EDNC"
+ :title "1st test"
+ :body "hello, world"
+ :urgency "normal")
+#+END_EXAMPLE
+
+I don't know how exactly the Linux notification system works but it
+seems there cannot be multiple daemons listening at the same time. If
+you don't see any notifications, check whether the daemon runs in
+another Emacs instance, or whether another daemon is running (Dunst,
+Qtile widget, etc).
+
+I want the log buffer to automatically scroll down, similarly like
+~tail -f~ works.
+
+See https://stackoverflow.com/a/12666854/3285282
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/autoscroll ()
+  (set (make-local-variable 'window-point-insertion-type) t))
+
+(add-hook 'ednc-view-mode-hook 'frostyx/autoscroll)
+#+END_SRC
+
 ** Database
 
 We can use ~psql~, for sure. But why leaving Emacs?
