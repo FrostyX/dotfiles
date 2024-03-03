@@ -88,6 +88,7 @@ configuring something.
 *** https://johnhame.link/index.xml
 *** https://mayacostantini.github.io/feed.xml
 *** https://oremacs.com/atom.xml
+*** https://clarete.li/blog/rss.xml
 
 ** Gentoo
 
