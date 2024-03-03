@@ -2346,6 +2346,18 @@ Use ~company-mode~ everywhere
 (add-hook 'after-init-hook 'global-company-mode)
 #+END_SRC
 
+Use ~company-box~ it automatically shows documentation
+
+#+BEGIN_SRC emacs-lisp
+(use-package company-box
+  :ensure t
+  :hook
+  (company-mode . company-box-mode)
+
+  :config
+  (setq company-box-icon-right-margin 1))
+#+END_SRC
+
 ** Whitespace
 
 #+BEGIN_SRC emacs-lisp
