@@ -3140,6 +3140,24 @@ is that not a default.
 (advice-add 'org-agenda-quit :after 'org-save-all-org-buffers)
 #+END_SRC
 
+I have a custom archiving function
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/org-agenda-archive ()
+  (interactive)
+  (let ((org-archive-location
+         (format-time-string "archive.org::* %Y - Week #%W")))
+    (org-agenda-archive)))
+#+END_SRC
+
+Let's bind it to some key
+
+#+BEGIN_SRC emacs-lisp
+(general-mmap
+  :keymaps 'org-agenda-mode-map
+  "ga" 'frostyx/org-agenda-archive)
+#+END_SRC
+
 **** Pomodoro
 The Pomodoro Technique is a time management technique that uses a timer to break
 work into short intervals (typically 25 minutes of work followed by 5 minutes of
