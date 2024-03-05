@@ -755,8 +755,8 @@ TODO projectile
 
 #+BEGIN_SRC emacs-lisp
 (evil-leader/set-key
-  "f" 'helm-projectile
-  "p" 'helm-projectile-switch-project
+  "f" 'projectile-find-file
+  "p" 'projectile-switch-project
   "s" 'helm-lsp-workspace-symbol)
 #+END_SRC
 
@@ -1561,7 +1561,7 @@ Hydra main entry-point allowing us acces to other hydras.
     ("E" hydra-eyebrowse/body "eyebrowse"))
 
    "Projects"
-   (("p" helm-projectile-switch-project "switch project")
+   (("p" projectile-switch-project "switch project")
     ("P" hydra-project/body "projectile"))
 
    "Window management"
