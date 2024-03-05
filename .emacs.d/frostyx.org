@@ -2358,6 +2358,13 @@ Use ~company-box~ it automatically shows documentation
   (setq company-box-icon-right-margin 1))
 #+END_SRC
 
+Make ~company-box-mode~ play well with ~company-tng-mode~.
+See https://github.com/sebastiencs/company-box/issues/47
+
+#+BEGIN_SRC emacs-lisp
+(setq company-frontends '(company-tng-frontend company-box-frontend))
+#+END_SRC
+
 ** Whitespace
 
 #+BEGIN_SRC emacs-lisp
