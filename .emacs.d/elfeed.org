@@ -16,6 +16,7 @@ Mainly Red Hatters, former colleagues and work related feeds.
 *** [[https://sgallagh.wordpress.com/feed/][@sgallagh]]
 *** [[https://blog.tomecek.net/index.xml][@ttomecek]]
 *** [[https://medium.com/feed/@raghavi101][Raghavi]]
+*** [[https://blog.mfocko.xyz/blog/rss.xml][@mfocko]]
 
 ** Fedora
 
