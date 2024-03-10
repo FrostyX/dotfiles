@@ -3411,6 +3411,20 @@ See https://github.com/python-lsp/python-lsp-server
 (frostyx/dnf :install "python3-lsp-server+all")
 #+END_SRC
 
+*** Clojure
+
+See https://github.com/clojure-lsp/clojure-lsp
+
+The ~clojure-lsp~ server is not packaged for Fedora, we are using a
+Nix package instead.
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'eglot
+  (add-to-list
+   'eglot-server-programs
+   '(clojurescript-mode . ("nix" "run" "nixpkgs#clojure-lsp"))))
+#+END_SRC
+
 ** LSP
 
 See https://emacs-lsp.github.io/lsp-mode/
