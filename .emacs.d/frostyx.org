@@ -6161,11 +6161,11 @@ from Elfeed to Pocket.
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(slack-register-team
- :name "myslackteam"
- :default t
- :token (password-store-get "slack/token")
- :cookie (password-store-get "slack/cookie"))
+;; (slack-register-team
+;;  :name "myslackteam"
+;;  :default t
+;;  :token (password-store-get "slack/token")
+;;  :cookie (password-store-get "slack/cookie"))
 #+END_SRC
 
 ** Spotify
