@@ -3933,6 +3933,33 @@ See https://github.com/armindarvish/consult-gh
            :repo "armindarvish/consult-gh"))
 #+END_SRC
 
+** Git Autocommit
+
+This is very much useful for agenda files.
+
+See https://github.com/ryuslash/git-auto-commit-mode
+
+#+BEGIN_SRC emacs-lisp
+(use-package git-auto-commit-mode
+  :ensure t)
+#+END_SRC
+
+Don't commit after every save, rather wait a few secs. I am a obsesive
+~:w~ person. Also, automatically push.
+
+#+BEGIN_SRC emacs-lisp
+(setq-default gac-automatically-push-p t)
+(setq-default gac-debounce-interval 60)
+#+END_SRC
+
+Use custom commit message
+
+#+BEGIN_SRC emacs-lisp
+;; (setq gac-default-message
+;;       (lambda (filename)
+;;         (concat "Update " (gac-relative-file-name filename))))
+#+END_SRC
+
 ** File manager
 
 There is already an awesome file manager built in Emacs, called ~dired~.
