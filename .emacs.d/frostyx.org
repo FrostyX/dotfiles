@@ -1868,6 +1868,7 @@ Lisp interaction mode, aka ~*scratch*~ buffer.
   (:color blue :quit-key ("q" "SPC") :title "Lisp interaction mode" :idle 1.0)
   ("Actions"
    (("e" eval-defun "Evaluate this function")
+    ("E" eval-last-sexp "Evaluate last expression")
     ("p" eval-print-last-sexp "Evaluate and print to the buffer"))))
 #+END_SRC
 
