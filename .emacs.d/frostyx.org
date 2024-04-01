@@ -2746,6 +2746,20 @@ sudo dnf copr enable korkeala/clojure
 
 Open an empty clojure file and run ~M-x cider-jack-in~.
 
+#+BEGIN_SRC emacs-lisp
+(general-imap
+  :keymaps 'cider-repl-mode-map
+  "<up>" 'cider-repl-previous-input
+  "<down>" 'cider-repl-next-input)
+#+END_SRC
+
+Don't show a separate stacktrace buffer
+https://docs.cider.mx/cider/usage/navigating_stacktraces.html
+
+#+BEGIN_SRC emacs-lisp
+(setq cider-show-error-buffer nil)
+#+END_SRC
+
 *** Jinja2
 
 #+BEGIN_SRC emacs-lisp
