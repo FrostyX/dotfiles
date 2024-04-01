@@ -6,12 +6,12 @@ Here follows a list of RSS feeds that I am subscribed to.
 
 Mainly Red Hatters, former colleagues and work related feeds.
 
-*** [[https://blog.samalik.com/feed.xml][@asamalik]]
+*** [[https://blog.samalik.com/feed.xml][@asamalik]]                                                        :ignore:
 *** [[http://miroslav.suchy.cz/blog/rss.xml][@msuchy]]
 *** [[https://pavel.raiskup.cz/feed.xml][@praiskup]]
 *** [[https://clime.github.io/feed.xml][@clime]]
 *** [[https://contyk.org/feed/][@contyk]]
-*** https://developers.redhat.com/blog/author/langdonwhite/feed/
+*** https://developers.redhat.com/blog/author/langdonwhite/feed/     :ignore:
 *** http://threebean.org/blog/feed/atom/index.xml
 *** [[https://sgallagh.wordpress.com/feed/][@sgallagh]]
 *** [[https://blog.tomecek.net/index.xml][@ttomecek]]
@@ -29,7 +29,7 @@ tied to my day to day work-related tasks.
 *** https://tatica.org/feed/
 *** https://fedoramagazine.org/feed/
 *** https://mojefedora.cz/feed/
-*** https://quantum-integration.org/feeds/all.atom.xml
+*** https://quantum-integration.org/feed/
 *** [[https://www.winglemeyer.org/feed.xml][Brian "bex" Exelbierd]]
 ** Nerds
 
@@ -56,21 +56,21 @@ configuring something.
 *** https://blog.katriel.co.uk/feed
 *** https://www.artificialworlds.net/blog/feed/
 *** https://feeds.feedburner.com/GiantRobotsSmashingIntoOtherGiantRobots
-*** https://medium.com/feed/@romainhe.brisse
+*** https://medium.com/feed/@romainhe.brisse                         :ignore:
 *** https://chriskiehl.com/rss.xml
 *** https://brbsix.github.io/rss.xml
-*** http://www.patricksoftwareblog.com/feed/
+*** http://www.patricksoftwareblog.com/feed/                         :ignore:
 *** https://blog.miguelgrinberg.com/feed
 *** https://tuomassalmi.com/rss.xml
 *** https://ruleoftech.com/feed
 *** https://addy-dclxvi.github.io/post/index.xml
-*** https://statico.github.io/feed.xml
+*** https://statico.github.io/feed.xml                               :ignore:
 *** https://codemadness.org/atom_content.xml
-*** https://www.mikeshultz.com/feeds/all.atom.xml
-*** https://archive.casouri.cat/note/rss.xml
+*** https://www.mikeshultz.com/feeds/all.atom.xml                    :ignore:
+*** https://archive.casouri.cat/note/rss.xml                         :ignore:
 *** https://andreyorst.gitlab.io/feed.xml
 *** https://nullprogram.com/feed/
-*** https://smythp.com/feed.xml
+*** https://smythp.com/feed.xml                                      :ignore:
 *** http://vakila.github.io/feed.xml
 *** https://arenzana.org/feed/
 *** https://fuco1.github.io/rss.xml
@@ -79,7 +79,7 @@ configuring something.
 *** https://www.bennee.com/~alex/blog/feeds/all.atom.xml
 *** https://www.murilopereira.com/index.xml
 *** https://blog.lambda.cx/index.xml
-*** https://truongtx.me/atom.xml
+*** https://truongtx.me/feed.xml
 *** https://www.philnewton.net/blog/feed/
 *** https://sqrtminusone.xyz/posts/index.xml
 *** https://niklaseklund.gitlab.io/blog/index.xml
@@ -103,7 +103,7 @@ There is always something new in the Emacs world.
 
 *** https://sachachua.com/blog/feed/
 *** http://blog.binchen.org/rss.xml
-*** http://doyouevenlisp.com/feed/
+*** http://doyouevenlisp.com/feed/                                   :ignore:
 *** https://nyxt.atlas.engineer/feed
 
 *** https://emacsredux.com/atom.xml
@@ -112,7 +112,7 @@ There is always something new in the Emacs world.
 
 There is more interesting Vim development happening than ever before.
 
-*** https://www.vimfromscratch.com/articles.rss
+*** https://www.vimfromscratch.com/articles.rss                      :ignore:
 
 ** Python
 
@@ -126,7 +126,7 @@ Workflows, testing, design patterns, CI, functional paradigm ... you know,
 all the good stuff.
 
 *** https://www.zdrojak.cz/clanky/feed/
-*** https://becoming-functional.com/feed
+*** https://becoming-functional.com/feed                             :ignore:
 
 ** Fun
 
@@ -143,7 +143,7 @@ involving human interaction.
 
 Just some non-IT people that write about interesting real-life topics
 
-*** http://twinniefox.com/feed/
+*** https://alexandrazenata.cz/feed/                                 :ignore:
 *** https://sexperimentatorka.cz/feed/
 *** https://elladawson.com/feed/
 
@@ -151,8 +151,7 @@ Just some non-IT people that write about interesting real-life topics
 
 Software engineer interested in sports. What could go wrong.
 
-*** https://jirkaorsag.cz/feed/
-
+*** https://jirkaorsag.cz/feed/                                      :ignore:
 ** Sites without RSS
 
 Following websites unfortunatelly don't provide a RSS feed. Ideally, we want to
