@@ -75,7 +75,7 @@ if hostname == "chromie":
 
 elif hostname in ["alarak", "zeratul"]:
     # terminal = "urxvt256c -e tmux"
-    terminal = "alacritty -e tmux"
+    terminal = "alacritty"
     lock = "i3lock -i /home/jkadlcik/.dotfiles/.config/qtile/img/bsod.png"
 
     # The pactl commands sometimes work, sometimes doesn't,
