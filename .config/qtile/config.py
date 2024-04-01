@@ -116,7 +116,9 @@ keys = [
     Key([mod], "F4", lazy.window.kill()),
 
     Key([mod, "control"], "r", lazy.restart()),
-    Key([mod, "control"], "q", lazy.shutdown()),
+
+    # This is the most dangerous key bind ever
+    # Key([mod, "control"], "q", lazy.shutdown()),
 
     Key([mod], "w", lazy.screen.toggle_group()),
 
