@@ -32,7 +32,7 @@ Plugin 'ap/vim-css-color'
 Plugin 'tmhedberg/matchit'
 
 " Requires to `dnf install python3-jedi`
-Plugin 'davidhalter/jedi-vim'
+" Plugin 'davidhalter/jedi-vim'
 
 " Requires to `dnf install fzf`
 Plugin 'junegunn/fzf.vim'
@@ -165,10 +165,10 @@ map <C-n> :NERDTreeFind<CR>
 
 
 " Jedi-vim
-let g:jedi#popup_select_first = 1
-let g:jedi#show_call_signatures = 0
-let g:jedi#completions_command = "<C-n>"
-autocmd FileType python setlocal completeopt-=preview
+" let g:jedi#popup_select_first = 1
+" let g:jedi#show_call_signatures = 0
+" let g:jedi#completions_command = "<C-n>"
+" autocmd FileType python setlocal completeopt-=preview
 
 " tComment
 map <leader>c <C-_><C-_>
