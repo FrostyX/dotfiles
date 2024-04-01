@@ -5332,7 +5332,6 @@ https://github.com/jorgenschaefer/circe/pull/384
 #+BEGIN_SRC emacs-lisp
 (use-package circe
   :if workstation-p
-  :ensure t
   :quelpa (circe :fetcher github
                  :repo "FrostyX/circe"
                  :branch "circe-tracking-colors"))
