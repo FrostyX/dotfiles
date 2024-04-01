@@ -2810,6 +2810,12 @@ TOC will be regenerated.
 (setq org-edit-src-content-indentation 0)
 #+END_SRC
 
+When opening org files, we want all headings to be collapsed
+
+#+BEGIN_SRC emacs-lisp
+(setq org-startup-folded t)
+#+END_SRC
+
 See https://stackoverflow.com/a/24173780/3285282
 
 #+BEGIN_SRC emacs-lisp
