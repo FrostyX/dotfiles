@@ -4397,6 +4397,11 @@ The other way around, don't let vterm eat some keyboard shortcuts
 
 ** Eat
 
+#+BEGIN_SRC emacs-lisp
+(use-package eat
+ :ensure t)
+#+END_SRC
+
 Always create a new terminal, don't switch to an existing one.
 
 #+BEGIN_SRC emacs-lisp
