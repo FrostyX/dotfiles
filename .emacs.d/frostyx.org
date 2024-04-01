@@ -2993,6 +2993,27 @@ each group.
         (search category-keep)))
 #+END_SRC
 
+**** Tags
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'org-tag nil :foreground my/lgray)
+#+END_SRC
+
+https://gitlab.com/marcowahl/org-pretty-tags
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-pretty-tags
+  :diminish org-pretty-tags-mode
+  :ensure t
+  :disabled t
+  :config
+  (setq org-pretty-tags-surrogate-strings
+        `(("person" . ,(all-the-icons-octicon "home"))
+          ("work" . ,(all-the-icons-octicon "flame"))
+          ("optional" . ,(all-the-icons-octicon "question"))))
+  (org-pretty-tags-global-mode))
+#+END_SRC
+
 **** Unsorted category
 TODO org-capture
 
