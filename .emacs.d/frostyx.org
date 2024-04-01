@@ -3922,6 +3922,17 @@ git config --global pagure.user frostyx
 pass insert forge/pagure.io
 #+END_SRC
 
+** Consult GH
+
+See https://github.com/armindarvish/consult-gh
+
+#+BEGIN_SRC emacs-lisp
+(use-package consult-gh
+  :quelpa (consult-gh
+           :fetcher github
+           :repo "armindarvish/consult-gh"))
+#+END_SRC
+
 ** File manager
 
 There is already an awesome file manager built in Emacs, called ~dired~.
