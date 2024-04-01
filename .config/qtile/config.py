@@ -199,7 +199,7 @@ def get_layout_icon(name):
 workspaces = [
     {"name": "i", "key": "i", "label": icons["chat"], "matches": [Match(wm_class=["Pidgin"])]},
     {"name": "r", "key": "r", "label": icons["web"], "matches": [Match(wm_class=["Chromium-browser", "Firefox", "Google-chrome"])]},
-    {"name": "f", "key": "f", "label": icons["terminal"], "matches": [Match(wm_class=["dolphin", "Thunar", "File-roller"])]},
+    {"name": "f", "key": "f", "label": icons["terminal"], "matches": []},
     {"name": "d", "key": "d", "label": icons["dev"], "matches": [Match(wm_class=["Lispworks", "jetbrains-pycharm", "Eclipse" ])]},
     {"name": "q", "key": "q", "label": icons["doc"], "matches": [Match(wm_class=["Acroread", "Zathura", "Evince"])]},
     {"name": "n", "key": "n", "label": icons["misc"], "matches": [Match(wm_class=["Claws-mail"])]},
