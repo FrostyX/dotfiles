@@ -1175,7 +1175,7 @@ And lastly the right group
 (setq frostyx/doom-modeline-right-segments
       '(compilation objed-state persp-name battery grip gnus
         github debug repl lsp minor-modes input-method indent-info
-        buffer-encoding process vcs checker time circe-lagmon circe-track
+        buffer-encoding process vcs time circe-lagmon circe-track
         buffer-position))
 #+END_SRC
 
