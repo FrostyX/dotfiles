@@ -431,6 +431,12 @@ And unbind key bindings like this (you can ommit the mode map)
 
 * Mouse
 
+Smoother mouse scroll
+
+#+BEGIN_SRC emacs-lisp
+(pixel-scroll-precision-mode)
+#+END_SRC
+
 I want mouse double-click to behave and select exactly the same range
 of words as in a terminal emulator like alacritty.
 
