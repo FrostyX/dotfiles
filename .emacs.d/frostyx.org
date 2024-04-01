@@ -3518,6 +3518,20 @@ Use the binary provided by Fedora
 (setq plantuml-default-exec-mode 'executable)
 #+END_SRC
 
+*** Gleam
+
+See https://github.com/gleam-lang/gleam-mode
+See https://github.com/gleam-lang/gleam-mode/issues/12#issuecomment-2002975860
+
+#+BEGIN_SRC emacs-lisp
+(use-package gleam-ts-mode
+  :quelpa (gleam-ts-mode
+           :fetcher github
+           :repo "gleam-lang/gleam-mode"
+           :branch "gleam-ts-mode"
+           :files ("gleam-ts-mode.el")))
+#+END_SRC
+
 ** Eglot
 
 #+BEGIN_SRC emacs-lisp
