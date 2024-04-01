@@ -3381,6 +3381,15 @@ Ah, chills.
   (org-pomodoro '(4)))
 #+END_SRC
 
+**** Org Query language
+
+See https://github.com/alphapapa/org-ql
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-ql
+  :ensure t)
+#+END_SRC
+
 *** Markdown
 
 For previews, we need an external command.
