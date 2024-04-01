@@ -4330,7 +4330,9 @@ We can easily emulate Evil-like window management.
   "C-w l" 'evil-window-right
   "C-w s" 'evil-window-split
   "C-w v" 'evil-window-vsplit
-  "C-w c" 'evil-window-delete)
+  "C-w c" 'evil-window-delete
+  "<prior>" 'vterm--self-insert
+  "<next>" 'vterm--self-insert)
 #+END_SRC
 
 A quick access to scrolling and copy mode
