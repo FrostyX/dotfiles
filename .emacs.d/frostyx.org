@@ -2955,17 +2955,17 @@ each group.
 TODO org-capture
 
 #+BEGIN_SRC emacs-lisp
-(setq org-default-notes-file (concat org-directory "/gtd/inbox.org"))
+(setq org-default-notes-file (concat org-directory "/agenda/inbox.org"))
 #+END_SRC
 
 TODO Capture templates for adding TODOs via ~org-agenda~
 
 #+BEGIN_SRC emacs-lisp
 (setq org-capture-templates
-      '(("t" "Todo" entry (file "~/Org/gtd/todo.org")
+      '(("t" "Todo" entry (file "~/Org/agenda/todo.org")
          "* TODO %?\n  %i\n")
 
-        ("i" "Inbox" entry (file "~/Org/gtd/inbox.org")
+        ("i" "Inbox" entry (file "~/Org/agenda/inbox.org")
          "* TODO %?\n  %i\n")))
 #+END_SRC
 
@@ -3015,8 +3015,8 @@ Let's bind it to some key
 Show agendas from these TODO files.
 
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-files '("~/Org/gtd/inbox.org"
-                         "~/Org/gtd/todo.org"))
+(setq org-agenda-files '("~/Org/agenda/inbox.org"
+                         "~/Org/agenda/todo.org"))
 #+END_SRC
 
 For the love of god, do not do ~\'reorganize-frame~, nor any other shenanigans.

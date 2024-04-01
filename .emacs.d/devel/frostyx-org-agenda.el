@@ -34,7 +34,7 @@
                                 '(priority "3")
                                 :action #'org-get-heading)))
           (inbox-count (length (org-ql-query
-                                 :from "~/Org/gtd/inbox.org"
+                                 :from "~/Org/agenda/inbox.org"
                                  :select #'org-get-heading))))
       (setq doom-modeline--frostyx-org-agenda-count
             (format "Also %s tasks in the inbox and %s tasks for next week"
