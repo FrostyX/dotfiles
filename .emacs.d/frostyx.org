@@ -1435,6 +1435,12 @@ https://github.com/minad/vertico#completion-at-point-and-completion-in-region
                args)))
 #+END_SRC
 
+Show xref results within consult
+
+#+BEGIN_SRC emacs-lisp
+(setq xref-show-xrefs-function #'consult-xref)
+#+END_SRC
+
 ** Embark
 
 TODO https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages/
