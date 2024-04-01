@@ -3433,7 +3433,14 @@ Besides other things, it provides a template for creating a new spec files.
 Just use ~:e ~/rpmbuild/SPECS/foo.spec~ to use it.
 
 #+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "emacs-rpm-spec-mode")
+#+END_SRC
+
+And load it.
+
+#+BEGIN_SRC emacs-lisp
 (use-package rpm-spec-mode
+  :load-path "/usr/share/emacs/site-lisp/rpm-spec-mode/"
   :ensure t)
 #+END_SRC
 
