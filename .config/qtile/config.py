@@ -384,17 +384,16 @@ def create_screen(primary=False):
             # We want low priority color to be also red because some
             # applications (not looking at you Spotify) are using that color for
             # highlights.
-            widget.Spacer(length=100),
-            widget.Notify(
-                default_timeout=15,
-                foreground=base16_chalk["white"],
-                foreground_low=base16_chalk["red"],
-                foreground_urgent=base16_chalk["red"],
-                **style
-            ),
-            widget.Spacer(length=100),
-
-
+            # widget.Spacer(length=100),
+            # widget.Notify(
+            #     default_timeout=15,
+            #     foreground=base16_chalk["white"],
+            #     foreground_low=base16_chalk["red"],
+            #     foreground_urgent=base16_chalk["red"],
+            #     **style
+            # ),
+            # widget.Spacer(length=100),
+            #
             # Emails
             # widget.TextBox(
             #     text=icons["email"],
