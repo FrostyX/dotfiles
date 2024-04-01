@@ -269,6 +269,7 @@ layouts = [
     layout.MonadTall(**layout_theme),
     layout.xmonad.MonadTall(ratio=0.68, **layout_theme),
     layout.max.Max(),
+    layout.max.Max(margin=30),
 ]
 floating_layout = layout.Floating(**layout_theme)
 
