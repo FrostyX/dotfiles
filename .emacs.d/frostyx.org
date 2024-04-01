@@ -437,6 +437,15 @@ Smoother mouse scroll
 (pixel-scroll-precision-mode)
 #+END_SRC
 
+Moving a hand to press mouse middle-click for every paste operation is
+such a waste of time.
+
+#+BEGIN_SRC emacs-lisp
+(general-define-key
+ :states '(emacs normal insert motion)
+ "C-y" 'mouse-yank-primary)
+#+END_SRC
+
 I want mouse double-click to behave and select exactly the same range
 of words as in a terminal emulator like alacritty.
 
