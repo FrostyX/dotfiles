@@ -458,14 +458,15 @@ TODO Create a MELPA package for this (called e.g. ~double-click~,
 (defun get-word-boundary ()
   "Return the boundary of the current word.
  The return value is of the form: (cons pos1 pos2)."
-  (save-excursion
-    (let (p1 p2)
-      (progn
-        (skip-chars-backward "-A-Za-z0-9_.@") ;; here you can choose which symbols to use
-        (setq p1 (point))
-        (skip-chars-forward "-A-Za-z0-9_.@") ;; put the same here
-        (setq p2 (point)))
-      (cons p1 p2))))
+  (let ((chars  "-A-Za-z0-9_.@/"))
+    (save-excursion
+      (let (p1 p2)
+        (progn
+          (skip-chars-backward chars)
+          (setq p1 (point))
+          (skip-chars-forward chars)
+          (setq p2 (point)))
+        (cons p1 p2)))))
 
 (defun select-word ()
   "Mark the url under cursor."
