@@ -2825,6 +2825,14 @@ See https://stackoverflow.com/a/24173780/3285282
 (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
 #+END_SRC
 
+Jump to links when pressing enter.
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap
+  :keymaps 'org-mode-map
+  "RET" 'org-open-at-point)
+#+END_SRC
+
 I use checklists on a daily basis and often they get quite long. Additionally,
 I don't always process them from the beginning to the end but rather randomly,
 they are not numbered, so what. Then it can become quite messy when the
