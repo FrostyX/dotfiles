@@ -3242,6 +3242,8 @@ Let's bind it to some key
          ("C-c n g" . org-roam-graph)
          ("C-c n i" . org-roam-node-insert)
          ("C-c n c" . org-roam-capture)
+         ("C-c n t" . org-roam-tag-add)
+         ("C-c n a" . org-roam-alias-add)
          ;; Dailies
          ("C-c n j" . org-roam-dailies-capture-today))
   :config
