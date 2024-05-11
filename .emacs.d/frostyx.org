@@ -4318,7 +4318,9 @@ prompt.
   (deactivate-mark)
   (vterm-yank-primary))
 
-(global-set-key [mouse-2] 'frostyx/vterm-paste)
+(general-emap
+  :keymaps 'vterm-mode-map
+  [mouse-2] 'frostyx/vterm-paste)
 #+END_SRC
 
 *** Vterm without Evil
