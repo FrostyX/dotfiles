@@ -801,13 +801,15 @@ Random garbage
 #+END_SRC
 
 These are not exactly Vim based but I don't want to start a separate
-section.
+section. These are a life-saver for non-Evil buffers.
 
 #+BEGIN_SRC emacs-lisp
 (general-define-key
  :states '(normal visual insert emacs motion)
  "C-x l" 'evil-switch-to-windows-last-buffer
- "C-x SPC" 'hydra-main/body)
+ "C-x SPC" 'hydra-main/body
+ "C-x ;"  'my/smart-buffers-list
+ "C-x ,;" 'consult-buffer)
 #+END_SRC
 
 ** Custom Evil commands
