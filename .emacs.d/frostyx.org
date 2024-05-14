@@ -4338,7 +4338,10 @@ We can easily emulate Evil-like window management.
 #+BEGIN_SRC emacs-lisp
 (general-emap
   :keymaps 'vterm-mode-map
+  ;; Emacs shouldn't catch these and pass them to terminal
   "C-c" 'vterm-send-C-c
+
+  ;; Evil-like window management
   "C-w h" 'evil-window-left
   "C-w j" 'evil-window-down
   "C-w k" 'evil-window-up
@@ -4346,6 +4349,8 @@ We can easily emulate Evil-like window management.
   "C-w s" 'evil-window-split
   "C-w v" 'evil-window-vsplit
   "C-w c" 'evil-window-delete
+
+  ;; Prompt navigation using PageUp and PageDown
   "<prior>" 'vterm--self-insert
   "<next>" 'vterm--self-insert)
 #+END_SRC
