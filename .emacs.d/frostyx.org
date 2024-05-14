@@ -3567,6 +3567,17 @@ worry, this will still show single line with signatures below the modeline.
 (setq eglot-ignored-server-capabilities '(:hoverProvider))
 #+END_SRC
 
+Emacs becomes more sluggish when using LSP servers, ~eglot-booster~
+claims to improve the performance.
+
+See https://github.com/jdtsmith/eglot-booster
+
+#+BEGIN_SRC emacs-lisp
+(use-package eglot-booster
+  :after eglot
+  :config (eglot-booster-mode))
+#+END_SRC
+
 *** Python
 
 See https://github.com/python-lsp/python-lsp-server
