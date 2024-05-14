@@ -3578,6 +3578,13 @@ See https://github.com/jdtsmith/eglot-booster
   :config (eglot-booster-mode))
 #+END_SRC
 
+The size of Eglot buffers is another common cause of bad performance. It is
+recommended to limit the size to zero.
+
+#+BEGIN_SRC emacs-lisp
+(setq eglot-events-buffer-size 0)
+#+END_SRC
+
 *** Python
 
 See https://github.com/python-lsp/python-lsp-server
