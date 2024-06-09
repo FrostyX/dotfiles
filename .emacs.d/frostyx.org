@@ -4021,6 +4021,25 @@ Use custom commit message
 ;;         (concat "Update " (gac-relative-file-name filename))))
 #+END_SRC
 
+** Gitignore
+
+Downloading .gitignore files manually from GitHub is just fine but there is a
+cool package for that.
+
+https://github.com/xuchunyang/gitignore-templates.el
+
+#+BEGIN_SRC emacs-lisp
+(use-package gitignore-templates
+  :ensure t)
+#+END_SRC
+
+I don't want any other source than GitHub's gitignore repository
+https://github.com/github/gitignore
+
+#+BEGIN_SRC emacs-lisp
+(setq gitignore-templates-api 'github)
+#+END_SRC
+
 ** File manager
 
 There is already an awesome file manager built in Emacs, called ~dired~.
