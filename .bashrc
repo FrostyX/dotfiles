@@ -57,6 +57,7 @@ multihead () {
 }
 
 3head () {
+    # On wayland, it is better to use wdisplays
     case $HOSTNAME in
         "zeratul")
             L="DP-4"
