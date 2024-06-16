@@ -1,0 +1,30 @@
+[Added Associations]
+application/x-compressed-tar=org.gnome.FileRoller.desktop;org.gnome.Nautilus.desktop;
+audio/mpeg=vlc.desktop;
+audio/x-vorbis+ogg=vlc.desktop;
+image/jpeg=org.gnome.eog.desktop;gimp.desktop;pinta.desktop;
+image/png=org.gnome.eog.desktop;feh.desktop;pinta.desktop;gimp.desktop;
+image/svg+xml=org.inkscape.Inkscape.desktop;
+image/webp=feh.desktop;
+text/html=firefox.desktop;google-chrome.desktop;
+text/plain=libreoffice-writer.desktop;
+text/x-emacs-lisp=org.gnome.gedit.desktop;libreoffice-writer.desktop;emacs.desktop;org.gnome.TextEditor.desktop;gvim.desktop;org.lite_xl.lite_xl.desktop;
+video/mp4=vlc.desktop;
+video/quicktime=vlc.desktop;
+video/x-matroska=vlc.desktop;
+video/x-msvideo=vlc.desktop;
+
+[Default Applications]
+audio/mpeg=vlc.desktop
+audio/x-vorbis+ogg=vlc.desktop
+image/jpeg=org.gnome.eog.desktop;
+text/html=google-chrome.desktop
+text/x-emacs-lisp=org.gnome.gedit.desktop;
+video/mp4=vlc.desktop
+video/quicktime=vlc.desktop
+video/x-matroska=vlc.desktop
+video/x-msvideo=vlc.desktop
+x-scheme-handler/about=google-chrome.desktop
+x-scheme-handler/http=google-chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
+x-scheme-handler/unknown=google-chrome.desktop
