@@ -757,6 +757,21 @@ See https://www.reddit.com/r/emacs/comments/86iq3w/evil_cw_o_toggle_windows/
 (define-key evil-normal-state-map (kbd "C-w o") 'toggle-fullscreen)
 #+END_SRC
 
+Incrementing and decrementing numbers
+https://github.com/cofi/evil-numbers
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil-numbers
+  :ensure t)
+#+END_SRC
+
+Decrementing is done via ~C-x~ in Vim, which is an important keybind
+in Emacs. We will only bind incrementing.
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap "C-a" 'evil-numbers/inc-at-pt)
+#+END_SRC
+
 ** Custom Evil keybindings
 
 Emacs provides so many ways to create custom keybindings and to run commands in
