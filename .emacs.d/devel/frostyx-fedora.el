@@ -11,7 +11,9 @@
     (list "rpmdev-bumpspec"
           buffer-file-name
           "--new"
-          version)
+          version
+          "--comment"
+          "'New upstream version'")
     " ")))
 
 
