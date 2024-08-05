@@ -3577,9 +3577,14 @@ See https://github.com/gleam-lang/gleam-mode/issues/12#issuecomment-2002975860
 
 The documentation pop-ups at the bottom are too annoying, disable them. Don't
 worry, this will still show single line with signatures below the modeline.
+And we can still run ~M-x eldoc~ or simply press ~K~ to show a documentation in
+a separate buffer.
+
+See also https://new.reddit.com/r/emacs/comments/11mv5ky/eglot_documentation/
 
 #+BEGIN_SRC emacs-lisp
-(setq eglot-ignored-server-capabilities '(:hoverProvider))
+(setq eldoc-echo-area-prefer-doc-buffer t)
+(setq eldoc-echo-area-use-multiline-p nil)
 #+END_SRC
 
 Emacs becomes more sluggish when using LSP servers, ~eglot-booster~
