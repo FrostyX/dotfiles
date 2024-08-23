@@ -21,4 +21,4 @@ xinput set-prop "ELAN0672:00 04F3:3187 Touchpad" "libinput Tapping Enabled" 1 # 
 
 nm-applet &
 blueman-applet &
-ulauncher --hide-window &
+ulauncher --hide-window --no-window-shadow &
