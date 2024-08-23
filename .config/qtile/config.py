@@ -598,7 +598,13 @@ bring_front_click = False
 dgroups_key_binder = None
 dgroups_app_rules = [
     # floating windows
-    Rule(Match(wm_class=['Synfigstudio', 'Wine', 'Xephyr', 'postal2-bin']), float=True),
+    Rule(Match(wm_class=[
+        'Synfigstudio',
+        'Wine',
+        'Xephyr',
+        'postal2-bin',
+        'Ulauncher'
+    ]), float=True),
 ]
 main = None
 cursor_warp = False
