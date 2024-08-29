@@ -4041,6 +4041,16 @@ Use custom commit message
 ;;         (concat "Update " (gac-relative-file-name filename))))
 #+END_SRC
 
+Git autocommit is typically configured for only a specific projects
+through ~.dir-locals.el~, so we should trust those expected values.
+
+#+BEGIN_SRC emacs-lisp
+(let ((safe '((gac-automatically-push-p . t)
+              (gac-automatically-add-new-files-p . t))))
+  (dolist (option safe)
+    (add-to-list 'safe-local-variable-values option)))
+#+END_SRC
+
 ** Gitignore
 
 Downloading .gitignore files manually from GitHub is just fine but there is a
