@@ -2354,6 +2354,8 @@ takes no arguments.
   (company-complete-common-or-cycle))
 #+END_SRC
 
+This ^^ can maybe be replaced with using ~M-x company-tng-mode~
+
 For the love of god, be case-sensitive. This setting IMHO applies only
 to plain text completions.
 
