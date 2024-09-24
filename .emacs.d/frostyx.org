@@ -5680,7 +5680,7 @@ And apply it for all circe major modes
 Customize modeline colors for channels and personal messages
 
 #+BEGIN_SRC emacs-lisp
-(if workstation-p
+(if (and workstation-p (fboundp #'circe-tracking-get-face))
 	(progn
 	  (setq tracking-get-face-function #'circe-tracking-get-face)
 	  (set-face-attribute 'circe-tracking-channel-face nil :foreground my/white)
