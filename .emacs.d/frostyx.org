@@ -6437,6 +6437,7 @@ pacmd move-sink-input 1712 1
 /Edit with Emacs/ is a Google Chrome extension allowing to pop-up a new Emacs
 frame to edit a textarea.
 
+See https://addons.mozilla.org/en-US/firefox/addon/edit-with-emacs1/
 See https://chrome.google.com/extensions/detail/ljobjlafonikaiipfkggjbhkghgicgoh
 
 The usage is easy, just right-click a ~<textarea>~ and click ~Edit with
