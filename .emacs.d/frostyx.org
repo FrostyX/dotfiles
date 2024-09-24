@@ -3653,6 +3653,11 @@ See https://github.com/dcermak/rpm-spec-language-server
   (let ((cmd '("python3" "-m" "rpm_spec_language_server" "--stdio")))
     (add-to-list 'eglot-server-programs `(rpm-spec-mode . ,cmd))))
 #+END_SRC
+
+*** Golang
+
+#+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "golang-x-tools-gopls")
 #+END_SRC
 
 ** LSP
