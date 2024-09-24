@@ -4538,6 +4538,7 @@ Keybindings
  "C-c" 'eat-self-input
  "C-d" 'eat-self-input
  "C-r" 'eat-self-input
+ "C-b" 'eat-self-input
  "C-w h" 'evil-window-left
  "C-w j" 'evil-window-down
  "C-w k" 'evil-window-up
