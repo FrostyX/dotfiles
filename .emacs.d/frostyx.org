@@ -1664,10 +1664,11 @@ Hydra definitions useful for presentations.
 (pretty-hydra-define hydra-presentations
   (:color blue :quit-key ("q" "SPC") :title "Presentations" :idle 1.0)
   ("Actions"
-   (("e" frostyx/presentation-mode-start "Enable / Start")
+   (("l" (frostyx/set-default-font 140) "Laptop mode")
+    ("e" frostyx/presentation-mode-start "Enable / Start")
     ("d" frostyx/presentation-mode-stop "Disable / Stop")
-    ("l" text-scale-decrease "lesser")
-    ("g" text-scale-increase "greated"))))
+    ("L" text-scale-decrease "lesser")
+    ("G" text-scale-increase "greated"))))
 #+END_SRC
 
 Hydra definitions for ~projectile~ package.
@@ -3780,6 +3781,15 @@ For systemd services and unit files
 #+BEGIN_SRC emacs-lisp
 (use-package systemd
   :ensure t)
+#+END_SRC
+
+** Licenses
+
+https://github.com/jcs-elpa/license-templates/
+
+#+BEGIN_SRC emacs-lisp
+(use-package license-templates
+ :ensure t)
 #+END_SRC
 
 * Writing
