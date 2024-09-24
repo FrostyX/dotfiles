@@ -5178,6 +5178,7 @@ See https://github.com/rougier/mu4e-dashboard
 
 #+BEGIN_SRC emacs-lisp
 (use-package mu4e-dashboard
+  :disabled t
   :if workstation-p
   :quelpa (mu4e-dashboard
            :fetcher github
