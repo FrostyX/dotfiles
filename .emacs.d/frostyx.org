@@ -3582,9 +3582,10 @@ See https://github.com/mcandre/vimrc-mode
 (use-package eglot
   :ensure t
   :hook
-  (python-mode . eglot-ensure)
-  (markdown-mode . eglot-ensure)
-  (elm-mode . eglot-ensure))
+  ((python-mode . eglot-ensure)
+   (markdown-mode . eglot-ensure)
+   (elm-mode . eglot-ensure)
+   (clojurescript-mode . eglot-ensure)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
