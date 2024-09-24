@@ -4433,6 +4433,15 @@ Fix tmux panel colors
 (set-face-attribute 'term-color-white nil :background nil)
 (set-face-attribute 'term-color-black nil :background nil)
 (set-face-attribute 'term-color-magenta nil :background nil)
+
+(set-face-attribute 'ansi-color-bright-green nil :background nil)
+(set-face-attribute 'ansi-color-bright-yellow nil :background nil)
+(set-face-attribute 'ansi-color-bright-cyan nil :background nil)
+(set-face-attribute 'ansi-color-bright-red nil :background nil)
+(set-face-attribute 'ansi-color-bright-blue nil :background nil)
+(set-face-attribute 'ansi-color-bright-white nil :background nil)
+(set-face-attribute 'ansi-color-bright-black nil :background nil)
+(set-face-attribute 'ansi-color-bright-magenta nil :background nil)
 #+END_SRC
 
 TODO Disable blink-cursor-mode
