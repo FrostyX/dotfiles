@@ -19,7 +19,16 @@ from datetime import date
 from os import uname
 from os.path import expanduser
 from libqtile import qtile
-from libqtile.config import Key, Screen, Group, Drag, Click, Match, Rule
+from libqtile.config import (
+    Key,
+    Screen,
+    Group,
+    Drag,
+    Click,
+    Match,
+    Rule,
+    KeyChord,
+)
 from libqtile.command.client import Client
 from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook
@@ -152,6 +161,13 @@ keys = [
 
     # Quiting
     Key([mod], "F10", lazy.spawn(suspend)),
+
+    # Chords
+    KeyChord([mod], "a", [
+        Key([], "e", lazy.spawn("flatpak run im.riot.Riot")),
+        Key([], "s", lazy.spawn("flatpak run com.slack.Slack")),
+        Key([], "d", lazy.spawn("flatpak run com.discordapp.Discord")),
+    ])
 ]
 
 
