@@ -92,6 +92,11 @@ elif hostname in ["alarak", "zeratul"]:
     vol_up = "amixer -D pipewire sset Master 2%+"
     vol_down = "amixer -D pipewire sset Master 2%-"
 
+elif hostname == "hive":
+    # terminal = "urxvt256c -e tmux"
+    terminal = "alacritty"
+    lock = "i3lock -i /home/jkadlcik/.dotfiles/.config/qtile/img/bsod.png"
+
 
 WAYLAND = False
 if qtile and qtile.core.name == "wayland":
