@@ -2198,6 +2198,10 @@ when the buffer should never be killed.
             'my/buffer-is-eyebrowse-visible-p))
 #+END_SRC
 
+* Tree sitter
+
+See [[file:devel/frostyx-treesitter.el]]
+
 * Development
 
 #+BEGIN_SRC emacs-lisp
