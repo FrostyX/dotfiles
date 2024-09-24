@@ -3610,6 +3610,7 @@ See https://github.com/jdtsmith/eglot-booster
 
 #+BEGIN_SRC emacs-lisp
 (use-package eglot-booster
+  :disabled t
   :after eglot
   :config (eglot-booster-mode))
 #+END_SRC
