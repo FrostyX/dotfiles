@@ -3898,6 +3898,26 @@ And set some pretty colors
 (set-face-attribute 'woman-unknown nil :foreground my/red)
 #+END_SRC
 
+* Auto-scroll
+
+Some applications infinitelly print a wall of text and we want to
+automatically scroll to the end. Similarly to what ~tail -f~ does.
+
+See https://github.com/RJTK/emacs-auto-scroll
+
+#+BEGIN_SRC emacs-lisp
+(use-package auto-scroll
+  :quelpa (auto-scroll
+           :fetcher github
+           :repo "RJTK/emacs-auto-scroll"))
+#+END_SRC
+
+Then move to some window and run ~M-x auto-scroll-mode~ and
+~M-x auto-scroll-start~. Ideally, we should setup major-mode hooks for
+this to happen automatically
+
+A possible alternative https://github.com/mbriggs/buffer-tail.el
+
 * Applications
 
 If I shoot myself into my leg and accidentally break a buffer by running an
