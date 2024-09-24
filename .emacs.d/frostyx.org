@@ -4167,14 +4167,11 @@ an image instead of viewing it, queueing a video instead of starting it
 immediately, etc). For that, it is nice to have an "open with" dialog that is
 commonly used in GUI file managers.
 
-See https://github.com/FrostyX/helm-dired-open
+See https://github.com/FrostyX/dired-open-with
 
 #+BEGIN_SRC emacs-lisp
-(use-package helm-dired-open
-  :ensure t
-  :quelpa (helm-dired-open
-           :fetcher github
-           :repo "FrostyX/helm-dired-open"))
+(use-package dired-open-with
+  :ensure t)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
