@@ -236,6 +236,10 @@ support sharing workspaces accross all frames (i.e. closing an emacsclient will
 destroy all its workspaces)
 
 * Package management
+
+When running an upgrade manually, use ~M-x package-upgrade-all~ followed by
+~M-x qualpa-upgrade-all~.
+
 ** Automatical updates
 
 We want to automatically update Emacs packages in order to avoid annoying warnings
