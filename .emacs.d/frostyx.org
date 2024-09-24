@@ -3643,6 +3643,16 @@ Nix package instead.
     (add-to-list 'eglot-server-programs `(clojurescript-mode . ,cmd))
     (add-to-list 'eglot-server-programs `(clojure-ts-mode . ,cmd))))
 #+END_SRC
+
+*** RPM Spec
+
+See https://github.com/dcermak/rpm-spec-language-server
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'eglot
+  (let ((cmd '("python3" "-m" "rpm_spec_language_server" "--stdio")))
+    (add-to-list 'eglot-server-programs `(rpm-spec-mode . ,cmd))))
+#+END_SRC
 #+END_SRC
 
 ** LSP
