@@ -4522,6 +4522,13 @@ Render clickable links
 (add-hook 'eat-mode-hook 'goto-address-mode)
 #+END_SRC
 
+We need to unbind C-w first otherwise us trying to bind it something else will
+fail
+
+#+BEGIN_SRC emacs-lisp
+(general-unbind '(emacs normal insert motion) eat-mode-map "C-w")
+#+END_SRC
+
 Keybindings
 
 #+BEGIN_SRC emacs-lisp
