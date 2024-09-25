@@ -3282,6 +3282,13 @@ Let's bind it to some key
   (require 'org-roam-protocol))
 #+END_SRC
 
+Move the database outside of the data directory, so it doesn't get
+synced through Syncthing, Nextcloud, etc.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-roam-db-location "~/.cache/org-roam.db")
+#+END_SRC
+
 Use ~C-c C-o~ to open a linked node.
 
 #+BEGIN_SRC emacs-lisp
