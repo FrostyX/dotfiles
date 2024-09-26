@@ -3596,7 +3596,9 @@ See https://github.com/mcandre/vimrc-mode
   ((python-mode . eglot-ensure)
    (markdown-mode . eglot-ensure)
    (elm-mode . eglot-ensure)
-   (clojurescript-mode . eglot-ensure)))
+   (clojurescript-mode . eglot-ensure)
+   (typescript-ts-mode . eglot-ensure)
+   (js-ts-mode . eglot-ensure)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -3670,6 +3672,26 @@ See https://github.com/dcermak/rpm-spec-language-server
 
 #+BEGIN_SRC emacs-lisp
 (frostyx/dnf :install "golang-x-tools-gopls")
+#+END_SRC
+
+*** Javascript / Typescript
+
+See https://github.com/typescript-language-server/typescript-language-server
+
+The recommended installation process is through ~npm~:
+
+#+BEGIN_SRC
+npm install -g typescript-language-server typescript
+#+END_SRC
+
+But I'd rather use Nix:
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'eglot
+  (let ((cmd '("nix" "run" "nixpkgs#nodePackages.typescript-language-server"
+               "--" "--stdio")))
+    (add-to-list 'eglot-server-programs `(typescript-ts-mode . ,cmd))
+    (add-to-list 'eglot-server-programs `(js-ts-mode . ,cmd))))
 #+END_SRC
 
 ** LSP
