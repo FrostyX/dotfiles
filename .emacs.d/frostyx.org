@@ -3756,6 +3756,18 @@ The python language server shows deprecation warnings, I hope this is
 going to be fixed in a new Fedora, otherwise we would have to do
 something about it.
 
+Ruff is the new shiny.
+
+#+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "ruff-lsp")
+#+END_SRC
+
+But it doesn't support code completion (yet?). So let's not use it (yet?)
+
+#+BEGIN_SRC emacs-lisp
+;; (add-to-list 'eglot-server-programs '(python-mode . ("ruff-lsp")))
+#+END_SRC
+
 *** Grammarly
 
 For some reason ~lsp-grammarly~ requires this ~keytar~ thing and for
