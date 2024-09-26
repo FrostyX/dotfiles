@@ -4161,6 +4161,15 @@ through ~.dir-locals.el~, so we should trust those expected values.
     (add-to-list 'safe-local-variable-values option)))
 #+END_SRC
 
+So far, ~git-auto-commit-mode~ can automatically push after commit but it cannot
+pull and rebase before pushing.
+
+See https://github.com/ryuslash/git-auto-commit-mode/pull/40
+
+Using ~git-sync~ instead may help.
+
+See https://github.com/simonthum/git-sync
+
 ** Gitignore
 
 Downloading .gitignore files manually from GitHub is just fine but there is a
