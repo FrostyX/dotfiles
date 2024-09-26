@@ -128,6 +128,7 @@ keys = [
     # Toggle between different layouts as defined below
     Key([mod], "space", lazy.next_layout()),
     Key([mod], "F4", lazy.window.kill()),
+    Key([mod], "c", lazy.window.kill()),
 
     Key([mod, "control"], "r", lazy.restart()),
 
@@ -226,7 +227,7 @@ workspaces = [
     {"name": "d", "key": "d", "label": icons["dev"], "matches": [Match(wm_class=["Lispworks", "jetbrains-pycharm", "Eclipse" ])]},
     {"name": "q", "key": "q", "label": icons["doc"], "matches": [Match(wm_class=["Acroread", "Zathura", "Evince"])]},
     {"name": "n", "key": "n", "label": icons["misc"], "matches": [Match(wm_class=["Claws-mail"])]},
-    {"name": "c", "key": "c", "label": icons["ssh"]},
+    {"name": "m", "key": "m", "label": icons["ssh"]},
     {"name": "v", "key": "v", "label": icons["virtual"], "matches": [Match(wm_class=["VirtualBox"])]},
     {"name": "g", "key": "g", "label": icons["games"], "matches": [Match(wm_class=["Wine", "Python2.7", "Steam", "Progress"])]}, # Python2.7 is playonlinux; Progress is steam updater
     {"name": "o", "key": "o", "label": icons["music"], "matches": [Match(wm_class=["Vlc", "Totem"])]},
