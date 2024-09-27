@@ -3587,6 +3587,15 @@ See https://github.com/mcandre/vimrc-mode
   :ensure t)
 #+END_SRC
 
+*** Typescript
+
+See https://github.com/emacs-typescript/typescript.el
+
+#+BEGIN_SRC emacs-lisp
+(use-package typescript-mode
+  :ensure t)
+#+END_SRC
+
 ** Eglot
 
 #+BEGIN_SRC emacs-lisp
@@ -3597,8 +3606,8 @@ See https://github.com/mcandre/vimrc-mode
    (markdown-mode . eglot-ensure)
    (elm-mode . eglot-ensure)
    (clojurescript-mode . eglot-ensure)
-   (typescript-ts-mode . eglot-ensure)
-   (js-ts-mode . eglot-ensure)))
+   (typescript-mode . eglot-ensure)
+   (js-mode . eglot-ensure)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -3690,8 +3699,8 @@ But I'd rather use Nix:
 (with-eval-after-load 'eglot
   (let ((cmd '("nix" "run" "nixpkgs#nodePackages.typescript-language-server"
                "--" "--stdio")))
-    (add-to-list 'eglot-server-programs `(typescript-ts-mode . ,cmd))
-    (add-to-list 'eglot-server-programs `(js-ts-mode . ,cmd))))
+    (add-to-list 'eglot-server-programs `(typescript-mode . ,cmd))
+    (add-to-list 'eglot-server-programs `(js-mode . ,cmd))))
 #+END_SRC
 
 ** LSP
