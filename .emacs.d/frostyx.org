@@ -3799,6 +3799,17 @@ But it doesn't support code completion (yet?). So let's not use it (yet?)
 ;; (add-to-list 'eglot-server-programs '(python-mode . ("ruff-lsp")))
 #+END_SRC
 
+*** HTML
+
+See https://emacs-lsp.github.io/lsp-mode/page/lsp-html/
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'eglot
+  (let ((cmd '("nix" "shell" "nixpkgs#vscode-langservers-extracted"
+               "-c" "vscode-css-language-server" "--stdio")))
+    (add-to-list 'eglot-server-programs `(mhtml-mode . ,cmd))))
+#+END_SRC
+
 *** Grammarly
 
 For some reason ~lsp-grammarly~ requires this ~keytar~ thing and for
