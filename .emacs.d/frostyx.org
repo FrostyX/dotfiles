@@ -2264,13 +2264,15 @@ Also see my blog post http://frostyx.cz/posts/emacs-browse-at-pagure
 
 ** Indentation
 
-Disable ~electric-indent-mode~ because it is trying to be smart and do weird
-aggressive indents that are in fact just stupid and only makes me manually remove
-and adjust them. Also make sure, that any major mode won't turn it on again.
+The ~electric-indent-mode~ is trying to be smart and do weird aggressive
+indents that are in fact just stupid and only makes me manually remove
+and adjust them. The documentation even says that its default is not compatible
+with languages like Python. So let's make it less aggressive.
 
 #+BEGIN_SRC emacs-lisp
-(electric-indent-mode -1)
-(add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
+(electric-indent-mode 1)
+(add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode 1)))
+(setq electric-indent-inhibit t)
 #+END_SRC
 
 By default, use spaces, not tabs
@@ -2288,16 +2290,6 @@ current project.
   :config
   (dtrt-indent-global-mode)
   (dtrt-indent-adapt))
-#+END_SRC
-
-Map ~ENTER~ key to execute ~newline-and-indent~ in order to eliminate different
-indentation from ~ENTER~ and pressing Evil ~o~ command. Hopefully they are the
-same, we need some longer observation.
-
-TODO map this for all modes?
-
-#+BEGIN_SRC emacs-lisp
-(define-key global-map (kbd "RET") 'newline-and-indent)
 #+END_SRC
 
 In case a project uses TABs for indenting, we want to see them with some
