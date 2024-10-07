@@ -2028,6 +2028,13 @@ like a workaround. Eyebrowse is not project-oriented by design, it gives you
 free hand on what to use workspaces for. For this reason, it lacks certain
 project management shortcuts, that I would appreciate.
 
+Install ripgrep so that we can use ~M-x projectile-ripgrep~.
+
+#+BEGIN_SRC emacs-lisp
+(use-package ripgrep
+  :ensure t)
+#+END_SRC
+
 ** Eyebrowse
 
 See https://github.com/wasamasa/eyebrowse
