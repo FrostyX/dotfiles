@@ -6576,6 +6576,16 @@ pacmd list-sink-inputs
 pacmd move-sink-input 1712 1
 #+END_SRC
 
+* Tramp
+
+#+BEGIN_SRC emacs-lisp
+(setq tramp-default-remote-shell "/bin/bash")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'vterm-tramp-shells '("ssh" "/bin/bash"))
+#+END_SRC
+
 * Beyond Emacs
 ** Edit with Emacs (in Google Chrome)
 /Edit with Emacs/ is a Google Chrome extension allowing to pop-up a new Emacs
