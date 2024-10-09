@@ -29,16 +29,25 @@ alias performance="sudo bash -c 'echo performance > /sys/firmware/acpi/platform_
 
 singlehead () {
     cmd="xrandr"
-    cmd+=" --output DP-1-1 --off"
-    cmd+=" --output DP-1-2 --off"
-    cmd+=" --output DP-1-3 --off"
-    cmd+=" --output DP-3-1 --off"
-    cmd+=" --output DP-3-2 --off"
-    cmd+=" --output DP-3-3 --off"
-    cmd+=" --output DP-2 --off"
-    cmd+=" --output DP-3 --off"
-    cmd+=" --output DP-4 --off"
-    cmd+=" --output eDP-1 --auto"
+    case $HOSTNAME in
+        "zeratul")
+            cmd+=" --output DP-1-1 --off"
+            cmd+=" --output DP-1-2 --off"
+            cmd+=" --output DP-1-3 --off"
+            cmd+=" --output DP-3-1 --off"
+            cmd+=" --output DP-3-2 --off"
+            cmd+=" --output DP-3-3 --off"
+            cmd+=" --output DP-2 --off"
+            cmd+=" --output DP-3 --off"
+            cmd+=" --output DP-4 --off"
+            cmd+=" --output eDP-1 --auto"
+            ;;
+        "hive")
+            cmd+=" --output HDMI-A-1 --off"
+            cmd+=" --output DVI-D-0 --auto"
+            ;;
+        *) echo "Unrecognized hostname"; exit 1;;
+    esac
     $cmd
 }
 
@@ -53,6 +62,13 @@ multihead () {
     cmd="xrandr"
     cmd+=" --output eDP-1 --off"
     cmd+="--output DP-1-2 --auto"
+    $cmd
+}
+
+2head () {
+    cmd="xrandr"
+    cmd+=" --output HDMI-A-1 --auto --rotate left --left-of DVI-D-0"
+    cmd+=" --output DVI-D-0 --auto --primary"
     $cmd
 }
 
