@@ -2052,9 +2052,9 @@ and not that useful anyway.
 #+BEGIN_SRC emacs-lisp
 (defun frostyx/projectile-find-file ()
   (interactive)
-  (unless (frostyx/projectile-p)
-    (projectile-switch-project))
-  (projectile-find-file))
+  (if (frostyx/projectile-p)
+      (projectile-find-file)
+    (projectile-switch-project)))
 #+END_SRC
 
 ** Eyebrowse
