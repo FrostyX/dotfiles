@@ -790,7 +790,7 @@ TODO projectile
 
 #+BEGIN_SRC emacs-lisp
 (evil-leader/set-key
-  "f" 'projectile-find-file
+  "f" 'frostyx/projectile-find-file
   "p" 'projectile-switch-project
   "s" 'helm-lsp-workspace-symbol)
 #+END_SRC
@@ -2033,6 +2033,28 @@ Install ripgrep so that we can use ~M-x projectile-ripgrep~.
 #+BEGIN_SRC emacs-lisp
 (use-package ripgrep
   :ensure t)
+#+END_SRC
+
+In many functions I want to have a check whether we are in a project
+or not.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/projectile-p ()
+  (let ((project (projectile-project-root))
+        (home (expand-file-name "~/")))
+    (and project (not (equal project home)))))
+#+END_SRC
+
+If we are not in a project, first switch to a project, then search the file. The
+default behavior is to search from the home directory, which is insanely slow
+and not that useful anyway.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/projectile-find-file ()
+  (interactive)
+  (unless (frostyx/projectile-p)
+    (projectile-switch-project))
+  (projectile-find-file))
 #+END_SRC
 
 ** Eyebrowse
