@@ -3981,9 +3981,9 @@ tool. Instead, let's use ~M-x woman~.
 And set some pretty colors
 
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute 'woman-bold nil :foreground my/blue)
-(set-face-attribute 'woman-italic nil :foreground my/orange)
-(set-face-attribute 'woman-unknown nil :foreground my/red)
+;; (set-face-attribute 'woman-bold nil :foreground my/blue)
+;; (set-face-attribute 'woman-italic nil :foreground my/orange)
+;; (set-face-attribute 'woman-unknown nil :foreground my/red)
 #+END_SRC
 
 * Auto-scroll
