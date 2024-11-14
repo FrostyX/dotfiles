@@ -3617,6 +3617,13 @@ See https://github.com/emacs-typescript/typescript.el
   :ensure t)
 #+END_SRC
 
+*** PHP
+
+#+BEGIN_SRC elisp
+(use-package php-mode
+  :ensure t)
+#+END_SRC
+
 ** Eglot
 
 #+BEGIN_SRC emacs-lisp
@@ -3722,6 +3729,15 @@ But I'd rather use Nix:
                "--" "--stdio")))
     (add-to-list 'eglot-server-programs `(typescript-mode . ,cmd))
     (add-to-list 'eglot-server-programs `(js-mode . ,cmd))))
+#+END_SRC
+
+** PHP
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'eglot
+  (let ((cmd '("nix-shell" "-p" "nodePackages.intelephense"
+               "--command" "'intelephense --stdio'")))
+    (add-to-list 'eglot-server-programs `(php-mode . ,cmd))))
 #+END_SRC
 
 ** LSP
