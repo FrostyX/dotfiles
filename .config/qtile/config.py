@@ -221,16 +221,16 @@ def get_layout_icon(name):
 
 
 workspaces = [
-    {"name": "i", "key": "i", "label": icons["chat"], "matches": [Match(wm_class=["Pidgin"])]},
-    {"name": "r", "key": "r", "label": icons["web"], "matches": [Match(wm_class=["Chromium-browser", "Firefox", "Google-chrome"])]},
+    {"name": "i", "key": "i", "label": icons["chat"], "matches": [Match(wm_class=re.compile(r"^(Pidgin)$"))]},
+    {"name": "r", "key": "r", "label": icons["web"], "matches": [Match(wm_class=re.compile(r"^(Chromium-browser|Firefox|Google-chrome)$"))]},
     {"name": "f", "key": "f", "label": icons["terminal"], "matches": []},
-    {"name": "d", "key": "d", "label": icons["dev"], "matches": [Match(wm_class=["Lispworks", "jetbrains-pycharm", "Eclipse" ])]},
-    {"name": "q", "key": "q", "label": icons["doc"], "matches": [Match(wm_class=["Acroread", "Zathura", "Evince"])]},
-    {"name": "n", "key": "n", "label": icons["misc"], "matches": [Match(wm_class=["Claws-mail"])]},
+    {"name": "d", "key": "d", "label": icons["dev"], "matches": [Match(wm_class=re.compile(r"^(Lispworks|jetbrains-pycharm|Eclipse)$"))]},
+    {"name": "q", "key": "q", "label": icons["doc"], "matches": [Match(wm_class=re.compile(r"^(Acroread|Zathura|Evince)$"))]},
+    {"name": "n", "key": "n", "label": icons["misc"], "matches": [Match(wm_class=re.compile(r"^(Claws-mail)$"))]},
     {"name": "m", "key": "m", "label": icons["ssh"]},
-    {"name": "v", "key": "v", "label": icons["virtual"], "matches": [Match(wm_class=["VirtualBox"])]},
-    {"name": "g", "key": "g", "label": icons["games"], "matches": [Match(wm_class=["Wine", "Python2.7", "Steam", "Progress"])]}, # Python2.7 is playonlinux; Progress is steam updater
-    {"name": "o", "key": "o", "label": icons["music"], "matches": [Match(wm_class=["Vlc", "Totem"])]},
+    {"name": "v", "key": "v", "label": icons["virtual"], "matches": [Match(wm_class=re.compile(r"^(VirtualBox)$"))]},
+    {"name": "g", "key": "g", "label": icons["games"], "matches": [Match(wm_class=re.compile(r"^(Wine|Python2.7|Steam|Progress)$"))]}, # Python2.7 is playonlinux; Progress is steam updater
+    {"name": "o", "key": "o", "label": icons["music"], "matches": [Match(wm_class=re.compile(r"^(Vlc|Totem)$"))]},
 ]
 
 groups = []
@@ -356,7 +356,7 @@ def create_screen(primary=False):
                 text=icons["logo"],
                 font="Font Awesome",
                 fontsize=14,
-                mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn("urxvt")},
+                mouse_callbacks = {'Button1': lambda qtile: qtile.spawn("urxvt")},
                 foreground=base16_chalk["magenta"],
                 padding_y=5,
                 **style
@@ -620,13 +620,7 @@ bring_front_click = False
 dgroups_key_binder = None
 dgroups_app_rules = [
     # floating windows
-    Rule(Match(wm_class=[
-        'Synfigstudio',
-        'Wine',
-        'Xephyr',
-        'postal2-bin',
-        'Ulauncher'
-    ]), float=True),
+    Rule(Match(wm_class=re.compile(r"^(Synfigstudio|Wine|Xephyr|postal2-bin|Ulauncher)$")), float=True),
 ]
 main = None
 cursor_warp = False
