@@ -92,7 +92,7 @@ hostname.
       linux-p       (and (eq system-type 'gnu/linux) (not android-p))
       windows-p     (eq system-type 'windows-nt)
       workstation-p (member (system-name)
-                            '("chromie" "alarak" "zeratul" "hive")))
+                            '("chromie" "alarak" "zeratul" "hive" "nova")))
 #+END_SRC
 
 * Defaults
