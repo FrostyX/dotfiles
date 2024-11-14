@@ -1,6 +1,9 @@
 ! Reload xresources configuration with
 !     xrdb ~/.Xresources
 
+! A lot of comments online recommends 192 but that's too large
+Xft.dpi: 132
+
 
 ! Base16 Chalk
 ! Scheme: Chris Kempson (http://chriskempson.com)

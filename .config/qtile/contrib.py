@@ -1,6 +1,8 @@
 #-*- coding: utf-8 -*-
 
 import os
+import re
+import subprocess
 import sqlite3
 from datetime import date
 from subprocess import Popen, PIPE
@@ -133,3 +135,40 @@ class Mu(GenPollText):
         if not stdout:
             return "0"
         return str(len(stdout.decode("utf-8").split("\n")) -1)
+
+
+def get_dpi_from_xresources():
+    """
+    See https://github.com/qtile/qtile/issues/1494#issuecomment-2193904349
+    """
+    try:
+        # Use subprocess to run the 'xrdb -query' command and capture the output
+        xrdb_output = subprocess.check_output(["xrdb", "-query"], text=True)
+
+        # Use a regular expression to find the 'Xft.dpi' value
+        match = re.search(r"Xft\.dpi:\s*(\d+)", xrdb_output)
+        if match:
+            return float(match.group(1))
+
+        # Return None if 'Xft.dpi' is not found in the output
+        return 96
+    except Exception:
+        return 96
+
+
+def set_font_size(dpi):
+    """
+    See https://github.com/qtile/qtile/issues/1494#issuecomment-2193904349
+    """
+    if dpi >= 192:
+        return 24
+    elif dpi >= 144:
+        return 20
+    elif dpi >= 120:
+        return 16
+    elif dpi >= 96:
+        return 10
+    elif dpi >= 72:
+        return 8
+    else:
+        return 6

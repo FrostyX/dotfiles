@@ -36,7 +36,7 @@ from libqtile.log_utils import logger
 from libqtile.backend.wayland import InputConfig
 from qtile_extras.widget import StatusNotifier
 
-from contrib import CurrentLayoutTextIcon
+from contrib import CurrentLayoutTextIcon, set_font_size, get_dpi_from_xresources
 
 
 # https://docs.qtile.org/en/latest/manual/troubleshooting.html
@@ -101,6 +101,9 @@ elif hostname == "hive":
 WAYLAND = False
 if qtile and qtile.core.name == "wayland":
     WAYLAND = True
+
+
+fontsize = set_font_size(get_dpi_from_xresources())
 
 
 # https://docs.qtile.org/en/latest/manual/wayland.html
@@ -297,7 +300,7 @@ floating_layout = layout.Floating(**layout_theme)
 
 widget_defaults = dict(
     font='Arial',
-    fontsize=12,
+    fontsize=fontsize,
     padding=3,
 )
 
@@ -355,7 +358,7 @@ def create_screen(primary=False):
             widget.TextBox(
                 text=icons["logo"],
                 font="Font Awesome",
-                fontsize=14,
+                fontsize=fontsize,
                 mouse_callbacks = {'Button1': lambda qtile: qtile.spawn("urxvt")},
                 foreground=base16_chalk["magenta"],
                 padding_y=5,
@@ -373,7 +376,7 @@ def create_screen(primary=False):
                 inactive=base16_chalk["gray"],
                 rounded=False,
                 font="Font Awesome",
-                fontsize=14,
+                fontsize=fontsize,
                 hide_unused=True,
                 **style,
             ),
@@ -585,7 +588,7 @@ def systray(primary=True):
     return widget.TextBox(
         icons["systray"],
         font="Font Awesome",
-        fontsize=14,
+        fontsize=fontsize,
         foreground=base16_chalk["magenta"]
     )
 
