@@ -18,6 +18,7 @@ xset b 0 0 0
 # Use e.g. `xinput list-props "Synaptics TM3289-021"` to see device properties
 xinput set-prop "Synaptics TM3289-021" "libinput Tapping Enabled" 1 # alarak
 xinput set-prop "ELAN0672:00 04F3:3187 Touchpad" "libinput Tapping Enabled" 1 # zeratul
+xinput set-prop "ELAN067B:00 04F3:31F8 Touchpad" "libinput Tapping Enabled" 1 # nova
 
 nm-applet &
 blueman-applet &
