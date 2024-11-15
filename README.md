@@ -16,6 +16,11 @@
     cd ~/.dotfiles
     git submodule update --init --recursive
 
+    # Tmux
+    mkdir -p ~/.tmux/plugins ~/.tmux/resurrect
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+
 
 ## Remove dotfiles
 
