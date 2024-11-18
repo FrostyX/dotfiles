@@ -59,7 +59,7 @@ PassCmd "pass email/jkadlcik@redhat.com@gmail.com"
 
 MaildirStore redhat-local
 Path ~/Mail/redhat/
-Inbox ~/Mail/redhat/INBOX
+Inbox ~/Mail/redhat/Inbox
 Subfolders Verbatim
 
 Channel redhat
