@@ -1,8 +1,11 @@
 ! Reload xresources configuration with
 !     xrdb ~/.Xresources
 
-! A lot of comments online recommends 192 but that's too large
-Xft.dpi: 132
+! A lot of comments online recommends 192 but thats too large
+! https://jnrowe.github.io/articles/tips/Sharing_Xresources_between_systems.html
+#ifdef SRVR_nova
+    Xft.dpi: 132
+#endif
 
 
 ! Base16 Chalk
