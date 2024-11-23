@@ -2312,7 +2312,11 @@ See [[file:devel/frostyx-treesitter.el]]
 (use-package fic-mode
   :ensure t
   :config
-  (add-hook 'prog-mode-hook 'fic-mode))
+  (add-hook 'prog-mode-hook 'fic-mode)
+  (set-face-attribute
+   'fic-face nil
+   :foreground my/red
+   :background nil))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
