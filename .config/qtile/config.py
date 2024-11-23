@@ -258,18 +258,9 @@ def dialogs(window):
         pass
 
 
-# Preivew: https://chriskempson.github.io/base16/#eighties
-# Codes: https://chriskempson.github.io/base16/css/base16-eighties.css
-colors = {
-    "greybg": "#2d2d2d",
-    "greyfg": "#d3d0c8",
-    "red": "#f2777a",
-    "blue": "#6699cc",
-    "lgrey": "#747369",
-    "green": "#99cc99",
-}
-
 base16_chalk = {
+    "background": "#2d2d2d",
+    "muted": "#747369",
     "black" : "#151515",
     "red": "#fb9fb1",
     "green": "#acc267",
@@ -278,14 +269,30 @@ base16_chalk = {
     "magenta": "#e1a3ee",
     "cyan": "#12cfc0",
     "white": "#d0d0d0",
-    "gray": "#505050",
 }
+
+catppuccin_mocha = {
+    "background": "#181825",
+    "muted": "#45475a",
+    "black": "#1e1e2e",
+    "red": "#f38ba8",
+    "green": "#a6e3a1",
+    "yellow": "#f9e2af",
+    "blue": "#89b4fa",
+    "magenta": "#f5c2e7",
+    "cyan": "#94e2d5",
+    "white": "#bac2de",
+}
+
+
+theme = catppuccin_mocha
+
 
 # http://docs.qtile.org/en/latest/manual/ref/layouts.html
 layout_theme = {
     "border_width": 1,
-    "border_focus": colors["blue"],
-    "border_normal": colors["lgrey"],
+    "border_focus": theme["blue"],
+    "border_normal": theme["muted"],
     "margin": 10,
     "single_border_width": 0,
     "single_margin": 0,
@@ -339,16 +346,17 @@ style = {
 }
 
 sep = {
-    "foreground": colors["lgrey"],
+    "foreground": theme["muted"],
     "padding": 15,
 }
 
 
 def create_screen(primary=False):
+    primary=True
     return Screen(
         # Let's have a gap on the bottom, but instead of showing a wallpaper,
         # make it seamless with emacs and termianl backgrounds
-        bottom=bar.Bar([widget.TextBox("")], 15, background=base16_chalk["black"]),
+        bottom=bar.Bar([widget.TextBox("")], 15, background=theme["black"]),
 
         top=bar.Bar([
 
@@ -360,7 +368,7 @@ def create_screen(primary=False):
                 font="Font Awesome",
                 fontsize=fontsize,
                 mouse_callbacks = {'Button1': lambda qtile: qtile.spawn("urxvt")},
-                foreground=base16_chalk["magenta"],
+                foreground=theme["magenta"],
                 padding_y=5,
                 **style
             ),
@@ -371,9 +379,9 @@ def create_screen(primary=False):
             widget.GroupBox(
                 highlight_method="text",
                 urgent_alert_method="text",
-                this_current_screen_border=base16_chalk["blue"],
-                active=base16_chalk["white"],
-                inactive=base16_chalk["gray"],
+                this_current_screen_border=theme["blue"],
+                active=theme["white"],
+                inactive=theme["muted"],
                 rounded=False,
                 font="Font Awesome",
                 fontsize=fontsize,
@@ -387,7 +395,7 @@ def create_screen(primary=False):
             CurrentLayoutTextIcon(
                 fun=get_layout_icon,
                 length=20,
-                foreground=base16_chalk["green"],
+                foreground=theme["green"],
                 font="Font Awesome",
                 **style
             ),
@@ -396,12 +404,13 @@ def create_screen(primary=False):
 
             widget.TaskList(
                 icon_size=0,
-                background=colors["greybg"],
-                foreground=base16_chalk["white"],
+                padding_y=6,
+                background=theme["background"],
+                foreground=theme["white"],
 
                 highlight_method="text",
-                border=base16_chalk["blue"],
-                urgent_border=base16_chalk["red"],
+                border=theme["blue"],
+                urgent_border=theme["red"],
             ),
 
 
@@ -412,9 +421,9 @@ def create_screen(primary=False):
             # widget.Spacer(length=100),
             # widget.Notify(
             #     default_timeout=15,
-            #     foreground=base16_chalk["white"],
-            #     foreground_low=base16_chalk["red"],
-            #     foreground_urgent=base16_chalk["red"],
+            #     foreground=theme["white"],
+            #     foreground_low=theme["red"],
+            #     foreground_urgent=theme["red"],
             #     **style
             # ),
             # widget.Spacer(length=100),
@@ -422,26 +431,26 @@ def create_screen(primary=False):
             # Emails
             # widget.TextBox(
             #     text=icons["email"],
-            #     foreground=base16_chalk["green"],
+            #     foreground=theme["green"],
             #     **style
             # ),
             # Mu(
             #     "/home/jkadlcik/Mail",
             #     "/seznam/I/BOX",
             #     "frostyx@email.cz",
-            #     foreground=base16_chalk["green"],
+            #     foreground=theme["green"],
             #     **style
             # ),
             # widget.TextBox(
             #     text=icons["gmail"],
-            #     foreground=base16_chalk["green"],
+            #     foreground=theme["green"],
             #     **style
             # ),
             # Mu(
             #     "/home/jkadlcik/Mail",
             #     "/gmail/*",
             #     "jakub.kadlcik@gmail.com",
-            #     foreground=base16_chalk["green"],
+            #     foreground=theme["green"],
             #     **style
             # ),
             # widget.Sep(**sep),
@@ -451,14 +460,14 @@ def create_screen(primary=False):
             # Temp
             widget.TextBox(
                 text=icons["temp"],
-                foreground=base16_chalk["yellow"],
+                foreground=theme["yellow"],
                 font="Font Awesome",
                 **style
             ),
             widget.ThermalSensor(
                 threshold=65,
-                foreground=base16_chalk["yellow"],
-                foreground_alert=colors["red"],
+                foreground=theme["yellow"],
+                foreground_alert=theme["red"],
                 **style
             ),
             widget.Sep(**sep),
@@ -467,15 +476,15 @@ def create_screen(primary=False):
             # Battery
             widget.TextBox(
                 text=icons["battery"],
-                foreground=base16_chalk["magenta"],
+                foreground=theme["magenta"],
                 font="Font Awesome",
                 **style
             ),
             widget.Battery(
                 battery_name=battery,
-                foreground=base16_chalk["magenta"],
+                foreground=theme["magenta"],
                 format="{percent:2.0%}",
-                low_foreground=colors["red"],
+                low_foreground=theme["red"],
                 **style
             ),
             widget.Sep(**sep),
@@ -484,14 +493,14 @@ def create_screen(primary=False):
             # Light
             widget.TextBox(
                 text=icons["light"],
-                foreground=base16_chalk["blue"],
+                foreground=theme["blue"],
                 font="Font Awesome",
                 **style
             ),
             widget.Backlight(
                 brightness_file="/sys/class/backlight/intel_backlight/actual_brightness",
                 max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness",
-                foreground=base16_chalk["blue"],
+                foreground=theme["blue"],
                 **style
             ),
             widget.Sep(**sep),
@@ -500,13 +509,13 @@ def create_screen(primary=False):
             # Volume
             widget.TextBox(
                 text=icons["volume"],
-                foreground=base16_chalk["green"],
+                foreground=theme["green"],
                 font="Font Awesome",
                 **style
             ),
             widget.Volume(
                 get_volume_command=(vol_cur.split() if vol_cur else None),
-                foreground=base16_chalk["green"],
+                foreground=theme["green"],
                 **style
             ),
             widget.Sep(**sep),
@@ -515,7 +524,7 @@ def create_screen(primary=False):
             # Available updates
             widget.TextBox(
                 text=icons["sync"],
-                foreground=base16_chalk["yellow"],
+                foreground=theme["yellow"],
                 font="Font Awesome",
                 **style
             ),
@@ -523,9 +532,9 @@ def create_screen(primary=False):
                 distro="Fedora",
                 display_format="{updates}",
                 no_update_string="0",
-                foreground=base16_chalk["yellow"],
-                colour_no_updates=base16_chalk["yellow"],
-                colour_have_updates=base16_chalk["yellow"],
+                foreground=theme["yellow"],
+                colour_no_updates=theme["yellow"],
+                colour_have_updates=theme["yellow"],
                 **style,
             ),
             widget.Sep(**sep),
@@ -535,7 +544,7 @@ def create_screen(primary=False):
             widget.Clock(
                 timezone="Europe/Prague",
                 format="%H:%M",
-                foreground=base16_chalk["magenta"],
+                foreground=theme["magenta"],
                 **style
             ),
             widget.Sep(**sep),
@@ -545,7 +554,7 @@ def create_screen(primary=False):
             widget.Clock(
                 timezone="Europe/Prague",
                 format="%d. %m. (%b) %Y",
-                foreground=base16_chalk["blue"],
+                foreground=theme["blue"],
                 **style
             ),
             widget.Sep(**sep),
@@ -555,7 +564,7 @@ def create_screen(primary=False):
             widget.Clock(
                 timezone="Europe/Prague",
                 format="#%W",
-                foreground=base16_chalk["green"],
+                foreground=theme["green"],
                 **style
             ),
             widget.Sep(**sep),
@@ -564,7 +573,7 @@ def create_screen(primary=False):
             # The meaning of this date is a private matter
             # DaysCounter(
             #     starting_date=date(year=2019, month=2, day=3),
-            #     foreground=base16_chalk["yellow"],
+            #     foreground=theme["yellow"],
             # ),
             # widget.Sep(**sep),
 
@@ -574,7 +583,7 @@ def create_screen(primary=False):
 
 
             widget.Spacer(length=5),
-        ], 25, background=colors["greybg"]),
+        ], 35, background=theme["background"]),
     )
 
 
@@ -589,7 +598,7 @@ def systray(primary=True):
         icons["systray"],
         font="Font Awesome",
         fontsize=fontsize,
-        foreground=base16_chalk["magenta"]
+        foreground=theme["magenta"]
     )
 
 
