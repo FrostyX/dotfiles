@@ -2568,6 +2568,10 @@ change some colors.
 (set-face-attribute
   'font-lock-variable-name-face nil
   :foreground my/red)
+
+(set-face-attribute
+  'font-lock-type-face nil
+  :foreground my/brown)
 #+END_SRC
 
 ** Version control
