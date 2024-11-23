@@ -4039,7 +4039,7 @@ something about it.
 Ruff is the new shiny.
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "ruff-lsp")
+(frostyx/dnf :install "ruff")
 #+END_SRC
 
 But it doesn't support code completion (yet?). So let's not use it (yet?)
