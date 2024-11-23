@@ -4334,6 +4334,13 @@ And some colors
   (set-face-attribute
    face nil
    :background (cdr (assoc 'mantle catppuccin-mocha-colors))))
+
+(dolist (face '(magit-diff-revision-summary-highlight
+                magit-diff-revision-summary))
+  (set-face-attribute
+   face nil
+   :weight 'normal
+   :foreground my/purple))
 #+END_SRC
 
 ** Git Forge
