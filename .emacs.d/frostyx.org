@@ -3106,16 +3106,48 @@ Let's have more colorful TODO keywords
    :height 90))
 
 (set-face-attribute
-  'org-block nil
-  :foreground my/lwhite)
+ 'org-block nil
+ :foreground my/lwhite)
 
 (set-face-attribute
-  'org-link nil
-  :foreground my/blue)
+ 'org-link nil
+ :foreground my/blue)
 
 ;; (set-face-attribute
 ;;   'org-tag nil
 ;;   :foreground my/lgray)
+
+(set-face-attribute
+ 'org-special-keyword nil
+ :foreground my/brown)
+
+(set-face-attribute
+ 'org-date nil
+ :foreground my/purple)
+
+(set-face-attribute
+ 'org-level-1 nil
+ :foreground my/blue)
+
+(set-face-attribute
+ 'org-level-2 nil
+ :foreground my/red)
+
+(set-face-attribute
+ 'org-level-3 nil
+ :foreground my/purple)
+
+(set-face-attribute
+ 'org-level-4 nil
+ :foreground my/yellow)
+
+(set-face-attribute
+ 'org-level-5 nil
+ :foreground my/orange)
+
+(set-face-attribute
+ 'org-level-6 nil
+ :foreground my/lblue)
 #+END_SRC
 
 **** Priorities
