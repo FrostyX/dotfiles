@@ -26,6 +26,10 @@
 
     stow -D . -d ~/.dotfiles/ -t ~
 
+## Add a new file
+
+    mv ~/.foo ~/.dotfiles/
+    stow . -d ~/.dotfiles/ -t ~
 
 ## Playbooks
 
