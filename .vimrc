@@ -27,6 +27,7 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'junegunn/goyo.vim'
 Plugin 'ElmCast/elm-vim'
 Plugin 'chriskempson/base16-vim'
+Plugin 'catppuccin/vim'
 Plugin 'tpope/vim-sleuth'
 Plugin 'ap/vim-css-color'
 Plugin 'tmhedberg/matchit'
@@ -250,6 +251,10 @@ elseif hostname == "chromie" || hostname == "localhost.localdomain" || hostname 
 	if terminal == "rxvt-xpm"
 		colorscheme base16-chalk
 	end
+
+elseif hostname == "nova" || hostname == "hive"
+	set termguicolors
+	colorscheme catppuccin_mocha
 end
 
 
