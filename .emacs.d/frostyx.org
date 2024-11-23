@@ -879,11 +879,19 @@ See http://chriskempson.com/projects/base16/
   :ensure t)
 #+END_SRC
 
-At this point, my whole desktop environment uses ~base16-chalk~
+See https://github.com/catppuccin/emacs
 
 #+BEGIN_SRC emacs-lisp
-(if workstation-p
-   (load-theme 'base16-chalk t))
+(use-package catppuccin-theme
+  :ensure t)
+#+END_SRC
+
+At this point, my whole desktop environment uses ~catppuccin~
+
+#+BEGIN_SRC emacs-lisp
+(when workstation-p
+  (setq catppuccin-flavor 'mocha)
+  (load-theme 'catppuccin t))
 #+END_SRC
 
 ** Colors
@@ -894,20 +902,39 @@ for customizing third-party packages.
 See http://chriskempson.com/projects/base16/#styling-guidelines
 
 #+BEGIN_SRC emacs-lisp
-(if workstation-p
-    (setq my/black (plist-get base16-chalk-theme-colors :base00)
-          my/gray (plist-get base16-chalk-theme-colors :base01)
-          my/lgray (plist-get base16-chalk-theme-colors :base03)
-          ;; ... grayish colors from base02 to base06
-          my/white (plist-get base16-chalk-theme-colors :base07)
-          my/red (plist-get base16-chalk-theme-colors :base08)
-          my/orange (plist-get base16-chalk-theme-colors :base09)
-          my/yellow (plist-get base16-chalk-theme-colors :base0A)
-          my/green (plist-get base16-chalk-theme-colors :base0B)
-          my/lblue (plist-get base16-chalk-theme-colors :base0C)
-          my/blue (plist-get base16-chalk-theme-colors :base0D)
-          my/purple (plist-get base16-chalk-theme-colors :base0E)
-          my/brown (plist-get base16-chalk-theme-colors :base0F)))
+(when workstation-p
+  (pcase (car custom-enabled-themes)
+    ('base16-chalk
+     (setq my/black (plist-get base16-chalk-theme-colors :base00)
+           my/gray (plist-get base16-chalk-theme-colors :base01)
+           my/lgray (plist-get base16-chalk-theme-colors :base03)
+           my/lwhite (plist-get base16-chalk-theme-colors :base05)
+           ;; ... grayish colors from base02 to base06
+           my/white (plist-get base16-chalk-theme-colors :base07)
+           my/red (plist-get base16-chalk-theme-colors :base08)
+           my/orange (plist-get base16-chalk-theme-colors :base09)
+           my/yellow (plist-get base16-chalk-theme-colors :base0A)
+           my/green (plist-get base16-chalk-theme-colors :base0B)
+           my/lblue (plist-get base16-chalk-theme-colors :base0C)
+           my/blue (plist-get base16-chalk-theme-colors :base0D)
+           my/purple (plist-get base16-chalk-theme-colors :base0E)
+           my/brown (plist-get base16-chalk-theme-colors :base0F)))
+
+    ('catppuccin
+     (setq my/black (cdr (assoc 'base catppuccin-mocha-colors))
+           my/gray (cdr (assoc 'mantle catppuccin-mocha-colors))
+           my/lgray (cdr (assoc 'subtext0 catppuccin-mocha-colors))
+           my/lwhite (cdr (assoc 'subtext1 catppuccin-mocha-colors))
+           ;; ... grayish colors from base02 to base06
+           my/white (cdr (assoc 'text catppuccin-mocha-colors))
+           my/red (cdr (assoc 'red catppuccin-mocha-colors))
+           my/orange (cdr (assoc 'flamingo catppuccin-mocha-colors))
+           my/yellow (cdr (assoc 'yellow catppuccin-mocha-colors))
+           my/green (cdr (assoc 'green catppuccin-mocha-colors))
+           my/lblue (cdr (assoc 'sapphire catppuccin-mocha-colors))
+           my/blue (cdr (assoc 'blue catppuccin-mocha-colors))
+           my/purple (cdr (assoc 'mauve catppuccin-mocha-colors))
+           my/brown (cdr (assoc 'peach catppuccin-mocha-colors))))))
 #+END_SRC
 
 The custom theme and its colors looks great on my workstation but it won't be
@@ -928,6 +955,54 @@ based on the default Emacs theme.
           my/blue "blue"
           my/purple "Purple"
           my/brown "brown"))
+#+END_SRC
+
+** Theme fixes
+
+The chosen theme configures colors for everytihng. Sometimes I am too nitpicky
+and prefer a different colors.
+
+Color of clickable URLs
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+  'link nil
+  :foreground my/blue)
+#+END_SRC
+
+Colors for forward slash searching in Evil
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+  'isearch nil
+  :weight 'normal
+  :background my/yellow)
+#+END_SRC
+
+Background of highlighted/selected text within a buffer. For example using
+visual selection in Evil or dragging mouse over text.
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+  'region nil
+  :background (cdr (assoc 'surface0 catppuccin-mocha-colors)))
+#+END_SRC
+
+Vertical lines outside of buffers
+
+#+BEGIN_SRC emacs-lisp
+(dolist (face '(fringe line-number))
+  (set-face-attribute
+   face nil
+   :background (cdr (assoc 'mantle catppuccin-mocha-colors))))
+#+END_SRC
+
+Colors of searched text matches
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+  'lazy-highlight nil
+  :background (cdr (assoc 'surface1 catppuccin-mocha-colors)))
 #+END_SRC
 
 * Frame management
@@ -1030,7 +1105,7 @@ Get rid of menu, scrollbars, toolbars and everything that can be clicked on.
    :weight 'normal
    :width 'normal
    :slant 'normal
-   :foreground (plist-get base16-chalk-theme-colors :base05)))
+   :foreground my/lwhite))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -2437,6 +2512,29 @@ See https://github.com/sebastiencs/company-box/issues/47
 (setq company-frontends '(company-tng-frontend company-box-frontend))
 #+END_SRC
 
+And some colors
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'company
+  (set-face-attribute
+   'company-tooltip-common nil
+   :foreground my/blue)
+
+  (set-face-attribute
+   'company-tooltip-common-selection nil
+   :weight 'normal
+   :foreground my/blue)
+
+  (set-face-attribute
+   'company-tooltip-selection nil
+   :foreground my/blue
+   :background my/black)
+
+  (set-face-attribute
+   'company-tooltip nil
+   :foreground my/lwhite))
+#+END_SRC
+
 ** Whitespace
 
 #+BEGIN_SRC emacs-lisp
@@ -2458,6 +2556,18 @@ option.
 #+BEGIN_SRC emacs-lisp
 (add-hook 'before-save-hook 'unix-newline)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+END_SRC
+
+** Syntax highlighting
+
+Of course, Emacs has modes for all imaginable programming languages, and they
+support syntax highlighting by default. I am just too nitpicky and want to
+change some colors.
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+  'font-lock-variable-name-face nil
+  :foreground my/red)
 #+END_SRC
 
 ** Version control
@@ -2977,6 +3087,29 @@ Let's have more colorful TODO keywords
         ("CANCELLED" . (:foreground ,my/green))))
 #+END_SRC
 
+**** Org Colors
+
+#+BEGIN_SRC emacs-lisp
+(dolist (face '(org-level-1
+                org-level-2
+                org-level-3
+                org-level-4
+                org-level-5
+                org-level-6))
+  (set-face-attribute
+   face nil
+   :weight 'normal
+   :height 90))
+
+(set-face-attribute
+  'org-block nil
+  :foreground my/lwhite)
+
+;; (set-face-attribute
+;;   'org-tag nil
+;;   :foreground my/lgray)
+#+END_SRC
+
 **** Priorities
 
 Setup TODO item priorities. My usage, starting from the highest priority will be
@@ -3279,6 +3412,18 @@ Let's bind it to some key
   "ga" 'frostyx/org-agenda-archive)
 #+END_SRC
 
+And some colors
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+  'org-super-agenda-header nil
+  :foreground my/purple)
+
+(set-face-attribute
+  'org-agenda-structure nil
+  :foreground my/purple)
+#+END_SRC
+
 **** Org Roam
 
 #+BEGIN_SRC emacs-lisp
@@ -3477,6 +3622,20 @@ See https://stackoverflow.com/a/34672923/3285282
 
 #+BEGIN_SRC emacs-lisp
 (setq browse-url-chromium-program "google-chrome")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'markdown-mode
+  (dolist (face '(markdown-header-face-1
+                  markdown-header-face-2
+                  markdown-header-face-3
+                  markdown-header-face-4
+                  markdown-header-face-5
+                  markdown-header-face-6))
+    (set-face-attribute
+     face nil
+     :weight 'normal
+     :height 90)))
 #+END_SRC
 
 *** Ascii doc
@@ -4096,6 +4255,31 @@ Make sure magit doesn't override our hydra key binding
              magit-revision-mode-map)
   "SPC" 'hydra-main/body
   "S-SPC" 'major-mode-hydra)
+#+END_SRC
+
+And some colors
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+  'magit-hash nil
+  :foreground my/blue)
+
+(set-face-attribute
+  'magit-log-author nil
+  :foreground my/blue)
+
+(set-face-attribute
+  'magit-log-date nil
+  :foreground my/lwhite)
+
+(dolist (face '(diff-hunk-header
+                magit-section-highlight
+                magit-diff-added-highlight
+                magit-diff-removed-highlight
+                magit-diff-context-highlight))
+  (set-face-attribute
+   face nil
+   :background (cdr (assoc 'mantle catppuccin-mocha-colors))))
 #+END_SRC
 
 ** Git Forge
@@ -5044,6 +5228,14 @@ Customize the font of currently highlighted line
                     :underline nil)
 #+END_SRC
 
+Customize the color of unread emails
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+  'mu4e-unread-face nil
+  :foreground my/purple)
+#+END_SRC
+
 Mu4e offers a possiblity to use symbols instead of letters, however it doesn't
 really work. The output of messages list is weirdly aligned.
 
@@ -5202,6 +5394,41 @@ See https://github.com/djcb/mu/issues/857#issuecomment-1363498998
 #+BEGIN_SRC emacs-lisp
 (setq mm-automatic-display
       (remove "text/calendar" mm-automatic-display))
+#+END_SRC
+
+Some additional color changes
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+  'mu4e-header-key-face nil
+  :foreground my/blue)
+
+(set-face-attribute
+  'mu4e-highlight-face nil
+  :weight 'normal
+  :foreground my/purple)
+
+(set-face-attribute
+  'gnus-button nil
+  :weight 'normal
+  :foreground my/blue)
+
+(set-face-attribute
+  'gnus-header-name nil
+  :weight 'normal
+  :foreground my/blue)
+
+(set-face-attribute
+  'gnus-header-content nil
+  :weight 'normal
+  :foreground my/lwhite)
+
+(dolist (face '(gnus-header-subject
+                gnus-header-from))
+  (set-face-attribute
+   face nil
+   :weight 'normal
+   :foreground my/purple))
 #+END_SRC
 
 *** Email queries
