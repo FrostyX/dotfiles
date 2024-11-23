@@ -20,6 +20,10 @@
     mkdir -p ~/.tmux/plugins ~/.tmux/resurrect
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+    tmux source-file ~/.tmux.conf
+
+    # Vim
+    vim +PluginInstall +qall
 
 
 ## Remove dotfiles
