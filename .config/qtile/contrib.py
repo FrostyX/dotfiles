@@ -159,6 +159,8 @@ def get_dpi_from_xresources():
 def set_font_size(dpi):
     """
     See https://github.com/qtile/qtile/issues/1494#issuecomment-2193904349
+    Use `xrdb -query | grep dpi` to quickly find the current DPI value
+    By default, Xorg always sets DPI to 96.
     """
     if dpi >= 192:
         return 24
@@ -167,7 +169,7 @@ def set_font_size(dpi):
     elif dpi >= 120:
         return 16
     elif dpi >= 96:
-        return 10
+        return 12
     elif dpi >= 72:
         return 8
     else:

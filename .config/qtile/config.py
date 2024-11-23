@@ -104,6 +104,7 @@ if qtile and qtile.core.name == "wayland":
 
 
 fontsize = set_font_size(get_dpi_from_xresources())
+fontsize_large = fontsize + 2
 
 
 # https://docs.qtile.org/en/latest/manual/wayland.html
@@ -366,7 +367,7 @@ def create_screen(primary=False):
             widget.TextBox(
                 text=icons["logo"],
                 font="Font Awesome",
-                fontsize=fontsize,
+                fontsize=fontsize_large,
                 mouse_callbacks = {'Button1': lambda qtile: qtile.spawn("urxvt")},
                 foreground=theme["magenta"],
                 padding_y=5,
@@ -384,7 +385,7 @@ def create_screen(primary=False):
                 inactive=theme["muted"],
                 rounded=False,
                 font="Font Awesome",
-                fontsize=fontsize,
+                fontsize=fontsize_large,
                 hide_unused=True,
                 **style,
             ),
@@ -597,7 +598,7 @@ def systray(primary=True):
     return widget.TextBox(
         icons["systray"],
         font="Font Awesome",
-        fontsize=fontsize,
+        fontsize=fontsize_large,
         foreground=theme["magenta"]
     )
 
