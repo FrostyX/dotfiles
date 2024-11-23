@@ -4289,7 +4289,8 @@ And some colors
                 magit-section-highlight
                 magit-diff-added-highlight
                 magit-diff-removed-highlight
-                magit-diff-context-highlight))
+                magit-diff-context-highlight
+                magit-blame-heading))
   (set-face-attribute
    face nil
    :background (cdr (assoc 'mantle catppuccin-mocha-colors))))
