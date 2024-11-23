@@ -3105,6 +3105,10 @@ Let's have more colorful TODO keywords
   'org-block nil
   :foreground my/lwhite)
 
+(set-face-attribute
+  'org-link nil
+  :foreground my/blue)
+
 ;; (set-face-attribute
 ;;   'org-tag nil
 ;;   :foreground my/lgray)
@@ -3635,7 +3639,16 @@ See https://stackoverflow.com/a/34672923/3285282
     (set-face-attribute
      face nil
      :weight 'normal
-     :height 90)))
+     :foreground my/blue
+     :height 90))
+
+  (set-face-attribute
+   'markdown-pre-face nil
+   :foreground my/brown)
+
+  (set-face-attribute
+   'markdown-link-face nil
+   :foreground my/blue))
 #+END_SRC
 
 *** Ascii doc
