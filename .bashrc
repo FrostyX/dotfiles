@@ -5,6 +5,7 @@ fi
 
 
 export EDITOR=vim
+export PATH="$PATH:/home/jkadlcik/.local/bin"
 export PATH="$PATH:/home/jkadlcik/.cask/bin"
 export PATH="$PATH:/home/jkadlcik/node_modules/.bin"
 
