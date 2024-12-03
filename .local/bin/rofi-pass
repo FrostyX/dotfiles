@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import time
+from subprocess import Popen, PIPE, run
+
+
+def pass_list():
+    store = os.path.expanduser("~/.password-store/")
+    passwords = []
+    for root, _dirs, files in os.walk(store):
+        for name in files:
+            if not name.endswith(".gpg"):
+                continue
+            path = os.path.join(root, name)
+            password = path.removeprefix(store).removesuffix(".gpg")
+            passwords.append(password)
+    return passwords
+
+
+def pass_show(name):
+    cmd = ["pass", "show", name]
+    proc = Popen(cmd, stdout=PIPE)
+    return proc.communicate()[0].decode("utf-8").strip()
+
+
+def rofi(choices):
+    blob = "\n".join(choices)
+    cmd = ["rofi", "-dmenu", "-i"]
+    result = run(cmd, input=blob, capture_output=True, text=True)
+    return result.stdout.strip()
+
+
+def main():
+    passwords = pass_list()
+    password = rofi(passwords)
+    if not password:
+        sys.exit(1)
+
+    secret = pass_show(password)
+    time.sleep(0.1)
+    result = run(["xdotool", "type", secret])
+    if not result:
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
