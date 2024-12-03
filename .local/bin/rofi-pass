@@ -48,7 +48,7 @@ def main():
     secret = pass_show(password)
     time.sleep(0.1)
     result = run(["xdotool", "type", secret])
-    if not result:
+    if result.returncode != 0:
         sys.exit(1)
 
 
