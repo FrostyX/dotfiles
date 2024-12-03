@@ -178,6 +178,17 @@ this safety measure and ask everytime before quiting.
 (setq confirm-kill-emacs 'y-or-n-p)
 #+END_SRC
 
+CRUX is a Collection of Ridiculously Useful eXtensions for Emacs. I am mainly
+using it for ~M-x crux-sudo-edit~ but it provides a lot of interesting
+functions.
+
+See https://github.com/bbatsov/crux
+
+#+BEGIN_SRC emacs-lisp
+(use-package crux
+  :ensure t)
+#+END_SRC
+
 ** Keep folders clean
 
 Watch this great explanation about Emacs temporary files such as backups,
