@@ -33,7 +33,7 @@
 ## Add a new file
 
     mv ~/.foo ~/.dotfiles/
-    stow . -d ~/.dotfiles/ -t ~
+    ln -s ~/.dotfiles/.foo ~/
 
 ## Playbooks
 
