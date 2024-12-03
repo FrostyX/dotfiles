@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 
+"""
+A password dialog that doesn't use clipboard.
+
+Dependencies:
+    sudo dnf install pass rofi xdotool
+"""
+
 import os
 import sys
 import time
