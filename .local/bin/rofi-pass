@@ -39,6 +39,17 @@ def rofi(choices):
     return result.stdout.strip()
 
 
+def current_keymap():
+    cmd = ["setxkbmap", "-query"]
+    result = run(cmd, capture_output=True, text=True)
+    for row in result.stdout.split("\n"):
+        if not row.startswith("layout:"):
+            continue
+        # Should return something like "cz"
+        return row.removeprefix("layout:").strip()
+    return "us"
+
+
 def main():
     passwords = pass_list()
     password = rofi(passwords)
@@ -47,6 +58,15 @@ def main():
 
     secret = pass_show(password)
     time.sleep(0.1)
+
+    # For some reason `xdtool type` doesn't respect the current keyboard layout
+    # and so it sometimes types nonsense. E.g. I have a Czech keyboard and
+    # it types y instead of z, # instead of 3, etc.
+    keymap = current_keymap()
+    result = run(["setxkbmap", keymap])
+    if result.returncode != 0:
+        sys.exit(1)
+
     result = run(["xdotool", "type", "--delay", "0", secret])
     if result.returncode != 0:
         sys.exit(1)
