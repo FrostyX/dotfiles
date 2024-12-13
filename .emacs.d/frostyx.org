@@ -3823,12 +3823,23 @@ See https://github.com/gleam-lang/gleam-mode
 See https://github.com/gleam-lang/gleam-mode/issues/12#issuecomment-2002975860
 
 #+BEGIN_SRC emacs-lisp
-(use-package gleam-ts-mode
-  :quelpa (gleam-ts-mode
+(use-package gleam-mode
+  :quelpa (gleam-mode
            :fetcher github
-           :repo "gleam-lang/gleam-mode"
-           :branch "gleam-ts-mode"
-           :files ("gleam-ts-mode.el")))
+           :repo "gleam-lang/gleam-mode"))
+#+END_SRC
+
+Automatically use treesitter mode for gleam files.
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.gleam\\'" . gleam-ts-mode))
+#+END_SRC
+
+Automatically format on save.
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'gleam-mode-hook
+          (lambda () (add-hook 'before-save-hook 'gleam-format nil t)))
 #+END_SRC
 
 *** Vimscript
