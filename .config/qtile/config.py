@@ -95,7 +95,7 @@ elif hostname in ["alarak", "zeratul", "nova"]:
 elif hostname == "hive":
     # terminal = "urxvt256c -e tmux"
     terminal = "alacritty"
-    lock = "i3lock -i /home/jkadlcik/.dotfiles/.config/qtile/img/bsod.png"
+    lock = "i3lock -t -i /home/jkadlcik/.dotfiles/.config/qtile/img/bsod.png"
 
 
 WAYLAND = False
