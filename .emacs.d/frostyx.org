@@ -3808,6 +3808,15 @@ Use the binary provided by Fedora
 (setq plantuml-default-exec-mode 'executable)
 #+END_SRC
 
+*** Elixir
+
+See https://github.com/elixir-editors/emacs-elixir
+
+#+BEGIN_SRC emacs-lisp
+(use-package elixir-mode
+  :ensure t)
+#+END_SRC
+
 *** Gleam
 
 See https://github.com/gleam-lang/gleam-mode
