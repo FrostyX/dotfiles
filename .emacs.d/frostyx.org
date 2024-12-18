@@ -2381,6 +2381,22 @@ Also see my blog post http://frostyx.cz/posts/emacs-browse-at-pagure
            :branch "pagure-commit-url"))
 #+END_SRC
 
+Browse at remote is a great package but it misses support for some forges and
+some advanced features like pointing to a different remote and branch than we
+are currently at (e.g. the ~main~ branch of the upstream remote even though we
+are currently working on some feature).
+
+#+BEGIN_SRC emacs-lisp
+(use-package git-link
+  :ensure t)
+#+END_SRC
+
+Don't only print the URLs, open them in the browser
+
+#+BEGIN_SRC emacs-lisp
+(setq git-link-open-in-browser t)
+#+END_SRC
+
 ** Indentation
 
 The ~electric-indent-mode~ is trying to be smart and do weird aggressive
