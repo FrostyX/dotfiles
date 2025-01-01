@@ -3335,13 +3335,58 @@ Let's bind it to some key
   "ga" 'frostyx/org-archive-subtree)
 #+END_SRC
 
+**** Khal
+
+See https://github.com/emacsmirror/khalel
+
+#+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "vdirsyncer")
+(frostyx/dnf :install "khal")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package khalel
+  :ensure t
+  :after org)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq khalel-import-end-date "+30d")
+(setq khalel-import-org-file "~/Org/agenda/khal.org")
+#+END_SRC
+
+On a fresh system, we need to initialize vdirsyncer.
+
+#+BEGIN_SRC
+vdirsyncer discover
+vdirsyncer sync
+#+END_SRC
+
+To make sure ~khal works~ we can try
+
+#+BEGIN_SRC
+khal list
+#+END_SRC
+
+To make sure ~khal.el~ works, we can run ~M-x khalel-import-events~.
+
+Unfortunatelly, there is no built-in synchronization timer.
+
+#+BEGIN_SRC emacs-lisp
+(setq frostyx/khalel-timer
+      (run-at-time 0 300 #'khalel-import-events))
+
+(setq khalel-import-org-file-confirm-overwrite nil)
+#+END_SRC
+
 **** Org Agenda
 
 Show agendas from these TODO files.
 
 #+BEGIN_SRC emacs-lisp
 (setq org-agenda-files '("~/Org/agenda/inbox.org"
-                         "~/Org/agenda/todo.org"))
+                         "~/Org/agenda/todo.org"
+                         "~/Org/agenda/khal.org"))
 #+END_SRC
 
 For the love of god, do not do ~\'reorganize-frame~, nor any other shenanigans.
@@ -3378,6 +3423,23 @@ see https://github.com/alphapapa/org-super-agenda/issues/50#issuecomment-8214486
 (setq org-super-agenda-header-map (make-sparse-keymap))
 #+END_SRC
 
+Start agenda from today, hide empty days, customize date format, and don't waste
+space.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-start-on-weekday nil)
+(setq org-agenda-show-all-dates nil)
+(setq org-agenda-format-date "%A")
+(setq org-agenda-block-separator nil)
+#+END_SRC
+
+Time grids are just a visual clutter.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-show-current-time-in-grid nil)
+(setq org-agenda-use-time-grid nil)
+#+END_SRC
+
 Now the actual agenda
 
 #+BEGIN_SRC emacs-lisp
@@ -3386,10 +3448,24 @@ Now the actual agenda
 
 (setq org-agenda-custom-commands
       '(("f" "FrostyX's agenda view"
-         ((alltodo
+         ((agenda
            ""
            ((org-agenda-overriding-header
-             (format-time-string "Week #%W"))
+             (format-time-string "Week #%W\n"))
+
+            (org-agenda-span 3)
+            (org-super-agenda-groups
+             '(( :anything t
+                 :order 1
+                 :transformer
+                 (--> it
+                      (replace-regexp-in-string ":jakub.kadlcik@gmail.com:" "" it))))
+
+             (:discard (:anything t)))))
+
+          (alltodo
+           ""
+           ((org-agenda-overriding-header "")
             (org-super-agenda-groups
              `(( :name ,(frostyx/org-agenda-group
                          "bookmark" "As soon as possible:")
@@ -3427,10 +3503,23 @@ TODO entry.
 
 #+BEGIN_SRC emacs-lisp
 (setq org-agenda-prefix-format
-      '((agenda . " %i %-12:c%?-12t% s")
+      '((agenda . " %?-12t")
         (todo . " - ")
         (tags . " %i %-12:c")
         (search . " %i %-12:c")))
+#+END_SRC
+
+Some custom agenda fonts
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+  'org-agenda-date nil
+  :foreground my/blue)
+
+(set-face-attribute
+  'org-agenda-date-today nil
+  :foreground my/blue
+  :weight 'normal)
 #+END_SRC
 
 I want a custom modeline for agenda.
