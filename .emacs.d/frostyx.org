@@ -2036,13 +2036,7 @@ Hydra menu for Vterm
 #+BEGIN_SRC emacs-lisp
 (major-mode-hydra-define (vterm-mode)
   (:color blue :quit-key ("q" "SPC") :title "Vterm" :idle 1.0)
-  ("Windows"
-   (("h" evil-window-left)
-    ("j" evil-window-down)
-    ("k" evil-window-up)
-    ("l" evil-window-right))
-
-   "Buffers"
+  ("Buffers"
    ((";" my/smart-buffers-list)
     ("," consult-buffer))
 
@@ -2052,7 +2046,10 @@ Hydra menu for Vterm
     ("0" (text-scale-set 0)))
 
    "Other"
-   (("s" frostyx/vterm-copy-mode)
+   (("n" evil-normal-state)
+    ("i" evil-emacs-state)
+    ("l" vterm-clear)
+    ("s" frostyx/vterm-copy-mode)
     ("t" frostyx/multi-vterm-named))))
 #+END_SRC
 
@@ -4979,6 +4976,11 @@ We can easily emulate Evil-like window management.
   "C-w s" 'evil-window-split
   "C-w v" 'evil-window-vsplit
   "C-w c" 'evil-window-delete
+
+  "C-h" 'evil-window-left
+  "C-j" 'evil-window-down
+  "C-k" 'evil-window-up
+  "C-l" 'evil-window-right
 
   ;; Prompt navigation using PageUp and PageDown
   "<prior>" 'vterm--self-insert
