@@ -3919,16 +3919,28 @@ See https://github.com/elixir-editors/emacs-elixir
   :ensure t)
 #+END_SRC
 
+LSP:
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'eglot
+  (let ((cmd '("nix" "run" "nixpkgs#elixir-ls")))
+    (add-to-list 'eglot-server-programs `(elixir-mode . ,cmd))
+    (add-to-list 'eglot-server-programs `(elixir-ts-mode . ,cmd))))
+#+END_SRC
+
 *** Gleam
 
 See https://github.com/gleam-lang/gleam-mode
 See https://github.com/gleam-lang/gleam-mode/issues/12#issuecomment-2002975860
 
 #+BEGIN_SRC emacs-lisp
-(use-package gleam-mode
-  :quelpa (gleam-mode
-           :fetcher github
-           :repo "gleam-lang/gleam-mode"))
+;; (use-package gleam-mode
+;;   :quelpa (gleam-mode
+;;            :fetcher github
+;;            :repo "gleam-lang/gleam-mode"))
+
+(use-package gleam-ts-mode
+  :ensure t)
 #+END_SRC
 
 Automatically use treesitter mode for gleam files.
