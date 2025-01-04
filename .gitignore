@@ -8,3 +8,6 @@
 !.emacs.d/img
 !.emacs.d/snippets
 !.emacs.d/devel
+
+.local/bin/*
+!.local/bin/rofi-pass
