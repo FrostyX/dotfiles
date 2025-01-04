@@ -1,0 +1,14 @@
+[calendars]
+
+  [[personal_calendar]]
+  path = ~/.calendars/personal/jakub.kadlcik@gmail.com/
+  type = discover
+  readonly = True
+  color = light magenta
+
+[locale]
+timeformat = %H:%M
+dateformat = %Y-%m-%d
+longdateformat = %Y-%m-%d %a
+datetimeformat = %Y-%m-%d %H:%M
+longdatetimeformat = %Y-%m-%d %H:%M
