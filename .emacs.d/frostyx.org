@@ -2053,6 +2053,28 @@ Hydra menu for Vterm
     ("t" frostyx/multi-vterm-named))))
 #+END_SRC
 
+**** Eat
+
+Hydra menu for Eat
+
+#+BEGIN_SRC emacs-lisp
+(major-mode-hydra-define (eat-mode)
+  (:color blue :quit-key ("q" "SPC") :title "Eat" :idle 1.0)
+  ("Buffers"
+   ((";" my/smart-buffers-list)
+    ("," consult-buffer))
+
+   "Font size"
+   (("+" text-scale-increase)
+    ("-" text-scale-decrease)
+    ("0" (text-scale-set 0)))
+
+   "Other"
+   (("n" evil-normal-state)
+    ("i" evil-emacs-state)
+    ("l" nil))))
+#+END_SRC
+
 ** Which-key
 
 Nobody can really remember all the Emacs key chords. Let's use
@@ -5122,6 +5144,7 @@ Keybindings
  "C-d" 'eat-self-input
  "C-r" 'eat-self-input
  "C-b" 'eat-self-input
+
  "C-w h" 'evil-window-left
  "C-w j" 'evil-window-down
  "C-w k" 'evil-window-up
@@ -5129,6 +5152,12 @@ Keybindings
  "C-w s" 'evil-window-split
  "C-w v" 'evil-window-vsplit
  "C-w c" 'evil-window-delete
+
+ "C-h" 'evil-window-left
+ "C-j" 'evil-window-down
+ "C-k" 'evil-window-up
+ "C-l" 'evil-window-right
+
  "C-b" 'scroll-down
  "C-f" 'scroll-up)
 #+END_SRC
