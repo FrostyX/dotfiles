@@ -6781,11 +6781,29 @@ I want the log buffer to automatically scroll down, similarly like
 See https://stackoverflow.com/a/12666854/3285282
 
 #+BEGIN_SRC emacs-lisp
-(defun frostyx/autoscroll ()
-  (set (make-local-variable 'window-point-insertion-type) t))
+;; (defun frostyx/autoscroll ()
+;;   (set (make-local-variable 'window-point-insertion-type) t))
 
-(add-hook 'ednc-view-mode-hook 'frostyx/autoscroll)
+;; (add-hook 'ednc-view-mode-hook 'frostyx/autoscroll)
 #+END_SRC
+
+I think the code above is useless. This should be what does the trick.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/ednc-scroll-down (new)
+  (ignore new)
+  (let ((buffer "*ednc-log*"))
+    (with-current-buffer buffer
+      (with-selected-window (get-buffer-window buffer 'visible)
+        (goto-char (point-max))))))
+
+(add-to-list
+ 'ednc-notification-amendment-functions
+ #'frostyx/ednc-scroll-down
+ t)
+#+END_SRC
+
+There is one caveat, you must jump to the end of the buffer.
 
 ** Database
 
