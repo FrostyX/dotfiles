@@ -189,6 +189,12 @@ See https://github.com/bbatsov/crux
   :ensure t)
 #+END_SRC
 
+Don't prompt me whether I want to follow git links
+
+#+BEGIN_SRC emacs-lisp
+(setq vc-follow-symlinks t)
+#+END_SRC
+
 ** Keep folders clean
 
 Watch this great explanation about Emacs temporary files such as backups,
