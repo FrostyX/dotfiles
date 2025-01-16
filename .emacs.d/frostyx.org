@@ -6000,7 +6000,7 @@ Finally, customize colors
 
 (set-face-attribute
  'elfeed-search-title-face nil
- :foreground "#d0d0d0") ;; Normal text foreground, we should define it somewhere
+ :foreground my/lwhite)
 
 (set-face-attribute
  'elfeed-search-feed-face nil
