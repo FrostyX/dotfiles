@@ -4098,6 +4098,10 @@ Nix package instead.
 See https://github.com/dcermak/rpm-spec-language-server
 
 #+BEGIN_SRC emacs-lisp
+(frostyx/dnf :install "rpm-spec-language-server")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
 (with-eval-after-load 'eglot
   (let ((cmd '("python3" "-m" "rpm_spec_language_server" "--stdio")))
     (add-to-list 'eglot-server-programs `(rpm-spec-mode . ,cmd))))
