@@ -91,7 +91,7 @@ configuring something.
 *** https://mayacostantini.github.io/feed.xml
 *** https://oremacs.com/atom.xml
 *** https://clarete.li/blog/rss.xml
-
+*** https://pthorpe92.dev/feed.xml
 ** Gentoo
 
 My love for Gentoo will probably never fade away. Let's at least see whats up.
