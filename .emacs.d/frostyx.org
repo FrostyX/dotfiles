@@ -1608,6 +1608,31 @@ See https://github.com/tumashu/vertico-posframe
   (vertico-posframe-mode 1))
 #+END_SRC
 
+** Minibuffer on top
+
+By default, when pressing ~M-x~, the windows are shrinked, so the buffer text
+jumps up and then when the minibuffer is closed, the text jumps back down.
+
+See https://www.reddit.com/r/emacs/comments/1i77q3o/we_are_ending_herky_jerk_window_schizophrenia/
+
+You get used to the default behavior very soon but there is a nice package that
+puts minibuffer over the normal windows.
+
+#+BEGIN_SRC emacs-lisp
+(use-package mini-ontop
+  :quelpa (mini-ontop
+           :fetcher github
+           :repo "hkjels/mini-ontop.el")
+  :config
+  (mini-ontop-mode 1))
+#+END_SRC
+
+It worked for some of my windows but not for all of them, this hack was needed.
+
+#+BEGIN_SRC emacs-lisp
+(setq mini-ontop-lines (+ vertico-count 10))
+#+END_SRC
+
 ** Hydra
 
 Hydra, a mythical Greek creature ultimatelly killed by Heracles. The beast
