@@ -407,7 +407,7 @@ def create_screen(primary=False):
 
             widget.TaskList(
                 icon_size=0,
-                padding_y=6,
+                padding_y=8,
                 background=theme["background"],
                 foreground=theme["white"],
 
@@ -601,7 +601,8 @@ def systray(primary=True):
         icons["systray"],
         font="Font Awesome",
         fontsize=fontsize_large,
-        foreground=theme["magenta"]
+        foreground=theme["magenta"],
+        padding_y=5,
     )
 
 
