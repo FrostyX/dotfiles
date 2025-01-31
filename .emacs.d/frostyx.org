@@ -7248,6 +7248,9 @@ Hint: Use ~M-x org-toggle-inline-images~ to see images in Emacs
 * Interesting packages
 I don't use these but they are worth checking out
 
+- https://github.com/neeasade/stillness-mode.el
+- https://github.com/jeffvalk/snap-indent
+- https://github.com/meqif/flymake-diagnostic-at-point/
 - https://github.com/isamert/corg.el
 - https://github.com/xenodium/ready-player
 - https://codeberg.org/rahguzar/filechooser
