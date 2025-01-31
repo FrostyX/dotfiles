@@ -4047,7 +4047,9 @@ See https://github.com/emacs-typescript/typescript.el
 
 #+BEGIN_SRC emacs-lisp
 (use-package lua-mode
-  :ensure t)
+  :ensure t
+  :hook
+  (lua-mode . (lambda () (setq c-basic-offset 2))))
 #+END_SRC
 
 ** Eglot
