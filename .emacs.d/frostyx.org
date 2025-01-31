@@ -4014,8 +4014,17 @@ Automatically use treesitter mode for gleam files.
 Automatically format on save.
 
 #+BEGIN_SRC emacs-lisp
-(add-hook 'gleam-mode-hook
-          (lambda () (add-hook 'before-save-hook 'gleam-format nil t)))
+(add-hook 'gleam-ts-mode-hook
+          (lambda () (add-hook 'before-save-hook 'gleam-ts-format nil t)))
+#+END_SRC
+
+Use Gleam LSP
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'eglot
+  (let ((cmd '("gleam" "lsp")))
+    (add-to-list 'eglot-server-programs `(gleam-mode . ,cmd))
+    (add-to-list 'eglot-server-programs `(gleam-ts-mode . ,cmd))))
 #+END_SRC
 
 *** Vimscript
