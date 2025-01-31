@@ -3423,11 +3423,14 @@ To make sure ~khal.el~ works, we can run ~M-x khalel-import-events~.
 Unfortunatelly, there is no built-in synchronization timer.
 
 #+BEGIN_SRC emacs-lisp
+;; (defun frostyx/khalel-update ()
+;;   (interactive)
+;;   (start-process "vdirsyncer-discover" nil "vdirsyncer" "discover")
+;;   (start-process "vdirsyncer-sync" nil "vdirsyncer" "sync")
+;;   (khalel-import-events))
+
 (defun frostyx/khalel-update ()
-  (interactive)
-  (start-process "vdirsyncer-discover" nil "vdirsyncer" "discover")
-  (start-process "vdirsyncer-sync" nil "vdirsyncer" "sync")
-  (khalel-import-events))
+  nil)
 
 (setq frostyx/khalel-timer
       (run-at-time 0 300 #'frostyx/khalel-update))
