@@ -681,6 +681,28 @@ See http://frostyx.cz/posts/emacs-evil-set-option
   (evil-set-option-mode))
 #+END_SRC
 
+** Evil minibuffer
+
+Sometimes we want more reasonable key bindings even in the Emacs minibuffer.
+
+#+BEGIN_SRC emacs-lisp
+(setq evil-want-minibuffer t)
+#+END_SRC
+
+It opens in insert mode so it is not noticable when not needed. The only thing
+that is too annoying is forcing us to use ~C-g~ to quit. I want ESC to keep
+working. With this, we can do ESC to switch into normal mode and then one more
+ESC to quit.
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap
+  :keymaps 'minibuffer-mode-map
+  "<escape>" #'abort-recursive-edit)
+#+END_SRC
+
+This workaround, howerver, doesn't work for Evil Ex commands (aka
+colon commands).
+
 ** Vim keybindings everywhere
 
 #+BEGIN_SRC emacs-lisp
