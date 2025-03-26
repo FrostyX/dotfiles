@@ -1975,9 +1975,10 @@ See https://github.com/jerrypnz/major-mode-hydra.el
 Press Shift+spacebar to spawn a hydra specific to the current major-mode
 
 #+BEGIN_SRC emacs-lisp
-(general-nmap "S-SPC" 'major-mode-hydra)
-(general-mmap "S-SPC" 'major-mode-hydra)
-(general-emap "S-SPC" 'major-mode-hydra)
+(general-define-key
+ :states '(emacs normal motion)
+ "S-SPC" 'major-mode-hydra
+ "C-SPC" 'major-mode-hydra)
 #+END_SRC
 
 **** Org
