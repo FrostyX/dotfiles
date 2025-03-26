@@ -10,6 +10,7 @@ export PATH="$PATH:/home/jkadlcik/.cask/bin"
 export PATH="$PATH:/home/jkadlcik/node_modules/.bin"
 
 
+alias e="TERM=xterm-direct emacsclient -c -nw"
 alias v="vagrant"
 alias dco="docker-compose"
 alias undo="git reset --soft HEAD~1"
