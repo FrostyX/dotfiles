@@ -7194,6 +7194,19 @@ pacmd move-sink-input 1712 1
 (add-to-list 'vterm-tramp-shells '("ssh" "/bin/bash"))
 #+END_SRC
 
+I really dislike connecting to SSH servers through the ~C-x C-f~ incantation
+followed by the ~/ssh:user@host:/path/to/file~ syntax. That's just too
+complicated. This package provides a nice menu.
+
+See https://github.com/FrostyX/tramp-menu
+
+#+BEGIN_SRC emacs-lisp
+(use-package tramp-menu
+  :quelpa (tramp-menu
+           :fetcher github
+           :repo "FrostyX/tramp-menu"))
+#+END_SRC
+
 * Beyond Emacs
 ** Edit with Emacs (in Google Chrome)
 /Edit with Emacs/ is a Google Chrome extension allowing to pop-up a new Emacs
