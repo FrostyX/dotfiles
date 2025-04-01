@@ -1978,7 +1978,8 @@ Press Shift+spacebar to spawn a hydra specific to the current major-mode
 (general-define-key
  :states '(emacs normal motion)
  "S-SPC" 'major-mode-hydra
- "C-SPC" 'major-mode-hydra)
+ "C-SPC" 'major-mode-hydra
+ "C-@" 'major-mode-hydra)
 #+END_SRC
 
 **** Org
@@ -3193,6 +3194,16 @@ Let's have more colorful TODO keywords
         ("BLOCKED"   . (:foreground ,my/red))
         ("DONE"      . (:foreground ,my/green))
         ("CANCELLED" . (:foreground ,my/green))))
+#+END_SRC
+
+This is a standard Org mode key binding. However, it is bound through ~<tab>~
+instead of ~TAB~ which doesn't work in terminal Emacs for some reason. This is a
+workaround.
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap
+  :keymaps 'org-mode-map
+  "TAB" 'org-cycle)
 #+END_SRC
 
 **** Org Colors
