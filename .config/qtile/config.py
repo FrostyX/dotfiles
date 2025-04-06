@@ -177,6 +177,9 @@ keys = [
         Key([], "e", lazy.spawn("flatpak run im.riot.Riot")),
         Key([], "s", lazy.spawn("flatpak run com.slack.Slack")),
         Key([], "d", lazy.spawn("flatpak run com.discordapp.Discord")),
+        Key([], "a", lazy.spawn(
+            expanduser("/home/jkadlcik/Downloads/Beeper-4.0.584.AppImage"))
+        ),
     ]),
 
     Key([sup], "p", lazy.spawn(expanduser("~/.local/bin/rofi-pass"))),
