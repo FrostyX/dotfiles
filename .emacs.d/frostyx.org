@@ -858,6 +858,11 @@ Random garbage
   "def" 'evil-jump-to-tag)
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(general-nmap
+  "gs" 'consult-imenu)
+#+END_SRC
+
 These are not exactly Vim based but I don't want to start a separate
 section. These are a life-saver for non-Evil buffers.
 
