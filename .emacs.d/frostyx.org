@@ -6176,7 +6176,8 @@ See https://github.com/skeeto/elfeed?tab=readme-ov-file#web-interface
 
 #+BEGIN_SRC emacs-lisp
 (use-package elfeed-web
-  :ensure t)
+  :ensure t
+  :disabled t)
 #+END_SRC
 
 The default port is 8080 which clashes with too many projects that I
