@@ -48,6 +48,11 @@ singlehead () {
             cmd+=" --output HDMI-A-1 --off"
             cmd+=" --output DVI-D-0 --auto"
             ;;
+        "nova")
+            cmd+=" --output DP-3-1 --off"
+            cmd+=" --output DP-3-3 --off"
+            cmd+=" --output eDP-1 --auto"
+            ;;
         *) echo "Unrecognized hostname"; exit 1;;
     esac
     $cmd
@@ -69,8 +74,17 @@ multihead () {
 
 2head () {
     cmd="xrandr"
-    cmd+=" --output HDMI-A-1 --auto --rotate left --left-of DVI-D-0"
-    cmd+=" --output DVI-D-0 --auto --primary"
+    case $HOSTNAME in
+        "nova")
+            L="eDP-1"
+            R="DP-3-1"
+            cmd+=" --output $L --auto"
+            cmd+=" --output $R --auto --above $L"
+            ;;
+        *)
+            cmd+=" --output HDMI-A-1 --auto --rotate left --left-of DVI-D-0"
+            cmd+=" --output DVI-D-0 --auto --primary"
+    esac
     $cmd
 }
 
