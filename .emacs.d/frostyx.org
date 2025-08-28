@@ -4404,6 +4404,16 @@ https://github.com/jcs-elpa/license-templates/
  :ensure t)
 #+END_SRC
 
+** Nix
+
+See https://github.com/NixOS/nix-mode
+
+#+BEGIN_SRC emacs-lisp
+(use-package nix-mode
+  :ensure t
+  :mode "\\.nix\\'")
+#+END_SRC
+
 * Writing
 
 First see some cool writing setups from other people:
