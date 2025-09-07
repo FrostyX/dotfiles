@@ -163,7 +163,7 @@ into ~.gitignore~.
 Let's have some funny message on the top of the ~*scratch*~ buffer.
 
 #+BEGIN_SRC emacs-lisp
-(setq initial-scratch-message ";; Do you even lisp, bro? ಠ_ಠ\n\n\n")
+(setq initial-scratch-message ";; Do you even lisp, bro?\n\n\n")
 #+END_SRC
 
 
