@@ -257,6 +257,18 @@ destroy all its workspaces)
 When running an upgrade manually, use ~M-x package-upgrade-all~ followed by
 ~M-x qualpa-upgrade-all~.
 
+** Thanks
+
+Automatically star all packages on GitHub.
+See https://github.com/FrostyX/thanks
+
+#+BEGIN_SRC emacs-lisp
+(use-package thanks
+  :ensure t
+  :config
+  (thanks-mode))
+#+END_SRC
+
 ** Automatical updates
 
 We want to automatically update Emacs packages in order to avoid annoying warnings
