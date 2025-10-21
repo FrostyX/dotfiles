@@ -4161,6 +4161,14 @@ recommended to limit the size to zero.
 (setq eglot-events-buffer-size 0)
 #+END_SRC
 
+Custom keybindings for buffers with Eglot enabled
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/eglot-keybinds ()
+  (define-key evil-normal-state-local-map (kbd "K") #'eldoc))
+(add-hook 'eglot-managed-mode-hook #'frostyx/eglot-keybinds)
+#+END_SRC
+
 *** Python
 
 See https://github.com/python-lsp/python-lsp-server
