@@ -4491,6 +4491,21 @@ on 80 characters.
   (frostyx/set-default-font 90))
 #+END_SRC
 
+** Moc
+
+See https://github.com/positron-solutions/moc
+
+It's what xenodium uses for his beautiful presentations,
+e.g. https://www.youtube.com/watch?v=oYHlH9NWraM
+
+#+BEGIN_SRC emacs-lisp
+(use-package moc
+  :ensure t)
+#+END_SRC
+
+Basically, select a text and press ~M-x moc-focus~. I have no idea how to move
+from slide to slide though.
+
 * Documents
 ** Man pages
 
