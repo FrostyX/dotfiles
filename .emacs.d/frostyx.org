@@ -1094,6 +1094,8 @@ just amazing.
 Let's just open everything in the current window, shall we? I can split manually
 if I want to.
 
+See https://github.com/FrostyX/current-window-only
+
 #+BEGIN_SRC emacs-lisp
 (use-package current-window-only
   :quelpa (current-window-only
