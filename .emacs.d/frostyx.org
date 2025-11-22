@@ -7357,6 +7357,7 @@ Hint: Use ~M-x org-toggle-inline-images~ to see images in Emacs
 * Interesting packages
 I don't use these but they are worth checking out
 
+- https://github.com/kljohann/turnip.el
 - https://github.com/rejeep/prodigy.el
 - https://github.com/neeasade/stillness-mode.el
 - https://github.com/jeffvalk/snap-indent
