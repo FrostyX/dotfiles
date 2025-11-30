@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+
+"""
+Open Copr projects in the web browser.
+
+Dependencies:
+    sudo dnf install python3-copr
+"""
+
+
+import sys
+from subprocess import run
+from copr.v3 import Client
+
+
+def copr_projects(ownername=None):
+    client = Client.create_from_config_file()
+    return [x.full_name for x in client.project_proxy.get_list(ownername)]
+
+
+def rofi(choices):
+    blob = "\n".join(choices)
+    cmd = ["rofi", "-dmenu", "-i"]
+    result = run(cmd, input=blob, capture_output=True, text=True)
+    return result.stdout.strip()
+
+
+def copr_url(project):
+    client = Client.create_from_config_file()
+    if project[0] == "@":
+        project = project.replace("@", "g/")
+    return "{0}/coprs/{1}/".format(client.config["copr_url"], project)
+
+
+def open_in_browser(url):
+    return run(["xdg-open", url])
+
+
+def main():
+    projects = []
+    for ownername in ["frostyx", "@copr"]:
+        projects.extend(copr_projects(ownername))
+
+    project = rofi(projects)
+    if not project:
+        sys.exit(1)
+    url = copr_url(project)
+    result = open_in_browser(url)
+    if result.returncode != 0:
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
