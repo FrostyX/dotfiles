@@ -7271,6 +7271,25 @@ See https://github.com/FrostyX/tramp-menu
            :repo "FrostyX/tramp-menu"))
 #+END_SRC
 
+* AI
+
+** agent-shell
+
+See https://github.com/xenodium/agent-shell
+See https://www.youtube.com/watch?v=R2Ucr3amgGg
+
+#+BEGIN_SRC emacs-lisp
+(use-package agent-shell
+  :ensure t)
+#+END_SRC
+
+We don't want to install some garbage using curl to shell pipe or global NPM.
+
+#+BEGIN_SRC emacs-lisp
+(setq agent-shell-anthropic-claude-command
+      '("nix" "run" "nixpkgs#claude-code-acp"))
+#+END_SRC
+
 * Beyond Emacs
 ** Edit with Emacs (in Google Chrome)
 /Edit with Emacs/ is a Google Chrome extension allowing to pop-up a new Emacs
