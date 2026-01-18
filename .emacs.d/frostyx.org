@@ -4436,6 +4436,20 @@ See https://github.com/NixOS/nix-mode
   :mode "\\.nix\\'")
 #+END_SRC
 
+** UUID
+
+I need to generate UUIDs quite often and I don't want to go to
+https://www.uuidgenerator.net/
+every time.
+
+#+BEGIN_SRC emacs-lisp
+(use-package uuidgen
+  :quelpa (uuidgen
+           :fetcher github
+           :repo "kanru/uuidgen-el"
+           :branch "master"))
+#+END_SRC
+
 * Writing
 
 First see some cool writing setups from other people:
