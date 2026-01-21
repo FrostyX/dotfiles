@@ -6705,7 +6705,6 @@ I want a simple command for connecting to Matrix
    :password (password-store-get "matrix/frostyx@matrix.org")))
 #+END_SRC
 
-
 *** Matrix rooms
 
 Don't display room icons in the top line
