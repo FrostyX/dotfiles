@@ -1,0 +1,31 @@
+---
+- name: Dependencies for my Emacs setup
+  hosts: localhost
+  become: true
+
+  tasks:
+    # TODO Enable Copr projects
+    # sudo dnf copr enable korkeala/clojure
+
+  - name: Install dependencies
+    dnf:
+      state: latest
+      name:
+        - python3-virtualenv
+        - leiningen
+        - vdirsyncer
+        - khal
+        - discount
+        - emacs-rpm-spec-mode
+        - plantuml
+        - python3-lsp-server+all
+        - rpm-spec-language-server
+        - gopls
+        - ruff
+        - udiskie
+        - libvterm
+        - w3m
+        - isync
+        - maildir-utils
+        - postgresql
+        - bluez-hid2hci

@@ -1,0 +1,12 @@
+#+TITLE: FrostyX's Emacs configuration
+#+AUTHOR: Jakub Kadlčík
+
+See [[file:frostyx.org][frostyx.org]]
+
+I used to install all my dependencies from inside of my Emacs config but it is
+too slow and often asks for passwords on config reload. That's why I moved them
+to an Ansible playbook.
+
+#+BEGIN_SRC
+ansible-playbook dependencies.yml -K
+#+END_SRC

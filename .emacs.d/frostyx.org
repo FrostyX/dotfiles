@@ -385,6 +385,30 @@ Just in case, set the package manager defaults to something expected
 (setq system-packages-use-sudo t)
 #+END_SRC
 
+An example usage of our ~frostyx/dnf~ method would be:
+
+#+BEGIN_EXAMPLE emacs-lisp
+(frostyx/dnf :install "ruff")
+#+END_EXAMPLE
+
+* Asserts
+
+Assert that a command is available in the system.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/assert-executable (name)
+  (unless (executable-find name)
+    (error (format "Executable %s not found" name))))
+#+END_SRC
+
+Assert that an RPM package is installed.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/assert-rpm (name)
+  (unless (frostyx/rpm-query name)
+    (error (format "Package %s not found" name))))
+#+END_SRC
+
 * Secrets
 
 Please do not hardcode your passwords or secret information into source code.
@@ -2870,7 +2894,7 @@ generally like to use the ~C-u~ prefix.
 *** Python
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "python3-virtualenv")
+(frostyx/assert-rpm "python3-virtualenv")
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -3019,7 +3043,7 @@ sudo dnf copr enable korkeala/clojure
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "leiningen")
+(frostyx/assert-rpm "leiningen")
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -3443,8 +3467,8 @@ Let's bind it to some key
 See https://github.com/emacsmirror/khalel
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "vdirsyncer")
-(frostyx/dnf :install "khal")
+(frostyx/assert-rpm "vdirsyncer")
+(frostyx/assert-rpm "khal")
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -3881,7 +3905,7 @@ The ~discount~ is a weird name but it in fact provides ~/usr/bin/markdown~
 command.
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "discount")
+(frostyx/assert-rpm "discount")
 #+END_SRC
 
 See https://stackoverflow.com/a/34672923/3285282
@@ -3949,7 +3973,7 @@ Besides other things, it provides a template for creating a new spec files.
 Just use ~:e ~/rpmbuild/SPECS/foo.spec~ to use it.
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "emacs-rpm-spec-mode")
+(frostyx/assert-rpm "emacs-rpm-spec-mode")
 #+END_SRC
 
 And load it.
@@ -4015,7 +4039,7 @@ See https://github.com/skuro/plantuml-mode
 Don't forget to install the ~plantuml~ package.
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "plantuml")
+(frostyx/assert-rpm "plantuml")
 #+END_SRC
 
 Use the binary provided by Fedora
@@ -4176,7 +4200,7 @@ Custom keybindings for buffers with Eglot enabled
 See https://github.com/python-lsp/python-lsp-server
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "python3-lsp-server+all")
+(frostyx/assert-rpm "python3-lsp-server+all")
 #+END_SRC
 
 *** Clojure
@@ -4198,7 +4222,7 @@ Nix package instead.
 See https://github.com/dcermak/rpm-spec-language-server
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "rpm-spec-language-server")
+(frostyx/assert-rpm "rpm-spec-language-server")
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -4210,7 +4234,7 @@ See https://github.com/dcermak/rpm-spec-language-server
 *** Golang
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "golang-x-tools-gopls")
+(frostyx/assert-rpm "gopls")
 #+END_SRC
 
 *** Javascript / Typescript
@@ -4319,7 +4343,7 @@ See https://emacs-lsp.github.io/lsp-mode/page/languages/
 See https://github.com/palantir/python-language-server
 
 #+BEGIN_SRC emacs-lisp
-;; (frostyx/dnf :install "python3-language-server")
+;; (frostyx/assert-rpm "python3-language-server")
 #+END_SRC
 
 The python language server shows deprecation warnings, I hope this is
@@ -4329,7 +4353,7 @@ something about it.
 Ruff is the new shiny.
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "ruff")
+(frostyx/assert-rpm "ruff")
 #+END_SRC
 
 But it doesn't support code completion (yet?). So let's not use it (yet?)
@@ -5017,7 +5041,7 @@ See https://gitlab.com/tuedachu/udiskie.el
 First, install the Fedora package that is internally used.
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "udiskie")
+(frostyx/assert-rpm "udiskie")
 #+END_SRC
 
 And install the Emacs ~udiskie~ pacakge
@@ -5044,7 +5068,7 @@ See https://github.com/akermu/emacs-libvterm
 Install the dependencies first
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "libvterm")
+(frostyx/assert-rpm "libvterm")
 #+END_SRC
 
 Install ~vterm~ package.
@@ -5431,7 +5455,7 @@ go - open in external browser
 First we need to install the ~w3m~ dependency.
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "w3m")
+(frostyx/assert-rpm "w3m")
 #+END_SRC
 
 Now we can install the Emacs w3m interface.
@@ -5453,7 +5477,8 @@ Unfortunatelly it is only for one email account.
 The prerequisite for this setup is having the following packages installed.
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "isync maildir-utils")
+(frostyx/assert-rpm "isync")
+(frostyx/assert-rpm "maildir-utils")
 #+END_SRC
 
 A ~mu~ index needs to be initialized with an email address.
@@ -6967,7 +6992,7 @@ There is one caveat, you must jump to the end of the buffer.
 We can use ~psql~, for sure. But why leaving Emacs?
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "postgresql")
+(frostyx/assert-rpm "postgresql")
 #+END_SRC
 
 See https://truongtx.me/2014/08/23/setup-emacs-as-an-sql-database-client
@@ -7223,7 +7248,7 @@ See:
 See https://github.com/emacsmirror/bluetooth
 
 #+BEGIN_SRC emacs-lisp
-(frostyx/dnf :install "bluez-hid2hci")
+(frostyx/assert-rpm "bluez-hid2hci")
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
