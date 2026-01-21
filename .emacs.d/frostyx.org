@@ -6886,6 +6886,7 @@ See https://github.com/FrostyX/helm-ement/
 #+BEGIN_SRC emacs-lisp
 (use-package helm-ement
   :ensure t
+  :disabled t
   :quelpa (helm-ement
            :fetcher github
            :repo "FrostyX/helm-ement"
