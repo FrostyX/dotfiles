@@ -4140,6 +4140,23 @@ See https://github.com/emacs-typescript/typescript.el
   (lua-mode . (lambda () (setq c-basic-offset 2))))
 #+END_SRC
 
+*** Vue
+
+See https://github.com/AdamNiederer/vue-mode
+
+#+BEGIN_SRC emacs-lisp
+(use-package vue-mode
+  :ensure t)
+#+END_SRC
+
+We don't want any special background.
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+ 'mmm-default-submode-face nil
+ :background nil)
+#+END_SRC
+
 ** Eglot
 
 #+BEGIN_SRC emacs-lisp
