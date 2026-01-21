@@ -6750,9 +6750,10 @@ Customize timestamp face to have the same color as in Circe. It seems
 that the color is not in our base16 theme, so we should change it.
 
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute
- 'ement-room-timestamp nil
- :foreground "#12cfc0")
+(with-eval-after-load "ement-room"
+  (set-face-attribute
+   'ement-room-timestamp nil
+   :foreground "#12cfc0"))
 #+END_SRC
 
 There is a horizontal separating the unread messages in the
@@ -6760,31 +6761,34 @@ buffer. Ideally, I would like to disable it but I can live with it
 having a gray color.
 
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute
- 'ement-room-fully-read-marker nil
- :foreground my/gray)
+(with-eval-after-load "ement-room"
+  (set-face-attribute
+   'ement-room-fully-read-marker nil
+   :foreground my/gray)
 
-(set-face-attribute
- 'ement-room-read-receipt-marker nil
- :foreground my/gray)
+  (set-face-attribute
+   'ement-room-read-receipt-marker nil
+   :foreground my/gray))
 #+END_SRC
 
 Use normal font size for lurker spam
 
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute
- 'ement-room-membership nil
- :height 90)
+(with-eval-after-load "ement-room"
+  (set-face-attribute
+   'ement-room-membership nil
+   :height 90))
 #+END_SRC
 
 Don't use any background color for messaages that are meant for me
 
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute
- 'ement-room-mention nil
- :inverse-video nil
- :foreground my/red
- :background nil)
+(with-eval-after-load "ement-room"
+  (set-face-attribute
+   'ement-room-mention nil
+   :inverse-video nil
+   :foreground my/red
+   :background nil))
 #+END_SRC
 
 Don't insert additional timestamp lines above the actual messages. This setting
@@ -6826,17 +6830,19 @@ message.
 My username should be purple
 
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute
- 'ement-room-self nil
- :foreground my/purple)
+(with-eval-after-load "ement-room-list"
+  (set-face-attribute
+   'ement-room-self nil
+   :foreground my/purple))
 #+END_SRC
 
 It is also not necessary for messages sent by me to be red
 
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute
- 'ement-room-self-message nil
- :foreground my/green)
+(with-eval-after-load "ement-room-list"
+  (set-face-attribute
+   'ement-room-self-message nil
+   :foreground my/green))
 #+END_SRC
 
 *** Matrix modeline
