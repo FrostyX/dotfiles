@@ -2503,6 +2503,8 @@ some advanced features like pointing to a different remote and branch than we
 are currently at (e.g. the ~main~ branch of the upstream remote even though we
 are currently working on some feature).
 
+See https://github.com/sshaw/git-link
+
 #+BEGIN_SRC emacs-lisp
 (use-package git-link
   :ensure t)
