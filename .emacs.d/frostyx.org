@@ -6682,6 +6682,7 @@ Now the actual ement client.
 
 #+BEGIN_SRC emacs-lisp
 (use-package ement
+  :disabled t
   :quelpa (ement :fetcher github
                  :repo "alphapapa/ement.el"))
 #+END_SRC
