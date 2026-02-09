@@ -19,13 +19,18 @@
     {
       homeConfigurations."jkadlcik" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
         modules = [ ./.config/home-manager/home.nix ];
+        extraSpecialArgs = {
+          hostname = "hive";
+        };
+      };
 
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+      homeConfigurations."jkadlcik@pop-os" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./.config/home-manager/home.nix ];
+        extraSpecialArgs = {
+          hostname = "pop-os";
+        };
       };
     };
 }

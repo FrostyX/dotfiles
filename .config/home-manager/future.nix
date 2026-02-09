@@ -1,48 +1,23 @@
-{ lib, config, ... }:
+{ lib, config, hostname, ... }:
 
-lib.mkIf (builtins.getEnv "HOSTNAME" == "pop-os") {
-  programs.git.enable = true;
+let
+  topdir = "${config.home.homeDirectory}/.dotfiles";
+  mkLink = path: config.lib.file.mkOutOfStoreSymlink "${topdir}/${path}";
 
-  home.file = {
-    ".bashrc" = {
-      source = ".bashrc";
-    };
-
-    ".config/alacritty" = {
-      source = ".config/alacritty";
-      recursive = true;
-    };
-
-    ".config/cava" = {
-      source = ".config/cava";
-      recursive = true;
-    };
-
-    ".config/home-manager" = {
-      source = ".config/home-manager";
-      recursive = true;
-    };
-
-    ".config/khal" = {
-      source = ".config/khal";
-      recursive = true;
-    };
-
-    ".config/qtile" = {
-      source = ".config/qtile";
-      recursive = true;
-    };
-
-    ".config/rofi" = {
-      source = ".config/rofi";
-      recursive = true;
-    };
-
-    ".config/vlc" = {
-      source = ".config/vlc";
-      recursive = true;
-    };
-
-  };
-
+  paths = [
+    ".bashrc"
+    ".config/alacritty"
+    ".config/cava"
+    ".config/home-manager"
+    ".config/khal"
+    ".config/qtile"
+    ".config/rofi"
+    ".config/vlc"
+  ];
+in
+lib.mkIf (hostname == "pop-os") {
+  home.file = builtins.listToAttrs (map (path: {
+    name = path;
+    value = { source = mkLink path; };
+  }) paths);
 }
