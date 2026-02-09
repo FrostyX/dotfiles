@@ -13,6 +13,19 @@ let
     ".config/qtile"
     ".config/rofi"
     ".config/vlc"
+    ".emacs.d"
+    ".gnupg/gpg-agent.conf"
+    ".local/bin"
+    ".local/share/applications/gvim.desktop"
+    ".mbsyncrc"
+    ".rpmmacros"
+    ".tmux.conf"
+    "vdirsyncer"
+    ".vim"
+    ".vimrc"
+    ".xmonad"
+    ".Xresources"
+    # TODO .zen
   ];
 in
 lib.mkIf (hostname == "pop-os") {
