@@ -1984,7 +1984,11 @@ Hydra launcher for applications
     ("t" frostyx/multi-vterm-named "Terminal (vterm)")
     ("w" eww "web (eww)")
     ("e" mu4e "email (mu4e)")
-    ("s" hydra-spotify/body "Spotify"))))
+    ("s" hydra-spotify/body "Spotify"))
+
+   "AI"
+   (("g" chatgpt-shell "ChatGPT")
+    ("c" frostyx/claude-code "Claude Code"))))
 #+END_SRC
 
 *** Configuration
@@ -7132,6 +7136,18 @@ pass insert openai/token
 (setq dall-e-shell-openai-key (password-store-get "openai/token"))
 #+END_SRC
 
+Use an existing buffer if possible
+
+#+BEGIN_SRC emacs-lisp
+(setq chatgpt-shell-always-create-new nil)
+#+END_SRC
+
+No welcome message
+
+#+BEGIN_SRC emacs-lisp
+(setq chatgpt-shell-welcome-function nil)
+#+END_SRC
+
 ** Mastodon
 
 See https://codeberg.org/martianh/mastodon.el
@@ -7353,6 +7369,21 @@ We don't want to install some garbage using curl to shell pipe or global NPM.
 #+BEGIN_SRC emacs-lisp
 (setq agent-shell-anthropic-claude-command
       '("nix" "run" "nixpkgs#claude-code-acp"))
+#+END_SRC
+
+We don't need a welcome message
+
+#+BEGIN_SRC emacs-lisp
+(setq agent-shell-show-welcome-message nil)
+#+END_SRC
+
+A helper function to start ~agent-shell~ for Claude Code or reuse an
+existing buffer.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/claude-code ()
+  (interactive)
+  (agent-shell--dwim :config (agent-shell-anthropic-make-claude-code-config)))
 #+END_SRC
 
 * Beyond Emacs
