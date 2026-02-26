@@ -148,6 +148,11 @@ keys = [
     Key([sup], "f", lazy.window.toggle_fullscreen()),
     Key([sup], "t", lazy.window.toggle_floating()),
 
+    # Move windows to the left or right. This lets us to change the master
+    # window for every layout
+    Key([mod, "shift"], "h", lazy.layout.swap_left()),
+    Key([mod, "shift"], "l", lazy.layout.swap_right()),
+
     # Process `gnome-screensaver` must run
     Key([mod, sup], "l", lazy.spawn(lock)),
 
