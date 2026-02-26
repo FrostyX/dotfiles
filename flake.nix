@@ -42,5 +42,16 @@
           hostname = "pop-os";
         };
       };
+
+      homeConfigurations."jkadlcik@nova" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          zen-browser.homeModules.beta
+          ./.config/home-manager/home.nix
+        ];
+        extraSpecialArgs = {
+          hostname = "nova";
+        };
+      };
     };
 }

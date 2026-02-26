@@ -1,6 +1,10 @@
 { lib, config, hostname, ... }:
 
 lib.mkIf (builtins.elem hostname [ "pop-os" "nova" ]) {
+  home.file.".zen/profiles.ini".force = true;
+  home.file.".zen/hpgqitks.Default (release)/user.js".force =
+    lib.mkIf (hostname == "nova") true;
+
   programs.zen-browser = {
     enable = true;
     policies = {
@@ -8,6 +12,12 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" ]) {
     };
     profiles.default = {
       isDefault = true;
+      path =
+        if (hostname == "nova")
+        then "hpgqitks.Default (release)"
+        else if (hostname == "hive")
+        then "default"
+        else "default";
 
       # settings = {
       #   "browser.startup.homepage" = "https://google.com";
