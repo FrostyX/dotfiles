@@ -4177,6 +4177,7 @@ We don't want any special background.
 
 #+BEGIN_SRC emacs-lisp
 (set-face-attribute 'flymake-warning nil :background nil :underline nil)
+(set-face-attribute 'flymake-note nil :background nil :underline nil)
 #+END_SRC
 
 The documentation pop-ups at the bottom are too annoying, disable them. Don't
