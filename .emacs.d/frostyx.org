@@ -4484,6 +4484,14 @@ See https://github.com/NixOS/nix-mode
   :mode "\\.nix\\'")
 #+END_SRC
 
+Use LSP for Nix files
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'eglot
+  (let ((cmd '("nix" "run" "nixpkgs#nil")))
+    (add-to-list 'eglot-server-programs `(nix-mode . ,cmd))))
+#+END_SRC
+
 ** UUID
 
 I need to generate UUIDs quite often and I don't want to go to
