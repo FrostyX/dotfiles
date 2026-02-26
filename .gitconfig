@@ -14,3 +14,5 @@
 	user = frostyx
 [pagure]
 	user = frostyx
+[init]
+	defaultBranch = main
