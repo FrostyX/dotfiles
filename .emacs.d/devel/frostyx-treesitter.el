@@ -33,8 +33,9 @@
   :custom
   (setq treesit-auto-install 'prompt)
   :config
+  (treesit-auto-add-to-auto-mode-alist '(gleam))
   ;; (treesit-auto-add-to-auto-mode-alist '(python clojure yaml bash css json))
-  (treesit-auto-add-to-auto-mode-alist 'all)
+  ;; (treesit-auto-add-to-auto-mode-alist 'all)
   ; (treesit-auto-install-all)
   (global-treesit-auto-mode))
 
@@ -66,3 +67,9 @@
    (elm-mode . eglot-ensure)
    (clojurescript-mode . eglot-ensure)
    (clojure-ts-mode . eglot-ensure)))
+
+
+(with-eval-after-load 'eglot
+  (let ((cmd '("gleam" "lsp")))
+    (add-to-list 'eglot-server-programs `(gleam-mode . ,cmd))
+    (add-to-list 'eglot-server-programs `(gleam-ts-mode . ,cmd))))
