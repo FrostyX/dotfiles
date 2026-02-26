@@ -70,6 +70,7 @@
   };
 
   imports = [
+    ./zen.nix
     ./future.nix
   ];
 

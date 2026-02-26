@@ -8,10 +8,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }:
+    { nixpkgs, home-manager, zen-browser, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -19,7 +23,10 @@
     {
       homeConfigurations."jkadlcik" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./.config/home-manager/home.nix ];
+        modules = [
+          zen-browser.homeModules.beta
+          ./.config/home-manager/home.nix
+        ];
         extraSpecialArgs = {
           hostname = "hive";
         };
@@ -27,7 +34,10 @@
 
       homeConfigurations."jkadlcik@pop-os" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./.config/home-manager/home.nix ];
+        modules = [
+          zen-browser.homeModules.beta
+          ./.config/home-manager/home.nix
+        ];
         extraSpecialArgs = {
           hostname = "pop-os";
         };

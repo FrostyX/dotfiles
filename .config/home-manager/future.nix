@@ -28,7 +28,7 @@ let
     # TODO .zen
   ];
 in
-lib.mkIf (hostname == "pop-os") {
+lib.mkIf (builtins.elem hostname [ "pop-os" "nova" ]) {
   home.file = builtins.listToAttrs (map (path: {
     name = path;
     value = { source = mkLink path; };
