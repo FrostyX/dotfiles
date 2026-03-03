@@ -6,12 +6,24 @@
 
     # See ~/.config/git/config
     settings = {
+      core = {
+        editor = "vim";
+      };
+      pull = {
+        rebase = true;
+      };
+      init = {
+        defaultBranch = "main";
+      };
       user = {
         name = "Jakub Kadlcik";
         email = "frostyx@email.cz";
       };
-      pull = {
-        rebase = true;
+      github = {
+        user = "frostyx";
+      };
+      pagure = {
+        user = "frostyx";
       };
       alias = {
         lol = "log --graph --decorate --pretty=oneline --abbrev-commit";
