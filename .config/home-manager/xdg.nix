@@ -10,7 +10,7 @@
     # See /home/jkadlcik/.local/share/applications/mimeapps.list
     mimeApps.defaultApplications = {
       "text/plain" = "org.kde.kwrite.desktop";
-      "text/html" = "zen-browser.desktop";
+      "text/html" = "zen-beta.desktop";
       "image/jpeg" = "org.gnome.eog.desktop";
       "image/png" = "org.gnome.eog.desktop";
       "image/webp" = "org.gnome.eog.desktop";
@@ -20,8 +20,8 @@
       "video/x-msvideo" = "vlc.desktop";
       "video/x-matroska" = "vlc.desktop";
       "application/pdf" = "okularApplication_pdf.desktop";
-      "x-scheme-handler/http" = "zen-browser.desktop";
-      "x-scheme-handler/https" = "zen-browser.desktop";
+      "x-scheme-handler/http" = "zen-beta.desktop";
+      "x-scheme-handler/https" = "zen-beta.desktop";
     };
   };
 }
