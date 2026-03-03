@@ -9,5 +9,8 @@
 !.emacs.d/snippets
 !.emacs.d/devel
 
+.local/share/applications/*
+!.local/share/applications/gvim.desktop
+
 .local/bin/*
 !.local/bin/rofi-pass
