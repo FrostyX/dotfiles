@@ -25,10 +25,9 @@ let
     ".vimrc"
     ".xmonad"
     ".Xresources"
-    # TODO .zen
   ];
 in
-lib.mkIf (builtins.elem hostname [ "pop-os" "nova" ]) {
+lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
   home.file = builtins.listToAttrs (map (path: {
     name = path;
     value = { source = mkLink path; };

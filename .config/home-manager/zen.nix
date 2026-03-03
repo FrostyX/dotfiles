@@ -1,9 +1,8 @@
 { lib, config, hostname, ... }:
 
-lib.mkIf (builtins.elem hostname [ "pop-os" "nova" ]) {
+lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
   home.file.".zen/profiles.ini".force = true;
-  home.file.".zen/hpgqitks.Default (release)/user.js".force =
-    lib.mkIf (hostname == "nova") true;
+  home.file.".zen/hpgqitks.Default (release)/user.js".force = true;
 
   programs.zen-browser = {
     enable = true;
@@ -16,7 +15,7 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" ]) {
         if (hostname == "nova")
         then "hpgqitks.Default (release)"
         else if (hostname == "hive")
-        then "default"
+        then "hpgqitks.Default (release)"
         else "default";
 
       # settings = {
@@ -100,6 +99,7 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" ]) {
         "zen.welcome-screen.seen" = true;
       };
 
+      # TODO Use the conditionally defined profile name here
       userChrome = builtins.readFile (../../.zen + "/hpgqitks.Default (release)/chrome/userChrome.css");
       userContent = builtins.readFile (../../.zen + "/hpgqitks.Default (release)/chrome/userContent.css");
     };
