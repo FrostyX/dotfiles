@@ -19,23 +19,6 @@
 
   programs.home-manager.enable = true;
 
-  programs.git = {
-    enable = true;
-
-    # See ~/.config/git/config
-    settings = {
-      user = {
-        name = "Jakub Kadlcik";
-        email = "frostyx@email.cz";
-      };
-      alias = {
-        lol = "log --graph --decorate --pretty=oneline --abbrev-commit";
-        forcepull = "!git reset --hard main && git pull --rebase";
-        foo = "log";
-      };
-    };
-  };
-
   gtk = {
     enable = true;
     # See ~/.config/gtk-3.0/settings.ini
@@ -70,6 +53,7 @@
   };
 
   imports = [
+    ./git.nix
     ./zen.nix
     ./future.nix
   ];
