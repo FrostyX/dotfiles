@@ -31,5 +31,10 @@
         foo = "log";
       };
     };
+
+    ignores = [
+      ".agent-shell"
+      "**/.claude/settings.local.json"
+    ];
   };
 }
