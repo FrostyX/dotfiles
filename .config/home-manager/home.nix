@@ -32,6 +32,7 @@
     ./git.nix
     ./xdg.nix
     ./zen.nix
+    ./symlinks.nix
     ./future.nix
   ];
 
