@@ -14,6 +14,23 @@
     EDITOR = "vim";
   };
 
+  # Fix clicking on links in Flatpak applications (e.g. Slack, Element) by
+  # exposing Nix profile paths to systemd user services
+  # (e.g. xdg-desktop-portal) so they can find and launch Nix-installed
+  # applications like zen-beta.
+  systemd.user.sessionVariables = {
+    PATH = builtins.concatStringsSep ":" [
+      "$HOME/.nix-profile/bin"
+      "/nix/var/nix/profiles/default/bin"
+      "\${PATH}"
+    ];
+    XDG_DATA_DIRS = builtins.concatStringsSep ":" [
+      "$HOME/.nix-profile/share"
+      "/nix/var/nix/profiles/default/share"
+      "\${XDG_DATA_DIRS}"
+    ];
+  };
+
   home.file = {
   };
 
