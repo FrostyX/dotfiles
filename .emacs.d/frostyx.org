@@ -252,6 +252,14 @@ The biggest blocker for me to switch to daemon mode is that Eyebrowse doesn't
 support sharing workspaces accross all frames (i.e. closing an emacsclient will
 destroy all its workspaces)
 
+Start at least one Emacs server so that we can use ~emacsclient~
+
+#+BEGIN_SRC emacs-lisp
+(setq server-name "server")
+(unless (server-running-p)
+  (server-start))
+#+END_SRC
+
 * Package management
 
 When running an upgrade manually, use ~M-x package-upgrade-all~ followed by
