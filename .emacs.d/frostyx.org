@@ -3623,6 +3623,13 @@ Now the actual agenda
                         :priority "1"))
 
                ( :name ,(frostyx/org-agenda-group
+                         "calendar" "This sprint:")
+                 :and ( :todo ("TODO" "STARTED")
+                        :priority>= "2"
+                        :tag "work"
+                        :not (:file-path "inbox")))
+
+               ( :name ,(frostyx/org-agenda-group
                          "calendar" "This week:")
                  :and ( :todo ("TODO" "STARTED")
                         :priority>= "2"
