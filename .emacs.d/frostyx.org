@@ -4521,6 +4521,15 @@ every time.
            :branch "master"))
 #+END_SRC
 
+** Other
+
+Specify major modes for not-so-standard filetypes.
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.fmf\\'" . yaml-ts-mode))
+#+END_SRC
+
 * Writing
 
 First see some cool writing setups from other people:
