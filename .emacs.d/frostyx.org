@@ -2942,6 +2942,32 @@ Use ~K~ for reading python documentation
   "K" #'lsp-describe-thing-at-point)
 #+END_SRC
 
+We don't want this indentation:
+
+#+BEGIN_SRC python
+def foo(
+        bar
+        baz
+):
+    ...
+#+END_SRC
+
+but rather:
+
+#+BEGIN_SRC python
+def foo(
+    bar
+    baz
+):
+    ...
+#+END_SRC
+
+Hence
+
+#+BEGIN_SRC emacs-lisp
+(setq python-indent-def-block-scale 1)
+#+END_SRC
+
 *** Lisp
 
 #+BEGIN_SRC emacs-lisp
