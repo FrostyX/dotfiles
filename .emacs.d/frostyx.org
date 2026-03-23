@@ -255,6 +255,7 @@ destroy all its workspaces)
 Start at least one Emacs server so that we can use ~emacsclient~
 
 #+BEGIN_SRC emacs-lisp
+(require 'server)
 (setq server-name "server")
 (unless (server-running-p)
   (server-start))
