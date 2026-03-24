@@ -97,6 +97,15 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
         "zen.view.show-newtab-button-top" = false;
         "zen.view.use-single-toolbar" = false;
         "zen.welcome-screen.seen" = true;
+
+        # Geolocation seems to be tricky. Without these settings, Zen won't
+        # even ask for permissions to find me on a map. With them, it finds me,
+        # even though on an incorrect location. It is weird, because Firefox
+        # from the host system finds me on the map perfectly.
+        # The key is taken from the official Fedora package
+        # https://src.fedoraproject.org/rpms/firefox/blob/rawhide/f/google-loc-api-key
+        "geo.provider.use_geoclue" = false;
+        "geo.provider.network.url" = "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyB2h2OuRcUgy5N-5hsZqiPW6sH3n_rptiQ";
       };
 
       # TODO Use the conditionally defined profile name here
