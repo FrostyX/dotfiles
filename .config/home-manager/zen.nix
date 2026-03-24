@@ -33,15 +33,15 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
         uiCustomization = builtins.toJSON {
           placements = {
             widget-overflow-fixed-list = [];
-            unified-extensions-area = [
-              "ublock0_raymondhill_net-browser-action"
-              "_testpilot-containers-browser-action"
-              "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
-              "languagetool-webextension_languagetool_org-browser-action"
-              "idcac-pub_guus_ninja-browser-action"
-              "_8dd384e7-fc9e-4b6a-a744-497edc3408c3_-browser-action"
-              "_c2c003ee-bd69-42a2-b0e9-6f34222cb046_-browser-action"
-            ];
+            # unified-extensions-area = [
+            #   "ublock0_raymondhill_net-browser-action"
+            #   "_testpilot-containers-browser-action"
+            #   "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
+            #   "languagetool-webextension_languagetool_org-browser-action"
+            #   "idcac-pub_guus_ninja-browser-action"
+            #   "_8dd384e7-fc9e-4b6a-a744-497edc3408c3_-browser-action"
+            #   "_c2c003ee-bd69-42a2-b0e9-6f34222cb046_-browser-action"
+            # ];
             nav-bar = [
               "back-button"
               "forward-button"
@@ -63,17 +63,17 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
               "zen-create-new-button"
             ];
           };
-          seen = [
-            "developer-button"
-            "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
-            "languagetool-webextension_languagetool_org-browser-action"
-            "idcac-pub_guus_ninja-browser-action"
-            "ublock0_raymondhill_net-browser-action"
-            "_8dd384e7-fc9e-4b6a-a744-497edc3408c3_-browser-action"
-            "_testpilot-containers-browser-action"
-            "_c2c003ee-bd69-42a2-b0e9-6f34222cb046_-browser-action"
-            "screenshot-button"
-          ];
+          # seen = [
+          #   "developer-button"
+          #   "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
+          #   "languagetool-webextension_languagetool_org-browser-action"
+          #   "idcac-pub_guus_ninja-browser-action"
+          #   "ublock0_raymondhill_net-browser-action"
+          #   "_8dd384e7-fc9e-4b6a-a744-497edc3408c3_-browser-action"
+          #   "_testpilot-containers-browser-action"
+          #   "_c2c003ee-bd69-42a2-b0e9-6f34222cb046_-browser-action"
+          #   "screenshot-button"
+          # ];
           dirtyAreaCache = [
             "nav-bar"
             "vertical-tabs"
@@ -81,7 +81,7 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
             "PersonalToolbar"
             "toolbar-menubar"
             "TabsToolbar"
-            "unified-extensions-area"
+            # "unified-extensions-area"
             "zen-sidebar-top-buttons"
             "widget-overflow-fixed-list"
           ];
