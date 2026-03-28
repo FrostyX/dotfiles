@@ -7412,7 +7412,7 @@ We don't want to install some garbage using curl to shell pipe or global NPM.
 
 #+BEGIN_SRC emacs-lisp
 (setq agent-shell-anthropic-claude-command
-      '("nix" "run" "nixpkgs#claude-code-acp"))
+      '("nix" "run" "nixpkgs#claude-agent-acp"))
 #+END_SRC
 
 We don't need a welcome message
