@@ -7502,35 +7502,6 @@ Features that I want to implement and bugs that I'd like to fix are
 reported against my dotfiles repository.
 https://github.com/FrostyX/dotfiles/issues/
 
-** Bugs
-
-I would consider this configuration mature enough and not experimental anymore
-once these TODO items are done. Try ~C-c C-c~ to toggle them.
-
-- [ ] Documentation for each piece of emacs-lisp code
-- [ ] Correct indentation for standard filetypes
-  - [ ] When writting a checklist in org mode, newline inserts 4 spaces,
-        which is wrong
-  - [ ] Unify Evil's ~O~, ~RET~ for newlines plus ~TAB~ and ~>>~
-  - [ ] Inteligent behavior of backspace
-- [ ] Correct indentation for non-standard filetypes, such as ~.elm~
-- [ ] Unified auto-completion across all programming languages
-- [ ] Not messing up whitespace by either removing or showing it
-- [ ] Code cleanup, unified way to do things
-  - [ ] All package imports using ~use-package~, even the local ones
-  - [ ] Key bindings - ~:bind~ vs ~:config~ vs whatever else
-  - [ ] Get rid of all ~:config nil~ lines
-  - [ ] Closing brackets where they should be
-- [ ] Evil ~C-o~ jumps to a file regardles of a project
-- [ ] Searching with ~/~ is somehow broken and doesn't support arrow keys
-
-
-These are less important, but we still want to keep track of them.
-
-- [ ] Inline code blocks containing commas doesn't render properly on GitHub
-- [ ] Spell checker
-
-
 But ... is it even worth it? ... Nope. It is fun though!
 
 #+CAPTION: Is It Worth The Time - xkcd.com/1205
