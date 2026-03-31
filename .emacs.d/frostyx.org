@@ -2416,6 +2416,18 @@ when the buffer should never be killed.
                 (derived-mode-p 'agent-shell-mode)))))
 #+END_SRC
 
+Tune the garbage collector to work with a higher threshold and also to collect
+mostly when Emacs is idle, to not interfere with user activity.
+
+See https://github.com/emacsmirror/gcmh
+
+#+BEGIN_SRC emacs-lisp
+(use-package gcmh
+  :ensure t
+  :config
+  (gcmh-mode 1))
+#+END_SRC
+
 * Tree sitter
 
 See [[file:devel/frostyx-treesitter.el]]
