@@ -7403,6 +7403,16 @@ See https://github.com/FrostyX/tramp-menu
 See https://github.com/xenodium/agent-shell
 See https://www.youtube.com/watch?v=R2Ucr3amgGg
 
+You will need to auth first. Just once, run
+
+#+BEGIN_SRC
+$ nix-shell -p claude-code
+$ claude
+#+END_SRC
+
+and follow the login instructions. After that, claude will start
+working in ~agent-shell~.
+
 #+BEGIN_SRC emacs-lisp
 (use-package agent-shell
   :ensure t)
@@ -7411,7 +7421,7 @@ See https://www.youtube.com/watch?v=R2Ucr3amgGg
 We don't want to install some garbage using curl to shell pipe or global NPM.
 
 #+BEGIN_SRC emacs-lisp
-(setq agent-shell-anthropic-claude-command
+(setq agent-shell-anthropic-claude-acp-command
       '("nix" "run" "nixpkgs#claude-agent-acp"))
 #+END_SRC
 
@@ -7430,6 +7440,50 @@ existing buffer.
   (agent-shell--dwim :config (agent-shell-anthropic-make-claude-code-config)))
 #+END_SRC
 
+We don't want any icons
+
+#+BEGIN_SRC emacs-lisp
+(setq agent-shell-thought-process-icon "")
+(setq agent-shell-permission-icon "")
+#+END_SRC
+
+We don't want fancy tables
+
+#+BEGIN_SRC emacs-lisp
+(setq markdown-overlays--table-use-unicode-borders nil)
+(setq markdown-overlays--table-zebra-stripe nil)
+#+END_SRC
+
+I want to enable this probably only for demos that I want to look nice and keep
+it disabled otherwise. It has a big disadvantage, you cannot simply move cursor
+to the table and copy text from it.
+
+#+BEGIN_SRC emacs-lisp
+(setq markdown-overlays-prettify-tables t)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/drop-agent-shell-status-labels (config)
+  (mapcar
+   (lambda (cell)
+     (if (eq (car cell) :face)
+         (cons :face 'default)
+       cell))
+   config))
+
+(advice-add
+ 'agent-shell--status-config
+ :filter-return
+ #'frostyx/drop-agent-shell-status-labels)
+#+END_SRC
+
+We want to search history the same way as in terminal.
+
+#+BEGIN_SRC emacs-lisp
+(general-define-key
+ :states '(normal insert)
+ "C-r" 'agent-shell-search-history)
+#+END_SRC
 
 * Exiting Emacs
 
