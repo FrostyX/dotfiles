@@ -4763,6 +4763,14 @@ And some colors
    :foreground my/purple))
 #+END_SRC
 
+Make the git scissors line as plain as possible
+
+#+BEGIN_SRC emacs-lisp
+(custom-set-faces
+ '(git-commit-comment-button
+   ((t :inherit font-lock-comment-face))))
+#+END_SRC
+
 ** Git Forge
 
 Communication over projects issues and pull requests consumes a big chunk of our
