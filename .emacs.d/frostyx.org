@@ -1675,9 +1675,9 @@ See https://github.com/tumashu/vertico-posframe
 #+BEGIN_SRC emacs-lisp
 (use-package vertico-posframe
   :ensure t
-  :disabled t
   :config
-  (setq vertico-posframe-border-width 2)
+  (setq vertico-posframe-width 140)
+  (setq vertico-posframe-border-width 7)
   (set-face-attribute 'vertico-posframe-border nil :background my/gray)
   (vertico-posframe-mode 1))
 #+END_SRC
@@ -1694,6 +1694,7 @@ puts minibuffer over the normal windows.
 
 #+BEGIN_SRC emacs-lisp
 (use-package mini-ontop
+  :disabled t
   :quelpa (mini-ontop
            :fetcher github
            :repo "hkjels/mini-ontop.el")
@@ -1706,6 +1707,11 @@ It worked for some of my windows but not for all of them, this hack was needed.
 #+BEGIN_SRC emacs-lisp
 (setq mini-ontop-lines (+ vertico-count 10))
 #+END_SRC
+
+There is also ~stillness-mode~
+https://github.com/neeasade/stillness-mode.el
+
+But both of those cause problems for me, so I just switched to ~vertico-posframe~.
 
 ** Hydra
 
