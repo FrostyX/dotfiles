@@ -2003,7 +2003,7 @@ Hydra launcher for applications
 
    "AI"
    (("g" chatgpt-shell "ChatGPT")
-    ("c" frostyx/claude-code "Claude Code"))))
+    ("c" frostyx/codex "Codex"))))
 #+END_SRC
 
 *** Configuration
@@ -7444,26 +7444,10 @@ working in ~agent-shell~.
   :ensure t)
 #+END_SRC
 
-We don't want to install some garbage using curl to shell pipe or global NPM.
-
-#+BEGIN_SRC emacs-lisp
-(setq agent-shell-anthropic-claude-acp-command
-      '("nix" "run" "nixpkgs#claude-agent-acp"))
-#+END_SRC
-
 We don't need a welcome message
 
 #+BEGIN_SRC emacs-lisp
 (setq agent-shell-show-welcome-message nil)
-#+END_SRC
-
-A helper function to start ~agent-shell~ for Claude Code or reuse an
-existing buffer.
-
-#+BEGIN_SRC emacs-lisp
-(defun frostyx/claude-code ()
-  (interactive)
-  (agent-shell--dwim :config (agent-shell-anthropic-make-claude-code-config)))
 #+END_SRC
 
 We don't want any icons
@@ -7509,6 +7493,42 @@ We want to search history the same way as in terminal.
 (general-define-key
  :states '(normal insert)
  "C-r" 'agent-shell-search-history)
+#+END_SRC
+
+** Claude Code
+
+We don't want to install some garbage using curl to shell pipe or global NPM.
+
+#+BEGIN_SRC emacs-lisp
+(setq agent-shell-anthropic-claude-acp-command
+      '("nix" "run" "nixpkgs#claude-agent-acp"))
+#+END_SRC
+
+A helper function to start ~agent-shell~ for Claude Code or reuse an
+existing buffer.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/claude-code ()
+  (interactive)
+  (agent-shell--dwim :config (agent-shell-anthropic-make-claude-code-config)))
+#+END_SRC
+
+** OpenAI Codex
+
+I don't think Codex ACP is packaged for Fedora yet
+
+#+BEGIN_SRC emacs-lisp
+(setq agent-shell-openai-codex-acp-command
+      '("nix" "run" "nixpkgs#codex-acp"))
+#+END_SRC
+
+A helper function to start ~agent-shell~ for Claude Code or reuse an
+existing buffer.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/codex ()
+  (interactive)
+  (agent-shell--dwim :config (agent-shell-openai-make-codex-config)))
 #+END_SRC
 
 * Exiting Emacs
