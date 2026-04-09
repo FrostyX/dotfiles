@@ -1,0 +1,83 @@
+#+TITLE: FrostyX's archived configuration
+#+AUTHOR: Jakub Kadlčík
+
+Pieces of my configuration that I don't need anymore but I'd like to keep them
+for archiving purposes.
+
+* Eyebrowse
+
+See https://github.com/wasamasa/eyebrowse
+
+#+BEGIN_SRC emacs-lisp
+(use-package eyebrowse
+  :ensure t
+  :config
+  (eyebrowse-mode t)
+  (eyebrowse-setup-opinionated-keys)
+
+  ;; unmap `gc' because it conflicts with `evil-commentary'
+  :bind
+  (:map evil-normal-state-map
+     ("g c" . nil)
+
+   :map evil-motion-state-map
+     ("g c" . nil)))
+#+END_SRC
+
+Besides hydra, I sometimes use leader key for quickly switching between
+eyebrowse workspaces.
+
+#+BEGIN_SRC emacs-lisp
+(evil-leader/set-key
+  "e" 'eyebrowse-switch-to-window-config)
+#+END_SRC
+
+When creating a new workspace do not copy the current window layout to it. I
+will most likely want only a single window there and split it only when
+necessary. This cryptic option means - Create a new workspace with just
+~*scratch*~ buffer.
+
+#+BEGIN_SRC emacs-lisp
+(setq eyebrowse-new-workspace t)
+#+END_SRC
+
+My workflow for opening a new project is.
+
+1. Create a new named workspace ~SPC E c~
+2. Switch to the desired project ~SPC p~
+
+Have some backups of Eyebrowse configurations in case Emacs crashes.
+
+#+BEGIN_SRC emacs-lisp
+(use-package eyebrowse-restore
+  :ensure t
+  :quelpa (eyebrowse-restore
+           :fetcher github
+           :repo "FrostyX/eyebrowse-restore"
+           :branch "main")
+  :config
+  (eyebrowse-restore-mode))
+#+END_SRC
+
+Hydra definitions for Eyebrowse commands.
+
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-eyebrowse
+  (:color blue :quit-key ("q" "SPC") :title "Presentations" :idle 1.0)
+  ("Eyebrowse"
+   (("e" eyebrowse-switch-to-window-config "Switch to config")
+    ("l" eyebrowse-last-window-config "Switch to the latest window config")
+    ("c" eyebrowse-create-named-window-config "Create a new config")
+    ("r" eyebrowse-rename-window-config "Rename a new config")
+    ("d" eyebrowse-close-window-config "Destroy a window config"))))
+#+END_SRC
+
+Hydra main entry-point allowing us acces to other hydras.
+
+#+BEGIN_EXAMPLE emacs-lisp
+(pretty-hydra-define hydra-main
+   ;; ...
+   "Workspaces"
+   (("e" eyebrowse-switch-to-window-config "switch workspace")
+    ("E" hydra-eyebrowse/body "eyebrowse")))
+#+END_EXAMPLE
