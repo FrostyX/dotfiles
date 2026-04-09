@@ -81,3 +81,829 @@ Hydra main entry-point allowing us acces to other hydras.
    (("e" eyebrowse-switch-to-window-config "switch workspace")
     ("E" hydra-eyebrowse/body "eyebrowse")))
 #+END_EXAMPLE
+
+* Bluetooth
+See https://github.com/emacsmirror/bluetooth
+
+#+BEGIN_SRC emacs-lisp
+(frostyx/assert-rpm "bluez-hid2hci")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package bluetooth
+  :if workstation-p
+  :ensure t)
+#+END_SRC
+
+See https://emacs.stackexchange.com/questions/31244/how-can-i-disable-evil-in-help-mode?rq=1
+
+#+BEGIN_SRC emacs-lisp
+(evil-set-initial-state 'bluetooth-mode 'emacs)
+(evil-add-hjkl-bindings bluetooth-mode-map 'emacs)
+#+END_SRC
+
+* Slack
+
+#+BEGIN_SRC emacs-lisp
+(use-package slack
+  :commands (slack-start)
+  :init
+  (setq slack-buffer-emojify t)
+  (setq slack-prefer-current-team t))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+;; (slack-register-team
+;;  :name "myslackteam"
+;;  :default t
+;;  :token (password-store-get "slack/token")
+;;  :cookie (password-store-get "slack/cookie"))
+#+END_SRC
+
+* Spotify
+
+For quick searches and control, ~spotify-helm-plus~ is the best available
+client. It has many shortcomings though. It seems like it requires the official
+Spotify client running on the system, it doesn't allow searching albums, and it
+doesn't customizing the output with e.g. colors or string format. Other than
+that, it works quite alright.
+
+See https://github.com/wandersoncferreira/helm-spotify-plus
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm-spotify-plus
+  :if workstation-p
+  :ensure t)
+#+END_SRC
+
+The project is an improvment of the former ~helm-spotify~, so for more
+information see the original project.
+
+See https://github.com/krisajenkins/helm-spotify
+
+On the contrary to the documentation, use ~C-z~ to see possible actions, such as
+playing the whole album.
+
+The ~helm-spotify-plus~ is only good for a fast control, it doesn't provide any
+browsing capabilities (I don't know if as a bug or feature, but it could be
+awesome). Hence, let's use some another tool for that.
+
+#+BEGIN_SRC emacs-lisp
+(use-package smudge
+  :ensure t)
+#+END_SRC
+
+Load sensitive tokens from keychain
+
+#+BEGIN_SRC emacs-lisp
+(setq smudge-oauth2-client-id (password-store-get "spotify/client-id"))
+(setq smudge-oauth2-client-secret (password-store-get "spotify/client-secret"))
+#+END_SRC
+
+Use Spotify Connect to be able to control other devices
+
+#+BEGIN_SRC emacs-lisp
+(setq smudge-transport 'connect)
+#+END_SRC
+
+See the following table for useful commands
+
+| Command                          | Description                    |
+|----------------------------------+--------------------------------|
+| smudge-my-playlists              | Show your playlists            |
+| smudge-track-search              | Search for tracks              |
+| smudge-recently-played           | List of recently played tracks |
+| smudge-controller-toggle-play    | Play/pause                     |
+| smudge-controller-next-track     | Next track                     |
+| smudge-controller-previous-track | Previous track                 |
+| smudge-select-device             | Select a playback device       |
+
+Let's add a hydra menu, so we don't have to remember the commands or shotcuts.
+
+#+BEGIN_SRC emacs-lisp
+(pretty-hydra-define hydra-spotify
+  (:color blue :quit-key ("q" "SPC") :title "Spotify" :idle 1.0)
+  ("Search"
+   (("s" helm-spotify-plus "Search in helm"))
+
+   ;; These are very likely obsolete by Window manager key bindings but it
+   ;; doesn't hurt to have a spare in case we are in a foreign environment
+   ;; just with Emacs.
+   "Control"
+   (("p" helm-spotify-plus-toggle-play-pause "Play / Pause")
+    ("<" helm-spotify-plus-previous "Previous")
+    (">" helm-spotify-plus-next "Next"))
+
+   "Browse"
+   (("P" spotify-my-playlists "My playlists")
+    ("r" sporify-recently-played "Recently played"))))
+#+END_SRC
+
+*** Vuivet
+
+TODO see Vuivet, it should have some spotify features
+
+See:
+- http://mihaiolteanu.me/vuiet/
+- https://github.com/mihaiolteanu/vuiet
+
+* Mastodon
+
+See https://codeberg.org/martianh/mastodon.el
+
+#+BEGIN_SRC emacs-lisp
+(use-package mastodon
+  :disabled t
+  :ensure t)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq mastodon-instance-url "https://fosstodon.org/")
+(setq mastodon-active-user "FrostyX")
+#+END_SRC
+
+* JIRA
+
+TODO
+
+See https://github.com/ahungry/org-jira
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-jira
+  :ensure t)
+#+END_SRC
+
+The ~org-jira~ package uses a temporary directory for storing
+generated Org files.
+
+#+BEGIN_SRC emacs-lisp
+(make-directory "~/.org-jira" t)
+#+END_SRC
+
+URL and login
+
+#+BEGIN_SRC emacs-lisp
+(setq jiralib-url
+      (concat "https://" (password-store-get "jira/redhat-host") "/"))
+(setq jiralib-user (password-store-get "jira/redhat-user"))
+#+END_SRC
+
+The ~jiralib-token~ is automatically generated after using ~M-x
+jiralib-login~ and therefore almost any ~M-x org-jira-*~ command. But
+since I am using API token instead of a password, I think I need to
+define the variable manually.
+
+#+BEGIN_SRC emacs-lisp
+(setq jiralib-token
+      (cons
+       "Authorization"
+       (concat "Bearer "
+               (auth-source-pick-first-password
+                :host (password-store-get "jira/redhat-host")))))
+#+END_SRC
+
+Don't forget to put the token into ~pass~ storage.
+
+#+BEGIN_SRC bash
+pass insert jira/issues.redhat.com
+pass insert jira/redhat-user
+pass insert jira/redhat-host
+#+END_SRC
+
+TODO
+
+#+BEGIN_SRC emacs-lisp
+(setq org-jira-jira-status-to-org-keyword-alist
+      '(("To Do" . "TODO")
+        ("In Progress" . "STARTED")
+        ("Done" . "DONE")))
+#+END_SRC
+
+Usage:
+
+org-jira-get-issues-by-board
+org-jira-refresh-issues-in-buffer
+
+* Matrix
+
+See https://matrix.org/
+If confused, use web client https://app.element.io
+
+In Emacs, we are going to use Ement.el
+See https://github.com/alphapapa/ement.el
+
+We need to install ~plz~ dependency first.
+
+#+BEGIN_SRC emacs-lisp
+(use-package plz
+  :quelpa (plz :fetcher github
+               :repo "alphapapa/plz.el"))
+#+END_SRC
+
+Now the actual ement client.
+
+#+BEGIN_SRC emacs-lisp
+(use-package ement
+  :disabled t
+  :quelpa (ement :fetcher github
+                 :repo "alphapapa/ement.el"))
+#+END_SRC
+
+I have two accounts, ~@frostyx:fedora.im~ and
+~@frostyx:matrix.org~. So far I have now idea if I need them both or
+not, if I can connect from Fedora account to matrix.org rooms and how
+to connect to the Fedora account from ement.
+
+Use ~M-x ement-connect~ to open the client.
+Use ~M-x ement-disconnect~ for quitting.
+
+I want a simple command for connecting to Matrix
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/ement-connect ()
+  (interactive)
+  (ement-connect
+   :user-id "@frostyx:matrix.org"
+   :password (password-store-get "matrix/frostyx@matrix.org")))
+#+END_SRC
+
+*** Matrix rooms
+
+Don't display room icons in the top line
+
+#+BEGIN_SRC emacs-lisp
+(setq ement-room-avatars nil)
+#+END_SRC
+
+There is some colision with Evil key bindings. Ement doesn't have a prompt, see
+https://github.com/alphapapa/ement.el/issues/55
+so you need to start writing message by pressing ~RET~. Reply to a message can
+be done via ~S-RET~ but that works by default.
+
+#+BEGIN_SRC emacs-lisp
+(general-nmap
+  :keymaps 'ement-room-mode-map
+  "RET" 'ement-room-send-message)
+#+END_SRC
+
+Don't put any prefixes and suffixes into room names. They have
+specific major modes anyway, so we know what those buffers are.
+
+#+BEGIN_SRC emacs-lisp
+(setq ement-room-buffer-name-prefix "")
+(setq ement-room-buffer-name-suffix "")
+#+END_SRC
+
+I am trying to imitate 15 years of my IRC user experience, that
+started with Irssi, hence no margins and both timestamp and nick on
+the left.
+
+#+BEGIN_SRC emacs-lisp
+(setq ement-room-right-margin-width 0)
+(setq ement-room-left-margin-width 0)
+(setq ement-room-message-format-spec "[%t] <%S>  %B%r")
+#+END_SRC
+
+Save a little bit of space by not showing seconds in timestamps
+
+#+BEGIN_SRC emacs-lisp
+(setq ement-room-timestamp-format "%H:%M")
+#+END_SRC
+
+Customize timestamp face to have the same color as in Circe. It seems
+that the color is not in our base16 theme, so we should change it.
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load "ement-room"
+  (set-face-attribute
+   'ement-room-timestamp nil
+   :foreground "#12cfc0"))
+#+END_SRC
+
+There is a horizontal separating the unread messages in the
+buffer. Ideally, I would like to disable it but I can live with it
+having a gray color.
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load "ement-room"
+  (set-face-attribute
+   'ement-room-fully-read-marker nil
+   :foreground my/gray)
+
+  (set-face-attribute
+   'ement-room-read-receipt-marker nil
+   :foreground my/gray))
+#+END_SRC
+
+Use normal font size for lurker spam
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load "ement-room"
+  (set-face-attribute
+   'ement-room-membership nil
+   :height 90))
+#+END_SRC
+
+Don't use any background color for messaages that are meant for me
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load "ement-room"
+  (set-face-attribute
+   'ement-room-mention nil
+   :inverse-video nil
+   :foreground my/red
+   :background nil))
+#+END_SRC
+
+Don't insert additional timestamp lines above the actual messages. This setting
+is not ideal and might sometime cause printing blank lines.
+
+#+BEGIN_SRC emacs-lisp
+(setq ement-room-timestamp-header-format "")
+(setq ement-room-timestamp-header-with-date-format "")
+#+END_SRC
+
+*** Matrix room list
+
+Don't show room avatars
+
+#+BEGIN_SRC emacs-lisp
+(setq ement-room-list-avatars nil)
+#+END_SRC
+
+No bold faces
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load "ement-room-list"
+  (dolist (face '(ement-room-user
+                  ement-room-list-unread
+                  ement-room-self))
+    (set-face-attribute face nil :weight 'normal)))
+#+END_SRC
+
+The default color for direct messages looks too much like an unread
+message.
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load "ement-room-list"
+  (set-face-attribute
+   'ement-room-list-direct nil
+   :foreground my/purple))
+#+END_SRC
+
+My username should be purple
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load "ement-room-list"
+  (set-face-attribute
+   'ement-room-self nil
+   :foreground my/purple))
+#+END_SRC
+
+It is also not necessary for messages sent by me to be red
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load "ement-room-list"
+  (set-face-attribute
+   'ement-room-self-message nil
+   :foreground my/green))
+#+END_SRC
+
+*** Matrix modeline
+
+Define a custom modeline for Ement
+
+#+BEGIN_SRC emacs-lisp
+(doom-modeline-def-modeline 'frostyx-ement
+ (cl-set-difference frostyx/doom-modeline-middle-segments
+                    '(buffer-info-simple major-mode buffer-position))
+
+ (cl-set-difference frostyx/doom-modeline-right-segments
+                    '(buffer-position)))
+#+END_SRC
+
+And apply it for all Ement major modes
+
+#+BEGIN_SRC emacs-lisp
+(setq frostyx/ement-major-modes '(ement-room-mode))
+
+(dolist (mode frostyx/ement-major-modes)
+  (add-to-list 'frostyx/tracking-major-modes mode)
+  (add-to-list 'doom-modeline-mode-alist (cons mode 'frostyx-ement)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+;; This doesn't work but it will be very usefull for my implementation
+;; https://gist.github.com/viiru-/685134a1781816e83df68520a4862599
+;;
+;; This works
+;; (tracking-add-buffer (get-buffer "Fedora Devel"))
+#+END_SRC
+
+*** Helm ement
+
+I'd like to avoid switching Ement buffers using the default "dashboard". Let's
+try helm interface.
+
+See https://github.com/FrostyX/helm-ement/
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm-ement
+  :ensure t
+  :disabled t
+  :quelpa (helm-ement
+           :fetcher github
+           :repo "FrostyX/helm-ement"
+           :branch "main"))
+#+END_SRC
+
+*** Matrix TODO
+
+- Sending messages via ~M-x ement-room-send-message~ is just awful. I
+  want prompt like Circe has
+- Showing lag and channels in modeline
+- Room membership messages starts with a space and it annoys the hell
+  out of me
+- Hide the whole headerline. We know the room name from buffer name
+- We desperatelly need to have customizable tabulated list format for
+  the room list view
+- We need to format reply messages better
+- Unread indicator in the room list is incorrect
+- We need to reduce lurker spam like in Circe
+- Configure automatical reconnect, so we don't have to run ~M-x
+  ement-connect~ when buffer is not syncing
+- We need to have a variable for configuring accounts, so they don't have to be
+  inserted on ~M-x ement-connect~
+- I just don't want any ~ement-room-timestamp-header-format~ lines
+- We need automatical scroll of the rooms
+
+* IRC
+
+There are several Emacs IRC clients available (such as ERC, rcirc and others)
+but Circe is the one trying to be modern and be pretty out of the box.
+
+See https://github.com/jorgenschaefer/circe
+
+Temporarily we want to install Circe from a patched source
+https://github.com/jorgenschaefer/circe/pull/384
+
+#+BEGIN_SRC emacs-lisp
+(use-package circe
+  :if workstation-p
+  :quelpa (circe :fetcher github
+                 :repo "FrostyX/circe"
+                 :branch "circe-tracking-colors"))
+#+END_SRC
+
+Do not forget to kill circe and run it again after modifying
+~circe-network-options~ variable.
+
+** Network & channels
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-network-options
+      `(("Libera"
+         :host "irc.libera.chat"
+         :port 6697
+         :tls t
+         :nick "FrostyX"
+         :sasl-username "FrostyX"
+         :sasl-password ,(password-store-get "irc/libera-password")
+         :nickserv-nick "FrostyX"
+         :nickserv-password ,(password-store-get "irc/libera-password")
+         :channels ("#fedora"
+                    "#fedora-admin"
+                    "#fedora-buildsys"
+                    "#fedora-websites"
+                    "#fedora-devel"
+                    "#fedora-noc"
+                    "#fedora-python"
+                    "#fedora-haskell"
+                    "#fedora-cs"
+                    "#fedora-apps"
+                    "#copr-team"
+                    "#tito"
+                    "#emacs"
+                    "#emacs-circe"))
+
+        ("OFTC"
+         :tls t
+         :nick "FrostyX"
+         :channels ("#qtile"))
+
+        ("RedHat"
+         :host ,(password-store-get "irc/redhat-host")
+         :port 6667
+         :tls nil
+         :nick "jkadlcik"
+         :channels ("#brno" "#copr"))
+
+        ("Gnome"
+         :host "irc.gnome.org"
+         :port 6667
+         :tls nil
+         :nick "FrostyX"
+         :channels ("#nautilus"))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun my/circe ()
+  (interactive)
+  (circe "Libera")
+  (circe "OFTC")
+  (circe "RedHat"))
+#+END_SRC
+
+** General configuration
+
+Make sure that we see lags and automatically reconnects if we got disconnected.
+
+#+BEGIN_SRC emacs-lisp
+(circe-lagmon-mode)
+#+END_SRC
+
+By default, circe only tries to reconnect back to server a given number of times
+and then gives up. We want to keep trying indefinitely even though it is not
+recommended.
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-server-max-reconnect-attempts nil)
+#+END_SRC
+
+Let us know that it is a new day so we can go to bed already.
+
+FIXME I needed to disable it oterwise it messes with tracking
+
+#+BEGIN_SRC emacs-lisp
+;; (enable-circe-new-day-notifier)
+#+END_SRC
+
+Living without TAB completion for nicknames is out of the question.
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-use-cycle-completion t)
+#+END_SRC
+
+But we definitelly don't want to use helm for it.
+
+See https://github.com/jorgenschaefer/circe/wiki/Configuration#tab-completion
+
+#+BEGIN_SRC emacs-lisp
+(setq my/circe-major-modes
+      '(circe-channel-mode
+        circe-query-mode
+        circe-server-mode))
+(setq helm-mode-no-completion-in-region-in-modes my/circe-major-modes)
+#+END_SRC
+
+Don't put server name into the buffer name
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-chat-buffer-name "{target}")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun my/circe-autoscroll ()
+  (setq scroll-down-aggressively 0.5))
+(add-hook 'lui-mode-hook 'my/circe-autoscroll)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq lui-time-stamp-only-when-changed-p nil)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-reduce-lurker-spam t)
+#+END_SRC
+
+TODO If you want to quit IRC ... insert funny joke from wiki use
+     ~M-x kill-buffer~ and select the freenode server buffer.
+
+Chat history is important. Enable logging.
+
+#+BEGIN_SRC emacs-lisp
+(setq lui-logging-directory "~/.emacs.d/circe")
+(load "lui-logging" nil t)
+(enable-lui-logging-globally)
+#+END_SRC
+
+** Circe Modeline
+
+See the newest buffer activity fist. But also, prioritize notifications over
+just normal messages in a channel.
+
+#+BEGIN_SRC emacs-lisp
+(setq tracking-most-recent-first t)
+(setq tracking-sort-faces-first t)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq tracking-shorten-buffer-names-p nil)
+#+END_SRC
+
+I would prefer to set maximum with of the segment (probably in percentages in
+ratio to the current width of the bar/window) but that doesn't seem to be
+supported and I don't want to implement the feature right now, so let's just set
+the maximum number of displayed buffers in the tracking segment. If we don't do
+so, the output might get too lengthy and not be displayed at all. This still
+might happen, when the channel names are too long but it's better than nothing.
+
+#+BEGIN_SRC emacs-lisp
+(setq tracking-max-mode-line-entries 3)
+#+END_SRC
+
+Define a custom modeline segment for showing a list of channels with activity.
+See https://github.com/TheBB/spaceline/issues/39#issuecomment-218469366
+
+TODO we want better colors here, highlight needs to be red
+
+#+BEGIN_SRC emacs-lisp
+(setq frostyx/tracking-major-modes my/circe-major-modes)
+
+(doom-modeline-def-segment circe-track
+  (when (and tracking-buffers
+             (member major-mode frostyx/tracking-major-modes))
+    (mapcar
+     (lambda (x)
+       (cond ((equal x ",") " , ")
+             ((equal x " [") " [ ")
+             ((equal x "] ") " ] ")
+             (t x)))
+     (tracking-status))))
+#+END_SRC
+
+Define a custom modeline segment for showing the current IRC network lag.
+
+TODO When lag <= 0.1, show "online" in green color
+
+#+BEGIN_SRC emacs-lisp
+(doom-modeline-def-segment circe-lagmon
+  (when (and circe-lagmon-mode
+             (member major-mode my/circe-major-modes))
+    (circe-lagmon-format-mode-line-entry)))
+#+END_SRC
+
+Define a custom modeline for circe
+
+#+BEGIN_SRC emacs-lisp
+(doom-modeline-def-modeline 'frostyx-circe
+ (cl-set-difference frostyx/doom-modeline-middle-segments
+                    '(buffer-info-simple major-mode buffer-position))
+
+ (cl-set-difference frostyx/doom-modeline-right-segments
+                    '(buffer-position)))
+#+END_SRC
+
+And apply it for all circe major modes
+
+#+BEGIN_SRC emacs-lisp
+(dolist (mode my/circe-major-modes)
+  (add-to-list 'doom-modeline-mode-alist (cons mode 'frostyx-circe)))
+#+END_SRC
+
+Customize modeline colors for channels and personal messages
+
+#+BEGIN_SRC emacs-lisp
+(if (and workstation-p (fboundp #'circe-tracking-get-face))
+	(progn
+	  (setq tracking-get-face-function #'circe-tracking-get-face)
+	  (set-face-attribute 'circe-tracking-channel-face nil :foreground my/white)
+	  (set-face-attribute 'circe-tracking-query-face nil :foreground my/blue)))
+#+END_SRC
+
+** Circe Notifications
+
+By default, circe doesn't support notifications. Luckily it is a matter of
+installing one additional package.
+
+See https://github.com/eqyiel/circe-notifications
+
+#+BEGIN_SRC emacs-lisp
+(use-package circe-notifications
+  :if workstation-p
+  :ensure t
+  :config
+  (enable-circe-notifications))
+#+END_SRC
+
+By default, typical ~libnotify~ notifications are sent. You can emulate them by
+~/usr/bin/notify-send~ command. This is not what I like.
+My notification style of choice is setting window urgency. Window managers
+typically know that there is an urgent window on some workspace/group and
+highlight them in the panel.
+
+See https://github.com/jwiegley/alert#builtin-alert-styles
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-notifications-alert-style 'x11)
+#+END_SRC
+
+It doesn't matter when I was notified from some user the last time. Notify me
+again. It's not spam.
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-notifications-wait-for 0)
+#+END_SRC
+
+** Messages format
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-format-say "<{nick}>  {body}")
+#+END_SRC
+
+See https://github.com/jorgenschaefer/circe/wiki/Configuration#inline-nick-reply
+
+#+BEGIN_SRC emacs-lisp
+(setq circe-format-self-say "<{nick}>  {body}")
+#+END_SRC
+
+Finally, let's configure circe colors.
+
+My nick highlighted in the chat but more importantly color of a buffer where
+I was mentioned, in the circe-tracking modeline segment
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'circe-highlight-nick-face nil :foreground my/red)
+#+END_SRC
+
+Hard wrap at 70 characters. This is a limit specifically for the message
+body. With timestamp prefix, the columns are basically 80 characters long.
+
+#+BEGIN_SRC emacs-lisp
+(setq lui-fill-column 70)
+#+END_SRC
+
+Ideally we would like to indent the message to the
+exact column that it started but it is not that easy. So until then, indent new
+lines of a message with a typical 4 spaces.
+
+#+BEGIN_SRC emacs-lisp
+(setq lui-fill-type "    ")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq lui-time-stamp-position 'left)
+(setq lui-time-stamp-format "[%H:%M]  ")
+#+END_SRC
+
+** Prompt
+
+See https://github.com/jorgenschaefer/circe/wiki/Configuration#channel-name-in-the-prompt
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'circe-chat-mode-hook 'my-circe-prompt)
+(defun my-circe-prompt ()
+  (lui-set-prompt
+   (concat "[" (propertize (buffer-name) 'face 'circe-prompt-face) "]  ")))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(enable-circe-color-nicks)
+#+END_SRC
+
+Sometimes it is usefull to just navigate with arrow keys in prompt to repeat
+previous messages. By default, this feature is bound to ~M-p~ and ~M-n~ but it
+coildes with my Window Manager key bindings, so let's just use arrow keys. I use
+~hjkl~ for movement anyway.
+
+#+BEGIN_SRC emacs-lisp
+(define-key circe-channel-mode-map (kbd "<up>") 'lui-previous-input)
+(define-key circe-channel-mode-map (kbd "<down>") 'lui-next-input)
+#+END_SRC
+
+** Helm support for Circe
+
+See https://emacs.stackexchange.com/a/37515
+
+TODO Use https://github.com/lesharris/helm-circe instead
+
+#+BEGIN_SRC emacs-lisp
+(setq my/circe-buffers-source
+  (helm-make-source "Circe Buffers" 'helm-source-buffers
+    :buffer-list
+    (lambda ()
+      (mapcar #'buffer-name
+              (cl-remove-if-not
+               (lambda (buf)
+                 (with-current-buffer buf
+                   (derived-mode-p 'lui-mode)))
+               (buffer-list))))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun my/circe-switch-to-buffer ()
+  (interactive)
+  (let ((helm-source-buffers-list my/circe-buffers-source))
+    (consult-buffer)))
+#+END_SRC
+
+** Circe TODO
+
+TODO my messages format
+TODO time stamp gray color and remove brackts
+TODO Day changed message like in weechat
+TODO logging file format like weechat has, see ~lui-logging-file-format~
+TODO change message format (date should go before nick)
+
+TODO ignore non-user messages in tracklist
+TODO read message from tracklist when switching window (not only when switching buffer)
