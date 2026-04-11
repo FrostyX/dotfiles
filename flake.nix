@@ -53,5 +53,12 @@
           hostname = "nova";
         };
       };
+
+      nixosConfigurations.fizzlebang = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./nixos/fizzlebang.nix
+        ];
+      };
     };
 }
