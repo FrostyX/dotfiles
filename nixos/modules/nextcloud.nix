@@ -1,4 +1,6 @@
 { config, pkgs, ... }: {
+  age.secrets.nextcloud.file = ../secrets/nextcloud.age;
+
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud32;
@@ -8,7 +10,7 @@
     database.createLocally = true;
     config = {
       dbtype = "pgsql";
-      adminpassFile = "/run/secrets/nextcloud-adminpass";
+      adminpassFile = config.age.secrets.nextcloud.path;
     };
   };
 

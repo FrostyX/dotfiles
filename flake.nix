@@ -12,10 +12,14 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    { nixpkgs, home-manager, zen-browser, ... }:
+    { nixpkgs, home-manager, zen-browser, agenix, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -57,6 +61,7 @@
       nixosConfigurations.fizzlebang = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
+          agenix.nixosModules.default
           ./nixos/fizzlebang.nix
         ];
       };

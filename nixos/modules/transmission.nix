@@ -1,4 +1,6 @@
 { config, pkgs, ... }: {
+  age.secrets.transmission.file = ../secrets/transmission.age;
+
   services.transmission = {
     enable = true;
     package = pkgs.transmission_4;
@@ -12,7 +14,6 @@
       rename-partial-files = false;
       lpd-enabled = true;
     };
-    # rpc-password should go in credentialsFile to keep it out of the nix store:
-    # credentialsFile = "/run/secrets/transmission-credentials";
+    credentialsFile = config.age.secrets.transmission.path;
   };
 }
