@@ -22,6 +22,8 @@
       {
         Services = [
           { Radarr = { href = "http://localhost:7878"; }; }
+          { Sonarr = { href = "http://localhost:8989"; }; }
+          { Lidarr = { href = "http://localhost:8686"; }; }
           { Bazarr = { href = "http://localhost:6767"; }; }
           { Prowlarr = { href = "http://localhost:9696"; }; }
           { Transmission = { href = "http://localhost:9091"; }; }

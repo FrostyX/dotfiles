@@ -13,4 +13,14 @@
     enable = true;
     openFirewall = true;
   };
+
+  services.sonarr = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  services.lidarr = {
+    enable = true;
+    openFirewall = true;
+  };
 }
