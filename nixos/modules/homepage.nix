@@ -3,6 +3,7 @@
     enable = true;
     openFirewall = true;
     listenPort = 8082;
+    allowedHosts = "home.abathur.cz";
     settings = {
       title = "Abathur";
       theme = "light";
@@ -24,17 +25,17 @@
         # add a "Published application route" for every new service here.
         # CloudFlare -> Zero Trust -> Networks -> Connectors -> Cloudflare Tunnels
         Services = [
-          { Radarr = { href = "http://localhost:7878"; }; }
-          { Sonarr = { href = "http://localhost:8989"; }; }
-          { Lidarr = { href = "http://localhost:8686"; }; }
-          { Bazarr = { href = "http://localhost:6767"; }; }
-          { Prowlarr = { href = "http://localhost:9696"; }; }
-          { Transmission = { href = "http://localhost:9091"; }; }
-          { Jellyfin = { href = "http://localhost:8096"; }; }
+          { Radarr = { href = "https://radarr.abathur.cz"; }; }
+          { Sonarr = { href = "https://sonarr.abathur.cz"; }; }
+          { Lidarr = { href = "https://lidarr.abathur.cz"; }; }
+          { Bazarr = { href = "https://bazarr.abathur.cz"; }; }
+          { Prowlarr = { href = "https://prowlarr.abathur.cz"; }; }
+          { Transmission = { href = "https://transmission.abathur.cz"; }; }
+          { Jellyfin = { href = "https://jellyfin.abathur.cz"; }; }
           { Syncthing = { href = "#"; }; }
-          { NextCloud = { href = "http://localhost:8080"; }; }
+          { NextCloud = { href = "https://nextcloud.abathur.cz"; }; }
           { Cockpit = { href = "#"; }; }
-          { Kuma = { href = "http://localhost:3001"; }; }
+          { Kuma = { href = "https://kuma.abathur.cz"; }; }
         ];
       }
     ];
