@@ -40,6 +40,8 @@
     vim
     lsof
   ];
+
+  console.keyMap = "cz-qwertz";
   services.openssh.enable = true;
 
   system.stateVersion = "23.11";
