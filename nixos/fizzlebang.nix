@@ -42,6 +42,18 @@
   ];
 
   console.keyMap = "cz-qwertz";
+
+  # Configuration for when building a VM and running it locally
+  virtualisation.vmVariant.virtualisation = {
+    memorySize = 2048;
+    forwardPorts = [
+      # Connect from the host system with:
+      # ssh -p 2222 jkadlcik@127.0.0.1
+      { from = "host"; host.port = 2222; guest.port = 22; }
+    ];
+  };
+
+
   services.openssh.enable = true;
 
   system.stateVersion = "23.11";
