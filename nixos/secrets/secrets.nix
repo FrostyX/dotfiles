@@ -1,10 +1,9 @@
 let
   jkadlcik = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCxZWz5K+BGQnVrirgJi+3pQhGY6+N6iiM1+u9jIOy4cC32DUnhRiUXBMfTqBQN0/0g2mG8W/Jn3Hmvzjet89Yk2rwcIzOghJ0mKLKYxbdVxgzMQRNmHmpIIis8yBfqHkNz5OO2BtxqckaQ5/xHQTwnYSLRCyNpi68ZwJUOzdvnL9y9zpH5IDJNQ6RlscLc/u6zQk9My3uPpNkwELE4brCQffHN1zc6MkDfVlVVqamWuF04YpqjoOWBe67aepUjC49eZy6uoWwxYg7IwPeZd1KyBg2y5W0dHj3OfXobv0bv4Bo/MXaMsEexJqlF4qF5A1wx2j5DIXlf4Lr8gyU9Td42C4CU2AkVjaue1e91Ay+ggotkOCEz+Wv5DKjOiTNWGS3InChbRYO2728pB6mjEh5w3I7RGF+ixtfk1w3GtVgU71uFquN3gFvVptDts/dQumsbyIl/ft0oi+FrodRH4Oz2Cb+FnDoOTMtQl5ykxzpJCDGWPr2ZXbcdIb0zFlmVnK0fjoSmpgmEwZG8Fpl2eVzxzIbM64L8+Qdr8VmTMNnmd6Z7ID8hR4qab5OBxh2IKhmashL4gZKPvsyuzfPu4sYXtIDZNBzi5sA31eTqogh1Cj6JEsUW/h+V3c7g7y3dtR3DGnPqM0H79yAlPdE5GOVq2A8OQT4snYPI+y9PrC9Hzw== jkadlcik@redhat.com";
-  # TODO: add fizzlebang host key once the server is running:
-  # fizzlebang = "ssh-ed25519 AAAA...";
+  fizzlebang = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILNBSDutNaL7ghVhQ0rzCMWwcrNruNVhrkp5V5dEsH79";
 in
 {
-  "transmission.age".publicKeys = [ jkadlcik ];
-  "nextcloud.age".publicKeys = [ jkadlcik ];
-  "cloudflared.age".publicKeys = [ jkadlcik ];
+  "transmission.age".publicKeys = [ jkadlcik fizzlebang ];
+  "nextcloud.age".publicKeys = [ jkadlcik fizzlebang ];
+  "cloudflared.age".publicKeys = [ jkadlcik fizzlebang ];
 }

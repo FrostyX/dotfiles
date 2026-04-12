@@ -4,6 +4,7 @@
   users.users.jkadlcik = {
     isNormalUser = true;
     password = "test";
+    extraGroups = [ "wheel" ];
   };
 
   imports = [
@@ -13,6 +14,7 @@
     ./modules/jellyfin.nix
     ./modules/uptime-kuma.nix
     ./modules/homepage.nix
+    ./modules/cloudflared.nix
   ];
 
   services.openssh.enable = true;
