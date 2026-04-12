@@ -20,6 +20,9 @@
     ];
     services = [
       {
+        # If this host is exposed via CloudFlare Tunnels, don't forget to
+        # add a "Published application route" for every new service here.
+        # CloudFlare -> Zero Trust -> Networks -> Connectors -> Cloudflare Tunnels
         Services = [
           { Radarr = { href = "http://localhost:7878"; }; }
           { Sonarr = { href = "http://localhost:8989"; }; }
