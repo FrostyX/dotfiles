@@ -36,6 +36,7 @@
           { NextCloud = { href = "https://nextcloud.abathur.cz"; }; }
           { Cockpit = { href = "#"; }; }
           { Kuma = { href = "https://kuma.abathur.cz"; }; }
+          { NAS = { href = "https://192.168.1.187:9443"; }; }
         ];
       }
     ];
