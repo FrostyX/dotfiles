@@ -17,9 +17,9 @@
   };
 
   fileSystems."/mnt/data1" = {
-    device = "192.168.1.187:/volume1/data1";
+    device = "192.100.2.1:/volume1/data1";
     fsType = "nfs";
-    options = [ "nfsvers=4" "soft" "x-systemd.automount" "noauto" ];
+    options = [ "nfsvers=3" "soft" "x-systemd.automount" "noauto" ];
   };
 
   swapDevices = [
