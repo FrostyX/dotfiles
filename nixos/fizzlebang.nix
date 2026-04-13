@@ -23,6 +23,7 @@
   #   9696  Prowlarr
 
   imports = [
+    ./hardware/fizzlebang.nix
     ./modules/arr.nix
     ./modules/transmission.nix
     ./modules/nextcloud.nix
