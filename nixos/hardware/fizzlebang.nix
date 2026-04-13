@@ -16,6 +16,12 @@
     fsType = "ext4";
   };
 
+  fileSystems."/mnt/data1" = {
+    device = "192.168.1.187:/volume1/data1";
+    fsType = "nfs";
+    options = [ "nfsvers=4" "soft" "x-systemd.automount" "noauto" ];
+  };
+
   swapDevices = [
     { device = "/dev/disk/by-uuid/6c8ba969-c81f-4889-a8e2-fd9013d5f18c"; }
   ];
