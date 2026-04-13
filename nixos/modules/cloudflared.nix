@@ -1,8 +1,5 @@
 { config, pkgs, ... }: {
-  age.secrets.cloudflared = {
-    file = ../secrets/cloudflared.age;
-    symlink = false;
-  };
+  age.secrets.cloudflared.file = ../secrets/cloudflared.age;
 
   services.cloudflared = {
     enable = true;
