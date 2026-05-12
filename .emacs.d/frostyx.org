@@ -1989,7 +1989,8 @@ Hydra launcher for applications
 
    "AI"
    (("g" chatgpt-shell "ChatGPT")
-    ("c" frostyx/codex "Codex"))))
+    ("c" frostyx/claude-code "Claude")
+    ("p" frostyx/claude-code-homeless "Homeless Claude"))))
 #+END_SRC
 
 *** Configuration
@@ -6538,13 +6539,6 @@ See https://github.com/FrostyX/tramp-menu
 See https://github.com/xenodium/agent-shell
 See https://www.youtube.com/watch?v=R2Ucr3amgGg
 
-You will need to auth first. Just once, run
-
-#+BEGIN_SRC
-$ nix-shell -p claude-code
-$ claude
-#+END_SRC
-
 and follow the login instructions. After that, claude will start
 working in ~agent-shell~.
 
@@ -6622,6 +6616,39 @@ existing buffer.
   (agent-shell--dwim :config (agent-shell-anthropic-make-claude-code-config)))
 #+END_SRC
 
+You will need to auth first. Just once, run
+
+#+BEGIN_SRC
+$ nix-shell -p claude-code
+$ claude
+#+END_SRC
+
+I personally use "Claude account with subscription · Pro, Max, Team, or
+Enterprise"
+
+If it doesn't fix Claude in ~agent-shell~, we can try checking OpenCode
+
+#+BEGIN_SRC
+nix-shell -p opencode
+opencode
+#+END_SRC
+
+I like Claude for asking questions much more than ChatGPT but new browser tab
+is so much easier to open than choosing the right project in Emacs, and opening
+~agent-shell~ with its initial prompts. I want a quick command for dumb
+questions.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/claude-code-homeless ()
+  (interactive)
+  (let ((agent-shell-text-file-capabilities nil))
+    (agent-shell--start
+     :config (agent-shell-anthropic-make-claude-code-config)
+     :no-focus nil
+     :new-session t
+     :session-strategy 'new)))
+#+END_SRC
+
 ** OpenAI Codex
 
 I don't think Codex ACP is packaged for Fedora yet
@@ -6629,6 +6656,12 @@ I don't think Codex ACP is packaged for Fedora yet
 #+BEGIN_SRC emacs-lisp
 (setq agent-shell-openai-codex-acp-command
       '("nix" "run" "nixpkgs#codex-acp"))
+#+END_SRC
+
+Maybe we should try the jailed binary in the future.
+
+#+BEGIN_SRC emacs-lisp
+;; (setq agent-shell-openai-codex-acp-command '("codex-acp-jailed"))
 #+END_SRC
 
 A helper function to start ~agent-shell~ for Claude Code or reuse an
