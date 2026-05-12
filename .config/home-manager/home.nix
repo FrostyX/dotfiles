@@ -46,6 +46,8 @@
 
 
   imports = [
+    ./claude.nix
+    ./codex.nix
     ./git.nix
     ./xdg.nix
     ./zen.nix

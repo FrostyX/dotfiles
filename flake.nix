@@ -16,13 +16,29 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    jail-nix.url = "sourcehut:~alexdavid/jail.nix";
+    nixpkgs-acp.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
   outputs =
-    { nixpkgs, home-manager, zen-browser, agenix, ... }:
+    { nixpkgs, home-manager, zen-browser, agenix, jail-nix, nixpkgs-acp, ... }:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfreePredicate = pkg:
+          builtins.elem (nixpkgs.lib.getName pkg) [
+            "claude-code"
+          ];
+      };
+      acpPkgs = import nixpkgs-acp {
+        inherit system;
+        config.allowUnfreePredicate = pkg:
+          builtins.elem (nixpkgs-acp.lib.getName pkg) [
+            "claude-code"
+          ];
+      };
+      jail = jail-nix.lib.init pkgs;
     in
     {
       homeConfigurations."jkadlcik" = home-manager.lib.homeManagerConfiguration {
@@ -33,6 +49,7 @@
         ];
         extraSpecialArgs = {
           hostname = "hive";
+          inherit jail acpPkgs;
         };
       };
 
@@ -44,6 +61,7 @@
         ];
         extraSpecialArgs = {
           hostname = "pop-os";
+          inherit jail acpPkgs;
         };
       };
 
@@ -55,6 +73,7 @@
         ];
         extraSpecialArgs = {
           hostname = "nova";
+          inherit jail acpPkgs;
         };
       };
 
