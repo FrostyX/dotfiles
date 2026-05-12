@@ -2493,7 +2493,12 @@ reasonable size.
 (defun hook-tab-width ()
   (setq tab-width 4)
   (setq evil-shift-width 4)
-  (setq python-indent-offset 4))
+  (setq python-indent-offset 4)
+
+  (when (eq major-mode 'nix-mode)
+    (setq-local dtrt-indent-min-offset 2)
+    (setq-local dtrt-indent-max-offset 2)))
+
 (add-hook 'prog-mode-hook #'hook-tab-width)
 #+END_SRC
 
