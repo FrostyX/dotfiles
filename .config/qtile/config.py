@@ -183,7 +183,7 @@ keys = [
         Key([], "s", lazy.spawn("flatpak run com.slack.Slack")),
         Key([], "d", lazy.spawn("flatpak run com.discordapp.Discord")),
         Key([], "a", lazy.spawn(
-            expanduser("/home/jkadlcik/Downloads/Beeper-4.0.584.AppImage"))
+            expanduser("/home/jkadlcik/Downloads/Beeper-4.2.692-x86_64.AppImage"))
         ),
     ]),
 
