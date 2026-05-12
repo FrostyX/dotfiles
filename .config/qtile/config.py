@@ -185,6 +185,7 @@ keys = [
         Key([], "a", lazy.spawn(
             expanduser("/home/jkadlcik/Downloads/Beeper-4.2.692-x86_64.AppImage"))
         ),
+        Key([], "c", lazy.spawn(expanduser("~/.dotfiles/.local/bin/rofi-copr"))),
     ]),
 
     Key([sup], "p", lazy.spawn(expanduser("~/.local/bin/rofi-pass"))),
