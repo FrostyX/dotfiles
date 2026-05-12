@@ -6595,7 +6595,17 @@ We want to search history the same way as in terminal.
 #+BEGIN_SRC emacs-lisp
 (general-define-key
  :states '(normal insert)
+ :keymaps 'agent-shell-mode-map
  "C-r" 'agent-shell-search-history)
+#+END_SRC
+
+Like any messaging app, ~S-RET~ for a newline and ~RET~ to submit.
+
+#+BEGIN_SRC emacs-lisp
+(general-define-key
+ :states 'insert
+ :keymaps 'agent-shell-mode-map
+ "<return>" 'agent-shell-submit)
 #+END_SRC
 
 ** Claude Code
