@@ -44,6 +44,13 @@
     iconTheme.name = "breeze";
   };
 
+  # I think it works it just requires session restart
+  home.pointerCursor = {
+    name = "breeze_cursors";
+    package = pkgs.kdePackages.breeze;
+    size = 24;
+    gtk.enable = true;
+  };
 
   imports = [
     ./claude.nix
