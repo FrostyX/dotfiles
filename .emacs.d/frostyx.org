@@ -291,6 +291,7 @@ See https://emacs.stackexchange.com/a/31904
 #+BEGIN_SRC emacs-lisp
 (use-package auto-package-update
    :ensure t
+   :disabled t
    :config
    (setq auto-package-update-delete-old-versions t
          auto-package-update-interval 365
