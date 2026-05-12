@@ -85,8 +85,8 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
             "zen-sidebar-top-buttons"
             "widget-overflow-fixed-list"
           ];
-          currentVersion = 22;
-          newElementCount = 13;
+          # currentVersion = 22;
+          # newElementCount = 13;
         };
       in {
         "browser.uiCustomization.state" = uiCustomization;
@@ -104,6 +104,7 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
         # from the host system finds me on the map perfectly.
         # The key is taken from the official Fedora package
         # https://src.fedoraproject.org/rpms/firefox/blob/rawhide/f/google-loc-api-key
+        "browser.translations.neverTranslateLanguages" = "cs,en,sk";
         "geo.provider.use_geoclue" = false;
         "geo.provider.network.url" = "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyB2h2OuRcUgy5N-5hsZqiPW6sH3n_rptiQ";
       };
