@@ -45,6 +45,7 @@ in
     - Make the smallest change that solves the requested problem.
     - Preserve existing project style and naming.
     - Summarize changes briefly after editing.
-    - Report verification commands and whether they passed or failed.
+    - Do not run tests, linters, formatters, or other verification commands unless explicitly requested.
+    - Report verification commands only when they were explicitly requested and run.
   '';
 }
