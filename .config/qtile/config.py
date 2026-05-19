@@ -364,129 +364,119 @@ sep = {
     "padding": 15,
 }
 
+def create_widgets():
+    widgets = [
+        widget.Spacer(length=5),
 
-def create_screen(primary=False):
-    primary=True
-    return Screen(
-        # Let's have a gap on the bottom, but instead of showing a wallpaper,
-        # make it seamless with emacs and termianl backgrounds
-        bottom=bar.Bar([widget.TextBox("")], 15, background=theme["black"]),
+        # Logo
+        widget.TextBox(
+            text=icons["logo"],
+            font="Font Awesome",
+            fontsize=fontsize_large,
+            mouse_callbacks = {'Button1': lambda qtile: qtile.spawn("urxvt")},
+            foreground=theme["magenta"],
+            padding_y=5,
+            **style
+        ),
+        widget.Sep(**sep),
 
-        top=bar.Bar([
+        # Workspaces
+        widget.GroupBox(
+            highlight_method="text",
+            urgent_alert_method="text",
+            this_current_screen_border=theme["blue"],
+            active=theme["white"],
+            inactive=theme["muted"],
+            rounded=False,
+            font="Font Awesome",
+            fontsize=fontsize_large,
+            hide_unused=True,
+            **style,
+        ),
+        widget.Sep(**sep),
 
-            widget.Spacer(length=5),
+        # Current layout
+        CurrentLayoutTextIcon(
+            fun=get_layout_icon,
+            length=20,
+            foreground=theme["green"],
+            font="Font Awesome",
+            **style
+        ),
+        widget.Sep(**sep),
 
-            # Logo
-            widget.TextBox(
-                text=icons["logo"],
-                font="Font Awesome",
-                fontsize=fontsize_large,
-                mouse_callbacks = {'Button1': lambda qtile: qtile.spawn("urxvt")},
-                foreground=theme["magenta"],
-                padding_y=5,
-                **style
-            ),
-            widget.Sep(**sep),
+        widget.TaskList(
+            icon_size=0,
+            padding_y=8,
+            background=theme["background"],
+            foreground=theme["white"],
 
+            highlight_method="text",
+            border=theme["blue"],
+            urgent_border=theme["red"],
+        ),
 
-            # Workspaces
-            widget.GroupBox(
-                highlight_method="text",
-                urgent_alert_method="text",
-                this_current_screen_border=theme["blue"],
-                active=theme["white"],
-                inactive=theme["muted"],
-                rounded=False,
-                font="Font Awesome",
-                fontsize=fontsize_large,
-                hide_unused=True,
-                **style,
-            ),
-            widget.Sep(**sep),
+        # Notify
+        # We want low priority color to be also red because some
+        # applications (not looking at you Spotify) are using that color for
+        # highlights.
+        # widget.Spacer(length=100),
+        # widget.Notify(
+        #     default_timeout=15,
+        #     foreground=theme["white"],
+        #     foreground_low=theme["red"],
+        #     foreground_urgent=theme["red"],
+        #     **style
+        # ),
+        # widget.Spacer(length=100),
+        #
+        # Emails
+        # widget.TextBox(
+        #     text=icons["email"],
+        #     foreground=theme["green"],
+        #     **style
+        # ),
+        # Mu(
+        #     "/home/jkadlcik/Mail",
+        #     "/seznam/I/BOX",
+        #     "frostyx@email.cz",
+        #     foreground=theme["green"],
+        #     **style
+        # ),
+        # widget.TextBox(
+        #     text=icons["gmail"],
+        #     foreground=theme["green"],
+        #     **style
+        # ),
+        # Mu(
+        #     "/home/jkadlcik/Mail",
+        #     "/gmail/*",
+        #     "jakub.kadlcik@gmail.com",
+        #     foreground=theme["green"],
+        #     **style
+        # ),
+        # widget.Sep(**sep),
 
+        widget.Spacer(length=100),
 
-            # Current layout
-            CurrentLayoutTextIcon(
-                fun=get_layout_icon,
-                length=20,
-                foreground=theme["green"],
-                font="Font Awesome",
-                **style
-            ),
-            widget.Sep(**sep),
+        # Temp
+        widget.TextBox(
+            text=icons["temp"],
+            foreground=theme["yellow"],
+            font="Font Awesome",
+            **style
+        ),
+        widget.ThermalSensor(
+            threshold=65,
+            foreground=theme["yellow"],
+            foreground_alert=theme["red"],
+            **style
+        ),
+        widget.Sep(**sep),
+    ]
 
-
-            widget.TaskList(
-                icon_size=0,
-                padding_y=8,
-                background=theme["background"],
-                foreground=theme["white"],
-
-                highlight_method="text",
-                border=theme["blue"],
-                urgent_border=theme["red"],
-            ),
-
-
-            # Notify
-            # We want low priority color to be also red because some
-            # applications (not looking at you Spotify) are using that color for
-            # highlights.
-            # widget.Spacer(length=100),
-            # widget.Notify(
-            #     default_timeout=15,
-            #     foreground=theme["white"],
-            #     foreground_low=theme["red"],
-            #     foreground_urgent=theme["red"],
-            #     **style
-            # ),
-            # widget.Spacer(length=100),
-            #
-            # Emails
-            # widget.TextBox(
-            #     text=icons["email"],
-            #     foreground=theme["green"],
-            #     **style
-            # ),
-            # Mu(
-            #     "/home/jkadlcik/Mail",
-            #     "/seznam/I/BOX",
-            #     "frostyx@email.cz",
-            #     foreground=theme["green"],
-            #     **style
-            # ),
-            # widget.TextBox(
-            #     text=icons["gmail"],
-            #     foreground=theme["green"],
-            #     **style
-            # ),
-            # Mu(
-            #     "/home/jkadlcik/Mail",
-            #     "/gmail/*",
-            #     "jakub.kadlcik@gmail.com",
-            #     foreground=theme["green"],
-            #     **style
-            # ),
-            # widget.Sep(**sep),
-
-            widget.Spacer(length=100),
-
-            # Temp
-            widget.TextBox(
-                text=icons["temp"],
-                foreground=theme["yellow"],
-                font="Font Awesome",
-                **style
-            ),
-            widget.ThermalSensor(
-                threshold=65,
-                foreground=theme["yellow"],
-                foreground_alert=theme["red"],
-                **style
-            ),
-            widget.Sep(**sep),
-
-
+    if False:
+        widgets.extend([
             # Battery
             widget.TextBox(
                 text=icons["battery"],
@@ -518,86 +508,88 @@ def create_screen(primary=False):
                 **style
             ),
             widget.Sep(**sep),
+        ])
+
+    widgets.extend([
+        # Volume
+        widget.TextBox(
+            text=icons["volume"],
+            foreground=theme["green"],
+            font="Font Awesome",
+            **style
+        ),
+        widget.Volume(
+            get_volume_command=(vol_cur.split() if vol_cur else None),
+            foreground=theme["green"],
+            **style
+        ),
+        widget.Sep(**sep),
+
+        # Available updates
+        widget.TextBox(
+            text=icons["sync"],
+            foreground=theme["yellow"],
+            font="Font Awesome",
+            **style
+        ),
+        widget.CheckUpdates(
+            distro="Fedora",
+            display_format="{updates}",
+            no_update_string="0",
+            foreground=theme["yellow"],
+            colour_no_updates=theme["yellow"],
+            colour_have_updates=theme["yellow"],
+            **style,
+        ),
+        widget.Sep(**sep),
+
+        # Time
+        widget.Clock(
+            timezone="Europe/Prague",
+            format="%H:%M",
+            foreground=theme["magenta"],
+            **style
+        ),
+        widget.Sep(**sep),
+
+        # Date
+        widget.Clock(
+            timezone="Europe/Prague",
+            format="%d. %m. (%b) %Y",
+            foreground=theme["blue"],
+            **style
+        ),
+        widget.Sep(**sep),
+
+        # Week
+        widget.Clock(
+            timezone="Europe/Prague",
+            format="#%W",
+            foreground=theme["green"],
+            **style
+        ),
+        widget.Sep(**sep),
+
+        # The meaning of this date is a private matter
+        # DaysCounter(
+        #     starting_date=date(year=2019, month=2, day=3),
+        #     foreground=theme["yellow"],
+        # ),
+        # widget.Sep(**sep),
+
+        # Systray
+        systray(primary),
+        widget.Spacer(length=5),
+    ])
+    return widgets
 
 
-            # Volume
-            widget.TextBox(
-                text=icons["volume"],
-                foreground=theme["green"],
-                font="Font Awesome",
-                **style
-            ),
-            widget.Volume(
-                get_volume_command=(vol_cur.split() if vol_cur else None),
-                foreground=theme["green"],
-                **style
-            ),
-            widget.Sep(**sep),
-
-
-            # Available updates
-            widget.TextBox(
-                text=icons["sync"],
-                foreground=theme["yellow"],
-                font="Font Awesome",
-                **style
-            ),
-            widget.CheckUpdates(
-                distro="Fedora",
-                display_format="{updates}",
-                no_update_string="0",
-                foreground=theme["yellow"],
-                colour_no_updates=theme["yellow"],
-                colour_have_updates=theme["yellow"],
-                **style,
-            ),
-            widget.Sep(**sep),
-
-
-            # Time
-            widget.Clock(
-                timezone="Europe/Prague",
-                format="%H:%M",
-                foreground=theme["magenta"],
-                **style
-            ),
-            widget.Sep(**sep),
-
-
-            # Date
-            widget.Clock(
-                timezone="Europe/Prague",
-                format="%d. %m. (%b) %Y",
-                foreground=theme["blue"],
-                **style
-            ),
-            widget.Sep(**sep),
-
-
-            # Week
-            widget.Clock(
-                timezone="Europe/Prague",
-                format="#%W",
-                foreground=theme["green"],
-                **style
-            ),
-            widget.Sep(**sep),
-
-
-            # The meaning of this date is a private matter
-            # DaysCounter(
-            #     starting_date=date(year=2019, month=2, day=3),
-            #     foreground=theme["yellow"],
-            # ),
-            # widget.Sep(**sep),
-
-
-            # Systray
-            systray(primary),
-
-
-            widget.Spacer(length=5),
-        ], 35, background=theme["background"]),
+def create_screen(primary=False):
+    return Screen(
+        # Let's have a gap on the bottom, but instead of showing a wallpaper,
+        # make it seamless with emacs and termianl backgrounds
+        bottom=bar.Bar([widget.TextBox("")], 15, background=theme["black"]),
+        top=bar.Bar(create_widgets(), 35, background=theme["background"]),
     )
 
 
