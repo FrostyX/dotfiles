@@ -18,6 +18,7 @@ alias killjobs="for x in `jobs -p`; do kill -9 $x; done"
 alias youtube-dl="yt-dlp"
 alias youtube-mp3="youtube-dl --extract-audio --audio-format mp3"
 alias untar="tar -xvzf"
+alias home-manager="nix run nixpkgs#home-manager --"
 
 # TODO Use this instead
 # https://wiki.archlinux.org/title/Session_lock
