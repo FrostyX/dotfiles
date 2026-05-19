@@ -124,6 +124,7 @@ in
               "ripgrep"
               "fedpkg"
               "emacs"
+              "tmux"
 
               # We need this for `pass` command, see what `pinentry-program` is configured
               # in ~/.gnupg/gpg-agent.conf
