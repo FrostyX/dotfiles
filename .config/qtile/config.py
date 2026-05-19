@@ -364,6 +364,7 @@ sep = {
     "padding": 15,
 }
 
+
 def create_widgets():
     widgets = [
         widget.Spacer(length=5),
@@ -475,7 +476,7 @@ def create_widgets():
         widget.Sep(**sep),
     ]
 
-    if False:
+    if is_laptop():
         widgets.extend([
             # Battery
             widget.TextBox(
@@ -609,13 +610,16 @@ def systray(primary=True):
     )
 
 
+def is_laptop():
+    return hostname in ["nova"]
+
 
 # Generate the same screen and panel configuration for each monitor
 # TODO Use `generate_screens` from Qtile 0.35.0
 # https://docs.qtile.org/en/latest/manual/config/screens.html#dynamic-screen-configuration
 screens = []
 for i in range(num_screens()):
-    primary = i == 1
+    primary = i == 0 if is_laptop() else 1
     screens.append(create_screen(primary))
 
 # This won't be that simple as returning screens as they are or returning them
