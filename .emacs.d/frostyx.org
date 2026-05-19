@@ -273,6 +273,7 @@ See https://github.com/FrostyX/thanks
 
 #+BEGIN_SRC emacs-lisp
 (use-package thanks
+  :if workstation-p
   :ensure t
   :config
   (thanks-mode))
