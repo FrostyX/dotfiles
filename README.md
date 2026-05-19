@@ -16,7 +16,7 @@ sudo systemctl enable nix-daemon --now
     # Optionally symlink dotfiles next to other git projects
     ln -s ~/.dotfiles ~/git/dotfiles
 
-    nix run .#playbook -- -K
+    nix run ~/.dotfiles/#playbook -- -K
     nix run nixpkgs#home-manager -- \
         switch --flake ~/.dotfiles/#jkadlcik@nova -b backup
 
