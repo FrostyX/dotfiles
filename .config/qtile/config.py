@@ -619,7 +619,7 @@ def is_laptop():
 # https://docs.qtile.org/en/latest/manual/config/screens.html#dynamic-screen-configuration
 screens = []
 for i in range(num_screens()):
-    primary = i == 0 if is_laptop() else 1
+    primary = i == (0 if is_laptop() else 1)
     screens.append(create_screen(primary))
 
 # This won't be that simple as returning screens as they are or returning them
