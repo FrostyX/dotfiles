@@ -164,7 +164,7 @@ in
       ++ [
         {
           name = "Enable OpenRazer repository";
-          command = ''dnf -y config-manager addrepo --overwrite --from-repofile https://download.opensuse.org/repositories/hardware:/razer/Fedora_{{ ansible_facts["distribution_major_version"] }}/hardware:razer.repo'';
+          command = ''dnf -y config-manager addrepo --overwrite --from-repofile=https://openrazer.github.io/hardware:razer.repo'';
         }
         {
           name = "Install polychromatic (an alternative to Razer Synapse)";
