@@ -1037,6 +1037,7 @@ based on the default Emacs theme.
           my/gray  "gray75"
           my/lgray "gray60"
           my/white "white"
+          my/lwhite "white"
           my/red "Firebrick"
           my/orange "orange red"
           my/yellow "lightyellow"
