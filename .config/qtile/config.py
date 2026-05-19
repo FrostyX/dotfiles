@@ -15,6 +15,7 @@ https://wiki.archlinux.org/index.php/Xephyr
 import re
 import logging
 import subprocess
+import functools
 from datetime import date
 from os import uname
 from os.path import expanduser
@@ -348,6 +349,7 @@ def num_screens_wayland():
     return i
 
 
+@functools.cache
 def num_screens():
     screens = num_screens_wayland() if WAYLAND else num_screens_x11()
     return screens or 1
