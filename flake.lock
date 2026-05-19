@@ -122,6 +122,39 @@
         "type": "sourcehut"
       }
     },
+    "nix-flatpak": {
+      "locked": {
+        "lastModified": 1767983141,
+        "narHash": "sha256-7ZCulYUD9RmJIDULTRkGLSW1faMpDlPKcbWJLYHoXcs=",
+        "owner": "gmodena",
+        "repo": "nix-flatpak",
+        "rev": "440818969ac2cbd77bfe025e884d0aa528991374",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gmodena",
+        "ref": "v0.7.0",
+        "repo": "nix-flatpak",
+        "type": "github"
+      }
+    },
+    "nixible": {
+      "locked": {
+        "dir": "lib",
+        "lastModified": 1767290102,
+        "narHash": "sha256-XmTqZH8tYRFPvRm5ZtcUTn1wYDLn767vq4ed0wr87Ok=",
+        "owner": "TECHNOFAB",
+        "repo": "nixible",
+        "rev": "f87cd73c98cae38e5a6eaafb1beb28e05a46905f",
+        "type": "gitlab"
+      },
+      "original": {
+        "dir": "lib",
+        "owner": "TECHNOFAB",
+        "repo": "nixible",
+        "type": "gitlab"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1769018530,
@@ -159,6 +192,8 @@
         "agenix": "agenix",
         "home-manager": "home-manager_2",
         "jail-nix": "jail-nix",
+        "nix-flatpak": "nix-flatpak",
+        "nixible": "nixible",
         "nixpkgs": "nixpkgs",
         "nixpkgs-acp": "nixpkgs-acp",
         "zen-browser": "zen-browser"

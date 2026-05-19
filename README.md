@@ -1,5 +1,12 @@
 # dotfiles
 
+## Prerequisites
+
+```
+sudo dnf install nix
+sudo systemctl enable nix-daemon --now
+```
+
 ## Installation
 
     # Choose method which suits better for you
@@ -9,12 +16,9 @@
     # Optionally symlink dotfiles next to other git projects
     ln -s ~/.dotfiles ~/git/dotfiles
 
-    # Make symlinks for configuration files
-    stow . -d ~/.dotfiles/ -t ~
-
-    # Get git submodules (required for Vundle)
-    cd ~/.dotfiles
-    git submodule update --init --recursive
+    nix run .#playbook -- -K
+    nix run nixpkgs#home-manager -- \
+        switch --flake ~/.dotfiles/#jkadlcik@nova -b backup
 
     # Tmux
     mkdir -p ~/.tmux/plugins ~/.tmux/resurrect
@@ -24,18 +28,3 @@
 
     # Vim
     vim +PluginInstall +qall
-
-
-## Remove dotfiles
-
-    stow -D . -d ~/.dotfiles/ -t ~
-
-## Add a new file
-
-    mv ~/.foo ~/.dotfiles/
-    ln -s ~/.dotfiles/.foo ~/
-
-## Playbooks
-
-I use ansible playbooks to bootstrap my new workstations
-https://github.com/FrostyX/playbooks

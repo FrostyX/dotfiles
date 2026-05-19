@@ -56,6 +56,7 @@
     ./claude.nix
     ./codex.nix
     ./git.nix
+    ./flatpak.nix
     ./xdg.nix
     ./zen.nix
     ./symlinks.nix
