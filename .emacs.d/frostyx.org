@@ -6684,6 +6684,13 @@ Maybe we should try the jailed binary in the future.
 ;; (setq agent-shell-openai-codex-acp-command '("codex-acp-jailed"))
 #+END_SRC
 
+In case we need to run the codex command
+
+#+BEGIN_SRC
+$ nix-shell -p codex
+$ codex
+#+END_SRC
+
 A helper function to start ~agent-shell~ for Claude Code or reuse an
 existing buffer.
 
