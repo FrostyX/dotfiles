@@ -2200,26 +2200,6 @@ See https://github.com/bbatsov/projectile
   (projectile-discover-projects-in-search-path))
 #+END_SRC
 
-The default projectile interface is /meh/ at best, let's use helm.
-
-See https://github.com/bbatsov/helm-projectile
-
-#+BEGIN_SRC emacs-lisp
-(use-package helm-projectile)
-#+END_SRC
-
-The only thing that ~projectile~ doesn't allow you to do (at least by default) is
-having multiple workspaces/tabs/perspectives or whatever you want to call it and
-switching between them. The purpose of such hypothetical workspaces would be to
-have one project per workspace that would allow to preserve splits layout when
-switching projects. This is essential for me since I work on 5-10 projects
-simultaneously.
-
-Such behavior can be achieved using ~eyebrowse~ even though it feels a little
-like a workaround. Eyebrowse is not project-oriented by design, it gives you
-free hand on what to use workspaces for. For this reason, it lacks certain
-project management shortcuts, that I would appreciate.
-
 Install ripgrep so that we can use ~M-x projectile-ripgrep~.
 
 #+BEGIN_SRC emacs-lisp
