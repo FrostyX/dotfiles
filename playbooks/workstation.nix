@@ -203,6 +203,15 @@ in
           };
         }
         {
+          name = "Disable sshd on work laptop";
+          systemd = {
+            state = "stopped";
+            name = "sshd";
+            enabled = false;
+          };
+          when = ''ansible_facts["hostname"] == "nova"'';
+        }
+        {
           name = "Add user to the libvirt group";
           user = {
             name = "jkadlcik";
