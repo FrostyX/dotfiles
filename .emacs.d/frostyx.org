@@ -2196,10 +2196,9 @@ See https://github.com/bbatsov/projectile
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
   :config
-  (setq projectile-project-search-path '("~/git/")))
+  (setq projectile-project-search-path '("~/git/"))
+  (projectile-discover-projects-in-search-path))
 #+END_SRC
-
-TODO Discover projects on startup
 
 The default projectile interface is /meh/ at best, let's use helm.
 
