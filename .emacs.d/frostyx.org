@@ -3452,9 +3452,10 @@ Unfortunatelly, there is no built-in synchronization timer.
 Show agendas from these TODO files.
 
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-files '("~/Org/agenda/inbox.org"
-                         "~/Org/agenda/todo.org"
-                         "~/Org/agenda/khal.org"))
+(when (file-directory-p "~/Org/agenda/")
+  (setq org-agenda-files '("~/Org/agenda/inbox.org"
+                           "~/Org/agenda/todo.org"
+                           "~/Org/agenda/khal.org")))
 #+END_SRC
 
 For the love of god, do not do ~\'reorganize-frame~, nor any other shenanigans.
@@ -3661,6 +3662,7 @@ And some colors
 
 #+BEGIN_SRC emacs-lisp
 (use-package org-roam
+  :if (file-directory-p "~/Org/roam/")
   :custom
   (org-roam-directory (file-truename "~/Org/roam/"))
   :bind (("C-c n l" . org-roam-buffer-toggle)

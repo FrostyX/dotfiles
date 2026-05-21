@@ -29,7 +29,8 @@
 
 
 (defun doom-modeline--frostyx-org-agenda-update ()
-  (when doom-modeline-frostyx-org-agenda
+  (when (and doom-modeline-frostyx-org-agenda
+             (file-directory-p "~/Org/agenda/"))
     (let ((soon-count (length (org-ql-select (org-agenda-files)
                                 '(priority "3")
                                 :action #'org-get-heading)))
