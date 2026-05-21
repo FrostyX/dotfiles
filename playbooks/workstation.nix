@@ -125,6 +125,8 @@ in
               "fedpkg"
               "emacs"
               "tmux"
+              "yubikey-manager"
+              "gnupg2-scdaemon"
 
               # We need this for `pass` command, see what `pinentry-program` is configured
               # in ~/.gnupg/gpg-agent.conf
@@ -157,6 +159,7 @@ in
               "maildir-utils"
               "postgresql"
               "python3-virtualenv"
+              "gh"
             ];
           };
         }

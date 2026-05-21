@@ -8,6 +8,7 @@
       "engineer.atlas.Nyxt"
       "com.github.iwalton3.jellyfin-media-player"
       "im.riot.Riot"
+      "com.yubico.yubioath"
     ];
   };
 }
