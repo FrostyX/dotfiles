@@ -55,6 +55,7 @@
   imports = [
     ./claude.nix
     ./codex.nix
+    ./emacs.nix
     ./git.nix
     ./flatpak.nix
     ./xdg.nix

@@ -95,6 +95,159 @@ hostname.
                             '("chromie" "alarak" "zeratul" "hive" "nova")))
 #+END_SRC
 
+* Package management
+
+We will install Emacs packages from Nix so that we can have a lockfile and
+faster onboarding on new machines:
+
+#+BEGIN_SRC emacs-lisp
+(let* ((nix-pkgs-dir "~/.nix-profile/share/emacs/site-lisp/elpa")
+       (nix-pkgs-dir (expand-file-name nix-pkgs-dir)))
+  (when (file-directory-p nix-pkgs-dir)
+    (add-to-list 'package-directory-list nix-pkgs-dir)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq use-package-always-ensure nil)
+#+END_SRC
+
+When running an upgrade manually, use ~M-x package-upgrade-all~ followed by
+~M-x qualpa-upgrade-all~.
+
+** Thanks
+
+Automatically star all packages on GitHub.
+See https://github.com/FrostyX/thanks
+
+#+BEGIN_SRC emacs-lisp
+(use-package thanks
+  :if workstation-p
+  :config
+  (thanks-mode))
+#+END_SRC
+
+** Automatical updates
+
+We want to automatically update Emacs packages in order to avoid annoying warnings
+during startup, that some package is recommended to be updated.
+
+Update automatically every night, don't ask for confirmation and don't bother us
+with update at Emacs startup.
+
+See https://emacs.stackexchange.com/a/31904
+
+#+BEGIN_SRC emacs-lisp
+(use-package auto-package-update
+   :disabled t
+   :config
+   (setq auto-package-update-delete-old-versions t
+         auto-package-update-interval 365
+         auto-package-update-prompt-before-update nil
+         auto-package-update-hide-results t)
+   (auto-package-update-at-time "04:00"))
+#+END_SRC
+
+Unfortunatelly updating takes around two minutes which is long enough to get
+disconnected from IRC, which is super annoying. As a temporary workaround let's
+update only once a year. We are waiting for async updates.
+
+See https://github.com/rranelli/auto-package-update.el/issues/39
+
+When the update is failing, it starts to ask whether to kill the buffers
+or what. Don't do that.
+
+See https://emacs.stackexchange.com/q/14509
+
+#+BEGIN_SRC emacs-lisp
+(setq kill-buffer-query-functions nil)
+#+END_SRC
+
+Some packages won't properly reload their configuration after update and break.
+We need to take care of that.
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'auto-package-update-after-hook
+          (lambda ()
+            (load-library "yasnippet-snippets.el")))
+#+END_SRC
+
+** Quelpa
+
+Quelpa is a package management tool to compile and install Emacs Lisp packages
+directly from upstream (i.e from git repository hosted for example on Git Hub),
+in opposite to installing them from ELPA or MELPA.
+
+#+BEGIN_SRC emacs-lisp
+(setq quelpa-checkout-melpa-p nil
+      quelpa-update-melpa-p nil)
+
+(use-package quelpa)
+#+END_SRC
+
+By default, Quelpa is called by its own ~quelpa~ function, which is /meh/. Let's
+use use integration with ~use-package~.
+
+#+BEGIN_SRC emacs-lisp
+(use-package quelpa-use-package)
+#+END_SRC
+
+We often want to use Quelpa for our own patched versions of packages that are
+otherwise available and previously installed from MELPA.
+
+#+BEGIN_SRC emacs-lisp
+;; (setq quelpa-upgrade-p t)
+#+END_SRC
+
+** System packages
+
+Some third-party Emacs packages are built around or internally use
+system packages or executables. We can install them from within the
+Emacs configuration.
+
+See https://gitlab.com/jabranham/system-packages
+
+#+BEGIN_SRC emacs-lisp
+(use-package system-packages
+  :load-path "/home/jkadlcik/git/system-packages")
+#+END_SRC
+
+I don't want to guess my package manager because running this
+configuration on a different system could lead to inconsistencies or
+failures because of different package names. Instead, let's define
+helper functions for each package manager that we care about and
+specify packages for each package manager explicitly.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/dnf (&key install)
+  (let ((system-packages-package-manager 'dnf)
+        (system-packages-use-sudo t))
+	(or (frostyx/rpm-query install)
+	  (system-packages-install install))))
+#+END_SRC
+
+We need to use ~system-packages-install~ instead of
+~system-packages-ensure~ to avoid asking for sudo password even though
+the packages are already installed.
+
+#+BEGIN_SRC emacs-lisp
+(defun frostyx/rpm-query (pack)
+  (equal 0 (shell-command
+            (concat "rpm -q " pack))))
+#+END_SRC
+
+Just in case, set the package manager defaults to something expected
+
+#+BEGIN_SRC emacs-lisp
+(setq system-packages-package-manager 'dnf)
+(setq system-packages-use-sudo t)
+#+END_SRC
+
+An example usage of our ~frostyx/dnf~ method would be:
+
+#+BEGIN_EXAMPLE emacs-lisp
+(frostyx/dnf :install "ruff")
+#+END_EXAMPLE
+
 * Defaults
 
 For whatever reason, Emacs modifies hand-written ~init.el~ and puts random
@@ -185,8 +338,7 @@ functions.
 See https://github.com/bbatsov/crux
 
 #+BEGIN_SRC emacs-lisp
-(use-package crux
-  :ensure t)
+(use-package crux)
 #+END_SRC
 
 Don't prompt me whether I want to follow git links
@@ -229,8 +381,7 @@ Don't clutter project directories with random garbage generated by Emacs
 packages.
 
 #+BEGIN_SRC emacs-lisp
-(use-package no-littering
-  :ensure t)
+(use-package no-littering)
 #+END_SRC
 
 Don't clutter project directories with undo tree files,
@@ -260,147 +411,6 @@ Start at least one Emacs server so that we can use ~emacsclient~
 (unless (server-running-p)
   (server-start))
 #+END_SRC
-
-* Package management
-
-When running an upgrade manually, use ~M-x package-upgrade-all~ followed by
-~M-x qualpa-upgrade-all~.
-
-** Thanks
-
-Automatically star all packages on GitHub.
-See https://github.com/FrostyX/thanks
-
-#+BEGIN_SRC emacs-lisp
-(use-package thanks
-  :if workstation-p
-  :ensure t
-  :config
-  (thanks-mode))
-#+END_SRC
-
-** Automatical updates
-
-We want to automatically update Emacs packages in order to avoid annoying warnings
-during startup, that some package is recommended to be updated.
-
-Update automatically every night, don't ask for confirmation and don't bother us
-with update at Emacs startup.
-
-See https://emacs.stackexchange.com/a/31904
-
-#+BEGIN_SRC emacs-lisp
-(use-package auto-package-update
-   :ensure t
-   :disabled t
-   :config
-   (setq auto-package-update-delete-old-versions t
-         auto-package-update-interval 365
-         auto-package-update-prompt-before-update nil
-         auto-package-update-hide-results t)
-   (auto-package-update-at-time "04:00"))
-#+END_SRC
-
-Unfortunatelly updating takes around two minutes which is long enough to get
-disconnected from IRC, which is super annoying. As a temporary workaround let's
-update only once a year. We are waiting for async updates.
-
-See https://github.com/rranelli/auto-package-update.el/issues/39
-
-When the update is failing, it starts to ask whether to kill the buffers
-or what. Don't do that.
-
-See https://emacs.stackexchange.com/q/14509
-
-#+BEGIN_SRC emacs-lisp
-(setq kill-buffer-query-functions nil)
-#+END_SRC
-
-Some packages won't properly reload their configuration after update and break.
-We need to take care of that.
-
-#+BEGIN_SRC emacs-lisp
-(add-hook 'auto-package-update-after-hook
-          (lambda ()
-            (load-library "yasnippet-snippets.el")))
-#+END_SRC
-
-** Quelpa
-
-Quelpa is a package management tool to compile and install Emacs Lisp packages
-directly from upstream (i.e from git repository hosted for example on Git Hub),
-in opposite to installing them from ELPA or MELPA.
-
-#+BEGIN_SRC emacs-lisp
-(use-package quelpa
-  :ensure t)
-#+END_SRC
-
-By default, Quelpa is called by its own ~quelpa~ function, which is /meh/. Let's
-use use integration with ~use-package~.
-
-#+BEGIN_SRC emacs-lisp
-(use-package quelpa-use-package
-  :ensure t)
-#+END_SRC
-
-We often want to use Quelpa for our own patched versions of packages that are
-otherwise available and previously installed from MELPA.
-
-#+BEGIN_SRC emacs-lisp
-;; (setq quelpa-upgrade-p t)
-#+END_SRC
-
-** System packages
-
-Some third-party Emacs packages are built around or internally use
-system packages or executables. We can install them from within the
-Emacs configuration.
-
-See https://gitlab.com/jabranham/system-packages
-
-#+BEGIN_SRC emacs-lisp
-(use-package system-packages
-  :load-path "/home/jkadlcik/git/system-packages"
-  :ensure t)
-#+END_SRC
-
-I don't want to guess my package manager because running this
-configuration on a different system could lead to inconsistencies or
-failures because of different package names. Instead, let's define
-helper functions for each package manager that we care about and
-specify packages for each package manager explicitly.
-
-#+BEGIN_SRC emacs-lisp
-(defun frostyx/dnf (&key install)
-  (let ((system-packages-package-manager 'dnf)
-        (system-packages-use-sudo t))
-	(or (frostyx/rpm-query install)
-	  (system-packages-install install))))
-#+END_SRC
-
-We need to use ~system-packages-install~ instead of
-~system-packages-ensure~ to avoid asking for sudo password even though
-the packages are already installed.
-
-#+BEGIN_SRC emacs-lisp
-(defun frostyx/rpm-query (pack)
-  (equal 0 (shell-command
-            (concat "rpm -q " pack))))
-#+END_SRC
-
-Just in case, set the package manager defaults to something expected
-
-#+BEGIN_SRC emacs-lisp
-(setq system-packages-package-manager 'dnf)
-(setq system-packages-use-sudo t)
-#+END_SRC
-
-An example usage of our ~frostyx/dnf~ method would be:
-
-#+BEGIN_EXAMPLE emacs-lisp
-(frostyx/dnf :install "ruff")
-#+END_EXAMPLE
 
 * Asserts
 
@@ -437,8 +447,7 @@ See:
 - https://medium.com/@chasinglogic/the-definitive-guide-to-password-store-c337a8f023a1
 
 #+BEGIN_SRC emacs-lisp
-(use-package password-store
-  :ensure t)
+(use-package password-store)
 #+END_SRC
 
 * Key bindings
@@ -464,8 +473,7 @@ for both octopuses and Evil users.
 See https://github.com/noctuid/general.el
 
 #+BEGIN_SRC emacs-lisp
-(use-package general
-  :ensure t)
+(use-package general)
 #+END_SRC
 
 Provide Vim-like definers such as ~general-nmap~, ~general-imap~,
@@ -593,7 +601,6 @@ otherwise it doesn't work in ~org-mode~.
 
 #+BEGIN_SRC emacs-lisp
 (use-package evil-leader
-  :ensure t
   :config
   (evil-leader/set-leader ",")
   (global-evil-leader-mode))
@@ -610,7 +617,6 @@ See:
 
 #+BEGIN_SRC emacs-lisp
 (use-package evil
-  :ensure t ;; install the evil package if not installed
   :init ;; tweak evil's configuration before loading it
   (evil-select-search-module 'evil-search-module 'evil-search)
   (setq evil-ex-complete-emacs-commands nil)
@@ -649,7 +655,6 @@ https://github.com/syl20bnr/spacemacs/issues/14036#issuecomment-707072523
 
 #+BEGIN_SRC emacs-lisp
 (use-package undo-tree
-  :ensure t
   :config
   (global-undo-tree-mode)
   (evil-set-undo-system 'undo-tree))
@@ -668,7 +673,6 @@ See https://github.com/emacs-evil/evil-surround
 
 #+BEGIN_SRC emacs-lisp
 (use-package evil-surround
-  :ensure t
   :config
   (global-evil-surround-mode))
 #+END_SRC
@@ -687,7 +691,6 @@ See https://github.com/redguardtoo/evil-matchit
 
 #+BEGIN_SRC emacs-lisp
 (use-package evil-matchit
-  :ensure t
   :config
   (global-evil-matchit-mode))
 #+END_SRC
@@ -707,7 +710,6 @@ commands. To comment e.g. next 3 lines, use ~3gcc~. To comment a ~VISUAL~ select
 
 #+BEGIN_SRC emacs-lisp
 (use-package evil-commentary
-  :ensure t
   :config
   (evil-commentary-mode))
 #+END_SRC
@@ -719,7 +721,6 @@ See http://frostyx.cz/posts/emacs-evil-set-option
 
 #+BEGIN_SRC emacs-lisp
 (use-package evil-set-option
-  :ensure t
   :quelpa (evil-set-option
            :fetcher github
            :repo "FrostyX/evil-set-option"
@@ -755,7 +756,6 @@ colon commands).
 #+BEGIN_SRC emacs-lisp
 (use-package evil-collection
   :after evil
-  :ensure t
   :config
   (evil-collection-init))
 
@@ -851,8 +851,7 @@ Incrementing and decrementing numbers
 https://github.com/cofi/evil-numbers
 
 #+BEGIN_SRC emacs-lisp
-(use-package evil-numbers
-  :ensure t)
+(use-package evil-numbers)
 #+END_SRC
 
 Decrementing is done via ~C-x~ in Vim, which is an important keybind
@@ -966,15 +965,13 @@ Let's install all the interesting themes.
 See http://chriskempson.com/projects/base16/
 
 #+BEGIN_SRC emacs-lisp
-(use-package base16-theme
-  :ensure t)
+(use-package base16-theme)
 #+END_SRC
 
 See https://github.com/catppuccin/emacs
 
 #+BEGIN_SRC emacs-lisp
-(use-package catppuccin-theme
-  :ensure t)
+(use-package catppuccin-theme)
 #+END_SRC
 
 At this point, my whole desktop environment uses ~catppuccin~
@@ -1156,8 +1153,7 @@ Emacs frames.
 See https://github.com/abo-abo/ace-window
 
 #+BEGIN_SRC emacs-lisp
-(use-package ace-window
-  :ensure t)
+(use-package ace-window)
 #+END_SRC
 
 By default, the window numbers are too small and can be overlooked. Let's use
@@ -1221,8 +1217,7 @@ See https://github.com/emacsorphanage/fontawesome
 
 #+BEGIN_SRC emacs-lisp
 (use-package fontawesome
-  :disabled t
-  :ensure t)
+  :disabled t)
 #+END_SRC
 
 By default ~Font Awesome~ icons show quite strangely. It seems that all icons
@@ -1246,8 +1241,7 @@ icons are not displayed correctly, run ~M-x all-the-icons-install-fonts~.
 See https://github.com/domtronn/all-the-icons.el
 
 #+BEGIN_SRC emacs-lisp
-(use-package all-the-icons
-  :ensure t)
+(use-package all-the-icons)
 #+END_SRC
 
 ** Modeline
@@ -1256,7 +1250,6 @@ See https://dev.to/gonsie/beautifying-the-mode-line-3k10
 
 #+BEGIN_SRC emacs-lisp
 (use-package doom-modeline
-  :ensure t
   :init
   (doom-modeline-mode 1))
 #+END_SRC
@@ -1412,7 +1405,6 @@ define our own later, though.
 
 #+BEGIN_SRC emacs-lisp
 (use-package helm
-  :ensure t
   :config
   (helm-mode 0)
   (setq helm-autoresize-mode t)
@@ -1456,7 +1448,6 @@ simply pressing down arrow. This fixes it.
 
 #+BEGIN_SRC emacs-lisp
 (use-package helm-posframe
-  :ensure t
   :disabled
   :config
   (helm-posframe-enable)
@@ -1546,7 +1537,6 @@ See https://github.com/minad/vertico
 
 #+BEGIN_SRC emacs-lisp
 (use-package vertico
-  :ensure t
   :config
   (setq vertico-cycle t)
   (setq vertico-count 25)
@@ -1581,7 +1571,6 @@ See https://github.com/minad/marginalia
 
 #+BEGIN_SRC emacs-lisp
 (use-package marginalia
-  :ensure t
   :config
   (marginalia-mode 1))
 #+END_SRC
@@ -1594,7 +1583,6 @@ See https://github.com/oantolin/orderless
 
 #+BEGIN_SRC emacs-lisp
 (use-package orderless
-  :ensure t
   :config
   (setq completion-styles '(orderless basic)))
 #+END_SRC
@@ -1604,8 +1592,7 @@ See https://github.com/oantolin/orderless
 See https://github.com/minad/consult
 
 #+BEGIN_SRC emacs-lisp
-(use-package consult
-  :ensure t)
+(use-package consult)
 #+END_SRC
 
 Disable live previews
@@ -1645,7 +1632,6 @@ See https://github.com/muffinmad/emacs-mini-frame
 
 #+BEGIN_SRC emacs-lisp
 (use-package mini-frame
-  :ensure t
   :disabled t
   :config
   (mini-frame-mode 1))
@@ -1677,7 +1663,6 @@ See https://github.com/tumashu/vertico-posframe
 
 #+BEGIN_SRC emacs-lisp
 (use-package vertico-posframe
-  :ensure t
   :config
   (setq vertico-posframe-width 140)
   (setq vertico-posframe-border-width 7)
@@ -1752,7 +1737,6 @@ Let's install just the ~hydra~ package and keep it simple.
 
 #+BEGIN_SRC emacs-lisp
 (use-package hydra
-  :ensure t
   :custom
   (hydra-default-hint nil))
 #+END_SRC
@@ -1785,8 +1769,7 @@ items or delete the existing ones. Let's install ~pretty-hydra~ instead,
 if allows us to define hydras as lists of columns.
 
 #+BEGIN_SRC emacs-lisp
-(use-package pretty-hydra
-  :ensure t)
+(use-package pretty-hydra)
 #+END_SRC
 
 *** Main Hydra Menu
@@ -2022,8 +2005,7 @@ major-mode-specific hydra menus.
 See https://github.com/jerrypnz/major-mode-hydra.el
 
 #+BEGIN_SRC emacs-lisp
-(use-package major-mode-hydra
-  :ensure t)
+(use-package major-mode-hydra)
 #+END_SRC
 
 Press Shift+spacebar to spawn a hydra specific to the current major-mode
@@ -2194,7 +2176,6 @@ See https://github.com/justbur/emacs-which-key
 
 #+BEGIN_SRC emacs-lisp
 (use-package which-key
-  :ensure t
   :config
   (which-key-mode))
 #+END_SRC
@@ -2214,7 +2195,6 @@ See https://github.com/bbatsov/projectile
 
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
-  :ensure t
   :config
   (setq projectile-project-search-path '("~/git/")))
 #+END_SRC
@@ -2226,8 +2206,7 @@ The default projectile interface is /meh/ at best, let's use helm.
 See https://github.com/bbatsov/helm-projectile
 
 #+BEGIN_SRC emacs-lisp
-(use-package helm-projectile
-  :ensure t)
+(use-package helm-projectile)
 #+END_SRC
 
 The only thing that ~projectile~ doesn't allow you to do (at least by default) is
@@ -2245,8 +2224,7 @@ project management shortcuts, that I would appreciate.
 Install ripgrep so that we can use ~M-x projectile-ripgrep~.
 
 #+BEGIN_SRC emacs-lisp
-(use-package ripgrep
-  :ensure t)
+(use-package ripgrep)
 #+END_SRC
 
 In many functions I want to have a check whether we are in a project
@@ -2324,7 +2302,6 @@ See https://www.emacswiki.org/emacs/MidnightMode
 
 #+BEGIN_SRC emacs-lisp
 (use-package midnight
-  :ensure t
   :config
   (midnight-mode))
 #+END_SRC
@@ -2366,7 +2343,6 @@ See https://github.com/emacsmirror/gcmh
 
 #+BEGIN_SRC emacs-lisp
 (use-package gcmh
-  :ensure t
   :config
   (gcmh-mode 1))
 #+END_SRC
@@ -2379,7 +2355,6 @@ See [[file:devel/frostyx-treesitter.el]]
 
 #+BEGIN_SRC emacs-lisp
 (use-package fic-mode
-  :ensure t
   :config
   (add-hook 'prog-mode-hook 'fic-mode)
   (set-face-attribute
@@ -2391,7 +2366,6 @@ See [[file:devel/frostyx-treesitter.el]]
 #+BEGIN_SRC emacs-lisp
 (use-package rainbow-mode
   ;; There is a bug visualizing even #def in .Xdefaults
-  :ensure t
   :config
   nil)
 #+END_SRC
@@ -2403,7 +2377,6 @@ diffs, ets. Typically we wrap at 80, 100 or 120 characters.
 
 #+BEGIN_SRC emacs-lisp
 (use-package fill-column-indicator
-  :ensure t
   :config
   (setq fci-rule-width 1)
   (setq fci-rule-color my/gray))
@@ -2432,7 +2405,6 @@ Also see my blog post http://frostyx.cz/posts/emacs-browse-at-pagure
 
 #+BEGIN_SRC emacs-lisp
 (use-package browse-at-remote
-  :ensure t
   :quelpa (browse-at-remote
            :fetcher github
            :repo "FrostyX/browse-at-remote"
@@ -2447,8 +2419,7 @@ are currently working on some feature).
 See https://github.com/sshaw/git-link
 
 #+BEGIN_SRC emacs-lisp
-(use-package git-link
-  :ensure t)
+(use-package git-link)
 #+END_SRC
 
 Don't only print the URLs, open them in the browser
@@ -2481,7 +2452,6 @@ current project.
 
 #+BEGIN_SRC emacs-lisp
 (use-package dtrt-indent
-  :ensure t
   :config
   (dtrt-indent-global-mode)
   (dtrt-indent-adapt))
@@ -2527,7 +2497,6 @@ See https://company-mode.github.io/
 
 #+BEGIN_SRC emacs-lisp
 (use-package company
-  :ensure t
   :hook
   (company-mode . frostyx/company-mode-hook))
 #+END_SRC
@@ -2593,7 +2562,6 @@ Use ~company-box~ it automatically shows documentation
 
 #+BEGIN_SRC emacs-lisp
 (use-package company-box
-  :ensure t
   :hook
   (company-mode . company-box-mode)
 
@@ -2678,8 +2646,7 @@ Sometimes it might be useful to visualize git changes within a file
 Use ~M-x diff-hl-mode~
 
 #+BEGIN_SRC emacs-lisp
-(use-package diff-hl
-  :ensure t)
+(use-package diff-hl)
 #+END_SRC
 
 ** Flycheck
@@ -2688,8 +2655,7 @@ It is handy to have some on-fly syntax and style checker in order to not
 produce ugly code.
 
 #+BEGIN_SRC emacs-lisp
-(use-package flycheck
-  :ensure t)
+(use-package flycheck)
 #+END_SRC
 
 Such tools are typically slow on large files, so to make it (allegedly 10x)
@@ -2786,7 +2752,6 @@ Let's install ~yasnippet~ so we can do just ~ipdb<TAB>~.
 
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet
-  :ensure t
   :init
   (yas-global-mode 1))
 #+END_SRC
@@ -2797,8 +2762,7 @@ it is a big maintanance overhead. Let's install some snippets collection
 and then write/override whatever is needed.
 
 #+BEGIN_SRC emacs-lisp
-(use-package yasnippet-snippets
-  :ensure t)
+(use-package yasnippet-snippets)
 #+END_SRC
 
 Specify paths to snippets and reload all of them
@@ -2824,8 +2788,7 @@ It is often useful to create a scratch buffer for any major mode
 See https://codeberg.org/emacs-weirdware/scratch
 
 #+BEGIN_SRC emacs-lisp
-(use-package scratch
-  :ensure t)
+(use-package scratch)
 #+END_SRC
 
 The most interesting command is ~C-u M-x scratch~ but I don't
@@ -2847,7 +2810,6 @@ generally like to use the ~C-u~ prefix.
 
 #+BEGIN_SRC emacs-lisp
 (use-package elpy
-  :ensure t
   :disabled t
   :init
   ;; @TODO have some module for snippets
@@ -2906,7 +2868,6 @@ Hence
 
 #+BEGIN_SRC emacs-lisp
 (use-package rainbow-delimiters
-  :ensure t
   :config
   (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
 #+END_SRC
@@ -2924,22 +2885,19 @@ When submitting packages to MELPA, they need to be checked using ~package-lint~
 See https://github.com/purcell/package-lint
 
 #+BEGIN_SRC emacs-lisp
-(use-package package-lint
-  :ensure t)
+(use-package package-lint)
 #+END_SRC
 
 *** JSON
 
 #+BEGIN_SRC emacs-lisp
-(use-package json-mode
-  :ensure t)
+(use-package json-mode)
 #+END_SRC
 
 *** YAML
 
 #+BEGIN_SRC emacs-lisp
-(use-package yaml-mode
-  :ensure t)
+(use-package yaml-mode)
 #+END_SRC
 
 Browsing Ansible documentation in Emacs sounds like a good idea. Just
@@ -2949,7 +2907,6 @@ See https://github.com/emacsorphanage/ansible-doc
 
 #+BEGIN_SRC emacs-lisp
 (use-package ansible-doc
-  :ensure t
   :hook
   (yaml-mode . #'ansible-doc-mode))
 #+END_SRC
@@ -2975,7 +2932,6 @@ Extend ~$PATH~ so Emacs can use them.
 
 #+BEGIN_SRC emacs-lisp
 (use-package elm-mode
-  :ensure t
   :config
   (add-hook 'elm-mode-hook 'elm-format-on-save-mode))
 #+END_SRC
@@ -3004,8 +2960,7 @@ Nope, I don't know haskell. I successfully fail learning it every time. Au
 revoir Haskell, see you again later this year. Every year.
 
 #+BEGIN_SRC emacs-lisp
-(use-package haskell-mode
-  :ensure t)
+(use-package haskell-mode)
 #+END_SRC
 
 *** Clojure
@@ -3021,13 +2976,11 @@ sudo dnf copr enable korkeala/clojure
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(use-package clojure-mode
-  :ensure t)
+(use-package clojure-mode)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(use-package cider
-  :ensure t)
+(use-package cider)
 #+END_SRC
 
 Open an empty clojure file and run ~M-x cider-jack-in~.
@@ -3049,8 +3002,7 @@ https://docs.cider.mx/cider/usage/navigating_stacktraces.html
 *** Jinja2
 
 #+BEGIN_SRC emacs-lisp
-(use-package jinja2-mode
-  :ensure t)
+(use-package jinja2-mode)
 #+END_SRC
 
 *** Org
@@ -3066,7 +3018,6 @@ See https://github.com/Somelauw/evil-org-mode
 
 #+BEGIN_SRC emacs-lisp
 (use-package evil-org
-  :ensure t
   :after org
   :hook (org-mode . (lambda () evil-org-mode))
   :config
@@ -3080,7 +3031,6 @@ step towards insanity. Use ~toc-org~ package instead.
 
 #+BEGIN_SRC emacs-lisp
 (use-package toc-org
-  :ensure t
   :after org)
 #+END_SRC
 
@@ -3298,7 +3248,6 @@ See https://github.com/harrybournis/org-fancy-priorities
 
 #+BEGIN_SRC emacs-lisp
 (use-package org-fancy-priorities
-  :ensure t
   :hook
   (org-mode . org-fancy-priorities-mode))
 #+END_SRC
@@ -3379,7 +3328,6 @@ https://gitlab.com/marcowahl/org-pretty-tags
 #+BEGIN_SRC emacs-lisp
 (use-package org-pretty-tags
   :diminish org-pretty-tags-mode
-  :ensure t
   :disabled t
   :config
   (setq org-pretty-tags-surrogate-strings
@@ -3417,8 +3365,7 @@ Install helm support for Org files. The main feature is
 See https://github.com/emacs-helm/helm-org
 
 #+BEGIN_SRC emacs-lisp
-(use-package helm-org
-  :ensure t)
+(use-package helm-org)
 #+END_SRC
 
 Show breadcrumbs for each heading, see more eplanation here
@@ -3459,7 +3406,6 @@ See https://github.com/emacsmirror/khalel
 
 #+BEGIN_SRC emacs-lisp
 (use-package khalel
-  :ensure t
   :after org)
 #+END_SRC
 
@@ -3533,7 +3479,6 @@ See https://github.com/alphapapa/org-super-agenda
 
 #+BEGIN_SRC emacs-lisp
 (use-package org-super-agenda
-  :ensure t
   :config
   (org-super-agenda-mode))
 #+END_SRC
@@ -3716,7 +3661,6 @@ And some colors
 
 #+BEGIN_SRC emacs-lisp
 (use-package org-roam
-  :ensure t
   :custom
   (org-roam-directory (file-truename "~/Org/roam/"))
   :bind (("C-c n l" . org-roam-buffer-toggle)
@@ -3747,7 +3691,6 @@ Use ~C-c C-o~ to open a linked node.
 
 #+BEGIN_SRC emacs-lisp
 (use-package consult-org-roam
-   :ensure t
    :after org-roam
    :init
    (require 'consult-org-roam)
@@ -3775,8 +3718,7 @@ Use ~C-c C-o~ to open a linked node.
 And of course, the graph ...
 
 #+BEGIN_SRC emacs-lisp
-(use-package org-roam-ui
-  :ensure t)
+(use-package org-roam-ui)
 #+END_SRC
 
 **** Pomodoro
@@ -3790,8 +3732,7 @@ See a simple pomodoro timer in the web browser https://pomofocus.io/
 Of course, we want to use Emacs and ~org-mode~.
 
 #+BEGIN_SRC emacs-lisp
-(use-package org-pomodoro
-  :ensure t)
+(use-package org-pomodoro)
 #+END_SRC
 
 For some strange reason, stopping the pomodoro timer prematurely throws away the
@@ -3886,8 +3827,7 @@ Ah, chills.
 See https://github.com/alphapapa/org-ql
 
 #+BEGIN_SRC emacs-lisp
-(use-package org-ql
-  :ensure t)
+(use-package org-ql)
 #+END_SRC
 
 *** Markdown
@@ -3940,15 +3880,13 @@ See https://stackoverflow.com/a/34672923/3285282
 Just some syntax highlighting for asciidoc manual pages.
 
 #+BEGIN_SRC emacs-lisp
-(use-package adoc-mode
-  :ensure t)
+(use-package adoc-mode)
 #+END_SRC
 
 *** RST
 
 #+BEGIN_SRC emacs-lisp
-(use-package rst
-  :ensure t)
+(use-package rst)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -3972,8 +3910,7 @@ And load it.
 
 #+BEGIN_SRC emacs-lisp
 (use-package rpm-spec-mode
-  :load-path "/usr/share/emacs/site-lisp/rpm-spec-mode/"
-  :ensure t)
+  :load-path "/usr/share/emacs/site-lisp/rpm-spec-mode/")
 #+END_SRC
 
 By default the ~rpm-spec-mode~ is not matched with ~.spec~ files, so they are
@@ -4024,8 +3961,7 @@ In Emacs, we have ~plantuml-mode~. It even provides previews with
 See https://github.com/skuro/plantuml-mode
 
 #+BEGIN_SRC emacs-lisp
-(use-package plantuml-mode
-  :ensure t)
+(use-package plantuml-mode)
 #+END_SRC
 
 Don't forget to install the ~plantuml~ package.
@@ -4046,8 +3982,7 @@ Use the binary provided by Fedora
 See https://github.com/elixir-editors/emacs-elixir
 
 #+BEGIN_SRC emacs-lisp
-(use-package elixir-mode
-  :ensure t)
+(use-package elixir-mode)
 #+END_SRC
 
 LSP:
@@ -4070,8 +4005,7 @@ See https://github.com/gleam-lang/gleam-mode/issues/12#issuecomment-2002975860
 ;;            :fetcher github
 ;;            :repo "gleam-lang/gleam-mode"))
 
-(use-package gleam-ts-mode
-  :ensure t)
+(use-package gleam-ts-mode)
 #+END_SRC
 
 Automatically use treesitter mode for gleam files.
@@ -4101,8 +4035,7 @@ Use Gleam LSP
 See https://github.com/mcandre/vimrc-mode
 
 #+BEGIN_SRC emacs-lisp
-(use-package vimrc-mode
-  :ensure t)
+(use-package vimrc-mode)
 #+END_SRC
 
 *** Typescript
@@ -4110,22 +4043,19 @@ See https://github.com/mcandre/vimrc-mode
 See https://github.com/emacs-typescript/typescript.el
 
 #+BEGIN_SRC emacs-lisp
-(use-package typescript-mode
-  :ensure t)
+(use-package typescript-mode)
 #+END_SRC
 
 *** PHP
 
 #+BEGIN_SRC elisp
-(use-package php-mode
-  :ensure t)
+(use-package php-mode)
 #+END_SRC
 
 *** Lua
 
 #+BEGIN_SRC emacs-lisp
 (use-package lua-mode
-  :ensure t
   :hook
   (lua-mode . (lambda () (setq c-basic-offset 2))))
 #+END_SRC
@@ -4135,8 +4065,7 @@ See https://github.com/emacs-typescript/typescript.el
 See https://github.com/AdamNiederer/vue-mode
 
 #+BEGIN_SRC emacs-lisp
-(use-package vue-mode
-  :ensure t)
+(use-package vue-mode)
 #+END_SRC
 
 We don't want any special background.
@@ -4151,7 +4080,6 @@ We don't want any special background.
 
 #+BEGIN_SRC emacs-lisp
 (use-package eglot
-  :ensure t
   :hook
   ((python-mode . eglot-ensure)
    (markdown-mode . eglot-ensure)
@@ -4282,7 +4210,6 @@ See https://emacs-lsp.github.io/lsp-mode/
 
 #+BEGIN_SRC emacs-lisp
 (use-package lsp-mode
-  :ensure t
   :disabled t
   :commands (lsp lsp-deferred)
   :hook
@@ -4343,8 +4270,7 @@ Don't just randomly pop flycheck buffer into my windows
 See https://github.com/emacs-lsp/helm-lsp
 
 #+BEGIN_SRC emacs-lisp
-(use-package helm-lsp
-  :ensure t)
+(use-package helm-lsp)
 #+END_SRC
 
 *** Python
@@ -4389,8 +4315,7 @@ For some reason ~lsp-grammarly~ requires this ~keytar~ thing and for
 some other reason, it doesn't pull it automatically as a dependency.
 
 #+BEGIN_SRC emacs-lisp
-(use-package keytar
-  :ensure t)
+(use-package keytar)
 #+END_SRC
 
 It requires a Javascript package installed via ~npm~.
@@ -4409,8 +4334,7 @@ account. If I understand this properly, the credentials will then be
 stored to ~keytar~ and preserved after closing Emacs.
 
 #+BEGIN_SRC emacs-lisp
-(use-package lsp-grammarly
-  :ensure t)
+(use-package lsp-grammarly)
 #+END_SRC
 
 *** Docker
@@ -4418,8 +4342,7 @@ stored to ~keytar~ and preserved after closing Emacs.
 Install syntax highlighting for dockerfiles
 
 #+BEGIN_SRC emacs-lisp
-(use-package dockerfile-mode
-  :ensure t)
+(use-package dockerfile-mode)
 #+END_SRC
 
 **** Org Books
@@ -4427,8 +4350,7 @@ Install syntax highlighting for dockerfiles
 See https://github.com/lepisma/org-books
 
 #+BEGIN_SRC emacs-lisp
-(use-package org-books
-  :ensure t)
+(use-package org-books)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -4447,8 +4369,7 @@ For systemd services and unit files
 
 #+BEGIN_SRC emacs-lisp
 (use-package systemd
-  :disabled t
-  :ensure t)
+  :disabled t)
 #+END_SRC
 
 ** Licenses
@@ -4456,8 +4377,7 @@ For systemd services and unit files
 https://github.com/jcs-elpa/license-templates/
 
 #+BEGIN_SRC emacs-lisp
-(use-package license-templates
- :ensure t)
+(use-package license-templates)
 #+END_SRC
 
 ** Nix
@@ -4466,7 +4386,6 @@ See https://github.com/NixOS/nix-mode
 
 #+BEGIN_SRC emacs-lisp
 (use-package nix-mode
-  :ensure t
   :mode "\\.nix\\'")
 #+END_SRC
 
@@ -4566,8 +4485,7 @@ It's what xenodium uses for his beautiful presentations,
 e.g. https://www.youtube.com/watch?v=oYHlH9NWraM
 
 #+BEGIN_SRC emacs-lisp
-(use-package moc
-  :ensure t)
+(use-package moc)
 #+END_SRC
 
 Basically, select a text and press ~M-x moc-focus~. I have no idea how to move
@@ -4582,8 +4500,7 @@ tool. Instead, let's use ~M-x woman~.
 
 #+BEGIN_SRC emacs-lisp
 (use-package woman
-  :disabled t
-  :ensure t)
+  :disabled t)
 #+END_SRC
 
 And set some pretty colors
@@ -4640,8 +4557,7 @@ Finally, Install the ~magit~ package.
 
 #+BEGIN_SRC emacs-lisp
 (use-package magit
-  :if (executable-find "git")
-  :ensure t)
+  :if (executable-find "git"))
 #+END_SRC
 
 The most basic key bindings are
@@ -4745,7 +4661,6 @@ See https://magit.vc/manual/ghub/
 
 #+BEGIN_SRC emacs-lisp
 (use-package ghub
-  :ensure t
   :disabled t)
 #+END_SRC
 
@@ -4778,7 +4693,6 @@ interface for ~ghub~.
 
 #+BEGIN_SRC emacs-lisp
 (use-package forge
-  :ensure t
   :disabled t)
 #+END_SRC
 
@@ -4821,8 +4735,7 @@ This is very much useful for agenda files.
 See https://github.com/ryuslash/git-auto-commit-mode
 
 #+BEGIN_SRC emacs-lisp
-(use-package git-auto-commit-mode
-  :ensure t)
+(use-package git-auto-commit-mode)
 #+END_SRC
 
 Don't commit after every save, rather wait a few secs. I am a obsesive
@@ -4868,8 +4781,7 @@ cool package for that.
 https://github.com/xuchunyang/gitignore-templates.el
 
 #+BEGIN_SRC emacs-lisp
-(use-package gitignore-templates
-  :ensure t)
+(use-package gitignore-templates)
 #+END_SRC
 
 I don't want any other source than GitHub's gitignore repository
@@ -4933,7 +4845,6 @@ See https://github.com/jtbm37/all-the-icons-dired
 
 #+BEGIN_SRC emacs-lisp
 (use-package all-the-icons-dired
-  :ensure t
   :hook
   (dired-mode . all-the-icons-dired-mode))
 #+END_SRC
@@ -4945,8 +4856,7 @@ open some file types with dedicated applications.
 https://github.com/Fuco1/dired-hacks#dired-open
 
 #+BEGIN_SRC emacs-lisp
-(use-package dired-open
-  :ensure t)
+(use-package dired-open)
 #+END_SRC
 
 Explicitly assign file types to the applications that should open them. I find
@@ -4975,8 +4885,7 @@ commonly used in GUI file managers.
 See https://github.com/FrostyX/dired-open-with
 
 #+BEGIN_SRC emacs-lisp
-(use-package dired-open-with
-  :ensure t)
+(use-package dired-open-with)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -4998,8 +4907,7 @@ permissions but we need to manually opt-in for each.
 See https://github.com/Fuco1/dired-hacks#dired-rainbow
 
 #+BEGIN_SRC emacs-lisp
-(use-package dired-rainbow
-  :ensure t)
+(use-package dired-rainbow)
 #+END_SRC
 
 This package is immensely annoying in one aspect. Instead of always redefining
@@ -5057,8 +4965,7 @@ It is well-known that Emacs can open archives (.tar, .zip, etc) but thanks to
 See https://github.com/nbarrientos/archive-rpm
 
 #+BEGIN_SRC emacs-lisp
-(use-package archive-rpm
-  :ensure t)
+(use-package archive-rpm)
 #+END_SRC
 
 In Emacs 29, it will be possible to drag-and-drop files from dired to
@@ -5084,7 +4991,6 @@ And install the Emacs ~udiskie~ pacakge
 #+BEGIN_SRC emacs-lisp
 (use-package udiskie
   :if workstation-p
-  :ensure t
   :disabled t
   :quelpa (udiskie
            :fetcher git
@@ -5110,8 +5016,7 @@ Install ~vterm~ package.
 
 #+BEGIN_SRC emacs-lisp
 (use-package vterm
-  :if workstation-p
-  :ensure t)
+  :if workstation-p)
 #+END_SRC
 
 In comparison with external terminal emulator, there is a noticable lag when,
@@ -5132,8 +5037,7 @@ See https://github.com/suonlight/multi-vterm
 
 #+BEGIN_SRC emacs-lisp
 (use-package multi-vterm
-  :if workstation-p
-  :ensure t)
+  :if workstation-p)
 #+END_SRC
 
 For convenience, let's create a wrapper for spawning a named terminal. Unnamed
@@ -5307,8 +5211,7 @@ The other way around, don't let vterm eat some keyboard shortcuts
 ** Eat
 
 #+BEGIN_SRC emacs-lisp
-(use-package eat
- :ensure t)
+(use-package eat)
 #+END_SRC
 
 Always create a new terminal, don't switch to an existing one.
@@ -5420,8 +5323,7 @@ We want multiple terminals
 See https://github.com/xenodium/dwim-shell-command
 
 #+BEGIN_SRC emacs-lisp
-(use-package dwim-shell-command
-  :ensure t)
+(use-package dwim-shell-command)
 #+END_SRC
 
 ** Tmux
@@ -5434,8 +5336,7 @@ See https://github.com/emacsorphanage/emamux
 
 #+BEGIN_SRC emacs-lisp
 (use-package emamux
-  :load-path "/home/jkadlcik/git/emamux"
-  :ensure t)
+  :load-path "/home/jkadlcik/git/emamux")
 #+END_SRC
 
 My goal is to implement helm-centric interface for Tmux. The following
@@ -5498,7 +5399,6 @@ Now we can install the Emacs w3m interface.
 #+BEGIN_SRC emacs-lisp
 (use-package w3m
   :if workstation-p
-  :ensure t
   :config
   nil)
 #+END_SRC
@@ -5533,8 +5433,9 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
 #+BEGIN_SRC emacs-lisp
 (use-package mu4e
   :if workstation-p
-  :ensure nil
-  :load-path "/usr/share/emacs/site-lisp/mu4e"
+  ;; I currently use mu4e from Nix but leaving this here as a documentation
+  ;; how would we load mu4e from a Fedora package
+  ;; :load-path "/usr/share/emacs/site-lisp/mu4e"
   :init
   ;; New versions of mu4e use Gnus-based email viewer that has more features than the
   ;; old one (namely images support, calendar support, etc). However, it sometimes
@@ -5662,7 +5563,6 @@ See https://github.com/Alexander-Miller/mu4e-column-faces
 #+BEGIN_SRC emacs-lisp
 (use-package mu4e-column-faces
   :if workstation-p
-  :ensure t
   :after mu4e
   :config
   (mu4e-column-faces-mode))
@@ -5802,7 +5702,6 @@ See https://www.djcbsoftware.nl/code/mu/mu4e/Sending-mail.html
 #+BEGIN_SRC emacs-lisp
 (use-package smtpmail
   :if workstation-p
-  :ensure t
   :load-path "/usr/share/emacs/site-lisp/mu4e")
 #+END_SRC
 
@@ -6068,8 +5967,7 @@ simple launcher and possibly submit a PR for it.
 *** Mu4e modeline
 
 #+BEGIN_SRC emacs-lisp
-(use-package mu4e-alert
-  :ensure t)
+(use-package mu4e-alert)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -6097,7 +5995,6 @@ opportunity to implement our own views.
 #+BEGIN_SRC emacs-lisp
 (use-package elfeed
   :if workstation-p
-  :ensure t
   :commands (elfeed)
   :config
   (setq-default elfeed-search-filter ""))
@@ -6109,7 +6006,6 @@ a list of lists.
 #+BEGIN_SRC emacs-lisp
 (use-package elfeed-org
   :if workstation-p
-  :ensure t
   :config
   (elfeed-org))
 #+END_SRC
@@ -6277,7 +6173,6 @@ See https://github.com/karthink/elfeed-tube
 
 #+BEGIN_SRC emacs-lisp
 (use-package elfeed-tube
-  :ensure t
   :after elfeed
   :demand t
   :config
@@ -6297,7 +6192,6 @@ See https://github.com/skeeto/elfeed?tab=readme-ov-file#web-interface
 
 #+BEGIN_SRC emacs-lisp
 (use-package elfeed-web
-  :ensure t
   :disabled t)
 #+END_SRC
 
@@ -6489,8 +6383,7 @@ There is a nice Emacs client for Pocket
 https://github.com/alphapapa/pocket-reader.el
 
 #+BEGIN_SRC emacs-lisp
-(use-package pocket-reader
-  :ensure t)
+(use-package pocket-reader)
 #+END_SRC
 
 I want to write some automation to streamline interesting articles
@@ -6553,8 +6446,7 @@ and follow the login instructions. After that, claude will start
 working in ~agent-shell~.
 
 #+BEGIN_SRC emacs-lisp
-(use-package agent-shell
-  :ensure t)
+(use-package agent-shell)
 #+END_SRC
 
 We don't need a welcome message
@@ -6743,7 +6635,6 @@ See https://github.com/stsquad/emacs_chrome
 #+BEGIN_SRC emacs-lisp
 (use-package edit-server
   :if workstation-p
-  :ensure t
   :config
   (edit-server-start))
 #+END_SRC

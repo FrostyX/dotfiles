@@ -25,11 +25,9 @@
 ;;                     "master" "typescript/src")
 ;;         (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
-(use-package clojure-ts-mode
-  :ensure t)
+(use-package clojure-ts-mode)
 
 (use-package treesit-auto
-  :ensure t
   :custom
   (setq treesit-auto-install 'prompt)
   :config
@@ -48,8 +46,7 @@
 ;;    (css-mode . css-ts-mode)
 ;;    (python-mode . python-ts-mode)))
 
-(use-package tree-sitter-indent
-  :ensure t)
+(use-package tree-sitter-indent)
 
 ;; (setq major-mode-remap-alist
 ;;       '((python-mode . python-ts-mode)
@@ -59,7 +56,6 @@
   (add-to-list 'eglot-server-programs '(python-ts-mode . ("pylsp"))))
 
 (use-package eglot
-  :ensure t
   :hook
   ((python-mode . eglot-ensure)
    (python-ts-mode . eglot-ensure)

@@ -19,11 +19,8 @@
 (require 'use-package)
 
 ;; Use latest Org
-(use-package org
-  :ensure t)
-
-(use-package org-contrib
-  :ensure t)
+(use-package org)
+(use-package org-contrib)
 
 ;; Tangle configuration
 (org-babel-load-file (expand-file-name "frostyx.org" user-emacs-directory))
