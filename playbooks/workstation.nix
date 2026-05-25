@@ -261,6 +261,7 @@ in
     {
       name = "Workstation user setup";
       hosts = "localhost";
+      become_user = "{{ vars.user }}";
 
       tasks = [
         {
@@ -272,6 +273,22 @@ in
           with_items = [
             "git"
           ];
+        }
+        {
+          name = "Clone Org repository";
+          git = {
+            repo = "git@github.com:FrostyX/org.git";
+            dest = "/home/{{ vars.user }}/git/Org";
+            update = false;
+          };
+        }
+        {
+          name = "Clone password-store repository";
+          git = {
+            repo = "git@github.com:FrostyX/password-store.git";
+            dest = "/home/{{ vars.user }}/.password-store";
+            update = false;
+          };
         }
         # TODO Use stow to install the dotfiles
         # {
