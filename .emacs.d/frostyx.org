@@ -5414,8 +5414,11 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
 #+BEGIN_SRC emacs-lisp
 (use-package mu4e
   :if workstation-p
-  ;; I currently use mu4e from Nix but leaving this here as a documentation
-  ;; how would we load mu4e from a Fedora package
+  ;; I currently use mu4e from Nix
+  ;; FIXME Don't hardcode the version
+  :load-path "/home/jkadlcik/.nix-profile/share/emacs/site-lisp/elpa/mu4e-1.12.13"
+  ;;
+  ;; But leaving a documentation here, how would we load it from a Fedora package
   ;; :load-path "/usr/share/emacs/site-lisp/mu4e"
   :init
   ;; New versions of mu4e use Gnus-based email viewer that has more features than the
