@@ -4940,6 +4940,12 @@ unbind that so that hydra works.
   "S-SPC")
 #+END_SRC
 
+When copying files, we want to default to an other visible Dired buffer.
+
+#+BEGIN_SRC emacs-lisp
+(setq dired-dwim-target t)
+#+END_SRC
+
 It is well-known that Emacs can open archives (.tar, .zip, etc) but thanks to
 ~archive-rpm~, it can browse also SRPM and RPM packages. This is a game changer.
 
