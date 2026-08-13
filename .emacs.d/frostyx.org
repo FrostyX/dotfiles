@@ -6662,6 +6662,7 @@ Hint: Use ~M-x org-toggle-inline-images~ to see images in Emacs
 * Interesting packages
 I don't use these but they are worth checking out
 
+- https://github.com/erickgnavar/cloak-mode
 - https://github.com/lorniu/gt.el
 - https://github.com/dusanx/elsqlite
 - https://github.com/kljohann/turnip.el

@@ -46,3 +46,8 @@
   "w" '(eww :which-key "web (eww)")
   "e" '(mu4e :which-key "email (mu4e)")
   "s" '(hydra-spotify/body :which-key "Spotify"))
+
+(use-package cloak-mode
+  :ensure t
+  :config
+  (global-cloak-mode))
