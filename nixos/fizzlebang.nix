@@ -13,6 +13,7 @@
   };
 
   # Open ports:
+  #   53    Blocky DNS
   #   22    SSH
   #   3001  Uptime Kuma
   #   6767  Bazarr
@@ -36,6 +37,7 @@
     ./modules/uptime-kuma.nix
     ./modules/homepage.nix
     ./modules/cloudflared.nix
+    ./modules/blocky.nix
   ];
 
   environment.systemPackages = with pkgs; [
