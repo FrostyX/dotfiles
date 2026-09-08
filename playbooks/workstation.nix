@@ -69,6 +69,7 @@ in
             "frostyx/rofi-themes-catppuccin"
             "vishalvvr/fontawesome-fonts"
             "korkeala/clojure"
+            "lihaohong/forgejo-cli"
           ];
         }
         {
@@ -160,6 +161,7 @@ in
               "postgresql"
               "python3-virtualenv"
               "gh"
+              "forgejo-cli"
             ];
           };
         }
