@@ -42,6 +42,14 @@
     # theme.name = "";
     # cursorTheme.name = "";
     iconTheme.name = "breeze";
+    theme = {
+      name = "catppuccin-mocha-mauve-standard";
+      package = pkgs.catppuccin-gtk.override {
+        variant = "mocha";
+        accents = [ "mauve" ];
+      };
+    };
+    gtk4.theme = config.gtk.theme;
   };
 
   # I think it works it just requires session restart

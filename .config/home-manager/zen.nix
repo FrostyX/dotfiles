@@ -1,105 +1,202 @@
 { lib, config, hostname, ... }:
 
 let
-  zenConfigPath = "${config.xdg.configHome}/zen";
+  workSpaceId = "512caef5-f0d2-49d1-b38e-6e3f52ff9af8";
+  personalSpaceId = "2c6c791a-9657-4d72-a7ac-92ea455a3bf5";
+  zenProfilePath =
+    if hostname == "hive"
+    then "FrostyX"
+    else "hpgqitks.Default (release)";
+  uiCustomization = builtins.toJSON {
+    placements = {
+      widget-overflow-fixed-list = [];
+      unified-extensions-area = [
+        "ublock0_raymondhill_net-browser-action"
+        "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
+        "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
+        "languagetool-webextension_languagetool_org-browser-action"
+        "idcac-pub_guus_ninja-browser-action"
+        "_8dd384e7-fc9e-4b6a-a744-497edc3408c3_-browser-action"
+      ];
+      nav-bar = [
+        "back-button"
+        "forward-button"
+        "stop-reload-button"
+        "personal-bookmarks"
+        "vertical-spacer"
+        "urlbar-container"
+        "unified-extensions-button"
+      ];
+      toolbar-menubar = [ "menubar-items" ];
+      TabsToolbar = [ "tabbrowser-tabs" ];
+      vertical-tabs = [];
+      PersonalToolbar = [];
+      zen-sidebar-top-buttons = [ "home-button" ];
+      zen-sidebar-foot-buttons = [
+        "downloads-button"
+        "zen-workspaces-button"
+        "zen-create-new-button"
+      ];
+    };
+    seen = [
+      "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
+      "ublock0_raymondhill_net-browser-action"
+      "ai-window-toggle"
+      "developer-button"
+      "screenshot-button"
+      "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
+      "idcac-pub_guus_ninja-browser-action"
+      "languagetool-webextension_languagetool_org-browser-action"
+    ];
+    dirtyAreaCache = [
+      "nav-bar"
+      "vertical-tabs"
+      "zen-sidebar-foot-buttons"
+      "PersonalToolbar"
+      "toolbar-menubar"
+      "TabsToolbar"
+      "unified-extensions-area"
+      "zen-sidebar-top-buttons"
+      "widget-overflow-fixed-list"
+    ];
+    currentVersion = 26;
+    newElementCount = 2;
+  };
 in
 lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
-  home.file."${zenConfigPath}/profiles.ini".force = true;
-  home.file."${zenConfigPath}/hpgqitks.Default (release)/user.js".force = true;
-
   programs.zen-browser = {
     enable = true;
+    configPath = if hostname == "hive" then ".zen" else ".config/zen";
+    env = {
+      GTK_THEME = "catppuccin-mocha-mauve-standard";
+    };
     policies = {
       AutofillAddressEnabled = true;
+      ExtensionSettings = {
+        "uBlock0@raymondhill.net" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+          installation_mode = "force_installed";
+        };
+        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
+          installation_mode = "force_installed";
+        };
+        "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/vimium-ff/latest.xpi";
+          installation_mode = "force_installed";
+        };
+        "languagetool-webextension@languagetool.org" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/languagetool/latest.xpi";
+          installation_mode = "force_installed";
+        };
+        "idcac-pub@guus.ninja" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/istilldontcareaboutcookies/latest.xpi";
+          installation_mode = "force_installed";
+        };
+        "{8dd384e7-fc9e-4b6a-a744-497edc3408c3}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/edit-with-emacs/latest.xpi";
+          installation_mode = "force_installed";
+        };
+      };
     };
     profiles.default = {
       isDefault = true;
-      path =
-        if (hostname == "nova")
-        then "hpgqitks.Default (release)"
-        else if (hostname == "hive")
-        then "hpgqitks.Default (release)"
+      name =
+        if (hostname == "hive")
+        then "FrostyX"
         else "default";
+      path =
+        if (hostname == "pop-os")
+        then "default"
+        else zenProfilePath;
 
-      # settings = {
-      #   "browser.startup.homepage" = "https://google.com";
-      #   "general.smoothScroll.msdPhysics.enabled" = false;
-      #   "zen.theme.content-element-separation" = 0;
-      #   "zen.glance.enabled" = false;
-      #   "zen.view.show-newtab-button-top" = false;
-      #   "zen.view.use-single-toolbar" = false;
-      #   "zen.welcome-screen.seen" = true;
-      # };
+      presets.catppuccin = {
+          enable = true;
+          # Frappe | Latte | Macchiato | Mocha
+          flavor = "Mocha";
+          # Blue, Flamingo, Green, Lavender, Maroon, Mauve, ...
+          accent = "Mauve";
+      };
 
-
-      settings = let
-        uiCustomization = builtins.toJSON {
-          placements = {
-            widget-overflow-fixed-list = [];
-            # unified-extensions-area = [
-            #   "ublock0_raymondhill_net-browser-action"
-            #   "_testpilot-containers-browser-action"
-            #   "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
-            #   "languagetool-webextension_languagetool_org-browser-action"
-            #   "idcac-pub_guus_ninja-browser-action"
-            #   "_8dd384e7-fc9e-4b6a-a744-497edc3408c3_-browser-action"
-            #   "_c2c003ee-bd69-42a2-b0e9-6f34222cb046_-browser-action"
-            # ];
-            nav-bar = [
-              "back-button"
-              "forward-button"
-              "stop-reload-button"
-              "personal-bookmarks"
-              "vertical-spacer"
-              "urlbar-container"
-              "customizableui-special-spring2"
-              "unified-extensions-button"
+      bookmarks = {
+        force = true;
+        settings = [
+          {
+            name = "toolbar";
+            toolbar = true;
+            bookmarks = [
+              {
+                name = "Abathur";
+                url = "http://192.168.1.222/";
+              }
+              {
+                name = "Game Time";
+                url = "https://eu.shop.battle.net/en-gb/product/world-of-warcraft-game-time";
+              }
+              {
+                name = "Messages";
+                url = "https://www.instagram.com/direct/inbox/";
+              }
+              {
+                name = "Spotify";
+                url = "https://open.spotify.com/browse/featured";
+              }
+              {
+                name = "Netflix";
+                url = "https://www.netflix.com/browse";
+              }
+              {
+                name = "JIRA";
+                url = "https://redhat.atlassian.net/jira/software/c/projects/CPT/boards/7400/backlog";
+              }
+              {
+                name = "Gmail";
+                url = "https://mail.google.com/mail/u/1/#inbox";
+              }
+              {
+                name = "Calendar";
+                url = "https://calendar.google.com/calendar/u/1/r";
+              }
+              {
+                name = "AWS";
+                url = "https://id.fedoraproject.org/saml2/SSO/Redirect?SPIdentifier=urn:amazon:webservices&RelayState=https://console.aws.amazon.com";
+              }
+              {
+                name = "GitHub";
+                url = "https://github.com/FrostyX";
+              }
             ];
-            toolbar-menubar = [ "menubar-items" ];
-            TabsToolbar = [ "tabbrowser-tabs" ];
-            vertical-tabs = [];
-            PersonalToolbar = [];
-            zen-sidebar-top-buttons = [ "home-button" ];
-            zen-sidebar-foot-buttons = [
-              "downloads-button"
-              "zen-workspaces-button"
-              "zen-create-new-button"
-            ];
-          };
-          # seen = [
-          #   "developer-button"
-          #   "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
-          #   "languagetool-webextension_languagetool_org-browser-action"
-          #   "idcac-pub_guus_ninja-browser-action"
-          #   "ublock0_raymondhill_net-browser-action"
-          #   "_8dd384e7-fc9e-4b6a-a744-497edc3408c3_-browser-action"
-          #   "_testpilot-containers-browser-action"
-          #   "_c2c003ee-bd69-42a2-b0e9-6f34222cb046_-browser-action"
-          #   "screenshot-button"
-          # ];
-          dirtyAreaCache = [
-            "nav-bar"
-            "vertical-tabs"
-            "zen-sidebar-foot-buttons"
-            "PersonalToolbar"
-            "toolbar-menubar"
-            "TabsToolbar"
-            # "unified-extensions-area"
-            "zen-sidebar-top-buttons"
-            "widget-overflow-fixed-list"
-          ];
-          # currentVersion = 22;
-          # newElementCount = 13;
+          }
+        ];
+      };
+
+      spaces = {
+        Work = {
+          id = workSpaceId;
+          position = 0;
+          icon = "❤️";
         };
-      in {
+        Personal = {
+          id = personalSpaceId;
+          position = 1;
+          icon = "💙";
+        };
+      };
+      spacesForce = true;
+
+      settings = {
         "browser.uiCustomization.state" = uiCustomization;
         "browser.startup.homepage" = "https://google.com";
         "general.smoothScroll.msdPhysics.enabled" = false;
         "zen.theme.content-element-separation" = 0;
+        "zen.theme.hide-unified-extensions-button" = true;
         "zen.glance.enabled" = false;
         "zen.view.show-newtab-button-top" = false;
         "zen.view.use-single-toolbar" = false;
         "zen.welcome-screen.seen" = true;
+        "media.videocontrols.picture-in-picture.enabled" = false;
+        "media.videocontrols.picture-in-picture.video-toggle.enabled" = false;
+        "layout.css.prefers-color-scheme.content-override" = 1;
 
         # Geolocation seems to be tricky. Without these settings, Zen won't
         # even ask for permissions to find me on a map. With them, it finds me,
@@ -112,19 +209,34 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
         "geo.provider.network.url" = "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyB2h2OuRcUgy5N-5hsZqiPW6sH3n_rptiQ";
       };
 
-      # TODO Use the conditionally defined profile name here
-      userChrome = builtins.readFile (../../.zen + "/hpgqitks.Default (release)/chrome/userChrome.css");
+      userChrome = ''
+        @import "catppuccin/userChrome.css";
+
+        #zen-sidebar-top-buttons {
+          background: var(--zen-themed-toolbar-bg) !important;
+        }
+
+        /* TODO: Replace this CSS workaround with Zen's native workspace bookmark
+           assignments once they can be configured declaratively.
+           Show only the active space's bookmarks on the toolbar. */
+
+        :root:not(:has(zen-workspace[id="{${personalSpaceId}}"][active]))
+          #personal-bookmarks .bookmark-item:is(
+            [label="Abathur"], [label="Game Time"],
+            [label="Spotify"], [label="Netflix"], [label="Messages"],
+          ) {
+          display: none !important;
+        }
+
+        :root:has(zen-workspace[id="{${personalSpaceId}}"][active])
+          #personal-bookmarks .bookmark-item:is(
+            [label="JIRA"], [label="Gmail"], [label="Calendar"],
+            [label="AWS"], [label="GitHub"],
+          ) {
+          display: none !important;
+        }
+      '';
       userContent = builtins.readFile (../../.zen + "/hpgqitks.Default (release)/chrome/userContent.css");
     };
   };
 }
-
-
-
-  # gtk = {
-  #   enable = true;
-  #   # See ~/.config/gtk-3.0/settings.ini
-  #   # theme.name = "";
-  #   # cursorTheme.name = "";
-  #   iconTheme.name = "breeze";
-  # };
