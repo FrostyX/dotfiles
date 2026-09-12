@@ -1,8 +1,11 @@
 { lib, config, hostname, ... }:
 
+let
+  zenConfigPath = "${config.xdg.configHome}/zen";
+in
 lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
-  home.file.".zen/profiles.ini".force = true;
-  home.file.".zen/hpgqitks.Default (release)/user.js".force = true;
+  home.file."${zenConfigPath}/profiles.ini".force = true;
+  home.file."${zenConfigPath}/hpgqitks.Default (release)/user.js".force = true;
 
   programs.zen-browser = {
     enable = true;
