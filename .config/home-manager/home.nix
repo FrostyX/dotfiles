@@ -46,6 +46,7 @@
 
   # I think it works it just requires session restart
   home.pointerCursor = {
+    enable = true;
     name = "breeze_cursors";
     package = pkgs.kdePackages.breeze;
     size = 24;
