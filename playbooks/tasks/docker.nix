@@ -1,3 +1,5 @@
+user:
+
 [
   # https://developer.fedoraproject.org/tools/docker/docker-installation.html
   {
@@ -32,7 +34,7 @@
   {
     name = "Docker as user - add user to group";
     user = {
-      name = "{{ user }}";
+      name = user;
       groups = "docker";
       append = true;
     };

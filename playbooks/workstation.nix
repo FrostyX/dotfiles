@@ -1,7 +1,8 @@
 { ... }:
 
 let
-  dockerTasks = import ./tasks/docker.nix;
+  dockerTasks = import ./tasks/docker.nix user;
+  user = "jkadlcik";
 in
 {
   collections = {
@@ -17,8 +18,6 @@ in
       # gather_facts = false;
       hosts = "localhost";
       become = true;
-
-      vars.user = "jkadlcik";
 
       # roles = [
       #   { role = "syncthing"; }
@@ -270,7 +269,7 @@ in
     {
       name = "Workstation user setup";
       hosts = "localhost";
-      become_user = "{{ vars.user }}";
+      become_user = user;
 
       tasks = [
         {
@@ -287,7 +286,7 @@ in
           name = "Clone Org repository";
           git = {
             repo = "git@github.com:FrostyX/org.git";
-            dest = "/home/{{ vars.user }}/git/Org";
+            dest = "/home/${user}/git/Org";
             update = false;
           };
         }
@@ -295,7 +294,7 @@ in
           name = "Clone password-store repository";
           git = {
             repo = "git@github.com:FrostyX/password-store.git";
-            dest = "/home/{{ vars.user }}/.password-store";
+            dest = "/home/${user}/.password-store";
             update = false;
           };
         }
