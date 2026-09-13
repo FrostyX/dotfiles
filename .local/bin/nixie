@@ -28,6 +28,11 @@ def nix_flake_update():
     subprocess.run(cmd, check=True, cwd=DOTFILES_PATH)
 
 
+def nix_playbook():
+    cmd = ["nix", "run", f"{DOTFILES_PATH}/#playbook", "--", "-K"]
+    subprocess.run(cmd, check=True)
+
+
 def cmd_switch(args):
     nix_switch()
 
@@ -38,6 +43,10 @@ def cmd_update(args):
         return
     nix_flake_update()
     nix_switch()
+
+
+def cmd_playbook(args):
+    nix_playbook()
 
 
 def get_arg_parser():
@@ -60,6 +69,12 @@ def get_arg_parser():
         help="Update configuration",
     )
     update_parser.set_defaults(func=cmd_update)
+
+    playbook_parser = subparsers.add_parser(
+        "playbook",
+        help="Run workstation playbook",
+    )
+    playbook_parser.set_defaults(func=cmd_playbook)
 
     return parser
 
