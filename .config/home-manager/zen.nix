@@ -4,7 +4,7 @@ let
   workSpaceId = "512caef5-f0d2-49d1-b38e-6e3f52ff9af8";
   personalSpaceId = "2c6c791a-9657-4d72-a7ac-92ea455a3bf5";
   zenProfilePath =
-    if hostname == "hive"
+    if builtins.elem hostname [ "hive" "nova" ]
     then "FrostyX"
     else "hpgqitks.Default (release)";
   uiCustomization = builtins.toJSON {
@@ -66,7 +66,7 @@ in
 lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
   programs.zen-browser = {
     enable = true;
-    configPath = if hostname == "hive" then ".zen" else ".config/zen";
+    configPath = if builtins.elem hostname [ "hive" "nova" ] then ".zen" else ".config/zen";
     env = {
       GTK_THEME = "catppuccin-mocha-mauve-standard";
     };
@@ -104,7 +104,7 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
     profiles.default = {
       isDefault = true;
       name =
-        if (hostname == "hive")
+        if builtins.elem hostname [ "hive" "nova" ]
         then "FrostyX"
         else "default";
       path =
