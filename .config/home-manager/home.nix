@@ -69,6 +69,7 @@
     ./flatpak.nix
     ./xdg.nix
     ./zen.nix
+    ./ssh.nix
     ./symlinks.nix
     ./future.nix
   ];
