@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+
+import argparse
+import socket
+import subprocess
+from pathlib import Path
+
+
+DOTFILES_PATH = Path.home() / ".dotfiles"
+
+
+def get_hostname():
+    return socket.gethostname()
+
+
+def nix_switch():
+    cmd = [
+        "nix", "run", "nixpkgs#home-manager", "--",
+        "switch", "--flake",
+        f"{DOTFILES_PATH}/#jkadlcik@{get_hostname()}",
+        "-b", "backup",
+    ]
+    subprocess.run(cmd, check=True)
+
+
+def nix_flake_update():
+    cmd = ["nix", "flake", "update"]
+    subprocess.run(cmd, check=True, cwd=DOTFILES_PATH)
+
+
+def cmd_switch(args):
+    nix_switch()
+
+
+def cmd_update(args):
+    nix_flake_update()
+    nix_switch()
+
+
+def get_arg_parser():
+    parser = argparse.ArgumentParser(
+        description="Manage Nix configuration."
+    )
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    switch_parser = subparsers.add_parser(
+        "switch",
+        help="Switch configuration",
+    )
+    switch_parser.set_defaults(func=cmd_switch)
+
+    update_parser = subparsers.add_parser(
+        "update",
+        help="Update configuration",
+    )
+    update_parser.set_defaults(func=cmd_update)
+
+    return parser
+
+
+def main():
+    parser = get_arg_parser()
+    args = parser.parse_args()
+    args.func(args)
+
+
+if __name__ == "__main__":
+    main()
