@@ -219,6 +219,17 @@ in
           when = ''ansible_facts["hostname"] == "nova"'';
         }
         {
+          name = "Install Intel media driver for hardware video acceleration";
+          dnf = {
+            state = "latest";
+            name = [
+              "intel-media-driver"
+              "libva-utils"
+            ];
+          };
+          when = ''ansible_facts["hostname"] == "nova"'';
+        }
+        {
           name = "Add user to the libvirt group";
           user = {
             name = "jkadlcik";

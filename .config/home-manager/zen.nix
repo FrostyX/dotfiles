@@ -199,6 +199,8 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
         "media.videocontrols.picture-in-picture.enabled" = false;
         "media.videocontrols.picture-in-picture.video-toggle.enabled" = false;
         "layout.css.prefers-color-scheme.content-override" = 1;
+        "media.ffmpeg.vaapi.enabled" = true;
+        "gfx.x11-egl.force-enabled" = true;
 
         # Geolocation seems to be tricky. Without these settings, Zen won't
         # even ask for permissions to find me on a map. With them, it finds me,
