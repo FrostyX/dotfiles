@@ -36,6 +36,7 @@
       groups = "docker";
       append = true;
     };
+    ignore_errors = true;
     # Conditionaly restart docker here and run `newgrp docker`
   }
 ]

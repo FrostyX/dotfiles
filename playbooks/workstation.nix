@@ -186,6 +186,7 @@ in
             groups = "plugdev";
             append = true;
           };
+          ignore_errors = true;
         }
 
         # https://docs.fedoraproject.org/en-US/quick-docs/virtualization-getting-started/
@@ -225,6 +226,7 @@ in
             groups = "libvirt";
             append = true;
           };
+          ignore_errors = true;
         }
         # {
         #   name = "Install nix";
