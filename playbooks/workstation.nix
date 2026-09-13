@@ -161,6 +161,7 @@ in
               "python3-virtualenv"
               "gh"
               "forgejo-cli"
+              "xdotool"
             ];
           };
         }
