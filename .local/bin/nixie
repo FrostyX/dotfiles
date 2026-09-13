@@ -33,6 +33,9 @@ def cmd_switch(args):
 
 
 def cmd_update(args):
+    answer = input("Do you want to update the nix lockfile? [y/N] ")
+    if answer.strip().lower() not in ("y", "yes"):
+        return
     nix_flake_update()
     nix_switch()
 
