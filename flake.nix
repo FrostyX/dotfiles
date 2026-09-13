@@ -49,7 +49,7 @@
     {
       packages.${system}.playbook = nixible_lib.mkNixibleCli ./playbooks/workstation.nix;
 
-      homeConfigurations."jkadlcik" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."jkadlcik@hive" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
           zen-browser.homeModules.beta
