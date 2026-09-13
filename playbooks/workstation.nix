@@ -214,6 +214,11 @@ in
           when = ''ansible_facts["hostname"] == "nova"'';
         }
         {
+          name = "Set tuned profile to throughput-performance";
+          command = "tuned-adm profile throughput-performance";
+          when = ''ansible_facts["hostname"] == "nova"'';
+        }
+        {
           name = "Add user to the libvirt group";
           user = {
             name = "jkadlcik";
