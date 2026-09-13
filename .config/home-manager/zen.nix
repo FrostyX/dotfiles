@@ -72,6 +72,7 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
     };
     policies = {
       AutofillAddressEnabled = true;
+      OfferToSaveLogins = false;
       ExtensionSettings = {
         "uBlock0@raymondhill.net" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
