@@ -1,4 +1,11 @@
-/* Catppuccin Latte Sky userContent.css*/
+/* Catppuccin Latte Sky userContent.css */
+
+/* Catppuccin Mocha Surface2 scrollbar thumbs on webpages. */
+@-moz-document url-prefix("http://"), url-prefix("https://") {
+  * {
+    scrollbar-color: #585b70 transparent !important;
+  }
+}
 
 @media (prefers-color-scheme: light) {
 

@@ -240,7 +240,7 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
           display: none !important;
         }
       '';
-      userContent = builtins.readFile (../../.zen + "/hpgqitks.Default (release)/chrome/userContent.css");
+      userContent = builtins.readFile ../../.zen/FrostyX/userContent.css;
     };
   };
 }
