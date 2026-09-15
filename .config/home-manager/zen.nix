@@ -15,7 +15,6 @@ let
         "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
         "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
         "languagetool-webextension_languagetool_org-browser-action"
-        "idcac-pub_guus_ninja-browser-action"
         "_8dd384e7-fc9e-4b6a-a744-497edc3408c3_-browser-action"
       ];
       nav-bar = [
@@ -45,7 +44,6 @@ let
       "developer-button"
       "screenshot-button"
       "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
-      "idcac-pub_guus_ninja-browser-action"
       "languagetool-webextension_languagetool_org-browser-action"
     ];
     dirtyAreaCache = [
@@ -73,6 +71,22 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
     policies = {
       AutofillAddressEnabled = true;
       OfferToSaveLogins = false;
+      "3rdparty".Extensions."uBlock0@raymondhill.net" = {
+        toOverwrite.filterLists = [
+          "user-filters"
+          "ublock-filters"
+          "ublock-badware"
+          "ublock-privacy"
+          "ublock-unbreak"
+          "ublock-quick-fixes"
+          "easylist"
+          "easyprivacy"
+          "urlhaus-1"
+          # EasyList and uBlock cookie notices.
+          "fanboy-cookiemonster"
+          "ublock-cookies-easylist"
+        ];
+      };
       ExtensionSettings = {
         "uBlock0@raymondhill.net" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
@@ -89,10 +103,6 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
         };
         "languagetool-webextension@languagetool.org" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/languagetool/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "idcac-pub@guus.ninja" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/istilldontcareaboutcookies/latest.xpi";
           installation_mode = "force_installed";
         };
         "{8dd384e7-fc9e-4b6a-a744-497edc3408c3}" = {
