@@ -295,6 +295,14 @@ in
           ];
         }
         {
+          name = "Clone wallpapers repository";
+          git = {
+            repo = "https://github.com/FrostyX/wallpapers.git";
+            dest = "/home/${user}/git/wallpapers";
+            update = false;
+          };
+        }
+        {
           name = "Clone Org repository";
           git = {
             repo = "git@github.com:FrostyX/org.git";

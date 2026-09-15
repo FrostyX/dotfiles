@@ -86,7 +86,7 @@ if hostname == "chromie":
 elif hostname in ["alarak", "zeratul", "nova"]:
     # terminal = "urxvt256c -e tmux"
     terminal = "alacritty"
-    lock = "i3lock -i /home/jkadlcik/.dotfiles/.config/qtile/img/bsod.png"
+    lock = "i3lock -i /home/jkadlcik/git/wallpapers/bsod-2.png"
 
     # The pactl commands sometimes work, sometimes doesn't,
     # let's try amixer again
@@ -96,7 +96,7 @@ elif hostname in ["alarak", "zeratul", "nova"]:
 elif hostname == "hive":
     # terminal = "urxvt256c -e tmux"
     terminal = "alacritty"
-    lock = "i3lock -t -i /home/jkadlcik/.dotfiles/.config/qtile/img/bsod.png"
+    lock = "i3lock -t -i /home/jkadlcik/git/wallpapers/bsod-2.png"
 
 
 WAYLAND = False
@@ -184,7 +184,7 @@ keys = [
         Key([], "s", lazy.spawn("flatpak run com.slack.Slack")),
         Key([], "d", lazy.spawn("flatpak run com.discordapp.Discord")),
         Key([], "a", lazy.spawn(
-            expanduser("/home/jkadlcik/Downloads/Beeper-4.2.692-x86_64.AppImage"))
+            expanduser("/home/jkadlcik/Downloads/Beeper-4.3.113-x86_64.AppImage"))
         ),
         Key([], "c", lazy.spawn(expanduser("~/.dotfiles/.local/bin/rofi-copr"))),
     ]),

@@ -8,7 +8,7 @@ xrdb -load ~/.Xresources
 xsetroot -cursor_name left_ptr
 
 
-swaybg --image ~/.config/qtile/img/paint-colorful-overlay.jpg &
+swaybg --image ~/git/wallpapers/abstract-2.png &
 
 
 # Turn off black Screensaver
