@@ -113,6 +113,11 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
     };
     profiles.default = {
       isDefault = true;
+      containers.Stream = {
+        id = 6;
+        color = "pink";
+        icon = "circle";
+      };
       name =
         if builtins.elem hostname [ "hive" "nova" ]
         then "FrostyX"
@@ -225,6 +230,12 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
 
       userChrome = ''
         @import "catppuccin/userChrome.css";
+
+        /* Stream container: Catppuccin Mocha pink. */
+        [usercontextid="${toString config.programs.zen-browser.profiles.default.containers.Stream.id}"] {
+          --identity-tab-color: #f5c2e7 !important;
+          --identity-icon-color: #f5c2e7 !important;
+        }
 
         #zen-sidebar-top-buttons {
           background: var(--zen-themed-toolbar-bg) !important;
