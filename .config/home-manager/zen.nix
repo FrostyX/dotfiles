@@ -113,6 +113,7 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
     };
     profiles.default = {
       isDefault = true;
+      containersForce = true;
       containers.Stream = {
         id = 6;
         color = "pink";
