@@ -216,6 +216,7 @@ in
             state = "stopped";
             name = "sshd";
             enabled = false;
+            masked = true;
           };
           when = ''ansible_facts["hostname"] == "nova"'';
         }
