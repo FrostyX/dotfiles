@@ -1,9 +1,12 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, hostname, ... }:
 
 {
   home.username = "jkadlcik";
   home.homeDirectory = "/home/jkadlcik";
   home.stateVersion = "23.11";
+
+  # Expose graphics drivers to Nix applications on non-NixOS hosts.
+  targets.genericLinux.gpu.enable = builtins.elem hostname [ "hive" "nova" ];
 
   home.packages = with pkgs; [
     git
