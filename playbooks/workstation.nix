@@ -37,6 +37,11 @@ in
       tasks =
         [
         {
+          name = "Set the system timezone";
+          command = "timedatectl set-timezone Europe/Prague";
+          when = ''ansible_facts["date_time"]["tz"] not in ["CET", "CEST"]'';
+        }
+        {
           name = "Install workstation repos";
           dnf = {
             state = "latest";
