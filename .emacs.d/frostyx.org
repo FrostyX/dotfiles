@@ -6624,7 +6624,7 @@ See https://github.com/stsquad/emacs_chrome
 
 #+BEGIN_SRC emacs-lisp
 (use-package edit-server
-  :if workstation-p
+  :if (and workstation-p (not (string= (system-name) "nova")))
   :config
   (edit-server-start))
 #+END_SRC
