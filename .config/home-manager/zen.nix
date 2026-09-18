@@ -1,4 +1,4 @@
-{ lib, config, hostname, ... }:
+{ lib, pkgs, config, hostname, ... }:
 
 let
   workSpaceId = "512caef5-f0d2-49d1-b38e-6e3f52ff9af8";
@@ -205,6 +205,17 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
       settings = {
         "browser.uiCustomization.state" = uiCustomization;
         "browser.startup.homepage" = "https://google.com";
+
+        # Allow Kerberos/GSSAPI authentication for these sites
+        "network.negotiate-auth.trusted-uris" = ".redhat.com";
+        "network.negotiate-auth.delegation-uris" = ".redhat.com";
+
+        # Zen is a Nix-built binary and cannot find the system GSSAPI library
+        # (/usr/lib64 is not on its library path). Point it at the
+        # Nix-provided libgssapi instead.
+        "network.negotiate-auth.gsslib" =
+          "${pkgs.libkrb5.lib}/lib/libgssapi_krb5.so.2";
+
         "general.smoothScroll.msdPhysics.enabled" = false;
         "zen.theme.content-element-separation" = 0;
         "zen.theme.hide-unified-extensions-button" = true;
