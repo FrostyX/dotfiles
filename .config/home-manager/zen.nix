@@ -85,6 +85,8 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
           # EasyList and uBlock cookie notices.
           "fanboy-cookiemonster"
           "ublock-cookies-easylist"
+          # Block List Project: adult sites.
+          "https://blocklistproject.github.io/Lists/porn.txt"
         ];
       };
       ExtensionSettings = {
