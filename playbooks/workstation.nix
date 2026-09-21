@@ -98,6 +98,7 @@ in
               "qtile-wayland"
               "qtile-extras"
               "feh"
+              "swaybg"
               "xset"
               "i3lock"
               "xrandr"
