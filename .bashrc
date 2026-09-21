@@ -22,7 +22,7 @@ alias home-manager="nix run nixpkgs#home-manager --"
 
 # TODO Use this instead
 # https://wiki.archlinux.org/title/Session_lock
-alias suspend="i3lock -t -i ~/.dotfiles/.config/qtile/img/bsod.png && systemctl suspend"
+alias suspend="i3lock -t -i ~/git/wallpapers/bsod-2.png && systemctl suspend"
 
 # Performance modes
 # https://wiki.archlinux.org/title/Lenovo_ThinkPad_X1_Carbon_(Gen_9)#Performance_modes
