@@ -40,6 +40,8 @@
   programs.home-manager.enable = true;
   news.display = "silent";
 
+  dconf.enable = false;
+
   gtk = {
     enable = true;
     # See ~/.config/gtk-3.0/settings.ini
