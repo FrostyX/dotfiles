@@ -5422,7 +5422,7 @@ The ~mu4e~ package is not available on MELPA, let's load it from system.
   :if workstation-p
   ;; I currently use mu4e from Nix
   ;; FIXME Don't hardcode the version
-  :load-path "/home/jkadlcik/.nix-profile/share/emacs/site-lisp/elpa/mu4e-1.12.13"
+  :load-path "/home/jkadlcik/.nix-profile/share/emacs/site-lisp/elpa/mu4e-1.14.3"
   ;;
   ;; But leaving a documentation here, how would we load it from a Fedora package
   ;; :load-path "/usr/share/emacs/site-lisp/mu4e"
