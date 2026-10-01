@@ -325,6 +325,14 @@ in
             update = false;
           };
         }
+        {
+          name = "Clone rpmbuild-topdir repository";
+          git = {
+            repo = "https://github.com/FrostyX/rpmbuild-topdir.git";
+            dest = "/home/${user}/rpmbuild";
+            update = false;
+          };
+        }
         # TODO Use stow to install the dotfiles
         # {
         #   name = "Use config from dotfiles repo";
