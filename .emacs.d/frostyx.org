@@ -6496,7 +6496,7 @@ We don't want to install some garbage using curl to shell pipe or global NPM.
 
 #+BEGIN_SRC emacs-lisp
 (setq agent-shell-anthropic-claude-acp-command
-      '("nix" "run" "nixpkgs#claude-agent-acp"))
+      '("claude-agent-acp"))
 #+END_SRC
 
 A helper function to start ~agent-shell~ for Claude Code or reuse an

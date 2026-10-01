@@ -26,6 +26,7 @@ in
   home.packages = [
     (jail "claude-jailed" pkgs.claude-code combinators)
     (jail "claude-agent-acp-jailed" acpPkgs.claude-agent-acp combinators)
+    acpPkgs.claude-agent-acp
   ];
 
   home.file.".claude/settings.json".text = builtins.toJSON {
