@@ -1,7 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, emacsFedoraPkgs, ... }:
 
 let
-  emacsPackages = pkgs.emacsPackagesFor pkgs.emacs;
+  emacs = emacsFedoraPkgs.emacs30-pgtk;
+  emacsPackages = emacsFedoraPkgs.emacsPackagesFor emacs;
   packageNames = [
     "ace-window"
     "adoc-mode"

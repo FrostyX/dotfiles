@@ -187,6 +187,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-emacs-fedora": {
+      "locked": {
+        "lastModified": 1787183986,
+        "narHash": "sha256-Qf3uTt+zZixVmw7aL66MR+U5utJilszz830u+eg2CfQ=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "a5914e721a05edc7bc50809625097813d253469a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "a5914e721a05edc7bc50809625097813d253469a",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -196,6 +212,7 @@
         "nixible": "nixible",
         "nixpkgs": "nixpkgs",
         "nixpkgs-acp": "nixpkgs-acp",
+        "nixpkgs-emacs-fedora": "nixpkgs-emacs-fedora",
         "zen-browser": "zen-browser"
       }
     },

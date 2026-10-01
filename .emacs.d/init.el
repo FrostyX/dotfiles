@@ -9,6 +9,12 @@
      ("gnu" . "http://elpa.gnu.org/packages/")
      ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 
+;; Install Emacs packages from Nix so that we can have a lockfile and
+;; faster onboarding on new machines.
+(let ((nix-pkgs-dir (expand-file-name "~/.nix-profile/share/emacs/site-lisp/elpa")))
+  (when (file-directory-p nix-pkgs-dir)
+    (add-to-list 'package-directory-list nix-pkgs-dir)))
+
 (setq package-enable-at-startup nil)
 (package-initialize)
 

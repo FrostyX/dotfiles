@@ -97,16 +97,6 @@ hostname.
 
 * Package management
 
-We will install Emacs packages from Nix so that we can have a lockfile and
-faster onboarding on new machines:
-
-#+BEGIN_SRC emacs-lisp
-(let* ((nix-pkgs-dir "~/.nix-profile/share/emacs/site-lisp/elpa")
-       (nix-pkgs-dir (expand-file-name nix-pkgs-dir)))
-  (when (file-directory-p nix-pkgs-dir)
-    (add-to-list 'package-directory-list nix-pkgs-dir)))
-#+END_SRC
-
 #+BEGIN_SRC emacs-lisp
 (setq use-package-always-ensure nil)
 #+END_SRC

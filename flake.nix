@@ -20,10 +20,11 @@
     nixible.url = "gitlab:TECHNOFAB/nixible?dir=lib";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.7.0";
     nixpkgs-acp.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-emacs-fedora.url = "github:nixos/nixpkgs/a5914e721a05edc7bc50809625097813d253469a";
   };
 
   outputs =
-    { nixpkgs, home-manager, zen-browser, agenix, jail-nix, nixible, nix-flatpak, nixpkgs-acp, ... }:
+    { nixpkgs, home-manager, zen-browser, agenix, jail-nix, nixible, nix-flatpak, nixpkgs-acp, nixpkgs-emacs-fedora, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -40,6 +41,7 @@
             "claude-code"
           ];
       };
+      emacsFedoraPkgs = import nixpkgs-emacs-fedora { inherit system; };
       jail = jail-nix.lib.init pkgs;
       nixible_lib = nixible.lib {
         inherit (nixpkgs) lib;
@@ -58,7 +60,7 @@
         ];
         extraSpecialArgs = {
           hostname = "hive";
-          inherit jail acpPkgs;
+          inherit jail acpPkgs emacsFedoraPkgs;
         };
       };
 
@@ -71,7 +73,7 @@
         ];
         extraSpecialArgs = {
           hostname = "pop-os";
-          inherit jail acpPkgs;
+          inherit jail acpPkgs emacsFedoraPkgs;
         };
       };
 
@@ -84,7 +86,7 @@
         ];
         extraSpecialArgs = {
           hostname = "nova";
-          inherit jail acpPkgs;
+          inherit jail acpPkgs emacsFedoraPkgs;
         };
       };
 
