@@ -277,6 +277,20 @@ lib.mkIf (builtins.elem hostname [ "pop-os" "nova" "hive" ]) {
         }
       '';
       userContent = builtins.readFile ../../.zen/FrostyX/userContent.css;
+
+      keyboardShortcuts = [
+        {
+          id = "zen-compact-mode-toggle";
+          disabled = true;
+        }
+        {
+          id = "key_savePage";
+          key = "s";
+          modifiers = {
+            accel = true;
+          };
+        }
+      ];
     };
   };
 }
