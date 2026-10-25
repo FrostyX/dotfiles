@@ -6490,6 +6490,16 @@ Like any messaging app, ~S-RET~ for a newline and ~RET~ to submit.
  "<return>" 'agent-shell-submit)
 #+END_SRC
 
+Not as distracting color for markdown tables.
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'agent-shell
+  (set-face-attribute
+   'agent-shell-markdown-table-zebra nil
+   :foreground my/white
+   :background my/gray))
+#+END_SRC
+
 ** Claude Code
 
 We don't want to install some garbage using curl to shell pipe or global NPM.
