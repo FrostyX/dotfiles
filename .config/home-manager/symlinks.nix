@@ -8,6 +8,7 @@ let
     ".bashrc"
     ".config/alacritty"
     ".config/cava"
+    ".config/csb-fedora.yml"
     ".config/home-manager"
     ".config/khal"
     ".config/qtile"
