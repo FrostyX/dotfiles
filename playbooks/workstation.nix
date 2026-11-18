@@ -276,6 +276,20 @@ in
           };
         }
         {
+          name = "Create xsessions directory";
+          file = {
+            path = "/usr/local/share/xsessions";
+            state = "directory";
+          };
+        }
+        {
+          name = "Install Qtile X11 session";
+          copy = {
+            src = "{{ git_root }}/playbooks/files/qtile-x11.desktop";
+            dest = "/usr/local/share/xsessions/qtile-x11.desktop";
+          };
+        }
+        {
           "ansible.posix.sysctl" = {
             name = "vm.swappiness";
             value = "5";

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Qtile (X11)
+Comment=Qtile Session on X11
+Exec=/usr/bin/qtile start -b x11
+Type=Application
+Keywords=wm;tiling
