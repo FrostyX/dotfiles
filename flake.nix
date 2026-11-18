@@ -20,7 +20,7 @@
     nixible.url = "gitlab:TECHNOFAB/nixible?dir=lib";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.7.0";
     nixpkgs-acp.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-emacs-fedora.url = "github:nixos/nixpkgs/a5914e721a05edc7bc50809625097813d253469a";
+    nixpkgs-emacs-fedora.url = "github:nixos/nixpkgs/e21fec321d73511849707a7585e4ea155ee4bf40";
   };
 
   outputs =

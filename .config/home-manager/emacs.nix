@@ -1,7 +1,7 @@
 { pkgs, emacsFedoraPkgs, ... }:
 
 let
-  emacs = emacsFedoraPkgs.emacs30-pgtk;
+  emacs = emacsFedoraPkgs.emacs31-pgtk;
   emacsPackages = emacsFedoraPkgs.emacsPackagesFor emacs;
   packageNames = [
     "ace-window"
