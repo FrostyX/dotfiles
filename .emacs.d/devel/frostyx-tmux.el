@@ -1,3 +1,5 @@
+;;; frostyx-tmux.el -*- lexical-binding: nil; -*-
+
 (defun frostyx/tmux-sessions ()
   "List all Tmux sessions"
   (interactive)

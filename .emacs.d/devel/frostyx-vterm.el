@@ -1,3 +1,5 @@
+;;; frostyx-vterm.el -*- lexical-binding: nil; -*-
+
 ;; TODO Make name optional and interactively read it
 (defun frostyx/projectile-run-vterm (name &optional project-root)
   "Run a named multi-vterm.

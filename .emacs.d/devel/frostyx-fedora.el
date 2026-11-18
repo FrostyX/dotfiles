@@ -1,3 +1,5 @@
+;;; frostyx-fedora.el -*- lexical-binding: nil; -*-
+
 (defun frostyx/rpmdev-bumpspec ()
   (interactive)
   (shell-command

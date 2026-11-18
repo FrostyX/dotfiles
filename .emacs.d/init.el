@@ -1,3 +1,5 @@
+;;; init.el -*- lexical-binding: nil; -*-
+
 ;; https://github.com/syl20bnr/spacemacs/issues/12839
 (setq package-check-signature nil)
 

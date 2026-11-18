@@ -45,6 +45,14 @@ you are doing. Because the odds are, that I am not.
   - [[#other-people-configs][Other people configs]]
   - [[#videos][Videos]]
 
+* Cookies
+
+These cookies need to be at the beginning of the rendered file
+
+#+BEGIN_SRC emacs-lisp
+;;; frostyx.el -*- lexical-binding: nil; -*-
+#+END_SRC
+
 * Oh-shit buttons
 
 In case you do something and have no idea how to save yourself.

@@ -1,3 +1,5 @@
+;;; frostyx-org-agenda.el -*- lexical-binding: nil; -*-
+
 (defvar doom-modeline--frostyx-org-agenda-count "")
 (doom-modeline-def-segment frostyx-org-agenda-count
   (when (equal major-mode 'org-agenda-mode)
