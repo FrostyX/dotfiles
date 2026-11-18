@@ -732,7 +732,8 @@ See http://frostyx.cz/posts/emacs-evil-set-option
 Sometimes we want more reasonable key bindings even in the Emacs minibuffer.
 
 #+BEGIN_SRC emacs-lisp
-(setq evil-want-minibuffer t)
+(customize-set-variable 'evil-want-minibuffer t)
+(evil-set-initial-state 'minibuffer-mode 'insert)
 #+END_SRC
 
 It opens in insert mode so it is not noticable when not needed. The only thing
